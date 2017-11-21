@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/more_details"
+        android:title="@string/more_details" />
+    <item android:id="@+id/more_link"
+        android:title="@string/more_link" />
+    <item android:id="@+id/more_copy"
+        android:title="@string/more_copy" />
+    <item android:id="@+id/more_translate"
+        android:title="@string/more_translate" />
+    <item android:id="@+id/more_delete"
+        android:title="@string/more_delete" />
+</menu>

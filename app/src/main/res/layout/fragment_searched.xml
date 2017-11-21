@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/sl_searched"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:fillViewport="true"
+    android:clipToPadding="false"
+    android:paddingTop="@dimen/default_toolbar_margin_top" >
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.ogaclejapan.smarttablayout.SmartTabLayout
+            android:id="@+id/stb_search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/search_tab_height"
+            app:stl_customTabTextLayoutId="@layout/tab_item"
+            app:stl_distributeEvenly="true"
+            app:stl_dividerThickness="0dp"
+            app:stl_indicatorInterpolation="linear"
+            app:stl_indicatorThickness="0dp"
+            app:stl_overlineThickness="0dp"
+            app:stl_underlineThickness="0dp" />
+
+        <FrameLayout
+            android:id="@+id/fl_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="40dp" />
+
+        <solonsky.signal.twitter.libs.NonSwipeableViewPager
+            android:id="@+id/vp_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
+</ScrollView>

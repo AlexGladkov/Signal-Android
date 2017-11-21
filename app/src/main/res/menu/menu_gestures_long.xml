@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/gestures_last"
+        android:title="@string/gestures_last" />
+
+    <item
+        android:id="@+id/gestures_later"
+        android:title="@string/gestures_later" />
+
+    <item
+        android:id="@+id/gestures_translate"
+        android:title="@string/gestures_translate" />
+
+    <item
+        android:id="@+id/gestures_share"
+        android:title="@string/gestures_share" />
+</menu>

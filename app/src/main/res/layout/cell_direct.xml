@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="model" type="solonsky.signal.twitter.models.DirectModel" />
+        <variable name="click" type="solonsky.signal.twitter.models.DirectModel.DirectClickHandler" />
+        <import type="solonsky.signal.twitter.helpers.AppData" alias="appData"/>
+        <import type="android.view.View" alias="v" />
+        <import type="solonsky.signal.twitter.R" />
+    </data>
+
+    <FrameLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="72dp"
+        app:backgroundAttr="@{model.messageCount > 0 ? R.attr.backgroundHighlightColor : R.attr.backgroundPrimaryColor}"
+        android:onClick="@{click::onItemClick}">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:id="@+id/direct_img_avatar"
+                android:layout_width="@dimen/dm_icon_size"
+                android:layout_height="@dimen/dm_icon_size"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:visibility="gone" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/direct_civ_avatar"
+                android:layout_width="@dimen/dm_icon_size"
+                android:layout_height="@dimen/dm_icon_size"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="?attr/backgroundRoundImage"
+                app:imageUrl="@{model.iconUrl}"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:id="@+id/direct_txt_username"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:includeFontPadding="false"
+                        android:fontFamily="sans-serif"
+                        android:textSize="16dp"
+                        android:textStyle="bold"
+                        android:textColor="?attr/secondaryTextColor"
+                        android:text="@{model.username}" />
+
+                    <TextView
+                        android:id="@+id/direct_created_at"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:textColor="?attr/secondaryTextColor"
+                        android:layout_marginTop="-0.25dp"
+                        android:textSize="12dp"
+                        android:includeFontPadding="false"
+                        android:visibility="@{model.messageCount == 0 ? v.VISIBLE : v.GONE}"
+                        android:fontFamily="sans-serif"
+                        android:text="12 Jul" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/direct_txt_last_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/primaryTextColor"
+                    android:textSize="16dp"
+                    android:fontFamily="sans-serif"
+                    android:lineSpacingMultiplier="1.06"
+                    android:layout_marginTop="1.25dp"
+                    android:text="@{model.lastMessage}" />
+
+            </LinearLayout>
+
+            <FrameLayout
+                android:layout_width="@dimen/direct_counter"
+                android:layout_height="@dimen/direct_counter"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="16dp"
+                android:visibility="@{model.messageCount > 0 ? v.VISIBLE : v.GONE}"
+                android:background="?attr/mediaCountResource" >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:textColor="?attr/replyTintColor"
+                    android:fontFamily="sans-serif-medium"
+                    android:textStyle="normal"
+                    android:textSize="14dp"
+                    android:includeFontPadding="false"
+                    android:text="@{String.valueOf(model.messageCount)}" />
+
+            </FrameLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/direct_divider"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginStart="@{model.divideState == appData.DIVIDER_SHORT ? @dimen/divider_margin_short : @dimen/divider_margin_long}"
+            android:layout_gravity="bottom"
+            android:background="?attr/dividerColor"
+            android:visibility="@{model.divideState == appData.DIVIDER_NONE ? v.GONE : v.VISIBLE}" />
+
+    </FrameLayout>
+
+</layout>

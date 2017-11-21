@@ -1,0 +1,64 @@
+[
+    {
+        "outputFile": "/Users/neura/Desktop/Documents.nosync/Android/Signal/sample/build/intermediates/incremental/mergeDebugResources/merged.dir/values-tr-rTR/values-tr-rTR.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 44,
+                    "endOffset": 95
+                },
+                "from": {
+                    "file": "/Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/res/values-tr-rTR/strings.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 633,
+                        "endColumn": 44,
+                        "endOffset": 673
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 100,
+                    "endColumn": 134,
+                    "endOffset": 230
+                },
+                "from": {
+                    "file": "/Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/res/values-tr-rTR/strings.xml",
+                    "position": {
+                        "startLine": 19,
+                        "startColumn": 4,
+                        "startOffset": 756,
+                        "endColumn": 134,
+                        "endOffset": 886
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 4,
+                    "startColumn": 4,
+                    "startOffset": 235,
+                    "endColumn": 77,
+                    "endOffset": 308
+                },
+                "from": {
+                    "file": "/Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/res/values-tr-rTR/strings.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 4,
+                        "startOffset": 678,
+                        "endColumn": 77,
+                        "endOffset": 751
+                    }
+                }
+            }
+        ]
+    }
+]

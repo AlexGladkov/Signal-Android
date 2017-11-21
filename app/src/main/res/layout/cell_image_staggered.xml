@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="model" type="solonsky.signal.twitter.models.ImageModel" />
+        <import type="solonsky.signal.twitter.helpers.Flags.MEDIA_TYPE" />
+        <import type="android.view.View" alias="v" />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/img_staggered"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/img_staggered_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true" />
+
+        <ImageView
+            android:id="@+id/img_staggered_media"
+            android:layout_width="@dimen/feed_badge_big_preview_width_size"
+            android:layout_height="@dimen/feed_badge_big_preview_width_size"
+            android:visibility="gone"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_badges_media_gif"/>
+
+        <!--android:src="@{model.mediaType == MEDIA_TYPE.GIF ? @drawable/ic_badges_media_gif : @drawable/ic_badges_media_video}"-->
+
+    </FrameLayout>
+</layout>

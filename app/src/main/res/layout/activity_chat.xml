@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>      
+        <variable name="model" type="solonsky.signal.twitter.viewmodels.ChatViewModel" />
+        <variable name="click" type="solonsky.signal.twitter.viewmodels.ChatViewModel.ChatClickHandler" />
+        <variable
+            name="appData"
+            type="solonsky.signal.twitter.helpers.AppData" />
+        <import type="android.view.View" alias="v" />
+        <import type="solonsky.signal.twitter.R" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/chat_rl_main"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/backgroundPrimaryColor"
+        android:focusableInTouchMode="true"
+        android:fitsSystemWindows="true" >
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tb_chat"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            app:contentInsetStart="0dp" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/btn_chat_back"
+                    android:layout_width="@dimen/tb_icon_size"
+                    android:layout_height="@dimen/tb_icon_size"
+                    android:src="@drawable/ic_icons_toolbar_back"
+                    android:padding="16dp"
+                    android:onClick="@{click::onBackClick}"
+                    android:tint="?attr/buttonTintColor"
+                    android:background="?attr/buttonRipple" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:includeFontPadding="false"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="?attr/primaryTextColor"
+                    android:text="@{model.title}" />
+
+                <ImageView
+                    android:layout_width="@dimen/tb_icon_size"
+                    android:layout_height="@dimen/tb_icon_size"
+                    android:padding="16dp"
+                    android:onClick="@{click::onDestroyClick}"
+                    android:background="?attr/buttonRipple"
+                    android:tint="?attr/buttonTintColor"
+                    android:src="@drawable/ic_icons_more_hor"/>
+
+            </LinearLayout>
+        </android.support.v7.widget.Toolbar>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tb_chat"
+            android:layout_above="@+id/ll_chat_bottom">
+
+            <solonsky.signal.twitter.libs.ChatRecyclerView
+                android:id="@+id/recycler_chat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:paddingBottom="16dp"
+                android:layout_marginEnd="-50dp"
+                android:clipToPadding="false"
+                android:visibility="@{model.state == appData.UI_STATE_VISIBLE ? v.VISIBLE : v.GONE}"
+                app:listConfig="@{model.listConfig}" />
+
+            <com.github.rahatarmanahmed.cpv.CircularProgressView
+                android:layout_width="@dimen/loader_size"
+                android:layout_height="@dimen/loader_size"
+                android:layout_gravity="center"
+                android:visibility="@{model.state == appData.UI_STATE_LOADING ? v.VISIBLE : v.GONE}"
+                app:cpv_animAutostart="true"
+                app:cpv_indeterminate="true"
+                app:cpv_color="?attr/hintTextColor" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="?attr/hintTextColor"
+                android:textStyle="normal"
+                android:includeFontPadding="false"
+                android:visibility="@{model.state == appData.UI_STATE_NO_ITEMS ? v.VISIBLE : v.GONE}"
+                android:layout_gravity="center"
+                android:text="@string/chat_no_text" />
+
+        </FrameLayout>
+        
+        <FrameLayout
+            android:id="@+id/ll_chat_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:layout_alignParentBottom="true"
+            android:background="?attr/backgroundSecondaryColor" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/txt_chat_message"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="@string/message_send_hint"
+                    android:background="?attr/backgroundSecondaryColor"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="13dp"
+                    android:layout_marginBottom="13.5dp"
+                    android:textSize="16dp"
+                    android:textColor="?attr/primaryTextColor"
+                    android:includeFontPadding="false"
+                    android:textStyle="normal"
+                    android:fontFamily="sans-serif"
+                    android:lineSpacingMultiplier="1.042"
+                    android:onTextChanged="@{model::onTextChanged}" />
+
+                <ImageView
+                    android:id="@+id/btn_chat_send"
+                    android:layout_width="@dimen/message_button_send"
+                    android:layout_height="@dimen/message_button_send"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:onClick="@{click::onSendClick}"
+                    android:alpha="@{model.enabled ? 1.0f : 0.2f}"
+                    android:tint="?attr/buttonSendTintColor"
+                    android:src="@drawable/ic_icons_toolbar_send" />
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/chat_send_divider"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_max_height"
+                android:background="@color/white" />
+
+        </FrameLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dropShadowHeight"
+            android:background="?attr/dropShadowResource"
+            android:layout_below="@+id/tb_chat" />
+
+    </RelativeLayout>
+</layout>

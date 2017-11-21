@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/rl_pager_image"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:background="@android:color/transparent" />-->
+
+    <!--<ua.zabelnikov.swipelayout.layout.frame.SwipeableLayout-->
+    <!--android:id="@+id/sl_pager_image"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:layout_centerInParent="true"-->
+    <!--app:swipeSpeed="1"-->
+    <!--app:swipeOrientation="bottomToUp"-->
+    <!--app:scrollAndClickable="false" >-->
+
+    <com.wingsofts.dragphotoview.DragPhotoView
+        android:id="@+id/img_pager_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerVertical="true"
+        android:background="@android:color/transparent"
+        android:scaleType="centerCrop" />
+
+</RelativeLayout>

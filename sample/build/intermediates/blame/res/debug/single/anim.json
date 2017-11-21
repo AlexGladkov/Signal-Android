@@ -1,0 +1,42 @@
+[
+    {
+        "merged": "/Users/neura/Desktop/Documents.nosync/Android/Signal/sample/build/intermediates/res/merged/debug/anim/abc_fade_in.xml",
+        "source": "/Users/neura/.android/build-cache/5ac21da304b16490cca136a0df143b70b80a9fe7/output/res/anim/abc_fade_in.xml"
+    },
+    {
+        "merged": "/Users/neura/Desktop/Documents.nosync/Android/Signal/sample/build/intermediates/res/merged/debug/anim/abc_fade_out.xml",
+        "source": "/Users/neura/.android/build-cache/5ac21da304b16490cca136a0df143b70b80a9fe7/output/res/anim/abc_fade_out.xml"
+    },
+    {
+        "merged": "/Users/neura/Desktop/Documents.nosync/Android/Signal/sample/build/intermediates/res/merged/debug/anim/abc_popup_exit.xml",
+        "source": "/Users/neura/.android/build-cache/5ac21da304b16490cca136a0df143b70b80a9fe7/output/res/anim/abc_popup_exit.xml"
+    },
+    {
+        "merged": "/Users/neura/Desktop/Documents.nosync/Android/Signal/sample/build/intermediates/res/merged/debug/anim/abc_shrink_fade_out_from_bottom.xml",
+        "source": "/Users/neura/.android/build-cache/5ac21da304b16490cca136a0df143b70b80a9fe7/output/res/anim/abc_shrink_fade_out_from_bottom.xml"
+    },
+    {
+        "merged": "/Users/neura/Desktop/Documents.nosync/Android/Signal/sample/build/intermediates/res/merged/debug/anim/abc_slide_out_bottom.xml",
+        "source": "/Users/neura/.android/build-cache/5ac21da304b16490cca136a0df143b70b80a9fe7/output/res/anim/abc_slide_out_bottom.xml"
+    },
+    {
+        "merged": "/Users/neura/Desktop/Documents.nosync/Android/Signal/sample/build/intermediates/res/merged/debug/anim/abc_grow_fade_in_from_bottom.xml",
+        "source": "/Users/neura/.android/build-cache/5ac21da304b16490cca136a0df143b70b80a9fe7/output/res/anim/abc_grow_fade_in_from_bottom.xml"
+    },
+    {
+        "merged": "/Users/neura/Desktop/Documents.nosync/Android/Signal/sample/build/intermediates/res/merged/debug/anim/abc_popup_enter.xml",
+        "source": "/Users/neura/.android/build-cache/5ac21da304b16490cca136a0df143b70b80a9fe7/output/res/anim/abc_popup_enter.xml"
+    },
+    {
+        "merged": "/Users/neura/Desktop/Documents.nosync/Android/Signal/sample/build/intermediates/res/merged/debug/anim/abc_slide_out_top.xml",
+        "source": "/Users/neura/.android/build-cache/5ac21da304b16490cca136a0df143b70b80a9fe7/output/res/anim/abc_slide_out_top.xml"
+    },
+    {
+        "merged": "/Users/neura/Desktop/Documents.nosync/Android/Signal/sample/build/intermediates/res/merged/debug/anim/abc_slide_in_bottom.xml",
+        "source": "/Users/neura/.android/build-cache/5ac21da304b16490cca136a0df143b70b80a9fe7/output/res/anim/abc_slide_in_bottom.xml"
+    },
+    {
+        "merged": "/Users/neura/Desktop/Documents.nosync/Android/Signal/sample/build/intermediates/res/merged/debug/anim/abc_slide_in_top.xml",
+        "source": "/Users/neura/.android/build-cache/5ac21da304b16490cca136a0df143b70b80a9fe7/output/res/anim/abc_slide_in_top.xml"
+    }
+]

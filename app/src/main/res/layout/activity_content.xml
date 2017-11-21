@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="solonsky.signal.twitter.viewmodels.ContentViewModel" />
+
+        <variable
+            name="click"
+            type="solonsky.signal.twitter.viewmodels.ContentViewModel.ContentClickHandler" />
+
+        <import type="solonsky.signal.twitter.R" />
+
+        <import
+            alias="v"
+            type="android.view.View" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/rl_content_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent" >
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_image_main"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:overScrollMode="never" />
+
+
+    </RelativeLayout>
+</layout>

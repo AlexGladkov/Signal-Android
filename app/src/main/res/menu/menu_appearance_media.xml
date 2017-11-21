@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/media_huge"
+        android:title="@string/appearance_media_menu_big" />
+
+    <item
+        android:id="@+id/media_small"
+        android:title="@string/appearance_media_menu_small" />
+
+    <item android:id="@+id/media_off"
+        android:title="@string/appearance_media_menu_off" />
+</menu>

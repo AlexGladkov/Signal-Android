@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="model"
+            type="solonsky.signal.twitter.viewmodels.ChatSelectViewModel" />
+    </data>
+
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical"
+        android:background="?attr/backgroundSecondaryColor">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tb_chat_select"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="?attr/backgroundPrimaryColor">
+
+            <EditText
+                android:id="@+id/txt_chat_select"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/backgroundPrimaryColor"
+                android:padding="8dp"
+                android:hint="@string/chat_select_hint"
+                android:textColor="?attr/primaryTextColor"
+                android:textColorHint="?attr/hintTextColor"
+                android:textSize="14dp" />
+
+        </android.support.v7.widget.Toolbar>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:layout_marginTop="56dp"
+            app:listConfig="@{model.listConfig}" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dropShadowHeight"
+            android:background="?attr/dropShadowResource"
+            android:layout_marginTop="56dp" />
+
+    </FrameLayout>
+
+</layout>

@@ -1,0 +1,570 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="solonsky.signal.twitter.models.StatusModel" />
+
+        <variable
+            name="click"
+            type="solonsky.signal.twitter.models.StatusModel.StatusClickHandler" />
+
+        <variable
+            name="f"
+            type="solonsky.signal.twitter.helpers.Flags" />
+
+        <import
+            alias="v"
+            type="android.view.View" />
+
+        <import type="solonsky.signal.twitter.R" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <solonsky.signal.twitter.libs.MySwipeLayout
+            android:id="@+id/status_bottom_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Bottom View Start-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
+
+                <View
+                    android:id="@+id/status_view_surface"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:isExpand="@{model.expand}"
+                    app:isHighlight="@{model.highlighted}" />
+
+                <!--<View-->
+                <!--android:id="@+id/status_view_bottom"-->
+                <!--android:layout_width="10dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--app:backgroundAttr="@{model.highlighted ? R.attr.backgroundHighlightColor : model.expand ? R.attr.backgroundSecondaryColor : R.attr.backgroundPrimaryColor}" />-->
+
+                <ImageView
+                    android:id="@+id/status_img_open"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/arrow_56"
+                    android:tint="?attr/hintTextColor" />
+
+                <!--<RelativeLayout-->
+                <!--android:id="@+id/status_rl_gradient"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:background="@drawable/dark_status_swipe_background">-->
+
+
+                <!--</RelativeLayout>-->
+                <!--What you want to show-->
+            </RelativeLayout>
+            <!-- Bottom View End-->
+
+            <LinearLayout
+                android:id="@+id/status_ll_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:backgroundAttrAnimation="@{model.highlighted ? R.attr.backgroundHighlightColor : model.expand ? R.attr.backgroundSecondaryColor : R.attr.backgroundPrimaryColor}"
+                app:durationRange="@{150}" >
+
+                <LinearLayout
+                    android:id="@+id/status_ll_body"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+
+                    <!--android:onClick="@{click::onItemClick}"-->
+                    <!--android:onLongClick="@{click::longItemClick}"-->
+
+                    <!--<LinearLayout-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<View-->
+                    <!--android:id="@+id/status_reply_top"-->
+                    <!--android:layout_width="2dp"-->
+                    <!--android:layout_height="12dp"-->
+                    <!--android:layout_marginStart="35dp"-->
+                    <!--android:layout_marginBottom="2dp"-->
+                    <!--android:visibility="gone"-->
+                    <!--android:background="?attr/primaryTextColor" />-->
+                    <!---->
+
+                    <!--<View-->
+                    <!--android:id="@+id/status_reply_bottom"-->
+                    <!--android:layout_width="2dp"-->
+                    <!--android:layout_height="0dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:visibility="gone"-->
+                    <!--android:layout_marginStart="35dp"-->
+                    <!--android:layout_marginTop="2dp"-->
+                    <!--android:background="?attr/primaryTextColor" />-->
+
+                    <!--</LinearLayout>-->
+
+                    <ImageView
+                        android:id="@+id/status_img_avatar"
+                        android:layout_width="@dimen/feed_icon_size"
+                        android:layout_height="@dimen/feed_icon_size"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="20dp"
+                        android:onClick="@{click::onProfileClick}"
+                        android:onLongClick="@{click::longUserClick}"
+                        android:visibility="gone" />
+
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/status_civ_avatar"
+                        android:layout_width="@dimen/feed_icon_size"
+                        android:layout_height="@dimen/feed_icon_size"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:background="?attr/backgroundRoundImage"
+                        android:onClick="@{click::onProfileClick}"
+                        android:onLongClick="@{click::longUserClick}" />
+
+                    <LinearLayout
+                        android:id="@+id/status_ll_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:id="@+id/status_ll_username"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/status_txt_username"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:fontFamily="sans-serif"
+                                android:includeFontPadding="false"
+                                android:textColor="?attr/secondaryTextColor"
+                                android:textSize="16dp"
+                                android:textStyle="bold" />
+
+                            <!--android:textColor="?attr/secondaryTextColor"-->
+
+                            <TextView
+                                android:id="@+id/status_txt_created_at"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:fontFamily="sans-serif"
+                                android:includeFontPadding="false"
+                                android:textColor="?attr/secondaryTextColor"
+                                android:textSize="12dp"
+                                android:textStyle="normal" />
+
+                            <ImageView
+                                android:id="@+id/status_img_favorite"
+                                android:layout_width="@dimen/feed_tiny_size"
+                                android:layout_height="@dimen/feed_tiny_size"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="4dp"
+                                android:layout_marginTop="1.5dp"
+                                android:src="@drawable/ic_icons_tiny_like"
+                                android:tint="?attr/likeTintColor"
+                                android:visibility="@{model.favorited ? v.VISIBLE : v.GONE}" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/status_ll_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp">
+
+                            <solonsky.signal.twitter.libs.autoLinkTextView.AutoLinkTextView
+                                android:id="@+id/status_txt_text"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1"
+                                android:fontFamily="sans-serif"
+                                android:includeFontPadding="false"
+                                android:lineSpacingExtra="1.25dp"
+                                android:textColor="?attr/primaryTextColor"
+                                android:textSize="16dp"
+                                android:textStyle="normal" />
+
+                            <FrameLayout
+                                android:id="@+id/status_rl_media"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="4dp"
+                                android:layout_marginStart="-8dp"
+                                android:layout_marginTop="6dp"
+                                android:onClick="@{click::onContentClick}"
+                                android:onLongClick="@{click::longContentClick}"
+                                android:visibility="gone">
+
+                                <RelativeLayout
+                                    android:layout_width="@dimen/feed_image_size"
+                                    android:layout_height="@dimen/feed_image_size"
+                                    android:layout_marginEnd="@{model.mediaEntities.size() > 1 ? 0f : 12f}" >
+
+                                    <ImageView
+                                        android:id="@+id/status_img_preview"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:adjustViewBounds="true" />
+
+                                    <ImageView
+                                        android:id="@+id/status_img_small_badge"
+                                        android:layout_width="@dimen/feed_badge_preview_width_size"
+                                        android:layout_height="@dimen/feed_badge_preview_height_size"
+                                        android:layout_centerInParent="true"
+                                        android:src="@drawable/ic_badges_media_youtube"
+                                        android:visibility="gone" />
+
+                                </RelativeLayout>
+
+                                <ImageView
+                                    android:layout_width="16dp"
+                                    android:layout_height="16dp"
+                                    android:layout_marginStart="48dp"
+                                    android:layout_marginTop="48dp"
+                                    android:src="@drawable/ic_badges_timeline_counter"
+                                    app:tintAttrAnimation="@{model.highlighted ? R.attr.backgroundHighlightColor : model.expand ? R.attr.backgroundSecondaryColor : R.attr.backgroundPrimaryColor}"
+                                    app:durationRange="@{15000}"
+                                    android:visibility="@{model.mediaEntities.size() > 1 ? v.VISIBLE : v.GONE}" />
+
+                                <TextView
+                                    android:id="@+id/status_txt_media_count"
+                                    android:layout_width="24dp"
+                                    android:layout_height="24dp"
+                                    android:layout_marginStart="52dp"
+                                    android:layout_marginTop="52dp"
+                                    android:gravity="center"
+                                    android:text="2"
+                                    android:textColor="?attr/secondaryTextColor"
+                                    android:textSize="10dp"
+                                    android:visibility="@{model.mediaEntities.size() > 1 ? v.VISIBLE : v.GONE}" />
+
+                            </FrameLayout>
+
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/status_rl_preview_big"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:onClick="@{click::onContentClick}"
+                            android:visibility="gone">
+
+                            <!--<com.stfalcon.multiimageview.MultiImageView-->
+                            <!--android:id="@+id/status_mi_big_preview"-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="wrap_content" />-->
+
+                            <!--<ImageView-->
+                            <!--android:id="@+id/status_img_big_dummy"-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:visibility="gone" />-->
+
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/status_recycler_big_media"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content" />
+
+                            <ImageView
+                                android:id="@+id/status_img_big_badge"
+                                android:layout_width="@dimen/feed_badge_big_preview_width_size"
+                                android:layout_height="@dimen/feed_badge_big_preview_width_size"
+                                android:layout_centerInParent="true"
+                                android:src="@drawable/ic_badges_media_youtube"
+                                android:visibility="gone" />
+
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:id="@+id/status_ll_quote"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:onClick="@{click::onQuoteClick}"
+                            android:visibility="gone"
+                            app:backgroundAttrAnimation="@{model.highlighted ? R.attr.backgroundHighlightColor : model.expand ? R.attr.backgroundSecondaryColor : R.attr.backgroundPrimaryColor}"
+                            app:durationRange="@{150}">
+
+                            <View
+                                android:id="@+id/view_compose_quote_mark"
+                                android:layout_width="8dp"
+                                android:layout_height="match_parent"
+                                android:layout_marginEnd="12dp"
+                                android:background="?attr/quoteDividerResource" />
+
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content">
+
+                                    <TextView
+                                        android:id="@+id/status_txt_quote_username"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="bottom"
+                                        android:layout_weight="1"
+                                        android:fontFamily="sans-serif"
+                                        android:includeFontPadding="false"
+                                        android:onClick="@{click::onQuoteUserClick}"
+                                        android:textColor="?attr/secondaryTextColor"
+                                        android:textSize="14dp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/status_txt_quote_created_at"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="bottom"
+                                        android:layout_marginStart="8dp"
+                                        android:fontFamily="sans-serif"
+                                        android:layout_marginEnd="16dp"
+                                        android:includeFontPadding="false"
+                                        android:textColor="?attr/secondaryTextColor"
+                                        android:textSize="12dp"
+                                        android:textStyle="normal" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:id="@+id/status_ll_quote_body"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="1.5dp">
+
+                                    <TextView
+                                        android:id="@+id/status_txt_quote_text"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:layout_marginEnd="8dp"
+                                        android:fontFamily="sans-serif"
+                                        android:includeFontPadding="false"
+                                        android:lineSpacingExtra="1.5dp"
+                                        android:textColor="?attr/thirdTextColor"
+                                        android:textSize="14dp"
+                                        android:textStyle="normal" />
+
+                                    <FrameLayout
+                                        android:id="@+id/status_fl_quote"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="4dp"
+                                        android:visibility="gone" >
+
+                                        <RelativeLayout
+                                            android:id="@+id/status_rl_quote_image"
+                                            android:layout_width="@dimen/feed_image_size"
+                                            android:layout_height="@dimen/feed_image_size"
+                                            android:onClick="@{click::onQuoteContentClick}"
+                                            android:onLongClick="@{click::longQuoteContentClick}">
+
+                                            <ImageView
+                                                android:id="@+id/status_img_quote"
+                                                android:layout_width="@dimen/feed_image_size"
+                                                android:layout_height="@dimen/feed_image_size"
+                                                android:layout_gravity="center_vertical" />
+
+                                            <ImageView
+                                                android:id="@+id/status_img_quote_badge"
+                                                android:layout_width="@dimen/feed_badge_preview_width_size"
+                                                android:layout_height="@dimen/feed_badge_preview_height_size"
+                                                android:layout_centerInParent="true" />
+
+                                        </RelativeLayout>
+
+                                        <ImageView
+                                            android:id="@+id/status_quote_img_media_count"
+                                            android:layout_width="16dp"
+                                            android:layout_height="16dp"
+                                            android:layout_marginStart="48dp"
+                                            android:layout_marginTop="48dp"
+                                            android:background="@drawable/ic_badges_timeline_counter"
+                                            android:backgroundTint="?attr/backgroundPrimaryColor" />
+
+                                        <TextView
+                                            android:id="@+id/status_quote_txt_media_count"
+                                            android:layout_width="24dp"
+                                            android:layout_height="16dp"
+                                            android:layout_marginStart="52dp"
+                                            android:layout_marginTop="52dp"
+                                            android:gravity="bottom|center_horizontal"
+                                            android:text="2"
+                                            android:textColor="?attr/secondaryTextColor"
+                                            android:textSize="10dp" />
+
+                                    </FrameLayout>
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/status_ll_retweet"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:visibility="gone">
+
+                            <ImageView
+                                android:layout_width="@dimen/feed_tiny_size"
+                                android:layout_height="@dimen/feed_tiny_size"
+                                android:layout_gravity="center_vertical"
+                                android:src="@drawable/ic_icons_tiny_rt"
+                                android:tint="?attr/rtTintColor" />
+
+                            <solonsky.signal.twitter.libs.autoLinkTextView.AutoLinkTextView
+                                android:id="@+id/status_txt_retweet"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="8dp"
+                                android:fontFamily="sans-serif"
+                                android:gravity="top"
+                                android:includeFontPadding="false"
+                                android:textColor="?attr/secondaryTextColor"
+                                android:textSize="14dp"
+                                android:textStyle="normal" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/status_ll_bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:alpha="1"
+                    android:visibility="gone">
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="@{click::onReplyClick}">
+
+                        <ImageView
+                            android:layout_width="@dimen/feed_bottom_icon_size"
+                            android:layout_height="@dimen/feed_bottom_icon_size"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/ic_icons_actions_reply"
+                            android:tint="@color/action_tint_color" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="@{click::onRetweetClick}">
+
+                        <ImageView
+                            android:layout_width="@dimen/feed_bottom_icon_size"
+                            android:layout_height="@dimen/feed_bottom_icon_size"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/ic_icons_actions_rt"
+                            android:tint="@color/action_tint_color" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="@{click::onLikeClick}">
+
+                        <ImageView
+                            android:layout_width="@dimen/feed_bottom_icon_size"
+                            android:layout_height="@dimen/feed_bottom_icon_size"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/ic_tabbar_icons_likes"
+                            app:tintColorAttr="@{model.favorited ? R.attr.likeTintColor : R.attr.hintTextColor}" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="@{click::onShareClick}">
+
+                        <ImageView
+                            android:layout_width="@dimen/feed_bottom_icon_size"
+                            android:layout_height="@dimen/feed_bottom_icon_size"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/ic_icons_actions_share"
+                            android:tint="@color/action_tint_color" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:onClick="@{click::onMoreClick}">
+
+                        <ImageView
+                            android:layout_width="@dimen/feed_bottom_icon_size"
+                            android:layout_height="@dimen/feed_bottom_icon_size"
+                            android:layout_marginBottom="12dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_gravity="center_horizontal"
+                            android:src="@drawable/ic_icons_more_hor"
+                            android:tint="@color/action_tint_color" />
+
+                    </FrameLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+        </solonsky.signal.twitter.libs.MySwipeLayout>
+
+        <View
+            android:id="@+id/status_divider"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="@{model.divideState == f.DIVIDER_SHORT ? @dimen/divider_margin_short : @dimen/divider_margin_long}"
+            android:background="@color/white"
+            android:visibility="@{model.divideState == f.DIVIDER_NONE ? v.GONE : v.VISIBLE}" />
+
+    </RelativeLayout>
+</layout>

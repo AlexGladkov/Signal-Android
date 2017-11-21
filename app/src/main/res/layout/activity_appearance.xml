@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="solonsky.signal.twitter.viewmodels.AppearanceViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tb_appearance"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:paddingTop="@dimen/status_bar_height"
+            android:background="?attr/backgroundPrimaryColor"
+            app:contentInsetStart="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/img_appearance_back"
+                    android:layout_width="@dimen/tb_icon_size"
+                    android:layout_height="@dimen/tb_icon_size"
+                    android:background="?attr/buttonRipple"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_icons_toolbar_back"
+                    android:tint="?attr/buttonTintColor" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="16dp"
+                    android:includeFontPadding="false"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif"
+                    android:text="@string/settings_appearance"
+                    android:textColor="?attr/primaryTextColor" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tb_appearance"
+            android:background="?attr/backgroundSecondaryColor"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txt_appearance_preview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="18dp"
+                android:includeFontPadding="false"
+                android:text="@string/tweet_preview"
+                android:textColor="?attr/secondaryTextColor"
+                android:fontFamily="sans-serif-medium"
+                android:textSize="12dp"/>
+
+            <LinearLayout
+                android:id="@+id/ll_appearance_preview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:background="?attr/backgroundPrimaryColor"
+                android:paddingBottom="16dp"
+                android:layout_alignParentStart="true">
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/appearance_civ_avatar"
+                    android:layout_width="@dimen/feed_icon_size"
+                    android:layout_height="@dimen/feed_icon_size"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:visibility="gone" />
+
+                <ImageView
+                    android:id="@+id/appearance_img_avatar"
+                    android:layout_width="@dimen/feed_icon_size"
+                    android:layout_height="@dimen/feed_icon_size"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp" >
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp" >
+
+                        <TextView
+                            android:id="@+id/txt_appearance_username"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif"
+                            android:includeFontPadding="false"
+                            android:textColor="?attr/secondaryTextColor"
+                            android:textSize="16dp"
+                            android:textStyle="bold"
+                            android:text="@string/settings_appearance_username" />
+
+                        <TextView
+                            android:id="@+id/txt_appearance_created_at"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/settings_appearance_time"
+                            android:fontFamily="sans-serif"
+                            android:includeFontPadding="false"
+                            android:textColor="?attr/secondaryTextColor"
+                            android:textSize="12dp"
+                            android:textStyle="normal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/appearance_ll_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp" >
+
+                        <solonsky.signal.twitter.libs.autoLinkTextView.AutoLinkTextView
+                            android:id="@+id/appearance_tweet_text"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:layout_weight="1"
+                            android:text="@string/settings_appearance_text"
+                            android:fontFamily="sans-serif"
+                            android:includeFontPadding="false"
+                            android:lineSpacingExtra="1.25dp"
+                            android:textColor="?attr/primaryTextColor"
+                            android:textSize="16dp"
+                            android:textStyle="normal" />
+
+                        <ImageView
+                            android:id="@+id/appearance_view_preview_small"
+                            android:layout_width="@dimen/feed_image_size"
+                            android:layout_height="@dimen/feed_image_size"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginStart="-8dp"
+                            android:layout_marginTop="6dp" />
+
+                    </LinearLayout>
+                    
+                    <ImageView
+                        android:id="@+id/appearance_view_preview_big"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="8dp" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:clipToPadding="false"
+                android:overScrollMode="always"
+                android:layout_below="@+id/ll_appearance_preview"
+                android:paddingTop="24dp"
+                app:listConfig="@{model.listConfig}" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/dropShadowHeight"
+                android:layout_below="@+id/ll_appearance_preview"
+                android:background="?attr/dropShadowResource" />
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dropShadowHeight"
+            android:layout_below="@+id/tb_appearance"
+            android:background="?attr/dropShadowResource" />
+
+    </RelativeLayout>
+</layout>

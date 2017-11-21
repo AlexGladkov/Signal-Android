@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/dialog_hashtag_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="#hashtag"
+        android:textColor="@color/dark_hint_text_color"
+        android:background="@color/dark_background_secondary_color" />
+
+    <TextView
+        android:id="@+id/dialog_copy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/dialog_copy"
+        android:textColor="@color/dark_primary_text_color"
+        android:background="@color/dark_background_color" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/dark_divider_color" />
+
+    <TextView
+        android:id="@+id/dialog_tweet_tag"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/dialog_tweet_tag"
+        android:textColor="@color/dark_primary_text_color"
+        android:background="@color/dark_background_color" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/dark_divider_color"
+         />
+
+    <TextView
+        android:id="@+id/dialog_hash_mute"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/dialog_mute"
+        android:textColor="@color/dark_primary_text_color"
+        android:background="@color/dark_background_color"
+         />
+
+</LinearLayout>

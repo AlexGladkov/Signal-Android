@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="model" type="solonsky.signal.twitter.viewmodels.TimelineViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="?attr/backgroundSecondaryColor">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tb_timeline"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:paddingTop="@dimen/status_bar_height"
+            app:contentInsetStart="0dp"
+            android:background="?attr/backgroundPrimaryColor">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/img_timeline_back"
+                    android:layout_width="@dimen/tb_icon_size"
+                    android:layout_height="@dimen/tb_icon_size"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_icons_toolbar_back"
+                    android:tint="?attr/buttonTintColor"
+                    android:background="?attr/buttonRipple" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/settings_timeline"
+                    android:fontFamily="sans-serif"
+                    android:textStyle="bold"
+                    android:textSize="16dp"
+                    android:textColor="?attr/primaryTextColor" />
+
+            </LinearLayout>
+        </android.support.v7.widget.Toolbar>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_timeline"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="always"
+            android:layout_below="@+id/tb_timeline"
+            android:paddingTop="24dp"
+            android:clipToPadding="false"
+            android:background="@android:color/transparent"
+            app:listConfig="@{model.listConfig}" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_below="@+id/recycler_timeline"
+            android:background="?attr/dividerColor" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dropShadowHeight"
+            android:background="?attr/dropShadowResource"
+            android:layout_below="@id/tb_timeline" />
+
+    </RelativeLayout>
+</layout>

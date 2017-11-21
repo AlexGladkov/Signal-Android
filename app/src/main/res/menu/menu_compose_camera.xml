@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/compose_camera"
+        android:title="@string/compose_camera" />
+
+    <item android:id="@+id/compose_library"
+        android:title="@string/compose_library" />
+</menu>

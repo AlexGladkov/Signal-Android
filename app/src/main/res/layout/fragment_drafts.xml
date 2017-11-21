@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable name="drafts" type="solonsky.signal.twitter.viewmodels.DraftsViewModel" />
+        <variable name="appData" type="solonsky.signal.twitter.helpers.AppData" />
+        <import type="android.view.View" alias="v" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/backgroundSecondaryColor">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_drafts"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:overScrollMode="never"
+            android:visibility="@{drafts.state == appData.UI_STATE_VISIBLE ? v.VISIBLE : v.GONE}" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:textStyle="normal"
+            android:textColor="?attr/hintTextColor"
+            android:includeFontPadding="false"
+            android:layout_marginTop="@dimen/search_placeholder_margin_top"
+            android:layout_centerHorizontal="true"
+            android:text="@string/no_drafts"
+            android:visibility="@{drafts.state == appData.UI_STATE_NO_ITEMS ? v.VISIBLE : v.GONE}" />
+
+    </RelativeLayout>
+</layout>

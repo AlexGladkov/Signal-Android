@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/search_save"
+        android:title="@string/search_save" />
+
+    <item
+        android:id="@+id/search_followers_only"
+        android:title="@string/search_followers_only"
+        android:checkable="true"
+        android:checked="false" />
+
+    <item
+        android:id="@+id/search_verified_only"
+        android:title="@string/search_verified_only"
+        android:checkable="true"
+        android:checked="false" />
+</menu>

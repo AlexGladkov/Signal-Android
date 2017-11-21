@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="model" type="solonsky.signal.twitter.models.UserModel" />
+        <variable name="click" type="solonsky.signal.twitter.models.UserModel.UserClickHandler" />
+        <import type="android.view.View" alias="v" />
+        <import type="solonsky.signal.twitter.R" />
+    </data>
+
+    <FrameLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="64dp"
+        app:backgroundAttr="@{model.active ? R.attr.backgroundSecondaryColor : R.attr.backgroundPrimaryColor}"
+        android:onClick="@{click::onItemClick}" >
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:background="?attr/dividerColor" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/user_civ_avatar"
+                android:layout_width="@dimen/cell_mute_user_icon"
+                android:layout_height="@dimen/cell_mute_user_icon"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="16dp"
+                android:background="?attr/backgroundRoundImage"
+                app:imageUrl="@{model.avatarUrl}" />
+            
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/primaryTextColor"
+                    android:includeFontPadding="false"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif"
+                    android:textSize="14dp"
+                    android:text="@{model.username}" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="14dp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="?attr/hintTextColor"
+                    android:includeFontPadding="false"
+                    android:layout_marginTop="2dp"
+                    android:text="@{model.followed ? @string/followed : @string/not_followed}" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/user_divider_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_gravity="bottom"
+            android:background="?attr/dividerColor" />
+
+    </FrameLayout>
+</layout>

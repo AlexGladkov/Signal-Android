@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SimpleTabBar">
+        <attr name="padding" format="dimension" />
+        <attr name="margin" format="dimension" />
+        <attr name="tabWidth" format="dimension" />
+        <attr name="tabHeight" format="dimension" />
+        <attr name="indicatorColor" format="color" />
+        <attr name="indicatorHeight" format="dimension" />
+        <attr name="selectedTabBackgroundColor" format="color" />
+        <attr name="selectedTabTextColor" format="color" />
+        <attr name="selectedTabImageColor" format="color" />
+        <attr name="indicatorLineColor" format="color" />
+        <attr name="imageTint" format="color" />
+        <attr name="noImage" format="boolean" />
+        <attr name="noText" format="boolean" />
+        <attr name="imagePosition" format="enum">
+            <enum name="left" value="0"/>
+            <enum name="top" value="1"/>
+            <enum name="right" value="2"/>
+            <enum name="bottom" value="3"/>
+        </attr>
+        <attr name="imageMargin" format="dimension" />
+        <attr name="imageWidth" format="dimension" />
+        <attr name="imageHeight" format="dimension" />
+        <attr name="textMargin" format="dimension" />
+        <attr name="textSize" format="dimension" />
+    </declare-styleable>
+    
+    <declare-styleable name="CTAppTheme" >
+        <attr name="primaryTextColor" format="color" />
+        <attr name="secondaryTextColor" format="color" />
+        <attr name="thirdTextColor" format="color" />
+        <attr name="activeSupportTextColor" format="color" />
+        <attr name="inactiveSupportTextColor" format="color" />
+        <attr name="highlightTextColor" format="color" />
+        <attr name="selectionTextColor" format="color" />
+        <attr name="hintTextColor" format="color" />
+        <attr name="counterTextColor" format="color" />
+        <attr name="tagTextColor" format="color" />
+        <attr name="profileTextTitleColor" format="color" />
+        
+        <attr name="dividerColor" format="color" />
+        <attr name="statsDividerColor" format="color" />
+        
+        <attr name="backgroundPrimaryColor" format="color" />
+        <attr name="backgroundSecondaryColor" format="color" />
+        <attr name="backgroundHighlightColor" format="color" />
+
+        <attr name="buttonTintColor" format="color"/>
+        <attr name="buttonSendTintColor" format="color" />
+        <attr name="likeTintColor" format="color" />
+        <attr name="rtTintColor" format="color" />
+        <attr name="replyTintColor" format="color" />
+        <attr name="profileTintColor" format="color" />
+        <attr name="pagerActiveBackground" format="color" />
+        <attr name="pagerBackground" format="color" />
+        <attr name="barInactiveColor" format="color" />
+        <attr name="barActiveColor" format="color" />
+        <attr name="barShadowColor" format="color" />
+        <attr name="borderRoundColor" format="color" />
+        <attr name="switcherOnTintColor" format="color" />
+        <attr name="switcherOffTintColor" format="color" />
+        <attr name="switcherLineTintColor" format="color" />
+        <attr name="arrowColor" format="color" />
+
+        <!-- Profile tail configuration -->
+        <attr name="profileTailButton" format="integer" />
+        <attr name="profileTailBackground" format="integer" />
+
+        <attr name="selectorBusyResource" format="integer" />
+
+        <attr name="backgroundRoundImage" format="integer" />
+        <attr name="swipeBackgroundPrimary" format="integer" />
+        <attr name="swipeBackgroundExpand" format="integer" />
+        <attr name="swipeBackgroundHighlight" format="integer" />
+        <attr name="mediaCountResource" format="integer" />
+        <attr name="scrollDownResource" format="integer" />
+        <attr name="cursorColor" format="integer" />
+        <attr name="accountAddImage" format="integer" />
+        <attr name="supportStarResource" format="integer" />
+        <attr name="bulletColor" format="integer" />
+        <attr name="buttonFollow" format="integer" />
+        <attr name="verifiedIcon" format="integer" />
+        <attr name="actionRipple" format="integer" />
+        <attr name="buttonRipple" format="integer" />
+        <attr name="composeSelectResource" format="integer" />
+        <attr name="testPushResource" format="integer" />
+        <attr name="searchIconResource" format="integer" />
+        <attr name="detailArrowBackgroundResource" format="integer" />
+        <attr name="aboutBackgroundResource" format="integer" />
+        <attr name="statsBackgroundResource" format="integer" />
+        <attr name="activeSupportResource" format="integer" />
+        <attr name="inactiveSupportResource" format="integer" />
+        <attr name="quoteDividerResource" format="integer" />
+        <attr name="dropShadowResource" format="integer" />
+        <attr name="paginationInactiveResource" format="integer" />
+        <attr name="composeBackgroundColor" format="integer" />
+        <attr name="profileGradientBackgroundColor" format="integer" />
+        <attr name="profileHeaderGradientColor" format="integer" />
+        <attr name="profileStrokeResource" format="integer" />
+    </declare-styleable>
+</resources>

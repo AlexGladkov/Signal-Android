@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="model" type="solonsky.signal.twitter.models.SettingsSwitchModel" />
+        <variable name="click" type="solonsky.signal.twitter.models.SettingsSwitchModel.SwitchClickHandler" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <View
+            android:id="@+id/settings_divider_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:background="?attr/dividerColor" />
+
+        <FrameLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/settings_switch_size"
+            android:background="?attr/backgroundPrimaryColor" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:background="?attr/backgroundPrimaryColor" >
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/primaryTextColor"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_weight="1"
+                    android:textSize="16dp"
+                    android:fontFamily="sans-serif"
+                    android:layout_gravity="center_vertical"
+                    android:includeFontPadding="false"
+                    android:text="@{model.title}" />
+
+                <android.support.v7.widget.SwitchCompat
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="12.5dp"
+                    android:background="@null"
+                    android:layout_gravity="center_vertical"
+                    android:onCheckedChanged="@{click::onSwitcherClick}"
+                    android:checked="@{model.on}" />
+            </LinearLayout>
+
+            <View
+                android:id="@+id/settings_divider_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/divider_height"
+                android:layout_gravity="bottom"
+                android:layout_marginStart="16dp"
+                android:background="?attr/dividerColor" />
+
+        </FrameLayout>
+
+    </LinearLayout>
+</layout>

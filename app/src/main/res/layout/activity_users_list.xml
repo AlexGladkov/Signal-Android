@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="model" type="solonsky.signal.twitter.viewmodels.UsersListViewModel" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="?attr/backgroundSecondaryColor">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tb_notifications"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:paddingTop="@dimen/status_bar_height"
+            app:contentInsetStart="0dp"
+            android:background="?attr/backgroundPrimaryColor">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/img_user_list_back"
+                    android:layout_width="@dimen/tb_icon_size"
+                    android:layout_height="@dimen/tb_icon_size"
+                    android:src="@drawable/ic_icons_toolbar_back"
+                    android:padding="16dp"
+                    android:tint="?attr/buttonTintColor"
+                    android:background="?attr/buttonRipple"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:text="@string/settings_notifications"
+                    android:textSize="16dp"
+                    android:textStyle="bold"
+                    android:fontFamily="sans-serif"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="?attr/primaryTextColor" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:id="@+id/ll_notifications_intercept"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:orientation="vertical"
+            android:layout_below="@+id/tb_notifications"
+            android:layout_marginTop="24dp" >
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="?attr/dividerColor" />
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:orientation="horizontal"
+                android:background="?attr/backgroundPrimaryColor">
+                
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/settings_intercept"
+                    android:textStyle="normal"
+                    android:textSize="16dp"
+                    android:includeFontPadding="false"
+                    android:textColor="?attr/primaryTextColor"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp" />
+
+                <android.support.v7.widget.SwitchCompat
+                    android:id="@+id/switch_notifications_intercept"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="12.5dp"
+                    android:background="@null" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="?attr/dividerColor" />
+
+        </LinearLayout>
+        
+        <LinearLayout
+            android:id="@+id/ll_notifications_subtext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_below="@+id/ll_notifications_intercept"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="24dp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="@string/settings_intercept_sub_1"
+                android:textColor="?attr/primaryTextColor"
+                android:includeFontPadding="false"
+                android:textStyle="bold"
+                android:textSize="12dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:layout_marginTop="1.75dp"
+                android:lineSpacingExtra="1.75dp"
+                android:text="@string/settings_intercept_sub_2"
+                android:textColor="?attr/hintTextColor"
+                android:includeFontPadding="false"
+                android:textStyle="normal"
+                android:textSize="12dp"/>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider_notifications"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_below="@+id/ll_notifications_subtext"
+            android:background="?attr/dividerColor" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_users_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            android:layout_below="@+id/divider_notifications"
+            android:background="?attr/backgroundPrimaryColor"
+            app:listConfig="@{model.listConfig}" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_below="@+id/recycler_users_list"
+            android:background="?attr/dividerColor" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dropShadowHeight"
+            android:layout_marginTop="80dp"
+            android:background="?attr/dropShadowResource"/>
+
+    </RelativeLayout>
+</layout>

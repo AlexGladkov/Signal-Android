@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="?attr/backgroundSecondaryColor"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/img_profile_test_header"
+        android:layout_width="match_parent"
+        android:layout_height="80dp" />
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_stats_header"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:layout_gravity="top"
+        android:background="@drawable/profile_gradient_toolbar"
+        app:contentInsetStart="0dp">
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/ll_stats_title"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:orientation="vertical"
+                android:layout_marginTop="32dp"
+                android:layout_gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/txt_stats_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/txt_stats_subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/white"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="12dp"
+                    android:text="Followers 172" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="24dp">
+
+                <ImageView
+                    android:id="@+id/btn_stats_back"
+                    android:layout_width="@dimen/tb_icon_size"
+                    android:layout_height="@dimen/tb_icon_size"
+                    android:padding="16dp"
+                    android:background="@drawable/white_ripple_background"
+                    android:src="@drawable/ic_icons_toolbar_back"
+                    android:tint="@color/white" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recycler_stats"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:background="?attr/backgroundPrimaryColor"
+        android:layout_below="@+id/tb_stats_header" />
+
+    <com.github.rahatarmanahmed.cpv.CircularProgressView
+        android:id="@+id/loader_stats"
+        android:layout_width="@dimen/loader_size"
+        android:layout_height="@dimen/loader_size"
+        android:layout_centerInParent="true"
+        app:cpv_color="?attr/hintTextColor"
+        app:cpv_indeterminate="true"
+        app:cpv_animAutostart="true" />
+
+</RelativeLayout>

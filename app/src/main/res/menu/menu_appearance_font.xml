@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/font_12"
+        android:title="@string/appearance_font_menu_12" />
+
+    <item android:id="@+id/font_14"
+        android:title="@string/appearance_font_menu_14" />
+
+    <item android:id="@+id/font_16"
+        android:title="@string/appearance_font_menu_16" />
+
+    <item android:id="@+id/font_18"
+        android:title="@string/appearance_font_menu_18" />
+
+    <item android:id="@+id/font_20"
+        android:title="@string/appearance_font_menu_20" />
+</menu>

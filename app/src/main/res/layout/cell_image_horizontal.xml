@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="model" type="solonsky.signal.twitter.models.ImageModel" />
+        <variable name="click" type="solonsky.signal.twitter.models.ImageModel.ImageClickHandler" />
+        <import type="android.view.View" alias="v" />
+        <import type="solonsky.signal.twitter.helpers.Flags.MEDIA_TYPE" />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/image_ll_main"
+        android:layout_width="wrap_content"
+        android:layout_height="88dp"
+        android:onClick="@{click::onItemClick}"
+        android:onLongClick="@{click::onLongItemClick}"
+        android:paddingTop="8dp"
+        android:paddingBottom="16dp">
+
+        <ImageView
+            android:id="@+id/image_img_main"
+            android:layout_width="@dimen/compose_image_size"
+            android:layout_height="64dp"
+            android:layout_marginStart="8dp"
+            android:background="?attr/backgroundSecondaryColor" />
+        
+        <ImageView
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginBottom="4dp"
+            android:layout_marginEnd="4dp"
+            android:visibility="@{model.mediaType == MEDIA_TYPE.IMAGE ? v.GONE : v.VISIBLE}"
+            android:src="@{model.mediaType == MEDIA_TYPE.GIF ? @drawable/ic_badges_media_gif_small : @drawable/ic_badges_media_video_small}" />
+        
+        <TextView
+            android:id="@+id/image_txt_select"
+            android:layout_width="@dimen/compose_image_size"
+            android:layout_height="@dimen/compose_image_size"
+            android:layout_marginStart="8dp"
+            android:background="?attr/composeSelectResource"
+            android:gravity="center"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/white"
+            android:visibility="@{model.selected ? v.VISIBLE : v.GONE}"
+            android:textSize="30dp"
+            android:text="@{String.valueOf(model.selectNumber)}"
+            />
+
+    </FrameLayout>
+</layout>

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/backgroundSecondaryColor">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/tb_logged_mute"
+        android:layout_width="match_parent"
+        app:contentInsetStart="0dp"
+        android:paddingTop="24dp"
+        android:layout_height="80dp"
+        android:background="?attr/backgroundPrimaryColor" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/img_mute_add_back"
+                android:layout_width="@dimen/tb_icon_size"
+                android:layout_height="@dimen/tb_icon_size"
+                android:padding="16dp"
+                android:tint="?attr/buttonTintColor"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_icons_toolbar_back" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="16dp"
+                android:includeFontPadding="false"
+                android:textStyle="bold"
+                android:text="@string/mute_add_client"
+                android:textColor="?attr/primaryTextColor"
+                android:textSize="16dp" />
+
+        </LinearLayout>
+
+    </android.support.v7.widget.Toolbar>
+
+    <FrameLayout
+        android:id="@+id/fl_mute_client"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp" >
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_mute_client"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="ifContentScrolls"
+            android:background="?attr/backgroundPrimaryColor" />
+
+        <com.github.rahatarmanahmed.cpv.CircularProgressView
+            android:id="@+id/cpv_mute_client"
+            android:layout_width="@dimen/loader_size"
+            android:layout_height="@dimen/loader_size"
+            android:layout_gravity="center"
+            app:cpv_indeterminate="true"
+            app:cpv_color="?attr/hintTextColor"
+            app:cpv_animAutostart="true" />
+
+    </FrameLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="?attr/dividerColor"
+        android:layout_below="@+id/fl_mute_client" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dropShadowHeight"
+        android:background="?attr/dropShadowResource"
+        android:layout_marginTop="80dp" />
+
+</RelativeLayout>

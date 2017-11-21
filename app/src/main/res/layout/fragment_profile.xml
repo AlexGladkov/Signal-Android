@@ -1,0 +1,281 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="solonsky.signal.twitter.viewmodels.ProfileViewModel" />
+
+        <variable
+            name="click"
+            type="solonsky.signal.twitter.viewmodels.ProfileViewModel.ProfileClickHandler" />
+
+        <import
+            alias="v"
+            type="android.view.View" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/backgroundPrimaryColor"
+        android:focusableInTouchMode="true">
+
+        <ImageView
+            android:id="@+id/img_profile_header"
+            android:layout_width="match_parent"
+            android:layout_height="186dp" />
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tb_profile_header"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_gravity="top"
+            android:onClick="@{click::onBackDropClick}"
+            android:background="@drawable/profile_gradient_toolbar"
+            app:contentInsetStart="0dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:id="@+id/ll_toolbar_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="80dp"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@{model.username}"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@{model.followers}"
+                        android:textColor="@color/white"
+                        android:textSize="12dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="24dp">
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:layout_width="@dimen/tb_icon_size"
+                        android:layout_height="@dimen/tb_icon_size"
+                        android:background="@drawable/white_ripple_background"
+                        android:onClick="@{click::onSettingsClick}"
+                        android:padding="16dp"
+                        android:src="@drawable/ic_icons_toolbar_gear"
+                        android:tint="@color/white" />
+
+                </LinearLayout>
+
+            </FrameLayout>
+        </android.support.v7.widget.Toolbar>
+
+        <View
+            android:id="@+id/header_fader"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/header_fader_height"
+            android:layout_below="@+id/tb_profile_header"
+            android:background="?attr/profileGradientBackgroundColor" />
+
+        <android.support.v4.widget.NestedScrollView
+            android:id="@+id/scroll_profile"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="80dp"
+            android:fillViewport="true"
+            android:overScrollMode="never">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="48dp"
+                android:background="@android:color/transparent">
+
+                <LinearLayout
+                    android:id="@+id/ll_sub_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/txt_profile_username"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="8dp"
+                        android:text="@{model.username}"
+                        android:textColor="?attr/profileTextTitleColor"
+                        android:textSize="20dp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="sans-serif-light"
+                        android:text="@{model.twitterName}"
+                        android:textColor="?attr/hintTextColor"
+                        android:textSize="14dp" />
+
+                    <solonsky.signal.twitter.libs.CustomViewPager
+                        android:id="@+id/vp_profile_header"
+                        android:layout_width="match_parent"
+                        android:layout_height="136dp"
+                        android:layout_marginTop="8dp"
+                        android:overScrollMode="never" />
+
+                    <!--<com.ogaclejapan.smarttablayout.SmartTabLayout-->
+                        <!--android:id="@+id/stb_profile_header"-->
+                        <!--android:layout_width="wrap_content"-->
+                        <!--android:layout_height="32dp"-->
+                        <!--android:layout_gravity="bottom|center_horizontal"-->
+                        <!--app:elevation="0dp"-->
+                        <!--app:stl_clickable="false"-->
+                        <!--app:stl_customTabTextLayoutId="@layout/custom_tab_circle"-->
+                        <!--app:stl_dividerColor="@android:color/transparent"-->
+                        <!--app:stl_dividerThickness="0dp"-->
+                        <!--app:stl_indicatorColor="?attr/primaryTextColor"-->
+                        <!--app:stl_indicatorCornerRadius="4dp"-->
+                        <!--app:stl_indicatorGravity="center"-->
+                        <!--app:stl_indicatorInterpolation="linear"-->
+                        <!--app:stl_indicatorThickness="8dp"-->
+                        <!--app:stl_underlineColor="@android:color/transparent"-->
+                        <!--app:stl_underlineThickness="0dp" />-->
+
+                </LinearLayout>
+
+                <FrameLayout
+                    android:id="@+id/rl_header_fader"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginTop="164dp"
+                    android:background="?attr/profileHeaderGradientColor">
+
+                    <com.ogaclejapan.smarttablayout.SmartTabLayout
+                        android:id="@+id/stb_profile_header"
+                        android:layout_width="wrap_content"
+                        android:layout_height="32dp"
+                        android:layout_gravity="center"
+                        app:stl_clickable="false"
+                        app:stl_customTabTextLayoutId="@layout/custom_tab_circle"
+                        app:stl_dividerColor="@color/white"
+                        app:stl_dividerThickness="0dp"
+                        app:stl_indicatorColor="?attr/primaryTextColor"
+                        app:stl_indicatorCornerRadius="4dp"
+                        app:stl_indicatorGravity="center"
+                        app:stl_indicatorInterpolation="linear"
+                        app:stl_indicatorThickness="8dp"
+                        app:stl_underlineColor="@android:color/transparent"
+                        app:stl_underlineThickness="0dp" />
+
+                </FrameLayout>
+
+                <solonsky.signal.twitter.libs.NonSwipeableViewPager
+                    android:id="@+id/vp_profile_fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="206dp"
+                    android:overScrollMode="never"
+                    android:visibility="gone" />
+
+                <FrameLayout
+                    android:id="@+id/fl_fragment_profile"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/profile_tail_height"
+                    android:layout_marginTop="244dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_below="@+id/fl_fragment_profile" />
+
+                <com.ogaclejapan.smarttablayout.SmartTabLayout
+                    android:id="@+id/stb_profile_fragment"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/tab_bar_layout_size"
+                    android:layout_marginTop="212dp"
+                    app:stl_customTabTextLayoutId="@layout/tab_item"
+                    app:stl_distributeEvenly="true"
+                    app:stl_dividerThickness="0dp"
+                    app:stl_indicatorInterpolation="linear"
+                    app:stl_indicatorThickness="0dp"
+                    app:stl_overlineThickness="0dp"
+                    app:stl_underlineThickness="0dp" />
+
+            </RelativeLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+        <RelativeLayout
+            android:id="@+id/rl_profile_avatar"
+            android:layout_width="@dimen/profile_icon_size"
+            android:layout_height="@dimen/profile_icon_size"
+            android:layout_below="@+id/tb_profile_header"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-36dp"
+            android:background="?attr/profileStrokeResource"
+            android:onClick="@{click::onAvatarClick}">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_profile_avatar"
+                android:layout_width="@dimen/profile_icon_size"
+                android:layout_height="@dimen/profile_icon_size"
+                app:civ_border_color="?attr/backgroundPrimaryColor"
+                app:civ_border_overlay="true"
+                app:civ_border_width="2dp"
+                app:civ_fill_color="?attr/backgroundPrimaryColor"
+                app:imageUrl="@{model.avatar}" />
+
+            <ImageView
+                android:id="@+id/img_profile_verified"
+                android:layout_width="@dimen/profile_verified_icon"
+                android:layout_height="@dimen/profile_verified_icon"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentEnd="true"
+                android:src="?attr/verifiedIcon"
+                android:visibility="@{model.verified ? v.VISIBLE : v.GONE}" />
+
+        </RelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/profile_bottom_more"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profile_tail_gradient_height"
+            android:layout_alignParentBottom="true"
+            android:onClick="@{click::onMoreClick}"
+            android:background="?attr/profileTailBackground">
+
+            <ImageView
+                android:layout_width="@dimen/profile_tail_button_width"
+                android:layout_height="@dimen/profile_tail_button_height"
+                android:layout_gravity="center"
+                android:scaleType="fitXY"
+                android:src="?attr/profileTailButton" />
+
+        </FrameLayout>
+
+    </RelativeLayout>
+</layout>

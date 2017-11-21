@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="mentions" type="solonsky.signal.twitter.viewmodels.MentionsViewModel" />
+        <variable name="click" type="solonsky.signal.twitter.viewmodels.MentionsViewModel.MentionsClickHandler" />
+        <variable name="appData" type="solonsky.signal.twitter.helpers.AppData" />
+        <import type="android.view.View" alias="v" />
+    </data>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_mentions_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_mentions"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/default_toolbar_margin_top"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                android:visibility="@{mentions.state == appData.UI_STATE_VISIBLE ? v.VISIBLE : v.GONE}"
+                app:listConfig="@{mentions.mentionsConfig}" />
+
+            <TextView
+                android:id="@+id/txt_mentions_no_items"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:gravity="center"
+                android:visibility="@{mentions.state == appData.UI_STATE_NO_ITEMS ? v.VISIBLE : v.GONE}"
+                android:text="@string/mentions_no_items" />
+
+            <com.github.rahatarmanahmed.cpv.CircularProgressView
+                android:id="@+id/cpv_mentions"
+                android:layout_width="@dimen/loader_size"
+                android:layout_height="@dimen/loader_size"
+                android:visibility="@{mentions.state == appData.UI_STATE_LOADING ? v.VISIBLE : v.GONE}"
+                android:layout_centerInParent="true"
+                app:cpv_animAutostart="true"
+                app:cpv_indeterminate="true"
+                app:cpv_color="?attr/hintTextColor" />
+
+        </RelativeLayout>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+</layout>

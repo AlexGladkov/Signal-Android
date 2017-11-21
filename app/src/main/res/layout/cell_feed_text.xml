@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="solonsky.signal.twitter.models.FeedTextModel" />
+
+        <variable
+            name="click"
+            type="solonsky.signal.twitter.models.FeedModel.FeedClickHandler" />
+
+        <import
+            alias="v"
+            type="android.view.View" />
+
+        <import type="solonsky.signal.twitter.R" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.daimajia.swipe.SwipeLayout
+            android:id="@+id/feed_text_bottom_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Bottom View Start-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/backgroundSecondaryColor"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/ic_icons_more_hor"
+                    android:tint="?attr/hintTextColor" />
+                <!--What you want to show-->
+
+            </RelativeLayout>
+            <!-- Bottom View End-->
+
+            <LinearLayout
+                android:id="@+id/feed_text_main"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:backgroundAttr="@{model.expand ? R.attr.backgroundSecondaryColor : model.highlighted ? R.attr.backgroundHighlightColor : R.attr.backgroundPrimaryColor}">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{click::onItemClick}"
+                    android:onLongClick="@{click::longItemClick}"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="@dimen/feed_icon_size"
+                        android:layout_height="@dimen/feed_icon_size"
+                        android:onLongClick="@{click::longUserClick}"
+                        android:background="?attr/backgroundRoundImage"
+                        app:imageRoundUrl="@{model.iconUrl}" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:onLongClick="@{click::longUserClick}"
+                                android:text="@{model.username.toUpperCase()}"
+                                android:textColor="?attr/secondaryTextColor" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="8dp"
+                                android:textColor="?attr/secondaryTextColor"
+                                app:parseTime="@{model.date}" />
+
+                            <ImageView
+                                android:layout_width="@dimen/feed_tiny_size"
+                                android:layout_height="@dimen/feed_tiny_size"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="8dp"
+                                android:src="@drawable/ic_icons_tiny_like"
+                                android:tint="?attr/likeTintColor"
+                                android:visibility="@{model.favorite ? v.VISIBLE : v.GONE}" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:id="@+id/feed_text_txt_text"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1"
+                                android:text="@{model.text}"
+                                android:textColor="?attr/primaryTextColor" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:visibility="@{model.retweeted ? v.VISIBLE : v.GONE }">
+
+                            <ImageView
+                                android:layout_width="@dimen/feed_tiny_size"
+                                android:layout_height="@dimen/feed_tiny_size"
+                                android:layout_gravity="center_vertical"
+                                android:src="@drawable/ic_icons_tiny_rt"
+                                android:tint="?attr/rtTintColor" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="8dp"
+                                android:gravity="top"
+                                android:text="@{model.retweetText}"
+                                android:textColor="?attr/secondaryTextColor"
+                                android:textSize="14dp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/feed_text_bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{model.expand ? v.VISIBLE : v.GONE}">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/feed_bottom_icon_size"
+                        android:layout_weight="1"
+                        android:onClick="@{click::onReplyClick}"
+                        android:padding="12dp"
+                        android:src="@drawable/ic_icons_actions_reply"
+                        android:tint="@color/action_tint_color" />
+
+                    <ImageView
+                        android:id="@+id/imageView7"
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/feed_bottom_icon_size"
+                        android:layout_weight="1"
+                        android:onClick="@{click::onRetweetClick}"
+                        android:padding="12dp"
+                        android:src="@drawable/ic_icons_actions_rt"
+                        android:tint="@color/action_tint_color" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/feed_bottom_icon_size"
+                        android:layout_weight="1"
+                        android:onClick="@{click::onLikeClick}"
+                        android:padding="12dp"
+                        android:src="@drawable/ic_tabbar_icons_likes"
+                        app:tintColorAttr="@{model.favorite ? R.attr.likeTintColor : R.attr.hintTextColor}" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/feed_bottom_icon_size"
+                        android:layout_weight="1"
+                        android:onClick="@{click::onShareClick}"
+                        android:padding="12dp"
+                        android:src="@drawable/ic_icons_actions_share"
+                        android:tint="@color/action_tint_color" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/feed_bottom_icon_size"
+                        android:layout_weight="1"
+                        android:onClick="@{click::onMoreClick}"
+                        android:padding="12dp"
+                        android:src="@drawable/ic_icons_more_hor"
+                        android:tint="@color/action_tint_color" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.daimajia.swipe.SwipeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginStart="72dp"
+            android:background="?attr/dividerColor" />
+
+    </LinearLayout>
+</layout>

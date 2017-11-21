@@ -1,0 +1,565 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="solonsky.signal.twitter.viewmodels.DetailViewModel" />
+
+        <variable
+            name="click"
+            type="solonsky.signal.twitter.viewmodels.DetailViewModel.DetailClickHandler" />
+
+        <import
+            alias="v"
+            type="android.view.View" />
+
+        <import type="solonsky.signal.twitter.R" />
+    </data>
+
+    <com.daimajia.swipe.SwipeLayout
+        android:id="@+id/sl_detail"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Bottom View Start-->
+        <View
+            android:id="@+id/view_bottom_right"
+            android:layout_width="0dp"
+            android:layout_height="match_parent" />
+
+        <View
+            android:id="@+id/view_bottom_left"
+            android:layout_width="400dp"
+            android:layout_height="match_parent"
+            android:alpha="0.2"
+            android:background="@color/black" />
+        <!-- Bottom View End-->
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/backgroundPrimaryColor">
+
+            <solonsky.signal.twitter.libs.ResponsiveScrollView
+                android:id="@+id/scroll_detail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/ll_detail_bottom"
+                android:clipToPadding="false">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/recyclerDetailConversation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:overScrollMode="never"
+                        android:visibility="visible"
+                        app:listConfig="@{model.threadConfig}" />
+
+                    <RelativeLayout
+                        android:id="@+id/rl_detail_main"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="24dp"
+                        android:background="?attr/backgroundSecondaryColor">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="800dp"
+                            android:background="?attr/backgroundSecondaryColor" />
+
+                        <RelativeLayout
+                            android:id="@+id/tb_detail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:backgroundAttrAnimation="@{model.showThread || !model.reply ? R.attr.backgroundSecondaryColor : R.attr.backgroundHighlightColor}"
+                            app:durationRange="@{300}">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/detail_tb_height"
+                                android:orientation="horizontal">
+
+                                <de.hdodenhof.circleimageview.CircleImageView
+                                    android:id="@+id/imageView"
+                                    android:layout_width="40dp"
+                                    android:layout_height="40dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_margin="16dp"
+                                    android:background="?attr/backgroundRoundImage"
+                                    app:imageUrl="@{model.avatar}" />
+
+                                <LinearLayout
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="16dp"
+                                    android:layout_marginTop="18.25dp"
+                                    android:orientation="vertical">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="sans-serif"
+                                        android:includeFontPadding="false"
+                                        android:text="@{model.userName}"
+                                        android:textColor="?attr/primaryTextColor"
+                                        android:textSize="16dp"
+                                        android:textStyle="bold" />
+
+                                    <TextSwitcher
+                                        android:id="@+id/txt_detail_subtitle"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="1dp"
+                                        android:text="@{model.twitterName}">
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="sans-serif"
+                                            android:includeFontPadding="false"
+                                            android:textColor="?attr/hintTextColor"
+                                            android:textSize="14dp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="sans-serif"
+                                            android:includeFontPadding="false"
+                                            android:textColor="?attr/hintTextColor"
+                                            android:textSize="14dp" />
+
+                                    </TextSwitcher>
+                                </LinearLayout>
+
+                                <View
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:onClick="@{click::onThreadClick}" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/tweet_follow_width"
+                                    android:layout_height="@dimen/tweet_follow_height"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginEnd="16dp"
+                                    android:layout_marginStart="16dp"
+                                    android:onClick="@{click::onFollowClick}"
+                                    android:scaleType="fitXY"
+                                    android:src="?attr/buttonFollow"
+                                    android:visibility="@{model.reply ? v.GONE : model.followed ? v.GONE : v.VISIBLE}" />
+
+                                <com.github.rahatarmanahmed.cpv.CircularProgressView
+                                    android:layout_width="@dimen/tb_icon_size"
+                                    android:layout_height="@dimen/tb_icon_size"
+                                    android:layout_gravity="center_vertical"
+                                    android:padding="16dp"
+                                    android:visibility="@{!model.reply ? v.GONE : model.loaded ? v.GONE : v.VISIBLE}"
+                                    app:cpv_animAutostart="true"
+                                    app:cpv_color="?attr/backgroundSecondaryColor"
+                                    app:cpv_indeterminate="true" />
+
+                                <ImageView
+                                    android:id="@+id/img_detail_arrow"
+                                    android:layout_width="30dp"
+                                    android:layout_height="30dp"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_marginEnd="16dp"
+                                    android:background="?attr/detailArrowBackgroundResource"
+                                    android:onClick="@{click::onThreadClick}"
+                                    android:padding="3dp"
+                                    android:scaleType="fitXY"
+                                    android:src="@drawable/disclosure_19"
+                                    android:tint="?attr/arrowColor"
+                                    android:visibility="@{model.loaded ? v.VISIBLE : v.GONE}" />
+                            </LinearLayout>
+
+                            <ImageView
+                                android:layout_width="16dp"
+                                android:layout_height="7dp"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginStart="28dp"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/ic_icons_tiny_corner"
+                                android:tint="?attr/backgroundPrimaryColor" />
+
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ll_detail_content"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_below="@+id/tb_detail"
+                            android:background="?attr/backgroundPrimaryColor"
+                            android:descendantFocusability="blocksDescendants"
+                            android:orientation="vertical">
+
+                            <android.support.v7.widget.RecyclerView
+                                android:id="@+id/recycler_detail_media"
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:visibility="@{model.imagesSource.size() > 0 ? v.VISIBLE : v.GONE}"
+                                app:listConfig="@{model.imagesConfig}"
+                                app:viewHeight="@{model.imageHeight}" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="48dp"
+                                android:paddingBottom="17dp"
+                                android:paddingEnd="16dp"
+                                android:paddingStart="16dp"
+                                android:paddingTop="15dp">
+
+                                <!--<TextView-->
+                                <!--android:layout_width="0dp"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginEnd="16dp"-->
+                                <!--android:layout_weight="1"-->
+                                <!--android:fontFamily="sans-serif-light"-->
+                                <!--android:text="@{model.location}"-->
+                                <!--android:textColor="?attr/secondaryTextColor" />-->
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="bottom"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="sans-serif-light"
+                                        android:gravity="end"
+                                        android:text="@{model.date}"
+                                        android:textColor="?attr/secondaryTextColor"
+                                        android:visibility="gone" />
+
+                                    <com.example.kmoaz.testapp1.CustomTextView.CustomTextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:layout_marginTop="-1.25dp"
+                                        android:fontFamily="sans-serif"
+                                        android:gravity="center_vertical"
+                                        android:includeFontPadding="false"
+                                        android:onClick="@{click::onClientClick}"
+                                        android:text="@{model.client}"
+                                        android:textColor="?attr/secondaryTextColor"
+                                        android:textStyle="normal" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <solonsky.signal.twitter.libs.NonSwipeableViewPager
+                            android:id="@+id/vp_detail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/stb_detail"
+                            android:visibility="gone" />
+
+                        <FrameLayout
+                            android:id="@+id/fl_detail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/stb_detail" />
+
+                        <com.ogaclejapan.smarttablayout.SmartTabLayout
+                            android:id="@+id/stb_detail"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/tab_bar_layout_size"
+                            android:layout_below="@+id/ll_detail_content"
+                            app:stl_customTabTextLayoutId="@layout/tab_item"
+                            app:stl_distributeEvenly="true"
+                            app:stl_dividerThickness="0dp"
+                            app:stl_indicatorInterpolation="linear"
+                            app:stl_indicatorThickness="0dp"
+                            app:stl_overlineThickness="0dp"
+                            app:stl_underlineThickness="0dp" />
+
+                        <LinearLayout
+                            android:id="@+id/ll_detail_status"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@{model.textMarginTop}"
+                            android:background="?attr/backgroundPrimaryColor"
+                            android:orientation="vertical">
+
+                            <solonsky.signal.twitter.libs.autoLinkTextView.AutoLinkTextView
+                                android:id="@+id/txt_detail_status"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="1.25dp"
+                                android:fontFamily="sans-serif"
+                                android:includeFontPadding="false"
+                                android:lineSpacingExtra="2.75dp"
+                                android:padding="16dp"
+                                android:textColor="?attr/primaryTextColor"
+                                android:textSize="18dp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="16dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="1.5dp"
+                                android:background="?attr/backgroundPrimaryColor"
+                                android:visibility="@{model.showQuote ? v.VISIBLE : v.GONE}">
+
+                                <View
+                                    android:id="@+id/view_detail_quote_mark"
+                                    android:layout_width="8dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginEnd="12dp"
+                                    android:background="?attr/quoteDividerResource" />
+
+                                <LinearLayout
+                                    android:layout_width="0dp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
+                                    android:layout_weight="1"
+                                    android:orientation="vertical">
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginTop="1dp"
+                                        android:layout_marginEnd="16dp" >
+
+                                        <TextView
+                                            android:id="@+id/txt_detail_quote_title"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="bottom"
+                                            android:layout_weight="1"
+                                            android:fontFamily="sans-serif"
+                                            android:includeFontPadding="false"
+                                            android:textColor="?attr/secondaryTextColor"
+                                            android:textSize="14dp"
+                                            android:textStyle="bold" />
+
+                                        <TextView
+                                            android:id="@+id/txt_detail_quote_created_at"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="bottom"
+                                            android:layout_marginStart="8dp"
+                                            android:fontFamily="sans-serif"
+                                            android:includeFontPadding="false"
+                                            android:textColor="?attr/secondaryTextColor"
+                                            android:textSize="12dp"
+                                            android:textStyle="normal" />
+
+                                    </LinearLayout>
+
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="horizontal"
+                                        android:layout_marginTop="1.5dp" >
+
+                                        <TextView
+                                            android:id="@+id/txt_detail_quote_text"
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_weight="1"
+                                            android:fontFamily="sans-serif"
+                                            android:includeFontPadding="false"
+                                            android:layout_marginEnd="8dp"
+                                            android:lineSpacingExtra="1.5dp"
+                                            android:textColor="?attr/thirdTextColor"
+                                            android:textSize="14dp"
+                                            android:textStyle="normal" />
+
+                                        <FrameLayout
+                                            android:id="@+id/detail_fl_quote_media"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="6dp"
+                                            android:layout_marginEnd="4dp"
+                                            android:onClick="@{click::onQuoteMediaClick}" >
+
+                                            <RelativeLayout
+                                                android:layout_width="@dimen/compose_quote_image_size"
+                                                android:layout_height="@dimen/compose_quote_image_size">
+
+                                                <ImageView
+                                                    android:id="@+id/img_detail_quote_image"
+                                                    android:layout_width="@dimen/compose_quote_image_size"
+                                                    android:layout_height="@dimen/compose_quote_image_size"
+                                                    android:background="@drawable/compose_image_stroke" />
+
+                                                <ImageView
+                                                    android:id="@+id/img_detail_quote_badge"
+                                                    android:layout_width="@dimen/feed_badge_preview_width_size"
+                                                    android:layout_height="@dimen/feed_badge_preview_height_size"
+                                                    android:layout_centerInParent="true"
+                                                    android:src="@drawable/ic_badges_media_youtube" />
+
+                                            </RelativeLayout>
+
+                                            <ImageView
+                                                android:id="@+id/detail_quote_img_media_count"
+                                                android:layout_width="16dp"
+                                                android:layout_height="16dp"
+                                                android:layout_marginStart="48dp"
+                                                android:layout_marginTop="48dp"
+                                                android:background="@drawable/ic_badges_timeline_counter"
+                                                android:backgroundTint="?attr/backgroundPrimaryColor" />
+
+                                            <TextView
+                                                android:id="@+id/detail_quote_txt_media_count"
+                                                android:layout_width="24dp"
+                                                android:layout_height="24dp"
+                                                android:layout_marginStart="52dp"
+                                                android:layout_marginTop="52dp"
+                                                android:gravity="center"
+                                                android:text="2"
+                                                android:textColor="?attr/secondaryTextColor"
+                                                android:textSize="10dp" />
+
+                                        </FrameLayout>
+
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/view_detail_shadow"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/dropShadowHeight"
+                            android:layout_below="@+id/ll_detail_status"
+                            android:background="?attr/dropShadowResource" />
+
+                    </RelativeLayout>
+
+                    <View
+                        android:id="@+id/view_detail_dummy"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_below="@+id/rl_detail_main"
+                        app:viewHeight="@{model.dummyHeight}" />
+
+                </RelativeLayout>
+            </solonsky.signal.twitter.libs.ResponsiveScrollView>
+
+            <View
+                android:id="@+id/view_status_bar_scrim"
+                android:layout_width="match_parent"
+                android:layout_height="24dp" />
+
+            <FrameLayout
+                android:id="@+id/ll_detail_bottom"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/bottom_bar_height"
+                android:layout_alignParentBottom="true"
+                android:background="?attr/backgroundPrimaryColor"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_max_height"
+                    android:background="?attr/barShadowColor" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp" >
+                    
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" >
+
+                        <ImageView
+                            android:layout_width="@dimen/feed_bottom_icon_size"
+                            android:layout_height="@dimen/feed_bottom_icon_size"
+                            android:onClick="@{click::onReplyClick}"
+                            android:layout_gravity="center"
+                            android:background="?attr/actionRipple"
+                            android:src="@drawable/ic_icons_actions_reply"
+                            android:tint="?attr/hintTextColor" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" >
+
+                        <ImageView
+                            android:layout_width="@dimen/feed_bottom_icon_size"
+                            android:layout_height="@dimen/feed_bottom_icon_size"
+                            android:background="?attr/actionRipple"
+                            android:onClick="@{click::onRtClick}"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_icons_actions_rt"
+                            android:tint="?attr/hintTextColor" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" >
+
+                        <ImageView
+                            android:id="@+id/img_detail_like"
+                            android:layout_width="@dimen/feed_bottom_icon_size"
+                            android:layout_height="@dimen/feed_bottom_icon_size"
+                            android:background="?attr/actionRipple"
+                            android:onClick="@{click::onLikeClick}"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_tabbar_icons_likes"
+                            app:tintColorAttr="@{model.favorite ? R.attr.likeTintColor : R.attr.hintTextColor}" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" >
+
+                        <ImageView
+                            android:layout_width="@dimen/feed_bottom_icon_size"
+                            android:layout_height="@dimen/feed_bottom_icon_size"
+                            android:background="?attr/actionRipple"
+                            android:onClick="@{click::onShareClick}"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_icons_actions_share"
+                            android:tint="?attr/hintTextColor" />
+
+                    </FrameLayout>
+
+                    <FrameLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" >
+
+                        <ImageView
+                            android:layout_width="@dimen/feed_bottom_icon_size"
+                            android:layout_height="@dimen/feed_bottom_icon_size"
+                            android:background="?attr/actionRipple"
+                            android:onClick="@{click::onMoreClick}"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_icons_more_hor"
+                            android:tint="?attr/hintTextColor" />
+
+                    </FrameLayout>
+
+                </LinearLayout>
+            </FrameLayout>
+
+        </RelativeLayout>
+
+    </com.daimajia.swipe.SwipeLayout>
+</layout>

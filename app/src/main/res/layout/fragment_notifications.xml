@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="notifications"
+            type="solonsky.signal.twitter.viewmodels.NotificationsViewModel" />
+
+        <variable
+            name="click"
+            type="solonsky.signal.twitter.viewmodels.NotificationsViewModel.NotificationsClickHandler" />
+
+        <import
+            alias="v"
+            type="android.view.View" />
+    </data>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/default_toolbar_margin_top"
+        android:background="?attr/backgroundSecondaryColor"
+        android:orientation="vertical">
+
+        <com.ogaclejapan.smarttablayout.SmartTabLayout
+            android:id="@+id/stb_notifications_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/search_tab_height"
+            app:stl_customTabTextLayoutId="@layout/tab_item"
+            app:stl_distributeEvenly="true"
+            app:stl_dividerThickness="0dp"
+            app:stl_indicatorInterpolation="linear"
+            app:stl_indicatorThickness="0dp"
+            app:stl_overlineThickness="0dp"
+            app:stl_underlineThickness="0dp" />
+
+        <FrameLayout
+            android:id="@+id/fl_notifications_fragments"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/vp_notifications_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:overScrollMode="never"
+            android:visibility="gone" />
+
+    </LinearLayout>
+
+</layout>

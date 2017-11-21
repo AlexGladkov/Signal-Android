@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:id="@+id/search_media_save_group">
+
+        <item
+            android:id="@+id/search_save"
+            android:title="@string/search_save" />
+
+    </group>
+
+    <group android:id="@+id/search_media_other_group">
+
+        <item
+            android:id="@+id/search_images"
+            android:title="@string/search_images"
+            android:checkable="true"
+            android:checked="true" />
+
+        <item
+            android:id="@+id/search_video"
+            android:title="@string/search_video"
+            android:checkable="true"
+            android:checked="true" />
+
+        <item
+            android:id="@+id/search_links"
+            android:title="@string/search_links"
+            android:checkable="true"
+            android:checked="true" />
+
+    </group>
+</menu>

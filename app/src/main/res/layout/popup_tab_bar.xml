@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="@dimen/tabBarPopupWidth"
+    android:layout_height="@dimen/tabBarPopupHeight">
+
+    <View
+        android:layout_width="@dimen/tabBarPopupWidth"
+        android:layout_height="@dimen/tabBarPopupHeight"
+        android:background="@drawable/ic_tabbar_popover_bg"
+        android:backgroundTint="@color/header_tint_color"
+        android:alpha="0.95"/>
+
+    <ImageView
+        android:id="@+id/popup_menu_item_1"
+        android:layout_width="@dimen/tab_popup_size"
+        android:layout_height="@dimen/tab_popup_size"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:src="@drawable/ic_tabbar_icons_mute"
+        android:tint="@color/popover_button_tint_color" />
+
+    <ImageView
+        android:id="@+id/popup_menu_item_2"
+        android:layout_width="@dimen/tab_popup_size"
+        android:layout_height="@dimen/tab_popup_size"
+        android:src="@drawable/ic_tabbar_icons_profile"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="24dp"
+        android:layout_below="@+id/popup_menu_item_1"
+        android:tint="@color/popover_button_tint_color"
+        android:layout_marginBottom="24dp"/>
+
+    <ImageView
+        android:id="@+id/popup_menu_item_3"
+        android:layout_width="@dimen/tab_popup_size"
+        android:layout_height="@dimen/tab_popup_size"
+        android:src="@drawable/ic_tabbar_icons_likes"
+        android:layout_below="@id/popup_menu_item_2"
+        android:tint="@color/popover_button_tint_color"
+        android:layout_marginBottom="20dp"
+        android:layout_marginStart="12dp" />
+
+</RelativeLayout>

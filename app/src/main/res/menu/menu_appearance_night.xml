@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/night_on"
+        android:title="@string/appearance_night_menu_always" />
+
+    <item android:id="@+id/night_auto"
+        android:title="@string/appearance_night_menu_night" />
+
+    <item android:id="@+id/night_off"
+        android:title="@string/appearance_night_menu_off" />
+</menu>

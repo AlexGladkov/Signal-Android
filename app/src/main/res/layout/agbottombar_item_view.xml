@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_weight="1">
+
+    <ImageView
+        android:id="@+id/ag_item_view_image"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/ic_home_black_24dp"/>
+    
+    <View
+        android:id="@+id/ag_item_view_caption"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_gravity="center_horizontal" />
+    
+</LinearLayout>

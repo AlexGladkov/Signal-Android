@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="model" type="solonsky.signal.twitter.viewmodels.SupportViewModel" />
+        <variable name="click" type="solonsky.signal.twitter.viewmodels.SupportViewModel.SupportClickHandler" />
+        <import type="solonsky.signal.twitter.R" />
+        <import type="android.view.View" alias="v" />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/fl_support_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/aboutBackgroundResource">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbars="none"
+            android:overScrollMode="never">
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:id="@+id/tb_support"
+                    android:layout_width="match_parent"
+                    android:layout_height="?android:attr/actionBarSize"
+                    android:layout_marginTop="@dimen/status_bar_height"
+                    android:background="@android:color/transparent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/support_main_title"
+                    android:textSize="30dp"
+                    android:letterSpacing="-0.03"
+                    android:includeFontPadding="false"
+                    android:textColor="@color/white"
+                    android:fontFamily="sans-serif"
+                    android:layout_gravity="center_horizontal"/>
+
+                <TextView
+                    android:id="@+id/txt_support_main_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginTop="14dp"
+                    android:textSize="16dp"
+                    android:textStyle="normal"
+                    android:lineSpacingMultiplier="1.041"
+                    android:fontFamily="sans-serif"
+                    android:textColor="?attr/primaryTextColor"
+                    android:text="@string/support_main_subtitle"
+                    android:gravity="center"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="36dp" >
+
+                    <LinearLayout
+                        android:layout_width="76dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:onClick="@{click :: onCoffeeClick}" >
+                        
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="@dimen/support_tip_size"
+                                android:layout_height="@dimen/support_tip_size"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="2dp"
+                                android:src="@mipmap/coffee" />
+
+                            <ImageView
+                                android:layout_width="@dimen/little_star_size"
+                                android:layout_height="@dimen/little_star_size"
+                                android:layout_gravity="end"
+                                android:layout_marginEnd="1dp"
+                                android:visibility="@{model.star1 ? v.VISIBLE : v.GONE}"
+                                android:src="?attr/supportStarResource"/>
+
+                        </FrameLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:alpha="0.7"
+                            android:lineSpacingMultiplier="0.972"
+                            android:text="@{model.tips_1}"
+                            android:textColor="?attr/primaryTextColor"
+                            android:textSize="12dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="76dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginStart="28dp"
+                        android:layout_marginEnd="28dp"
+                        android:orientation="vertical"
+                        android:onClick="@{click :: onBeerClick}">
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="@dimen/support_tip_size"
+                                android:layout_height="@dimen/support_tip_size"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="2dp"
+                                android:src="@mipmap/beer" />
+
+                            <ImageView
+                                android:layout_width="@dimen/little_star_size"
+                                android:layout_height="@dimen/little_star_size"
+                                android:layout_gravity="end"
+                                android:layout_marginEnd="1dp"
+                                android:visibility="@{model.star2 ? v.VISIBLE : v.GONE}"
+                                android:src="?attr/supportStarResource"/>
+
+                        </FrameLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:alpha="0.7"
+                            android:lineSpacingMultiplier="0.972"
+                            android:text="@{model.tips_2}"
+                            android:textColor="?attr/primaryTextColor"
+                            android:textSize="12dp" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="76dp"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_weight="1"
+                        android:onClick="@{click :: onCakeClick}" >
+
+                        <FrameLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="@dimen/support_tip_size"
+                                android:layout_height="@dimen/support_tip_size"
+                                android:layout_gravity="center_horizontal"
+                                android:layout_marginTop="2dp"
+                                android:src="@mipmap/cake" />
+
+                            <ImageView
+                                android:layout_width="@dimen/little_star_size"
+                                android:layout_height="@dimen/little_star_size"
+                                android:layout_gravity="end"
+                                android:layout_marginEnd="1dp"
+                                android:visibility="@{model.star3 ? v.VISIBLE : v.GONE}"
+                                android:src="?attr/supportStarResource" />
+
+                        </FrameLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:gravity="center"
+                            android:layout_marginTop="10dp"
+                            android:textSize="12dp"
+                            android:lineSpacingMultiplier="0.972"
+                            android:textColor="?attr/primaryTextColor"
+                            android:alpha="0.7"
+                            android:text="@{model.tips_3}" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/support_tips_unlock"
+                    android:layout_marginTop="50dp"
+                    android:layout_gravity="center_horizontal"
+                    android:includeFontPadding="false"
+                    android:lineSpacingMultiplier="0.99"
+                    android:fontFamily="sans-serif-light"
+                    android:textSize="16dp"
+                    android:textColor="?attr/primaryTextColor" />
+
+                <Button
+                    android:id="@+id/btn_support_tip_1"
+                    android:layout_width="@dimen/support_button_width"
+                    android:layout_height="@dimen/support_button_height"
+                    android:background="?attr/activeSupportResource"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/support_tip_vote"
+                    android:textAllCaps="false"
+                    android:textSize="14dp"
+                    android:paddingBottom="0.5dp"
+                    android:alpha="@{model.tip1 ? 1f : 0.6f}"
+                    android:fontFamily="sans-serif"
+                    android:stateListAnimator="@null"
+                    app:textColorAttr="@{model.tip1 ? R.attr.activeSupportTextColor : R.attr.inactiveSupportTextColor}"
+                    android:onClick="@{click::onFirstTipClick}"
+                    android:layout_marginTop="16dp"/>
+
+                <Button
+                    android:id="@+id/btn_support_tip_2"
+                    android:layout_width="@dimen/support_button_width"
+                    android:layout_height="@dimen/support_button_height"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="sans-serif"
+                    android:paddingBottom="0.5dp"
+                    android:background="?attr/activeSupportResource"
+                    app:textColorAttr="@{model.tip2 ? R.attr.activeSupportTextColor : R.attr.inactiveSupportTextColor}"
+                    android:text="@string/support_tip_priority"
+                    android:stateListAnimator="@null"
+                    android:onClick="@{click::onSecondTipClick}"
+                    android:alpha="@{model.tip2 ? 1f : 0.6f}"
+                    android:textAllCaps="false"
+                    android:textSize="14dp" />
+
+                <Button
+                    android:id="@+id/btn_support_tip_3"
+                    android:layout_width="@dimen/support_button_width"
+                    android:layout_height="@dimen/support_button_height"
+                    android:layout_gravity="center_horizontal"
+                    android:gravity="center"
+                    app:textColorAttr="@{model.tip3 ? R.attr.activeSupportTextColor : R.attr.inactiveSupportTextColor}"
+                    android:text="@string/support_tip_beta"
+                    android:textAllCaps="false"
+                    android:paddingBottom="0.5dp"
+                    android:background="?attr/activeSupportResource"
+                    android:fontFamily="sans-serif"
+                    android:stateListAnimator="@null"
+                    android:alpha="@{model.tip3 ? 1f : 0.6f}"
+                    android:textSize="14dp"
+                    android:onClick="@{click::onThirdTipClick}"
+                    android:layout_marginTop="12dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="32dp"
+                    android:textColor="?attr/primaryTextColor"
+                    android:textSize="16dp"
+                    android:alpha="0.8"
+                    android:includeFontPadding="false"
+                    android:fontFamily="sans-serif-light"
+                    android:layout_gravity="center_horizontal"
+                    android:text="@string/support_cant_tip"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/support_cant_subline"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="sans-serif-medium"
+                    android:includeFontPadding="false"
+                    android:onClick="@{click::onReviewClick}"
+                    android:textColor="@color/support_color"
+                    android:textSize="16dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/support_restore"
+                    android:layout_marginTop="36dp"
+                    android:layout_marginBottom="18dp"
+                    android:includeFontPadding="false"
+                    android:textSize="12dp"
+                    android:fontFamily="sans-serif"
+                    android:textColor="?attr/hintTextColor"
+                    android:layout_gravity="center_horizontal"
+                    android:onClick="@{click::onRestoreClick}" />
+
+            </LinearLayout>
+        </ScrollView>
+
+        <ImageView
+            android:id="@+id/img_support_back"
+            android:layout_width="@dimen/tb_icon_size"
+            android:layout_height="@dimen/tb_icon_size"
+            android:padding="16dp"
+            android:src="@drawable/ic_icons_toolbar_back"
+            android:tint="?attr/primaryTextColor"
+            android:layout_marginTop="24dp"
+            android:background="?attr/buttonRipple" />
+        
+    </FrameLayout>
+</layout>

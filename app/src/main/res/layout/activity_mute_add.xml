@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="solonsky.signal.twitter.viewmodels.MuteAddViewModel" />
+
+        <variable
+            name="click"
+            type="solonsky.signal.twitter.viewmodels.MuteAddViewModel.MuteAddClickHandler" />
+
+        <import
+            alias="v"
+            type="android.view.View" />
+        
+        <import type="solonsky.signal.twitter.R" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/backgroundSecondaryColor"
+        android:fitsSystemWindows="true"
+        android:focusableInTouchMode="true" >
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tb_logged_mute"
+            android:layout_width="match_parent"
+            app:contentInsetStart="0dp"
+            android:layout_height="?android:attr/actionBarSize"
+            android:background="?attr/backgroundPrimaryColor" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/img_mute_add_back"
+                    android:layout_width="@dimen/tb_icon_size"
+                    android:layout_height="@dimen/tb_icon_size"
+                    android:padding="16dp"
+                    android:tint="?attr/buttonTintColor"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="4dp"
+                    android:src="@drawable/ic_icons_toolbar_back" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:fontFamily="sans-serif"
+                    android:textStyle="bold"
+                    android:text="@{model.title}"
+                    android:textColor="?attr/primaryTextColor"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:id="@+id/btn_mute_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:onClick="@{click::onActionClick}"
+                    android:padding="16dp"
+                    android:alpha="@{model.action ? 1.0f : 0.2f}"
+                    android:src="@drawable/ic_icons_toolbar_apply"
+                    android:tint="?attr/buttonSendTintColor" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="56dp"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_mute_selected"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:overScrollMode="never"
+                android:visibility="@{model.list ? v.GONE : v.VISIBLE}" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="24dp"
+                android:background="?attr/backgroundPrimaryColor"
+                android:visibility="@{model.list ? v.VISIBLE : v.GONE}" >
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:background="?attr/dividerColor" />
+
+                <EditText
+                    android:id="@+id/txt_mute_add_user"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/mute_add_height"
+                    android:background="?attr/backgroundPrimaryColor"
+                    android:hint="@string/mute_add_user"
+                    android:inputType="textNoSuggestions|textVisiblePassword"
+                    android:padding="16dp"
+                    android:textCursorDrawable="?attr/cursorColor"
+                    android:singleLine="true"
+                    android:imeOptions="actionDone"
+                    android:onTextChanged="@{model::onUserChanged}"
+                    android:textColor="?attr/primaryTextColor"
+                    android:textColorHint="?attr/primaryTextColor"
+                    android:textSize="16dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:layout_marginStart="16dp"
+                    android:background="?attr/dividerColor" />
+
+
+                <EditText
+                    android:id="@+id/txt_mute_add_keyword"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/mute_add_height"
+                    android:background="?attr/backgroundPrimaryColor"
+                    android:hint="@string/mute_add_keyword"
+                    android:singleLine="true"
+                    android:textCursorDrawable="?attr/cursorColor"
+                    android:imeOptions="actionDone"
+                    android:inputType="textNoSuggestions|textVisiblePassword"
+                    android:onTextChanged="@{model::onKeywordChanged}"
+                    android:padding="16dp"
+                    android:textColorHint="?attr/primaryTextColor"
+                    android:textColor="?attr/primaryTextColor"
+                    android:textSize="16dp" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:layout_marginStart="16dp"
+                    android:background="?attr/dividerColor" />
+
+                <EditText
+                    android:id="@+id/txt_mute_add_hashtag"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/mute_add_height"
+                    android:background="?attr/backgroundPrimaryColor"
+                    android:hint="@string/mute_add_hashtag"
+                    android:imeOptions="actionDone"
+                    android:singleLine="true"
+                    android:textCursorDrawable="?attr/cursorColor"
+                    android:inputType="textNoSuggestions|textVisiblePassword"
+                    android:onTextChanged="@{model::onHashTagChanged}"
+                    android:padding="16dp"
+                    android:textColor="?attr/primaryTextColor"
+                    android:textColorHint="?attr/primaryTextColor"
+                    android:textSize="16dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:background="?attr/dividerColor"
+                    android:layout_marginStart="16dp" />
+
+                <EditText
+                    android:id="@+id/txt_mute_add_client"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/mute_add_height"
+                    android:background="?attr/backgroundPrimaryColor"
+                    android:hint="@string/mute_add_client"
+                    android:singleLine="true"
+                    android:textCursorDrawable="?attr/cursorColor"
+                    android:imeOptions="actionDone"
+                    android:inputType="textNoSuggestions|textVisiblePassword"
+                    android:onTextChanged="@{model::onClientChanged}"
+                    android:padding="16dp"
+                    android:textColorHint="?attr/primaryTextColor"
+                    android:textColor="?attr/primaryTextColor"
+                    android:textSize="16dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:background="?attr/dividerColor" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_mute"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:overScrollMode="never"
+                android:background="?attr/backgroundPrimaryColor"
+                android:visibility="@{model.bottom ? v.VISIBLE : v.GONE}"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dropShadowHeight"
+            android:background="?attr/dropShadowResource"
+            android:layout_marginTop="56dp" />
+
+    </FrameLayout>
+</layout>

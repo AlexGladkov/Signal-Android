@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="solonsky.signal.twitter.viewmodels.SearchActivityViewModel" />
+
+        <variable
+            name="click"
+            type="solonsky.signal.twitter.viewmodels.SearchActivityViewModel.SearchActivityClickHandler" />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/fl_search_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/backgroundSecondaryColor"
+        android:focusableInTouchMode="true">
+
+        <FrameLayout
+            android:id="@+id/fl_search"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <Toolbar
+            android:id="@+id/tb_search"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/default_toolbar_margin_top"
+            android:background="?attr/backgroundPrimaryColor"
+            android:contentInsetStart="0dp"
+            app:contentInsetStart="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp">
+
+                <ImageView
+                    android:layout_width="@dimen/tb_icon_size"
+                    android:layout_height="@dimen/tb_icon_size"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="8dp"
+                    android:background="?attr/buttonRipple"
+                    android:padding="16dp"
+                    android:onClick="@{click::onBackClick}"
+                    android:src="@drawable/ic_icons_toolbar_back"
+                    android:tint="?attr/buttonTintColor" />
+
+                <EditText
+                    android:id="@+id/txt_search_input"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_weight="1"
+                    android:background="@android:color/transparent"
+                    android:fontFamily="sans-serif"
+                    android:hint="@string/search_hint"
+                    android:imeOptions="actionDone"
+                    android:includeFontPadding="false"
+                    android:selectAllOnFocus="true"
+                    android:singleLine="true"
+                    android:textColor="?attr/primaryTextColor"
+                    android:textColorHighlight="?attr/selectionTextColor"
+                    android:textColorHint="?attr/hintTextColor"
+                    android:textCursorDrawable="?attr/cursorColor"
+                    android:textSize="16dp" />
+
+                <ImageView
+                    android:id="@+id/btn_search_more"
+                    android:layout_width="@dimen/tb_icon_size"
+                    android:layout_height="@dimen/tb_icon_size"
+                    android:layout_gravity="center_vertical"
+                    android:background="?attr/buttonRipple"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_icons_more_hor"
+                    android:tint="?attr/buttonTintColor" />
+
+            </LinearLayout>
+
+        </Toolbar>
+
+        <View
+            android:id="@+id/view_logged_drop_shadow"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dropShadowHeight"
+            android:layout_marginTop="@dimen/default_toolbar_margin_top"
+            android:background="?attr/dropShadowResource" />
+
+    </FrameLayout>
+</layout>

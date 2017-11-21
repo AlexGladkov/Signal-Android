@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="model" type="solonsky.signal.twitter.viewmodels.ProfileStatsViewModel" />
+        <variable name="click" type="solonsky.signal.twitter.viewmodels.ProfileStatsViewModel.ProfileStatsClickHandler" />
+        <import type="android.view.View" alias="v" />
+        <import type="solonsky.signal.twitter.R" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp" >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="?attr/statsBackgroundResource" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:orientation="vertical"
+                android:layout_weight="1" >
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="39dp"
+                    android:layout_gravity="center_horizontal"
+                    android:onClick="@{click::onFollowersClick}" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="1dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12dp"
+                            android:textColor="?attr/hintTextColor"
+                            android:text="@string/profile_info_followers" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="@{String.valueOf(model.currentFollowers)}"
+                            android:layout_marginStart="8dp"
+                            android:textSize="12dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12dp"
+                            android:layout_marginStart="8dp"
+                            android:visibility="@{model.differenceFollowers == 0 ? v.GONE : v.VISIBLE}"
+                            app:textColorAttr="@{model.differenceFollowers > 0 ? R.attr.replyTintColor : model.differenceFollowers == 0 ? R.attr.primaryTextColor : R.attr.likeTintColor }"
+                            app:textDifference="@{model.differenceFollowers}" />
+
+                    </LinearLayout>
+
+                </FrameLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/stats_divider"
+                    android:layout_marginStart="2dp"
+                    android:background="?attr/statsDividerColor" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="39dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="-1dp"
+                        android:onClick="@{click::onTweetsClick}">
+
+                        <TextView
+                            android:id="@+id/textView4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/profile_info_tweets"
+                            android:textColor="?attr/hintTextColor"
+                            android:textSize="12dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:textSize="12dp"
+                            android:text="@{String.valueOf(model.currentTweets)}" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12dp"
+                            android:layout_marginStart="8dp"
+                            android:visibility="@{model.differenceTweets == 0 ? v.GONE : v.VISIBLE}"
+                            app:textColorAttr="@{model.differenceTweets > 0 ? R.attr.replyTintColor : model.differenceFollowers == 0 ? R.attr.primaryTextColor : R.attr.likeTintColor }"
+                            app:textDifference="@{model.differenceTweets}" />
+
+                    </LinearLayout>
+
+                </FrameLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="@dimen/stats_divider"
+                android:layout_height="match_parent"
+                android:layout_marginTop="2dp"
+                android:layout_marginBottom="2dp"
+                android:background="?attr/statsDividerColor" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="80dp"
+                android:orientation="vertical"
+                android:layout_weight="1" >
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="39dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="1dp"
+                        android:onClick="@{click::onFollowingClick}">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/profile_info_following"
+                            android:textColor="?attr/hintTextColor"
+                            android:textSize="12dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="@{String.valueOf(model.currentFollowing)}"
+                            android:textSize="12dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:textSize="12dp"
+                            android:visibility="@{model.differenceFollowing == 0 ? v.GONE : v.VISIBLE}"
+                            app:textColorAttr="@{model.differenceFollowing > 0 ? R.attr.replyTintColor : model.differenceFollowers == 0 ? R.attr.primaryTextColor : R.attr.likeTintColor }"
+                            app:textDifference="@{model.differenceFollowing}" />
+
+                    </LinearLayout>
+
+                </FrameLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/stats_divider"
+                    android:layout_marginEnd="2dp"
+                    android:background="?attr/statsDividerColor" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="39dp">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="-1dp"
+                        android:onClick="@{click::onListedClick}">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12dp"
+                            android:textColor="?attr/hintTextColor"
+                            android:text="@string/profile_info_listed" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="8dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:textSize="12dp"
+                            android:text="@{String.valueOf(model.currentListed)}" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="12dp"
+                            android:layout_marginStart="8dp"
+                            android:visibility="@{model.differenceListed == 0 ? v.GONE : v.VISIBLE}"
+                            app:textColorAttr="@{model.differenceListed > 0 ? R.attr.replyTintColor : model.differenceFollowers == 0 ? R.attr.primaryTextColor : R.attr.likeTintColor }"
+                            app:textDifference="@{model.differenceListed}" />
+
+                    </LinearLayout>
+
+                </FrameLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

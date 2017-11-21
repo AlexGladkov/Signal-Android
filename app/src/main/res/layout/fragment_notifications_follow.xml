@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="solonsky.signal.twitter.viewmodels.NotificationsDetailViewModel" />
+    </data>
+
+    <!--<android.support.v4.widget.SwipeRefreshLayout-->
+    <!--android:id="@+id/srl_notification_follow"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/backgroundSecondaryColor"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/notification_recycler_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            app:listConfig="@{model.listConfig}" />
+
+        <TextView
+            android:id="@+id/txt_notification_no_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:textStyle="normal"
+            android:textColor="?attr/hintTextColor"
+            android:includeFontPadding="false"
+            android:layout_marginTop="@dimen/search_placeholder_margin_top"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:visibility="gone"
+            android:text="@string/notifications_no_data" />
+
+    </FrameLayout>
+
+    <!--</android.support.v4.widget.SwipeRefreshLayout>-->
+</layout>

@@ -1,0 +1,158 @@
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion '26.0.2'
+
+    lintOptions {
+        checkReleaseBuilds false
+    }
+
+//    dexOptions {
+//        preDexLibraries = false
+//    }
+
+    defaultConfig {
+        applicationId "solonsky.signal.twitter"
+        vectorDrawables.useSupportLibrary = true
+        minSdkVersion 23
+        targetSdkVersion 25
+        versionCode 373
+        versionName "1.0"
+        multiDexEnabled true  // this line will solve this problem
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    packagingOptions {
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    sourceSets {
+        main.java.srcDirs += 'src/main/kotlin'
+        androidTest.java.srcDirs += 'src/androidTest/kotlin'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+kapt {
+    generateStubs = true
+}
+
+buildscript {
+    ext.kotlin_version = '1.1.51'
+    repositories {
+        mavenCentral()
+        maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
+    }
+}
+
+repositories {
+    mavenCentral()
+    google()
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+
+    implementation('commons-validator:commons-validator:1.4.1') {
+        exclude group: 'commons-collections', module: 'commons-collections'
+    }
+
+    //Optional: see how to use the utility.
+    compile 'com.twitter.sdk.android:twitter-core:3.0.0'
+    compile 'com.twitter.sdk.android:tweet-ui:3.0.0'
+    compile 'com.twitter.sdk.android:tweet-composer:3.0.0'
+    compile 'com.twitter.sdk.android:twitter-mopub:3.0.0'
+    compile 'org.twitter4j:twitter4j-core:4.0.6'
+    compile 'org.twitter4j:twitter4j-stream:4.0.6'
+    compile 'org.twitter4j:twitter4j-async:4.0.6'
+    compile 'com.google.firebase:firebase-crash:11.6.0'
+    compile 'com.google.android.gms:play-services-location:11.6.0'
+    compile 'com.google.code.gson:gson:2.8.0'
+    compile 'com.google.guava:guava:20.0'
+    compile 'com.squareup.okhttp3:okhttp:3.7.0'
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
+    compile 'com.squareup.okhttp3:logging-interceptor:3.7.0'
+    compile 'com.squareup.picasso:picasso:2.5.2'
+    compile 'com.anjlab.android.iab.v3:library:1.0.44'
+    compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
+    compile 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
+    compile 'com.android.support:appcompat-v7:26.0.2'
+    compile 'com.android.support:support-v13:26.0.2'
+    compile 'com.android.support:design:26.0.2'
+    compile 'com.android.support:support-v4:26.0.2'
+    compile 'com.android.support:recyclerview-v7:26.0.2'
+    compile 'net.sourceforge.htmlcleaner:htmlcleaner:2.18'
+    compile 'jp.wasabeef:picasso-transformations:2.1.2'
+    compile 'com.github.githubwing:DragPhotoView:1.0.1'
+    compile 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
+    compile 'com.facebook.fresco:fresco:1.5.0'
+    compile 'se.akerfeldt:okhttp-signpost:1.1.0'
+    compile 'de.hdodenhof:circleimageview:2.2.0'
+    compile 'oauth.signpost:signpost-core:1.2.1.2'
+    compile 'joda-time:joda-time:2.9.9'
+    compile 'com.fatboyindustrial.gson-jodatime-serialisers:gson-jodatime-serialisers:1.0.0'
+    compile 'com.aurelhubert:ahbottomnavigation:2.0.6'
+    compile 'com.afollestad.material-dialogs:commons:0.9.4.5'
+    compile 'com.daimajia.swipelayout:library:1.2.0@aar'
+    compile 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.0'
+    compile 'com.anupcowkur:reservoir:3.1.0'
+    compile 'com.github.jkwiecien:EasyImage:2.0.2'
+    compile 'com.github.rahatarmanahmed:circularprogressview:2.5.0'
+    compile 'com.github.stfalcon:multiimageview:0.1'
+    compile 'com.github.bumptech.glide:glide:4.0.0'
+
+    kapt 'com.android.databinding:compiler:3.0.0'
+
+    //дополнительные возможности для Android Kotlin
+    compile 'com.pawegio.kandroid:kandroid:0.5.0@aar'
+
+    //MVP
+    compile 'com.arello-mobile:moxy:1.5.3'
+    compile 'com.arello-mobile:moxy-android:1.5.3'
+    compile 'com.arello-mobile:moxy-app-compat:1.5.3'
+    kapt 'com.arello-mobile:moxy-compiler:1.5.3'
+
+    //RX
+    compile 'io.reactivex:rxjava:1.1.0'
+    compile 'io.reactivex:rxandroid:1.1.0'
+
+    //Depency Injection
+    kapt 'com.google.dagger:dagger-compiler:2.13'
+    compile 'com.google.dagger:dagger:2.13'
+    provided 'org.glassfish:javax.annotation:10.0-b28'
+
+    //ActiveAndroid DB
+    compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
+
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
+    testCompile 'junit:junit:4.12'
+    compile project(':matisse')
+    compile "org.jetbrains.kotlin:kotlin-reflect:1.0.5-3"
+}
+
+//// ADD THIS AT THE BOTTOM
+//apply plugin: 'com.google.gms.google-services'
+apply plugin: 'com.google.gms.google-services'

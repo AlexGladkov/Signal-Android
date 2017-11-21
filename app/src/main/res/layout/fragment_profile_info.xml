@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable name="model" type="solonsky.signal.twitter.viewmodels.ProfileInfoViewModel" />
+        <import type="android.view.View" alias="v" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp" >
+        
+        <LinearLayout
+            android:id="@+id/ll_profile_bio"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <solonsky.signal.twitter.libs.autoLinkTextView.AutoLinkTextView
+                android:id="@+id/txt_profile_info_bio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:lineSpacingExtra="1.5dp"
+                android:includeFontPadding="false"
+                android:layout_marginTop="1dp"
+                android:textColor="?attr/primaryTextColor"
+                android:textSize="14dp"
+                android:layout_gravity="center_horizontal"/>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:layout_gravity="center_horizontal"
+                android:visibility="@{model.location.empty ? v.GONE : v.VISIBLE}" >
+
+                <TextView
+                    android:id="@+id/txt_profile_info_location"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="1.5dp"
+                    android:textColor="?attr/hintTextColor"
+                    android:textSize="14dp"
+                    android:includeFontPadding="false"
+                    android:text="@{model.location}"/>
+
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="wrap_content"
+                android:layout_height="22dp"
+                android:layout_gravity="center_horizontal"
+                android:visibility="@{model.link.empty ? v.GONE : v.VISIBLE}" >
+
+                <TextView
+                    android:id="@+id/txt_profile_info_link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="22dp"
+                    android:text="@{model.link}"
+                    android:layout_marginTop="1.5dp"
+                    android:includeFontPadding="false"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="14dp"
+                    android:textColor="?attr/replyTintColor" />
+
+            </FrameLayout>
+
+        </LinearLayout>
+    </FrameLayout>
+</layout>

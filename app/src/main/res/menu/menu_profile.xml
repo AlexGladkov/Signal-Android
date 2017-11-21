@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/profile_talk"
+        android:menuCategory="container">
+        <item android:id="@+id/profile_reply"
+            android:title="@string/profile_reply"/>
+        <item android:id="@+id/profile_direct"
+            android:title="@string/profile_direct" />
+    </group>
+    <group android:id="@+id/profile_actions"
+        android:menuCategory="container">
+        <item android:id="@+id/profile_follow"
+            android:title="@string/profile_follow" />
+        <item android:id="@+id/profile_unfollow"
+            android:title="@string/profile_unfollow"
+            android:visible="false" />
+        <item android:id="@+id/profile_disable_retweets"
+            android:title="@string/profile_disable_retweets" />
+        <item android:id="@+id/profile_enable_retweets"
+            android:title="@string/profile_enable_retweets"
+            android:visible="false" />
+        <item android:id="@+id/profile_mute"
+            android:title="@string/profile_mute" />
+        <item android:id="@+id/profile_unmute"
+            android:title="@string/profile_unmute"
+            android:visible="false" />
+    </group>
+    <group android:id="@+id/profile_disable"
+        android:menuCategory="container" >
+        <item android:id="@+id/profile_block"
+            android:title="@string/profile_block" />
+        <item android:id="@+id/profile_unblock"
+            android:title="@string/profile_unblock"
+            android:visible="false" />
+        <item android:id="@+id/profile_report"
+            android:title="@string/profile_report" />
+
+    </group>
+</menu>

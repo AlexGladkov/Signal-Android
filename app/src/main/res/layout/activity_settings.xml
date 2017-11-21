@@ -1,0 +1,390 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="solonsky.signal.twitter.viewmodels.SettingsViewModel" />
+
+        <variable
+            name="click"
+            type="solonsky.signal.twitter.viewmodels.SettingsViewModel.SettingsClickHandler" />
+
+        <import
+            alias="v"
+            type="android.view.View" />
+    </data>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tb_settings"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:background="?attr/backgroundPrimaryColor"
+            android:paddingTop="24dp"
+            app:contentInsetStart="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/btn_settings_back"
+                    android:layout_width="@dimen/tb_icon_size"
+                    android:layout_height="@dimen/tb_icon_size"
+                    android:background="?attr/buttonRipple"
+                    android:onClick="@{click::onBackClick}"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_icons_toolbar_back"
+                    android:tint="?attr/buttonTintColor" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="sans-serif"
+                    android:includeFontPadding="false"
+                    android:text="@string/settings_tb_title"
+                    android:textColor="?attr/primaryTextColor"
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+        </android.support.v7.widget.Toolbar>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/tb_settings"
+            android:background="?attr/backgroundSecondaryColor">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:layout_marginTop="24dp"
+                    android:background="?attr/dividerColor" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/backgroundPrimaryColor"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/settings_menu_size"
+                        android:background="?attr/backgroundPrimaryColor"
+                        android:onClick="@{click::onAppearanceClick}">
+
+                        <ImageView
+                            android:layout_width="@dimen/settings_icon_size"
+                            android:layout_height="@dimen/settings_icon_size"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="16dp"
+                            android:src="@drawable/ic_icon_settings_eye"
+                            android:tint="?attr/replyTintColor" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="32dp"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif"
+                            android:includeFontPadding="false"
+                            android:text="@string/settings_appearance"
+                            android:textColor="?attr/primaryTextColor"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height"
+                        android:layout_marginStart="72dp"
+                        android:layout_marginTop="-0.5dp"
+                        android:background="?attr/dividerColor" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/settings_menu_size"
+                        android:background="?attr/backgroundPrimaryColor"
+                        android:onClick="@{click::onTimelineClick}">
+
+                        <ImageView
+                            android:id="@+id/imageView3"
+                            android:layout_width="@dimen/settings_icon_size"
+                            android:layout_height="@dimen/settings_icon_size"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="16dp"
+                            android:src="@drawable/ic_tabbar_icons_home"
+                            android:tint="?attr/replyTintColor" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="32dp"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif"
+                            android:text="@string/settings_timeline"
+                            android:textColor="?attr/primaryTextColor"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height"
+                        android:layout_marginStart="72dp"
+                        android:layout_marginTop="-0.5dp"
+                        android:background="?attr/dividerColor" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/settings_menu_size"
+                        android:background="?attr/backgroundPrimaryColor"
+                        android:onClick="@{click::onGesturesClick}">
+
+                        <ImageView
+                            android:layout_width="@dimen/settings_icon_size"
+                            android:layout_height="@dimen/settings_icon_size"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="16dp"
+                            android:src="@drawable/ic_icon_settings_finger"
+                            android:tint="?attr/replyTintColor" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="32dp"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif"
+                            android:text="@string/settings_gestures"
+                            android:textColor="?attr/primaryTextColor"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height"
+                        android:layout_marginStart="72dp"
+                        android:layout_marginTop="-0.5dp"
+                        android:background="?attr/dividerColor" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/settings_menu_size"
+                        android:background="?attr/backgroundPrimaryColor"
+                        android:onClick="@{click::onNotificationsClick}">
+
+                        <ImageView
+                            android:id="@+id/imageView4"
+                            android:layout_width="@dimen/settings_icon_size"
+                            android:layout_height="@dimen/settings_icon_size"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="16dp"
+                            android:src="@drawable/ic_icon_settings_bell"
+                            android:tint="?attr/replyTintColor" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="32dp"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif"
+                            android:text="@string/settings_notifications"
+                            android:textColor="?attr/primaryTextColor"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height"
+                        android:layout_marginStart="72dp"
+                        android:layout_marginTop="-0.5dp"
+                        android:background="?attr/dividerColor" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/settings_menu_size"
+                        android:background="?attr/backgroundPrimaryColor"
+                        android:onClick="@{click::onAdvancedClick}">
+
+                        <ImageView
+                            android:id="@+id/imageView10"
+                            android:layout_width="@dimen/settings_icon_size"
+                            android:layout_height="@dimen/settings_icon_size"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="16dp"
+                            android:src="@drawable/ic_icon_settings_gears"
+                            android:tint="?attr/replyTintColor" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="32dp"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif"
+                            android:text="@string/settings_advanced"
+                            android:textColor="?attr/primaryTextColor"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:layout_marginTop="-0.5dp"
+                    android:background="?attr/dividerColor" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:layout_marginTop="24dp"
+                    android:background="?attr/dividerColor" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/backgroundPrimaryColor"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/settings_menu_size"
+                        android:background="?attr/backgroundPrimaryColor"
+                        android:onClick="@{click::onAboutClick}">
+
+                        <ImageView
+                            android:layout_width="@dimen/settings_icon_size"
+                            android:layout_height="@dimen/settings_icon_size"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="16dp"
+                            android:src="@drawable/ic_tabbar_icons_profile"
+                            android:tint="@color/settings_button_gray" />
+
+                        <TextView
+                            android:id="@+id/textView"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="32dp"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif"
+                            android:text="@string/settings_about"
+                            android:textColor="?attr/primaryTextColor"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/divider_height"
+                        android:layout_marginStart="72dp"
+                        android:layout_marginTop="-0.5dp"
+                        android:background="?attr/dividerColor" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/settings_menu_size"
+                        android:background="?attr/backgroundPrimaryColor"
+                        android:onClick="@{click::onHelpClick}">
+
+                        <ImageView
+                            android:layout_width="@dimen/settings_icon_size"
+                            android:layout_height="@dimen/settings_icon_size"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="16dp"
+                            android:src="@drawable/ic_icon_settings_help"
+                            android:tint="@color/settings_button_gray" />
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginStart="32dp"
+                            android:layout_weight="1"
+                            android:fontFamily="sans-serif"
+                            android:text="@string/settings_help"
+                            android:textColor="?attr/primaryTextColor"
+                            android:textSize="16dp" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:layout_marginTop="-0.5dp"
+                    android:background="?attr/dividerColor" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:layout_marginTop="24dp"
+                    android:background="?attr/dividerColor" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/settings_menu_size"
+                    android:background="?attr/backgroundPrimaryColor"
+                    android:onClick="@{click::onSupportClick}">
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="@dimen/settings_icon_size"
+                        android:layout_height="@dimen/settings_icon_size"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="16dp"
+                        android:src="@drawable/ic_icons_settings_star" />
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="32dp"
+                        android:layout_weight="1"
+                        android:text="@string/settings_support"
+                        android:textColor="?attr/primaryTextColor"
+                        android:textSize="16dp" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/divider_height"
+                    android:layout_marginBottom="32dp"
+                    android:layout_marginTop="-0.5dp"
+                    android:background="?attr/dividerColor" />
+            </LinearLayout>
+        </ScrollView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dropShadowHeight"
+            android:layout_below="@+id/tb_settings"
+            android:background="?attr/dropShadowResource" />
+
+    </RelativeLayout>
+</layout>

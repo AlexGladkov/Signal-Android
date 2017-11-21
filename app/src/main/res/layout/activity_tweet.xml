@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="model" type="solonsky.signal.twitter.viewmodels.TweetViewModel" />
+        <variable name="click" type="solonsky.signal.twitter.viewmodels.TweetViewModel.TweetClickHandler" />
+    </data>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/status_bar_height"
+        android:background="?attr/backgroundPrimaryColor">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tweet_header_size"
+            android:background="?attr/backgroundPrimaryColor"
+            android:padding="16dp">
+
+            <ImageView
+                android:layout_width="@dimen/tweet_icon_size"
+                android:layout_height="@dimen/tweet_icon_size"
+                android:layout_gravity="center_vertical" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:orientation="vertical"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1">
+                
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="?attr/secondaryTextColor"
+                    android:textSize="14dp"
+                    android:text="Google play"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:alpha="0.6"
+                    android:textSize="12dp"
+                    android:textColor="@color/header_tint_color"
+                    android:text="GooglePlay"/>
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="@dimen/tweet_follow_width"
+                android:layout_height="@dimen/tweet_follow_height"
+                android:layout_gravity="center_vertical"
+                android:scaleType="fitXY"
+                android:background="@drawable/active_support_button"
+                android:src="?attr/buttonFollow" />
+
+        </LinearLayout>
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:textColor="?attr/primaryTextColor"
+            android:text="@string/debug_tweet_text_1"
+            android:layout_margin="16dp" />
+        
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/tweet_preview_size">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" />
+            
+            <ImageView
+                android:layout_width="@dimen/tweet_media"
+                android:layout_height="@dimen/tweet_media"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_badges_media_youtube"/>
+
+        </RelativeLayout>
+        
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/header_tint_color"
+                android:textSize="12dp"
+                android:text="Moscow, Russia"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="16dp"
+                android:layout_weight="1"
+                android:alpha="0.5"/>
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/header_tint_color"
+                android:textSize="12dp"
+                android:text="9:09, July 26"
+                android:layout_gravity="center_vertical"
+                android:alpha="0.5" />
+            
+            <View
+                android:layout_width="3dp"
+                android:layout_height="3dp"
+                android:background="@drawable/shape_tweet_round"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_gravity="center_vertical"
+                android:alpha="0.5" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/header_tint_color"
+                android:textSize="12dp"
+                android:text="via Signal for Android"
+                android:alpha="0.5" />
+
+        </LinearLayout>
+
+        <solonsky.signal.twitter.libs.tabBar.SimpleTabBar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabWidth="30dp"
+            app:indicatorHeight="0dp"
+            app:imageHeight="@dimen/feed_tiny_size"
+            app:imageWidth="@dimen/feed_tiny_size" />
+        
+        <android.support.v4.view.ViewPager
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never" />
+        
+    </LinearLayout>
+</layout>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="model" type="solonsky.signal.twitter.models.ChatModel" />
+        <import type="android.view.View" alias="v" />
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/rl_chat_other"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@+id/rl_chat_timestamp" >
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/shape_bubble_not_user"
+                android:layout_marginTop="@{model.showAvatar ? 16f : 2f}"
+                android:orientation="vertical" >
+
+                <TextView
+                    android:id="@+id/textView3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:text="@{model.text}"
+                    android:textColor="?attr/primaryTextColor"
+                    android:textSize="16dp"
+                    android:layout_marginBottom="10.25dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="8.5dp"
+                    android:lineSpacingMultiplier="1.06"
+                    android:layout_gravity="center_vertical"
+                    android:visibility="@{model.text.empty ? v.GONE : v.VISIBLE}" />
+
+                <RelativeLayout
+                    android:layout_height="@dimen/chat_image_height"
+                    android:layout_width="@dimen/chat_image_width"
+                    android:layout_gravity="center_vertical"
+                    android:visibility="@{model.imageUrl.empty ? v.GONE : v.VISIBLE}" >
+
+                    <ImageView
+                        android:id="@+id/chat_other_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:imageGhost="@{model.imageUrl}" />
+
+                    <ImageView
+                        android:id="@+id/chat_other_type"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_centerInParent="true" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:layout_width="7dp"
+                android:layout_height="14dp"
+                android:scaleX="-1"
+                android:scaleType="fitXY"
+                android:src="@drawable/ic_icons_tiny_corner_dm"
+                android:layout_marginTop="@{model.showAvatar ? 29f : 15f}"
+                android:visibility="@{model.showArrow ? v.VISIBLE : v.INVISIBLE}"
+                android:tint="?attr/backgroundSecondaryColor"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/chat_other_civ_avatar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginStart="9dp"
+                android:background="?attr/backgroundRoundImage"
+                android:visibility="@{model.showAvatar ? v.VISIBLE : v.INVISIBLE }"
+                android:layout_marginTop="@{model.showAvatar ? 16f : 2f}"
+                app:imageUrl="@{model.avatarUrl}" />
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:id="@+id/rl_chat_timestamp"
+            android:layout_width="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true" >
+
+            <TextView
+                android:id="@+id/chat_other_txt_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:textSize="12dp"
+                android:alpha="@{model.alpha}"
+                android:textStyle="normal"
+                android:textColor="?attr/secondaryTextColor"
+                android:fontFamily="sans-serif"
+                android:includeFontPadding="false"
+                android:layout_marginTop="@{model.showAvatar ? 16f : 2f}" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+</layout>

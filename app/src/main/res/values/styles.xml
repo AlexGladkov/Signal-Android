@@ -1,0 +1,306 @@
+<resources>
+    <style name="TweetTitleFont" >
+        <item name="android:textSize">16dp</item>
+    </style>
+
+    <!-- Base application theme -->
+    <!--<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar" >-->
+        <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+        <!--<item name="colorPrimary">@android:color/transparent</item>-->
+        <!--<item name="android:windowActionBar">false</item>-->
+        <!--<item name="android:windowNoTitle">true</item>-->
+        <!--<item name="android:windowTranslucentStatus">true</item>-->
+    <!--</style>-->
+
+    <!-- End of base application theme -->
+
+    <!-- Dark Theme -->
+
+    <!-- End of Dark Theme -->
+
+    <style name="Theme.Thanks" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+    </style>
+
+    <style name="thanks_menu" parent="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
+
+    <style name="popup_menu" parent="@style/Widget.AppCompat.PopupMenu">
+        <item name="overlapAnchor">true</item>
+        <item name="android:popupBackground">@android:color/white</item>
+    </style>
+
+    <style name="popup_no_overlap_menu" parent="@style/Widget.AppCompat.PopupMenu">
+        <item name="android:windowEnterAnimation">@anim/test_enter_anim</item>
+        <item name="android:windowExitAnimation">@anim/test_exit_anim</item>
+        <item name="overlapAnchor">false</item>
+        <item name="android:popupBackground">@android:color/white</item>
+    </style>
+
+    <style name="actionSheet" parent="@android:style/Theme.Dialog">
+        <item name="android:windowAnimationStyle">@style/actionSheetAnimation</item>
+    </style>
+
+    <style name="actionSheetAnimation">
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
+    </style>
+
+    <style name="fadeInSlideOutAnimation">
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_right_full</item>
+    </style>
+
+    <style name="slideInSlideOutAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_in_right_full</item>
+        <item name="android:windowExitAnimation">@anim/slide_out_right_full</item>
+    </style>
+
+    <style name="viewer_fullscreen">
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="viewer" >
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+    </style>
+
+    <style name="statusMediaStyle" parent="viewer">
+        <item name="android:windowAnimationStyle">@style/fadeInSlideOutAnimation</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
+    <style name="statusDetailStyle" parent="viewer">
+        <item name="android:windowAnimationStyle">@style/slideInSlideOutAnimation</item>
+    </style>
+
+    <style name="noAnimation" parent="viewer">
+        <item name="android:windowAnimationStyle">@null</item>
+    </style>
+
+    <!-- Light base activity theme -->
+    <style name="ActivityTheme.Primary.Base.Light" parent="Theme.AppCompat.NoActionBar">
+        <item name="primaryTextColor">@color/light_primary_text_color</item>
+        <item name="secondaryTextColor">@color/light_secondary_text_color</item>
+        <item name="thirdTextColor">@color/light_third_text_color</item>
+        <item name="activeSupportTextColor">@color/light_active_support_text_color</item>
+        <item name="inactiveSupportTextColor">@color/light_inactive_support_text_color</item>
+        <item name="highlightTextColor">@color/light_highlight_color</item>
+        <item name="selectionTextColor">@color/light_selection_color</item>
+        <item name="hintTextColor">@color/light_hint_text_color</item>
+        <item name="counterTextColor">@color/light_counter_text_color</item>
+        <item name="profileTextTitleColor">@color/light_primary_text_color</item>
+
+        <item name="backgroundPrimaryColor">@color/light_background_color</item>
+        <item name="backgroundSecondaryColor">@color/light_background_secondary_color</item>
+        <item name="backgroundHighlightColor">@color/light_background_highlight_color</item>
+
+        <item name="swipeBackgroundPrimary">@drawable/light_status_swipe_background</item>
+        <item name="swipeBackgroundExpand">@drawable/light_expand_swipe_background</item>
+        <item name="swipeBackgroundHighlight">@drawable/light_highlight_swipe_background</item>
+
+        <item name="cursorColor">@drawable/light_cursor_reply_color</item>
+        <item name="arrowColor">@color/light_status_bar_detail_thread_color</item>
+
+        <item name="profileTailBackground">@drawable/light_tail_background</item>
+        <item name="profileTailButton">@drawable/ic_badge_more_t1</item>
+
+        <item name="selectorBusyResource">@drawable/ic_busy_t1</item>
+
+        <item name="statsDividerColor">@color/light_divider_stats_color</item>
+        <item name="dividerColor">@color/light_divider_color</item>
+        <item name="backgroundRoundImage">@drawable/light_round_image</item>
+        <item name="accountAddImage">@drawable/ic_icons_toolbar_plus_t1</item>
+        <item name="bulletColor">@drawable/light_bullet_shape</item>
+        <item name="buttonFollow">@drawable/ic_button_follow</item>
+        <item name="supportStarResource">@drawable/ic_icons_star_light</item>
+        <item name="verifiedIcon">@drawable/ic_badges_profile_verified</item>
+        <item name="actionRipple">@drawable/light_bar_pressed</item>
+        <item name="buttonRipple">@drawable/light_ripple_pressed</item>
+        <item name="testPushResource">@drawable/light_test_push_button</item>
+        <item name="mediaCountResource">@drawable/light_media_count</item>
+        <item name="scrollDownResource">@drawable/ic_button_scrolldown</item>
+        <item name="activeSupportResource">@drawable/light_active_support_button</item>
+        <item name="detailArrowBackgroundResource">@drawable/light_detail_arrow_background</item>
+        <item name="inactiveSupportResource">@drawable/light_inactive_support_button</item>
+        <item name="aboutBackgroundResource">@drawable/light_about_header</item>
+        <item name="statsBackgroundResource">@drawable/light_shape_profile_info_background</item>
+        <item name="searchIconResource">@drawable/light_shape_search_icon_resource</item>
+        <item name="profileGradientBackgroundColor">@drawable/light_profile_fader</item>
+        <item name="profileHeaderGradientColor">@drawable/light_profile_header_fader</item>
+        <item name="profileStrokeResource">@drawable/light_circle_stroke</item>
+        <item name="paginationInactiveResource">@drawable/light_pagination_inactive</item>
+        <item name="composeBackgroundColor">@drawable/light_compose_background</item>
+        <item name="composeSelectResource">@drawable/light_compose_select_background</item>
+        <item name="quoteDividerResource">@drawable/light_quote_divider</item>
+        <item name="dropShadowResource">@mipmap/light_shadow</item>
+        <item name="buttonTintColor">@color/light_tint_color</item>
+        <item name="buttonSendTintColor">@color/light_button_send_tint_color</item>
+        <item name="likeTintColor">@color/light_like_tint_color</item>
+        <item name="rtTintColor">@color/light_rt_tint_color</item>
+        <item name="replyTintColor">@color/light_reply_tint_color</item>
+        <item name="profileTintColor">@color/light_profile_tint_color</item>
+        <item name="pagerActiveBackground">@color/light_pager_active_background_color</item>
+        <item name="pagerBackground">@color/light_pager_background_color</item>
+        <item name="barInactiveColor">@color/light_bar_inactive_color</item>
+        <item name="barActiveColor">@color/light_bar_active_color</item>
+        <item name="barShadowColor">@color/light_bar_shadow_color</item>
+        <item name="switcherOnTintColor">@color/light_switcher_on_tint_color</item>
+        <item name="switcherOffTintColor">@color/light_switcher_off_tint_color</item>
+        <item name="switcherLineTintColor">@color/light_switcher_line_tint_color</item>
+    </style>
+
+    <!-- Dark base activity theme -->
+    <style name="ActivityTheme.Primary.Base.Dark" parent="Theme.AppCompat.NoActionBar">
+        <item name="primaryTextColor">@color/dark_primary_text_color</item>
+        <item name="secondaryTextColor">@color/dark_secondary_text_color</item>
+        <item name="thirdTextColor">@color/dark_third_text_color</item>
+        <item name="activeSupportTextColor">@color/dark_active_support_text_color</item>
+        <item name="inactiveSupportTextColor">@color/dark_inactive_support_text_color</item>
+        <item name="highlightTextColor">@color/dark_highlight_color</item>
+        <item name="selectionTextColor">@color/dark_selection_color</item>
+        <item name="hintTextColor">@color/dark_hint_text_color</item>
+        <item name="counterTextColor">@color/dark_counter_text_color</item>
+        <item name="profileTextTitleColor">@color/white</item>
+
+        <item name="backgroundPrimaryColor">@color/dark_background_color</item>
+        <item name="backgroundSecondaryColor">@color/dark_background_secondary_color</item>
+        <item name="backgroundHighlightColor">@color/dark_background_highlight_color</item>
+
+        <item name="swipeBackgroundPrimary">@drawable/dark_status_swipe_background</item>
+        <item name="swipeBackgroundExpand">@drawable/dark_expand_swipe_background</item>
+        <item name="swipeBackgroundHighlight">@drawable/dark_highlight_swipe_background</item>
+
+        <item name="cursorColor">@drawable/dark_cursor_reply_color</item>
+        <item name="arrowColor">@color/dark_status_bar_detail_thread_color</item>
+
+        <item name="profileTailBackground">@drawable/dark_tail_background</item>
+        <item name="profileTailButton">@drawable/ic_badge_more_t2</item>
+
+        <item name="selectorBusyResource">@drawable/ic_busy_t2</item>
+
+        <item name="statsDividerColor">@color/dark_divider_stats_color</item>
+        <item name="dividerColor">@color/dark_divider_color</item>
+        <item name="backgroundRoundImage">@drawable/dark_round_image</item>
+        <item name="accountAddImage">@drawable/ic_icons_toolbar_plus_t2</item>
+        <item name="bulletColor">@drawable/dark_bullet_shape</item>
+        <item name="buttonFollow">@drawable/ic_button_follow_night</item>
+        <item name="supportStarResource">@drawable/ic_icons_star_dark</item>
+        <item name="verifiedIcon">@drawable/ic_badges_profile_verified_night</item>
+        <item name="actionRipple">@drawable/dark_bar_pressed</item>
+        <item name="buttonRipple">@drawable/dark_ripple_pressed</item>
+        <item name="testPushResource">@drawable/dark_test_push_button</item>
+        <item name="mediaCountResource">@drawable/dark_media_count</item>
+        <item name="scrollDownResource">@drawable/ic_button_scrolldown_night</item>
+        <item name="activeSupportResource">@drawable/dark_active_support_button</item>
+        <item name="detailArrowBackgroundResource">@drawable/dark_detail_arrow_background</item>
+        <item name="inactiveSupportResource">@drawable/dark_inactive_support_button</item>
+        <item name="aboutBackgroundResource">@drawable/dark_about_header</item>
+        <item name="statsBackgroundResource">@drawable/dark_shape_profile_info_background</item>
+        <item name="searchIconResource">@drawable/dark_shape_search_icon_resource</item>
+        <item name="profileGradientBackgroundColor">@drawable/dark_profile_fader</item>
+        <item name="profileHeaderGradientColor">@drawable/dark_profile_header_fader</item>
+        <item name="profileStrokeResource">@drawable/dark_circle_stroke</item>
+        <item name="paginationInactiveResource">@drawable/dark_pagination_inactive</item>
+        <item name="composeBackgroundColor">@drawable/dark_compose_background</item>
+        <item name="composeSelectResource">@drawable/dark_compose_select_background</item>
+        <item name="quoteDividerResource">@drawable/dark_quote_divider</item>
+        <item name="dropShadowResource">@mipmap/dark_shadow</item>
+        <item name="buttonTintColor">@color/dark_tint_color</item>
+        <item name="buttonSendTintColor">@color/dark_button_send_tint_color</item>
+        <item name="likeTintColor">@color/dark_like_tint_color</item>
+        <item name="rtTintColor">@color/dark_rt_tint_color</item>
+        <item name="replyTintColor">@color/dark_reply_tint_color</item>
+        <item name="profileTintColor">@color/dark_profile_tint_color</item>
+        <item name="pagerActiveBackground">@color/dark_pager_active_background_color</item>
+        <item name="pagerBackground">@color/dark_pager_background_color</item>
+        <item name="barInactiveColor">@color/dark_bar_inactive_color</item>
+        <item name="barActiveColor">@color/dark_bar_active_color</item>
+        <item name="barShadowColor">@color/dark_bar_shadow_color</item>
+        <item name="switcherOnTintColor">@color/dark_switcher_on_tint_color</item>
+        <item name="switcherOffTintColor">@color/dark_switcher_off_tint_color</item>
+        <item name="switcherLineTintColor">@color/dark_switcher_line_tint_color</item>
+    </style>
+
+    <style name="WindowAnimationTransition" parent="@android:style/Animation">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
+    </style>
+
+    <!-- Specific Feed activity theme -->
+    <style name="popupThemeLight" parent="@android:style/Widget.PopupMenu">
+        <item name="android:itemBackground">@color/dark_background_color</item>
+        <item name="android:popupBackground">@color/dark_background_color</item>
+        <item name="android:background">@color/dark_background_color</item>
+    </style>
+
+    <style name="popupThemeDark" parent="@android:style/Widget.PopupMenu">
+        <item name="android:itemBackground">@color/dark_background_color</item>
+        <item name="android:popupBackground">@color/dark_background_color</item>
+        <item name="android:background">@color/dark_background_color</item>
+    </style>
+
+    <style name="ActivityThemeLightNoAnimation" parent="ActivityTheme.Primary.Base.Light">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:itemBackground">@color/light_background_color</item>
+        <item name="android:textColor">@color/light_primary_text_color</item>
+        <item name="colorSwitchThumbNormal">@color/light_switcher_off_tint_color</item>
+        <item name="colorControlActivated">@color/light_switcher_on_tint_color</item>
+        <item name="android:colorForeground">@color/light_switcher_line_tint_color</item>
+        <item name="android:colorEdgeEffect">@color/light_primary_text_color</item>
+    </style>
+
+    <style name="ActivityThemeDarkNoAnimation" parent="ActivityTheme.Primary.Base.Dark">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:itemBackground">@color/dark_background_color</item>
+        <item name="android:textColor">@color/dark_primary_text_color</item>
+        <item name="colorSwitchThumbNormal">@color/dark_switcher_off_tint_color</item>
+        <item name="colorControlActivated">@color/dark_switcher_on_tint_color</item>
+        <item name="android:colorForeground">@color/dark_switcher_line_tint_color</item>
+        <item name="android:colorEdgeEffect">@color/dark_primary_text_color</item>
+    </style>
+
+    <style name="ActivityThemeLight" parent="ActivityTheme.Primary.Base.Light">
+        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:itemBackground">@color/light_background_color</item>
+        <item name="android:textColor">@color/light_primary_text_color</item>
+        <item name="colorSwitchThumbNormal">@color/light_switcher_off_tint_color</item>
+        <item name="colorControlActivated">@color/light_switcher_on_tint_color</item>
+        <item name="android:colorForeground">@color/light_switcher_line_tint_color</item>
+        <item name="android:colorEdgeEffect">@color/light_primary_text_color</item>
+    </style>
+
+    <style name="ActivityThemeDark" parent="ActivityTheme.Primary.Base.Dark">
+        <item name="android:windowAnimationStyle">@style/WindowAnimationTransition</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:itemBackground">@color/dark_background_color</item>
+        <item name="android:textColor">@color/dark_primary_text_color</item>
+        <item name="colorSwitchThumbNormal">@color/dark_switcher_off_tint_color</item>
+        <item name="colorControlActivated">@color/dark_switcher_on_tint_color</item>
+        <item name="android:colorForeground">@color/dark_switcher_line_tint_color</item>
+        <item name="android:colorEdgeEffect">@color/dark_primary_text_color</item>
+    </style>
+
+    <style name="TranslucentDark" parent="ActivityThemeDarkNoAnimation" >
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="TranslucentLight" parent="ActivityThemeLightNoAnimation" >
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+</resources>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/dialog_user_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="\@getsignal follows you"
+        android:textColor="@color/light_hint_text_color"
+        android:background="@color/light_background_secondary_color"/>
+
+    <TextView
+        android:id="@+id/dialog_reply"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/dialog_reply"
+        android:textColor="@color/light_primary_text_color"
+        android:background="@color/light_background_color" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/light_divider_color" />
+
+    <TextView
+        android:id="@+id/dialog_send_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/dialog_send_message"
+        android:textColor="@color/light_primary_text_color"
+        android:background="@color/light_background_color" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/light_divider_color" />
+
+    <TextView
+        android:id="@+id/dialog_disable_retweets"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/dialog_disable_retweets"
+        android:textColor="@color/light_primary_text_color"
+        android:background="@color/light_background_color" />
+
+    <TextView
+        android:id="@+id/dialog_enable_retweets"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/dialog_enable_retweets"
+        android:textColor="@color/light_primary_text_color"
+        android:background="@color/light_background_color" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/light_divider_color" />
+    
+    <TextView
+        android:id="@+id/dialog_mute"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/dialog_mute"
+        android:textColor="@color/light_primary_text_color"
+        android:background="@color/light_background_color" />
+
+    <TextView
+        android:id="@+id/dialog_unmute"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/dialog_unmute"
+        android:textColor="@color/light_primary_text_color"
+        android:background="@color/light_background_color" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/light_divider_color" />
+    
+    <TextView
+        android:id="@+id/dialog_follow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/dialog_follow"
+        android:textColor="@color/light_primary_text_color"
+        android:background="@color/light_background_color" />
+
+    <TextView
+        android:id="@+id/dialog_unfollow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/dialog_unfollow"
+        android:textColor="@color/light_primary_text_color"
+        android:background="@color/light_background_color" />
+
+</LinearLayout>

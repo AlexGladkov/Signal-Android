@@ -1,0 +1,45 @@
+[
+    {
+        "outputFile": "/Users/neura/Desktop/Documents.nosync/Android/Signal/sample/build/intermediates/incremental/mergeDebugResources/merged.dir/values-zh/values-zh.xml",
+        "map": [
+            {
+                "to": {
+                    "startLine": 2,
+                    "startColumn": 4,
+                    "startOffset": 55,
+                    "endColumn": 64,
+                    "endOffset": 115
+                },
+                "from": {
+                    "file": "/Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/res/values-zh/strings.xml",
+                    "position": {
+                        "startLine": 18,
+                        "startColumn": 4,
+                        "startOffset": 695,
+                        "endColumn": 64,
+                        "endOffset": 755
+                    }
+                }
+            },
+            {
+                "to": {
+                    "startLine": 3,
+                    "startColumn": 4,
+                    "startOffset": 120,
+                    "endColumn": 61,
+                    "endOffset": 177
+                },
+                "from": {
+                    "file": "/Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/res/values-zh/strings.xml",
+                    "position": {
+                        "startLine": 17,
+                        "startColumn": 4,
+                        "startOffset": 633,
+                        "endColumn": 61,
+                        "endOffset": 690
+                    }
+                }
+            }
+        ]
+    }
+]

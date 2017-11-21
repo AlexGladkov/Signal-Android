@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="solonsky.signal.twitter.helpers.drafts.DraftModel" />
+
+        <variable
+            name="click"
+            type="solonsky.signal.twitter.helpers.drafts.DraftModel.DraftClickHandler" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="?attr/backgroundPrimaryColor"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:onClick="@{click::onItemClick}"
+            android:paddingBottom="14dp"
+            android:paddingStart="16dp"
+            android:paddingTop="14dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:fontFamily="sans-serif"
+                android:includeFontPadding="false"
+                android:textColor="?attr/primaryTextColor"
+                android:textSize="16dp"
+                android:textStyle="normal"
+                app:maxLength="@{40}"
+                app:text="@{model.message}" />
+
+            <ImageView
+                android:layout_width="@dimen/cell_remove_icon_size"
+                android:layout_height="@dimen/cell_remove_icon_size"
+                android:layout_gravity="center_vertical"
+                android:onClick="@{click::onMinusClick}"
+                android:padding="16dp"
+                android:src="@drawable/ic_icons_minus" />
+
+        </LinearLayout>
+        
+        <View
+            android:id="@+id/draft_view_divider"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_gravity="bottom"
+            android:layout_marginStart="16dp"
+            android:background="?attr/dividerColor" />
+    </FrameLayout>
+</layout>

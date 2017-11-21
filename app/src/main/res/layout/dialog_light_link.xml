@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:textColor="@color/light_hint_text_color"
+        android:background="@color/light_background_secondary_color"/>
+
+    <TextView
+        android:id="@+id/dialog_copy"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/dialog_copy"
+        android:textColor="@color/light_primary_text_color"
+        android:background="@color/light_background_color" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/light_divider_color" />
+
+    <TextView
+        android:id="@+id/dialog_tweet_link"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="@string/dialog_tweet_link"
+        android:textColor="@color/light_primary_text_color"
+        android:background="@color/light_background_color" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/divider_height"
+        android:background="@color/light_divider_color" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/light_background_color"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/ll_dialog_share"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="16dp"
+            android:layout_weight="1"
+            android:background="@color/light_background_color"
+            android:text="@string/dialog_share"
+            android:textColor="@color/light_primary_text_color" />
+
+        <ImageView
+            android:id="@+id/dialog_img_share_1"
+            android:layout_width="@dimen/dialog_share_size"
+            android:layout_height="@dimen/dialog_share_size"
+            android:layout_gravity="center_vertical" />
+
+        <ImageView
+            android:id="@+id/dialog_img_share_2"
+            android:layout_width="@dimen/dialog_share_size"
+            android:layout_height="@dimen/dialog_share_size"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp" />
+
+        <ImageView
+            android:id="@+id/dialog_img_share_3"
+            android:layout_width="@dimen/dialog_share_size"
+            android:layout_height="@dimen/dialog_share_size"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="16dp" />
+
+    </LinearLayout>
+</LinearLayout>

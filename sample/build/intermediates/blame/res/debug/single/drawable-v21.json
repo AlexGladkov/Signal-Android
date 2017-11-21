@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/neura/Desktop/Documents.nosync/Android/Signal/sample/build/intermediates/res/merged/debug/drawable-v21/abc_edit_text_material.xml",
+        "source": "/Users/neura/.android/build-cache/5ac21da304b16490cca136a0df143b70b80a9fe7/output/res/drawable-v21/abc_edit_text_material.xml"
+    },
+    {
+        "merged": "/Users/neura/Desktop/Documents.nosync/Android/Signal/sample/build/intermediates/res/merged/debug/drawable-v21/notification_action_background.xml",
+        "source": "/Users/neura/.android/build-cache/5ac21da304b16490cca136a0df143b70b80a9fe7/output/res/drawable-v21/notification_action_background.xml"
+    },
+    {
+        "merged": "/Users/neura/Desktop/Documents.nosync/Android/Signal/sample/build/intermediates/res/merged/debug/drawable-v21/abc_btn_colored_material.xml",
+        "source": "/Users/neura/.android/build-cache/5ac21da304b16490cca136a0df143b70b80a9fe7/output/res/drawable-v21/abc_btn_colored_material.xml"
+    },
+    {
+        "merged": "/Users/neura/Desktop/Documents.nosync/Android/Signal/sample/build/intermediates/res/merged/debug/drawable-v21/abc_action_bar_item_background_material.xml",
+        "source": "/Users/neura/.android/build-cache/5ac21da304b16490cca136a0df143b70b80a9fe7/output/res/drawable-v21/abc_action_bar_item_background_material.xml"
+    }
+]

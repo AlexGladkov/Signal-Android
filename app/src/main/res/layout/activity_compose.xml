@@ -1,0 +1,452 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="compose"
+            type="solonsky.signal.twitter.viewmodels.ComposeViewModel" />
+
+        <variable
+            name="click"
+            type="solonsky.signal.twitter.viewmodels.ComposeViewModel.ComposeClickHandler" />
+
+        <import
+            alias="v"
+            type="android.view.View" />
+
+        <import type="solonsky.signal.twitter.R" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/backgroundPrimaryColor"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/tb_compose"
+            android:layout_width="match_parent"
+            android:layout_height="?android:attr/actionBarSize"
+            app:contentInsetStart="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/tb_icon_size"
+                    android:layout_height="@dimen/tb_icon_size"
+                    android:layout_gravity="center_vertical"
+                    android:background="?attr/buttonRipple"
+                    android:onClick="@{click::onBackClick}"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_icons_toolbar_back"
+                    android:tint="?attr/buttonTintColor" />
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="@dimen/tb_icon_size"
+                    android:layout_height="@dimen/tb_icon_size"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="-12dp"
+                    android:onClick="@{click::onUserClick}"
+                    android:padding="12dp"
+                    app:imageUrl="@{compose.avatarUrl}" />
+
+                <TextView
+                    android:id="@+id/txt_compose_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="4dp"
+                    android:fontFamily="sans-serif"
+                    android:text='@{compose.fragment ? "Drafts" : compose.title}'
+                    android:textSize="16dp"
+                    android:typeface='@{compose.text ? "medium" : "bold"}'
+                    app:textColorAttr="@{compose.more ? R.attr.likeTintColor : R.attr.primaryTextColor}" />
+
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1" />
+
+                <ImageView
+                    android:layout_width="@dimen/tb_icon_size"
+                    android:layout_height="@dimen/tb_icon_size"
+                    android:layout_gravity="center_vertical"
+                    android:alpha="@{compose.enabled ? 1.0f : 0.2f}"
+                    android:onClick="@{click::onSendClick}"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_icons_toolbar_send"
+                    android:tint="?attr/buttonSendTintColor" />
+
+            </LinearLayout>
+        </android.support.v7.widget.Toolbar>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/ll_compose_panels"
+            android:layout_below="@+id/tb_compose"
+            android:background="?attr/backgroundPrimaryColor"
+            android:fillViewport="true"
+            android:overScrollMode="ifContentScrolls" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <EditText
+                    android:id="@+id/txt_compose_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:gravity="top|start"
+                    android:hint="@string/compose_default_hint"
+                    android:includeFontPadding="false"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:onTextChanged="@{compose::onTextChanged}"
+                    android:paddingBottom="16dp"
+                    android:paddingEnd="24dp"
+                    android:paddingStart="24dp"
+                    android:paddingTop="16dp"
+                    android:text="@{compose.tweetText}"
+                    android:scrollbars="vertical"
+                    android:textColor="?attr/primaryTextColor"
+                    android:textColorHint="?attr/hintTextColor"
+                    android:textCursorDrawable="?attr/cursorColor"
+                    android:textSize="18dp"
+                    android:visibility="@{compose.fragment ? v.GONE : v.VISIBLE}" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="@{compose.locationState != compose.LOCATION_ON ? v.GONE : (compose.showQuote || compose.showReply) ? v.GONE : v.VISIBLE }" >
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:background="?attr/backgroundPrimaryColor" />
+
+                    <TextView
+                        android:id="@+id/txt_compose_location"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="sans-serif"
+                        android:includeFontPadding="false"
+                        android:text="@{compose.location}"
+                        android:textColor="?attr/hintTextColor"
+                        android:textSize="12dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/composeBackgroundColor"
+                    android:orientation="vertical"
+                    android:visibility="@{compose.showReply ? v.VISIBLE : v.GONE}">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:background="?attr/backgroundPrimaryColor" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="8dp"
+                        android:paddingEnd="24dp"
+                        android:paddingStart="24dp"
+                        android:paddingTop="8dp"
+                        android:background="?attr/backgroundPrimaryColor"
+                        android:fontFamily="sans-serif"
+                        android:includeFontPadding="false"
+                        android:text="@{compose.location}"
+                        android:textColor="?attr/hintTextColor"
+                        android:visibility="@{compose.locationState != compose.LOCATION_ON ? v.GONE : v.VISIBLE }"
+                        android:textSize="12dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:paddingBottom="16dp"
+                        android:paddingEnd="16dp"
+                        android:paddingStart="24dp"
+                        android:paddingTop="16dp">
+
+                        <TextView
+                            android:id="@+id/txt_compose_reply_title"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:includeFontPadding="false"
+                            android:textColor="?attr/secondaryTextColor"
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/txt_compose_reply_text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="3dp"
+                            android:fontFamily="sans-serif"
+                            android:lineSpacingMultiplier="1.075"
+                            android:maxLength="144"
+                            android:textColor="?attr/thirdTextColor"
+                            android:textSize="14dp"
+                            android:textStyle="normal" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?attr/composeBackgroundColor"
+                    android:orientation="vertical"
+                    android:visibility="@{compose.showQuote ? v.VISIBLE : v.GONE}">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:background="?attr/backgroundPrimaryColor" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="8dp"
+                        android:paddingEnd="24dp"
+                        android:paddingStart="24dp"
+                        android:paddingTop="8dp"
+                        android:background="?attr/backgroundPrimaryColor"
+                        android:fontFamily="sans-serif"
+                        android:includeFontPadding="false"
+                        android:text="@{compose.location}"
+                        android:textColor="?attr/hintTextColor"
+                        android:visibility="@{compose.locationState != compose.LOCATION_ON ? v.GONE : v.VISIBLE }"
+                        android:textSize="12dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <View
+                            android:id="@+id/view_compose_quote_mark"
+                            android:layout_width="8dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="16dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginTop="16dp"
+                            android:background="?attr/quoteDividerResource" />
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginBottom="16dp"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_weight="1"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:id="@+id/txt_compose_quote_title"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="sans-serif"
+                                    android:includeFontPadding="false"
+                                    android:textColor="?attr/secondaryTextColor"
+                                    android:textSize="12dp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:id="@+id/txt_compose_quote_subtitle"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="sans-serif"
+                                    android:includeFontPadding="false"
+                                    android:textColor="?attr/secondaryTextColor"
+                                    android:textSize="12dp"
+                                    android:textStyle="normal" />
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:id="@+id/txt_compose_quote_text"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="3dp"
+                                android:fontFamily="sans-serif"
+                                android:lineSpacingMultiplier="1.075"
+                                android:textColor="?attr/thirdTextColor"
+                                android:textSize="14dp"
+                                android:textStyle="normal" />
+
+                        </LinearLayout>
+
+                        <ImageView
+                            android:id="@+id/img_compose_quote_image"
+                            android:layout_width="@dimen/compose_quote_image_size"
+                            android:layout_height="@dimen/compose_quote_image_size"
+                            android:layout_marginEnd="8dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@drawable/compose_image_stroke"
+                            android:padding="0.5dp" />
+
+                        <View
+                            android:layout_width="8dp"
+                            android:layout_height="match_parent"
+                            android:background="@android:color/transparent" />
+
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <FrameLayout
+            android:id="@+id/fragment_compose_drafts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tb_compose"
+            android:layout_above="@+id/ll_compose_bottom"
+            android:visibility="@{compose.fragment ? v.VISIBLE : v.GONE}" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dropShadowHeight"
+            android:background="?attr/dropShadowResource"
+            android:layout_below="@id/tb_compose"
+            android:visibility="@{compose.fragment ? v.VISIBLE : v.GONE}" />
+
+        <LinearLayout
+            android:id="@+id/ll_compose_panels"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignWithParentIfMissing="true"
+            android:layout_above="@+id/ll_compose_bottom"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_compose_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/composeBackgroundColor"
+                android:overScrollMode="never"
+                android:visibility="@{compose.showPhoto ? v.VISIBLE : v.GONE}"
+                app:listConfig="@{compose.imageConfig}" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_compose_mentions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:visibility="@{compose.showMentions ? v.VISIBLE : v.GONE}"
+                app:listConfig="@{compose.mentionsConfig}" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_compose_hashtags"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:visibility="@{compose.showHashtags ? v.VISIBLE : v.GONE}"
+                app:listConfig="@{compose.hashtagsConfig}" />
+
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/ll_compose_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/bottom_bar_height"
+            android:layout_alignParentBottom="true"
+            android:background="?attr/backgroundPrimaryColor"
+            android:visibility="@{compose.showMentions || compose.showHashtags ? v.GONE : v.VISIBLE}">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="@{compose.fragment ? 0.15f : 1.0f}"
+                    android:background="?attr/actionRipple"
+                    android:enabled="@{!compose.fragment}"
+                    android:onClick="@{click::onGeoClick}"
+                    android:padding="12dp"
+                    android:src="@{compose.locationState == compose.LOCATION_ON ? @drawable/ic_icons_compose_geo_on : compose.locationState == compose.LOCATION_DISABLED ? @drawable/ic_icons_compose_geo_disabled : @drawable/ic_icons_compose_geo_off}"
+                    android:tint="?attr/hintTextColor" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="@{compose.fragment ? 0.15f : 1.0f}"
+                    android:background="?attr/actionRipple"
+                    android:enabled="@{!compose.fragment}"
+                    android:onClick="@{click::onMentionsClick}"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_tabbar_icons_mentions"
+                    android:tint="?attr/hintTextColor" />
+
+                <ImageView
+                    android:id="@+id/img_compose_library"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="@{compose.fragment || compose.hasGif || compose.hasVideo || compose.imagesSource.size() == 4 ? 0.15f : 1.0f}"
+                    android:background="?attr/actionRipple"
+                    android:enabled="@{!compose.fragment}"
+                    android:onClick="@{click::onCameraClick}"
+                    android:onLongClick="@{click::onCameraLongClick}"
+                    android:padding="12dp"
+                    android:src="@{compose.library || compose.hasGif || compose.hasVideo || compose.imagesSource.size() > 0 ? @drawable/ic_icons_compose_library : @drawable/ic_icons_compose_camera}"
+                    app:tintColorAttr="@{(compose.hasGif || compose.hasVideo || compose.imagesSource.size > 0) ? R.attr.replyTintColor : R.attr.hintTextColor}" />
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:alpha="@{compose.fragment ? 0.15f : 1.0f}"
+                    android:background="?attr/actionRipple"
+                    android:enabled="@{!compose.fragment}"
+                    android:onClick="@{click::onHashClick}"
+                    android:padding="12dp"
+                    android:src="@drawable/ic_icons_compose_hash"
+                    android:tint="?attr/hintTextColor" />
+
+                <ImageView
+                    android:id="@+id/btn_compose_drafts"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="?attr/actionRipple"
+                    android:onClick="@{click::onDraftsClick}"
+                    android:padding="12dp"
+                    android:tint="?attr/hintTextColor" />
+
+            </LinearLayout>
+        </FrameLayout>
+
+    </RelativeLayout>
+</layout>

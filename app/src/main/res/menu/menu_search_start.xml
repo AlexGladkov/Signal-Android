@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/clear_save"
+        android:title="@string/clear_save" />
+
+    <item
+        android:id="@+id/clear_recent"
+        android:title="@string/clear_recent" />
+
+    <item
+        android:id="@+id/show_local_trends"
+        android:title="@string/show_local_trends"
+        android:visible="false" />
+
+    <item
+        android:id="@+id/show_global_trends"
+        android:title="@string/show_global_trends" />
+</menu>

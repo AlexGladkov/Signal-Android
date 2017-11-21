@@ -1,0 +1,421 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable name="model" type="solonsky.signal.twitter.viewmodels.AboutViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/img_about_back"
+            android:layout_width="@dimen/tb_icon_size"
+            android:layout_height="@dimen/tb_icon_size"
+            android:padding="16dp"
+            android:background="?attr/buttonRipple"
+            android:src="@drawable/ic_icons_toolbar_back"
+            android:tint="?attr/primaryTextColor"
+            android:layout_marginTop="24dp" />
+
+        <ScrollView
+            android:id="@+id/scroll_about"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/backgroundPrimaryColor"
+            android:overScrollMode="never"
+            android:scrollbars="none">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="?attr/backgroundSecondaryColor"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/rl_about_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/about_header"
+                    android:background="?attr/aboutBackgroundResource">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/about_header_image"
+                        android:layout_marginTop="@dimen/about_header_image_top"
+                        android:src="@drawable/header_glow" />
+
+                    <ImageView
+                        android:id="@+id/img_about_icon"
+                        android:layout_width="@dimen/about_icon_size"
+                        android:layout_height="@dimen/about_icon_size"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/about_header_image_top"
+                        android:src="@drawable/ic_icon_settings_about" />
+
+                    <TextView
+                        android:id="@+id/txt_about_app_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="28dp"
+                        android:layout_below="@+id/img_about_icon"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="20dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="top"
+                        android:includeFontPadding="false"
+                        android:letterSpacing="-0.02"
+                        android:text="@string/app_name"
+                        android:textColor="?attr/primaryTextColor"
+                        android:textSize="24dp" />
+
+                    <TextView
+                        android:id="@+id/txt_about_subtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/txt_about_app_name"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:lineSpacingMultiplier="1.071"
+                        android:text="@string/about_subline"
+                        android:textColor="?attr/hintTextColor"
+                        android:textSize="14dp" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/rl_about_header"
+                    android:layout_marginTop="-40dp"
+                    android:background="@android:color/transparent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="18dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:includeFontPadding="false"
+                        android:text="@string/about_learn_more"
+                        android:textColor="?attr/secondaryTextColor"
+                        android:textSize="12dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="7dp"
+                        android:background="?attr/backgroundPrimaryColor"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/divider_height"
+                            android:background="?attr/dividerColor" />
+
+                        <LinearLayout
+                            android:id="@+id/ll_about_website"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_marginBottom="11.5dp"
+                                android:layout_marginStart="12dp"
+                                android:layout_marginTop="11.5dp"
+                                android:src="@drawable/ic_icons_settings_browser" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="16dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:includeFontPadding="false"
+                                    android:text="@string/about_website"
+                                    android:textColor="?attr/primaryTextColor"
+                                    android:textSize="16dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="1dp"
+                                    android:includeFontPadding="false"
+                                    android:text="@string/about_website_subtitle"
+                                    android:textColor="?attr/hintTextColor"
+                                    android:textSize="14dp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/divider_height"
+                            android:layout_marginStart="72dp"
+                            android:background="?attr/dividerColor" />
+
+                        <LinearLayout
+                            android:id="@+id/ll_about_twitter"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_marginBottom="11.5dp"
+                                android:layout_marginStart="12dp"
+                                android:layout_marginTop="12dp"
+                                android:src="@drawable/ic_icons_settings_avatar" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="16dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:includeFontPadding="false"
+                                    android:text="@string/about_twitter"
+                                    android:textColor="?attr/primaryTextColor"
+                                    android:textSize="16dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="1dp"
+                                    android:includeFontPadding="false"
+                                    android:text="@string/about_twitter_subtitle"
+                                    android:textColor="?attr/hintTextColor"
+                                    android:textSize="14dp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/divider_height"
+                            android:background="?attr/dividerColor" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="18dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:includeFontPadding="false"
+                        android:text="@string/about_authors"
+                        android:textColor="?attr/secondaryTextColor"
+                        android:textSize="12dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/backgroundPrimaryColor"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/divider_height"
+                            android:background="?attr/dividerColor" />
+
+                        <LinearLayout
+                            android:id="@+id/ll_about_author"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/img_about_client"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_marginBottom="11.5dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="11.5dp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="16dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:includeFontPadding="false"
+                                    android:text="@string/about_client"
+                                    android:textColor="?attr/primaryTextColor"
+                                    android:textSize="16dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="1dp"
+                                    android:includeFontPadding="false"
+                                    android:text="@string/about_client_subtitle"
+                                    android:textColor="?attr/hintTextColor"
+                                    android:textSize="14dp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/divider_height"
+                            android:layout_marginStart="72dp"
+                            android:background="?attr/dividerColor" />
+
+                        <LinearLayout
+                            android:id="@+id/ll_about_developer"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/img_about_author"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_marginBottom="11.5dp"
+                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="12dp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="16dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:includeFontPadding="false"
+                                    android:text="@string/about_author"
+                                    android:textColor="?attr/primaryTextColor"
+                                    android:textSize="16dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="1dp"
+                                    android:includeFontPadding="false"
+                                    android:text="@string/about_author_subtitle"
+                                    android:textColor="?attr/hintTextColor"
+                                    android:textSize="14dp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/divider_height"
+                            android:background="?attr/dividerColor" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="18dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:includeFontPadding="false"
+                        android:text="@string/about_apps"
+                        android:textColor="?attr/secondaryTextColor"
+                        android:textSize="12dp" />
+
+                    <LinearLayout
+                        android:id="@+id/ll_about_saver"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="?attr/backgroundPrimaryColor"
+                        android:orientation="vertical">
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/divider_height"
+                            android:background="?attr/dividerColor" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <de.hdodenhof.circleimageview.CircleImageView
+                                android:id="@+id/img_about_app"
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_marginBottom="11.5dp"
+                                android:layout_marginStart="12dp"
+                                android:layout_marginTop="11.5dp" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="16dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:includeFontPadding="false"
+                                    android:text="@string/about_apps_saver"
+                                    android:textColor="?attr/primaryTextColor"
+                                    android:textSize="16dp" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="1dp"
+                                    android:includeFontPadding="false"
+                                    android:text="@string/about_apps_saver_subtitle"
+                                    android:textColor="?attr/hintTextColor"
+                                    android:textSize="14dp" />
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/divider_height"
+                            android:background="?attr/dividerColor" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="24dp"
+                        android:layout_marginTop="24dp"
+                        android:alpha="0.6"
+                        android:includeFontPadding="false"
+                        android:text="@{model.version}"
+                        android:textColor="?attr/hintTextColor" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </ScrollView>
+
+    </FrameLayout>
+</layout>

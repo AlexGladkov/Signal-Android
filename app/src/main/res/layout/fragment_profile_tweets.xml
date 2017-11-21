@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="model"
+            type="solonsky.signal.twitter.viewmodels.ProfileTweetsViewModel" />
+
+        <variable
+            name="appData"
+            type="solonsky.signal.twitter.helpers.AppData" />
+
+        <import
+            alias="v"
+            type="android.view.View" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profile_tail_height"
+            android:overScrollMode="never"
+            android:visibility="@{model.state == appData.UI_STATE_VISIBLE ? v.VISIBLE : v.GONE}"
+            app:listConfig="@{model.listConfig}" />
+
+        <TextView
+            android:id="@+id/txt_profile_no_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16dp"
+            android:textStyle="normal"
+            android:textColor="?attr/hintTextColor"
+            android:includeFontPadding="false"
+            android:layout_marginTop="@dimen/search_placeholder_margin_top"
+            android:layout_gravity="center_horizontal"
+            android:gravity="center"
+            android:visibility="@{model.state == appData.UI_STATE_NO_ITEMS ? v.VISIBLE : v.GONE}"
+            android:text="@string/profile_no_data" />
+
+        <FrameLayout
+            android:id="@+id/profile_bottom_more"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profile_tail_gradient_height"
+            android:visibility="gone"
+            android:background="?attr/profileTailBackground"
+            android:layout_marginTop="556dp">
+
+            <ImageView
+                android:layout_width="@dimen/profile_tail_button_width"
+                android:layout_height="@dimen/profile_tail_button_height"
+                android:layout_gravity="center"
+                android:scaleType="fitXY"
+                android:src="?attr/profileTailButton" />
+
+        </FrameLayout>
+    </FrameLayout>
+</layout>

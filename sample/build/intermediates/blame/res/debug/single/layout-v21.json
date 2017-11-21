@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "/Users/neura/Desktop/Documents.nosync/Android/Signal/sample/build/intermediates/res/merged/debug/layout-v21/notification_template_custom_big.xml",
+        "source": "/Users/neura/.android/build-cache/5ac21da304b16490cca136a0df143b70b80a9fe7/output/res/layout-v21/notification_template_custom_big.xml"
+    },
+    {
+        "merged": "/Users/neura/Desktop/Documents.nosync/Android/Signal/sample/build/intermediates/res/merged/debug/layout-v21/notification_template_icon_group.xml",
+        "source": "/Users/neura/.android/build-cache/5ac21da304b16490cca136a0df143b70b80a9fe7/output/res/layout-v21/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "/Users/neura/Desktop/Documents.nosync/Android/Signal/sample/build/intermediates/res/merged/debug/layout-v21/notification_action_tombstone.xml",
+        "source": "/Users/neura/.android/build-cache/5ac21da304b16490cca136a0df143b70b80a9fe7/output/res/layout-v21/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "/Users/neura/Desktop/Documents.nosync/Android/Signal/sample/build/intermediates/res/merged/debug/layout-v21/notification_action.xml",
+        "source": "/Users/neura/.android/build-cache/5ac21da304b16490cca136a0df143b70b80a9fe7/output/res/layout-v21/notification_action.xml"
+    }
+]

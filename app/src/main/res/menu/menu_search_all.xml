@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/search_all_group_1" android:checkableBehavior="none">
+        <item
+            android:id="@+id/search_save"
+            android:title="@string/search_save" />
+    </group>
+
+    <group android:id="@+id/search_all_group_2" android:checkableBehavior="all" >
+        <item
+            android:id="@+id/search_include_retweets"
+            android:title="@string/search_include_retweets"
+            android:checkable="true"
+            android:checked="true" />
+
+        <item
+            android:id="@+id/search_popular"
+            android:title="@string/search_show_popular"
+            android:checkable="true"
+            android:checked="true" />
+    </group>
+</menu>

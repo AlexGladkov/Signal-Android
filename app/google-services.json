@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "24093770957",
+    "firebase_url": "https://signal-34f24.firebaseio.com",
+    "project_id": "signal-34f24",
+    "storage_bucket": "signal-34f24.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:24093770957:android:e7d87443a976511a",
+        "android_client_info": {
+          "package_name": "solonsky.signal.twitter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "24093770957-teohtm5joubf89c9rqt12cugsjissbe3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBZtPm98-nd5H8847GWYRIaR7UqyM_XZ3M"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

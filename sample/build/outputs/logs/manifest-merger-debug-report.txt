@@ -1,0 +1,99 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml:17:1-43:12
+	package
+		ADDED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml:18:11-45
+		INJECTED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml
+		INJECTED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml
+		INJECTED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml:17:11-69
+	android:versionCode
+		INJECTED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml
+		INJECTED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml
+application
+ADDED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml:20:5-41:19
+MERGED from [com.android.support:appcompat-v7:25.3.1] /Users/neura/.android/build-cache/5ac21da304b16490cca136a0df143b70b80a9fe7/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-v4:25.3.1] /Users/neura/.android/build-cache/439a192d044b2c6c14737cd8ee3f21f7aef48c26/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-fragment:25.3.1] /Users/neura/.android/build-cache/3e5f3b7b799018edd72309c89ddb13ef2e5accec/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-media-compat:25.3.1] /Users/neura/.android/build-cache/05d1942b78ba56a004df6174a54268f4b4178af2/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-ui:25.3.1] /Users/neura/.android/build-cache/956a0c0639cc67335d0fbeca345460d99aff9a4e/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:support-core-utils:25.3.1] /Users/neura/.android/build-cache/472bdb3fec9207fea885b77709e70fb7b70d6cce/output/AndroidManifest.xml:29:5-20
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] /Users/neura/.android/build-cache/7e345f059e470fc877cfaea9d7c8c52b4dec22d0/output/AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-vector-drawable:25.3.1] /Users/neura/.android/build-cache/2e73ff24a3f1170b5e51440e33f877667603d531/output/AndroidManifest.xml:26:5-20
+MERGED from [com.android.support:support-compat:25.3.1] /Users/neura/.android/build-cache/137bd6815f809afb2ba8d61a72505e2f44fd89c8/output/AndroidManifest.xml:29:5-20
+MERGED from [com.tbruyelle.rxpermissions2:rxpermissions:0.9.1] /Users/neura/.android/build-cache/2fd39907bd3f55651764a6bc2aa57c919b78bd03/output/AndroidManifest.xml:11:5-20
+	android:label
+		ADDED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml:23:9-41
+	android:allowBackup
+		ADDED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml:21:9-35
+	android:icon
+		ADDED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml:22:9-43
+	android:theme
+		ADDED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml:24:9-40
+activity#com.zhihu.matisse.sample.SampleActivity
+ADDED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml:25:9-31:20
+	android:name
+		ADDED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml:25:19-73
+intent-filter#android.intent.action.MAIN+android.intent.category.LAUNCHER
+ADDED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml:26:13-30:29
+action#android.intent.action.MAIN
+ADDED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml:27:17-68
+	android:name
+		ADDED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml:27:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml:29:17-76
+	android:name
+		ADDED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml:29:27-74
+provider#android.support.v4.content.FileProvider
+ADDED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml:32:9-40:20
+	android:authorities
+		ADDED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml:34:13-72
+	android:grantUriPermissions
+		ADDED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml:36:13-47
+	android:exported
+		ADDED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml:35:13-37
+	android:name
+		ADDED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml:33:13-67
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml:37:13-39:71
+	android:resource
+		ADDED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml:39:17-58
+	android:name
+		ADDED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml:38:17-67
+uses-sdk
+INJECTED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml reason: use-sdk injection requested
+MERGED from [com.android.support:appcompat-v7:25.3.1] /Users/neura/.android/build-cache/5ac21da304b16490cca136a0df143b70b80a9fe7/output/AndroidManifest.xml:21:5-23:78
+MERGED from [com.android.support:support-v4:25.3.1] /Users/neura/.android/build-cache/439a192d044b2c6c14737cd8ee3f21f7aef48c26/output/AndroidManifest.xml:21:5-23:54
+MERGED from [com.android.support:support-fragment:25.3.1] /Users/neura/.android/build-cache/3e5f3b7b799018edd72309c89ddb13ef2e5accec/output/AndroidManifest.xml:21:5-23:60
+MERGED from [com.android.support:support-media-compat:25.3.1] /Users/neura/.android/build-cache/05d1942b78ba56a004df6174a54268f4b4178af2/output/AndroidManifest.xml:21:5-23:63
+MERGED from [com.android.support:support-core-ui:25.3.1] /Users/neura/.android/build-cache/956a0c0639cc67335d0fbeca345460d99aff9a4e/output/AndroidManifest.xml:21:5-23:58
+MERGED from [com.android.support:support-core-utils:25.3.1] /Users/neura/.android/build-cache/472bdb3fec9207fea885b77709e70fb7b70d6cce/output/AndroidManifest.xml:21:5-23:61
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] /Users/neura/.android/build-cache/7e345f059e470fc877cfaea9d7c8c52b4dec22d0/output/AndroidManifest.xml:20:5-44
+MERGED from [com.android.support:support-vector-drawable:25.3.1] /Users/neura/.android/build-cache/2e73ff24a3f1170b5e51440e33f877667603d531/output/AndroidManifest.xml:20:5-43
+MERGED from [com.android.support:support-compat:25.3.1] /Users/neura/.android/build-cache/137bd6815f809afb2ba8d61a72505e2f44fd89c8/output/AndroidManifest.xml:21:5-23:58
+MERGED from [com.tbruyelle.rxpermissions2:rxpermissions:0.9.1] /Users/neura/.android/build-cache/2fd39907bd3f55651764a6bc2aa57c919b78bd03/output/AndroidManifest.xml:7:5-9:41
+	tools:overrideLibrary
+		ADDED from [com.android.support:appcompat-v7:25.3.1] /Users/neura/.android/build-cache/5ac21da304b16490cca136a0df143b70b80a9fe7/output/AndroidManifest.xml:23:9-75
+	android:targetSdkVersion
+		INJECTED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml
+		INJECTED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml
+		INJECTED from /Users/neura/Desktop/Documents.nosync/Android/Signal/sample/src/main/AndroidManifest.xml
+meta-data#android.support.VERSION
+ADDED from [com.android.support:appcompat-v7:25.3.1] /Users/neura/.android/build-cache/5ac21da304b16490cca136a0df143b70b80a9fe7/output/AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-v4:25.3.1] /Users/neura/.android/build-cache/439a192d044b2c6c14737cd8ee3f21f7aef48c26/output/AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-fragment:25.3.1] /Users/neura/.android/build-cache/3e5f3b7b799018edd72309c89ddb13ef2e5accec/output/AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-media-compat:25.3.1] /Users/neura/.android/build-cache/05d1942b78ba56a004df6174a54268f4b4178af2/output/AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-ui:25.3.1] /Users/neura/.android/build-cache/956a0c0639cc67335d0fbeca345460d99aff9a4e/output/AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:support-core-utils:25.3.1] /Users/neura/.android/build-cache/472bdb3fec9207fea885b77709e70fb7b70d6cce/output/AndroidManifest.xml:25:5-27:34
+MERGED from [com.android.support:animated-vector-drawable:25.3.1] /Users/neura/.android/build-cache/7e345f059e470fc877cfaea9d7c8c52b4dec22d0/output/AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-vector-drawable:25.3.1] /Users/neura/.android/build-cache/2e73ff24a3f1170b5e51440e33f877667603d531/output/AndroidManifest.xml:22:5-24:34
+MERGED from [com.android.support:support-compat:25.3.1] /Users/neura/.android/build-cache/137bd6815f809afb2ba8d61a72505e2f44fd89c8/output/AndroidManifest.xml:25:5-27:34
+	android:value
+		ADDED from [com.android.support:appcompat-v7:25.3.1] /Users/neura/.android/build-cache/5ac21da304b16490cca136a0df143b70b80a9fe7/output/AndroidManifest.xml:27:9-31
+	android:name
+		ADDED from [com.android.support:appcompat-v7:25.3.1] /Users/neura/.android/build-cache/5ac21da304b16490cca136a0df143b70b80a9fe7/output/AndroidManifest.xml:26:9-47

@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable name="model" type="solonsky.signal.twitter.models.FeedVideoModel" />
+        <variable name="click" type="solonsky.signal.twitter.models.FeedModel.FeedClickHandler" />
+        <import type="android.view.View" alias="v" />
+        <import type="solonsky.signal.twitter.R" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.daimajia.swipe.SwipeLayout
+            android:id="@+id/feed_video_bottom_wrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <!-- Bottom View Start-->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/backgroundSecondaryColor"
+                android:orientation="horizontal"
+                android:weightSum="1">
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_icons_more_hor"
+                    android:tint="?attr/hintTextColor" />
+                <!--What you want to show-->
+
+            </RelativeLayout>
+            <!-- Bottom View End-->
+
+            <LinearLayout
+                android:id="@+id/feed_video_main"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:backgroundAttr="@{model.expand ? R.attr.backgroundSecondaryColor : model.highlighted ? R.attr.backgroundHighlightColor : R.attr.backgroundPrimaryColor}" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{click::onItemClick}"
+                    android:onLongClick="@{click::longItemClick}"
+                    android:padding="16dp">
+
+                    <ImageView
+                        android:layout_width="@dimen/feed_icon_size"
+                        android:layout_height="@dimen/feed_icon_size"
+                        android:background="?attr/backgroundRoundImage"
+                        app:imageRoundUrl="@{model.iconUrl}"
+                        android:onLongClick="@{click::longUserClick}" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginStart="16dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:layout_gravity="center_vertical"
+                                android:textColor="?attr/secondaryTextColor"
+                                android:onLongClick="@{click::longUserClick}"
+                                android:text="@{model.username.toUpperCase()}"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="8dp"
+                                android:layout_gravity="center_vertical"
+                                android:textColor="?attr/secondaryTextColor"
+                                app:parseTime="@{model.date}" />
+
+                            <ImageView
+                                android:layout_width="@dimen/feed_tiny_size"
+                                android:layout_height="@dimen/feed_tiny_size"
+                                android:src="@drawable/ic_icons_tiny_like"
+                                android:layout_marginStart="8dp"
+                                android:visibility="@{model.favorite ? v.VISIBLE : v.GONE}"
+                                android:layout_gravity="center_vertical"
+                                android:tint="?attr/likeTintColor" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" >
+
+                            <TextView
+                                android:id="@+id/feed_video_txt_text"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:text="@{model.text}"
+                                android:textColor="?attr/primaryTextColor"
+                                android:layout_marginEnd="16dp"
+                                android:layout_weight="1"/>
+
+                            <RelativeLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content">
+
+                                <ImageView
+                                    android:layout_width="@dimen/feed_image_size"
+                                    android:layout_height="@dimen/feed_image_size"
+                                    android:scaleType="fitStart"
+                                    android:adjustViewBounds="true"
+                                    app:imageUrl="@{model.previewUrl}" />
+
+                                <ImageView
+                                    android:layout_width="@dimen/feed_badge_preview_width_size"
+                                    android:layout_height="@dimen/feed_badge_preview_height_size"
+                                    android:layout_centerInParent="true"
+                                    android:src="@drawable/ic_badges_media_youtube"
+                                    />
+
+                            </RelativeLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="2dp"
+                            android:visibility="@{model.retweeted ? v.VISIBLE : v.GONE }">
+
+                            <ImageView
+                                android:layout_width="@dimen/feed_tiny_size"
+                                android:layout_height="@dimen/feed_tiny_size"
+                                android:src="@drawable/ic_icons_tiny_rt"
+                                android:layout_gravity="center_vertical"
+                                android:tint="?attr/rtTintColor"/>
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="8dp"
+                                android:gravity="top"
+                                android:textSize="14dp"
+                                android:textColor="?attr/secondaryTextColor"
+                                android:text="@{model.retweetText}"/>
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/feed_video_bottom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="@{model.expand ? v.VISIBLE : v.GONE}">
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/feed_bottom_icon_size"
+                        android:src="@drawable/ic_icons_actions_reply"
+                        android:padding="12dp"
+                        android:tint="@color/action_tint_color"
+                        android:onClick="@{click::onReplyClick}"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/feed_bottom_icon_size"
+                        android:src="@drawable/ic_icons_actions_rt"
+                        android:padding="12dp"
+                        android:tint="@color/action_tint_color"
+                        android:onClick="@{click::onRetweetClick}"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/feed_bottom_icon_size"
+                        android:src="@drawable/ic_tabbar_icons_likes"
+                        android:padding="12dp"
+                        app:tintColorAttr="@{model.favorite ? R.attr.likeTintColor : R.attr.hintTextColor}"
+                        android:onClick="@{click::onLikeClick}"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/feed_bottom_icon_size"
+                        android:src="@drawable/ic_icons_actions_share"
+                        android:padding="12dp"
+                        android:tint="@color/action_tint_color"
+                        android:onClick="@{click::onShareClick}"
+                        android:layout_weight="1" />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="@dimen/feed_bottom_icon_size"
+                        android:padding="12dp"
+                        android:tint="@color/action_tint_color"
+                        android:onClick="@{click::onMoreClick}"
+                        android:src="@drawable/ic_icons_more_hor"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </com.daimajia.swipe.SwipeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/divider_height"
+            android:layout_marginStart="72dp"
+            android:background="?attr/dividerColor" />
+
+    </LinearLayout>
+</layout>

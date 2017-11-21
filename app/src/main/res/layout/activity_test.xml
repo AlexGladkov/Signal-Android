@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="model"
+            type="solonsky.signal.twitter.viewmodels.TestViewModel" />
+        <import type="android.view.View" alias="v" />
+    </data>
+    <android.support.v4.widget.NestedScrollView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/ll_detail"
+            android:layout_width="match_parent"
+            android:layout_height="500dp"
+            android:orientation="vertical" >
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerDetailConversation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:layout_marginTop="24dp"
+                app:listConfig="@{model.threadConfig}" />
+
+            <RelativeLayout
+                android:id="@+id/tb_detail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/recyclerDetailConversation" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/detail_tb_height"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:id="@+id/imageView"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="?attr/backgroundRoundImage"
+                        android:layout_gravity="center_vertical"
+                        android:layout_margin="12dp" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginStart="16dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-light"
+                            android:textColor="?attr/primaryTextColor"
+                            android:textSize="14dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif-light"
+                            android:textColor="?attr/secondaryTextColor"
+                            android:textSize="12dp" />
+
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+
+                    <com.github.rahatarmanahmed.cpv.CircularProgressView
+                        android:layout_width="@dimen/tb_icon_size"
+                        android:layout_height="@dimen/tb_icon_size"
+                        android:layout_gravity="center_vertical"
+                        android:padding="16dp"
+                        app:cpv_indeterminate="true"
+                        app:cpv_animAutostart="true"
+                        app:cpv_color="?attr/backgroundSecondaryColor"/>
+
+                    <ImageView
+                        android:id="@+id/img_detail_arrow"
+                        android:layout_width="@dimen/tb_icon_size"
+                        android:layout_height="@dimen/tb_icon_size"
+                        android:layout_gravity="center_vertical"
+                        android:padding="16dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/disclosure_19"
+                        android:tint="?attr/hintTextColor"
+                        android:visibility="@{model.threadSource.size() > 0 ? v.VISIBLE : v.GONE}" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="12dp"
+                    android:layout_height="6dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginStart="22dp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/ic_icons_tiny_corner"
+                    android:tint="?attr/backgroundPrimaryColor" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+    </android.support.v4.widget.NestedScrollView>
+</layout>
