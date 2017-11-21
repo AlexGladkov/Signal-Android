@@ -93,6 +93,7 @@
                                     android:layout_height="40dp"
                                     android:layout_gravity="center_vertical"
                                     android:layout_margin="16dp"
+                                    android:onClick="@{click::onAvatarClick}"
                                     android:background="?attr/backgroundRoundImage"
                                     app:imageUrl="@{model.avatar}" />
 

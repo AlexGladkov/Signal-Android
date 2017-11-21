@@ -95,6 +95,8 @@ public class DetailViewModel extends BaseObservable {
         void onFollowClick(View v);
 
         void onQuoteMediaClick(View v);
+
+        void onAvatarClick(View v);
     }
 
     public DetailViewModel(String userName, String twitterName, String avatar, String text,
