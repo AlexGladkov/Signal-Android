@@ -39,6 +39,7 @@ class ProfilePresenter : MvpPresenter<ProfileView>() {
 
     fun getUser(intent: Intent?) {
         val provider = ProfileProvider(presenter = this)
+        Log.e(TAG, "intent $intent, extras ${intent?.extras?.get(Flags.PROFILE_SCREEN_NAME)}")
         when {
             intent == null || intent.extras == null -> performError()
             intent.extras.get(Flags.PROFILE_DATA) != null -> {
@@ -53,9 +54,10 @@ class ProfilePresenter : MvpPresenter<ProfileView>() {
                 provider.loadFavorites(id = intent.extras.get(Flags.PROFILE_ID) as Long)
             }
             intent.extras.get(Flags.PROFILE_SCREEN_NAME) != null -> {
-                provider.loadUser(screenName = intent.extras.get(Flags.PROFILE_SCREEN_NAME) as String)
-                provider.loadTweets(screenName = intent.extras.get(Flags.PROFILE_SCREEN_NAME) as String)
-                provider.loadFavorites(screenName = intent.extras.get(Flags.PROFILE_SCREEN_NAME) as String)
+                val screenName = (intent.extras.get(Flags.PROFILE_SCREEN_NAME) as String).replace("@", "")
+                provider.loadUser(screenName = screenName)
+                provider.loadTweets(screenName = screenName)
+                provider.loadFavorites(screenName = screenName)
             }
             else -> performError()
         }

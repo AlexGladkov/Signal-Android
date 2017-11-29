@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.activities.LoggedActivity;
-import solonsky.signal.twitter.activities.ProfileActivity;
+import solonsky.signal.twitter.activities.MVPProfileActivity;
 import solonsky.signal.twitter.adapters.NotificationsDetailAdapter;
 import solonsky.signal.twitter.data.UsersData;
 import solonsky.signal.twitter.databinding.FragmentSearchPeopleBinding;
@@ -82,9 +82,9 @@ public class SearchPeopleFragment extends Fragment {
         public void onItemClick(NotificationDetailModel model, View v) {
             for (User user : mSourceList) {
                 if (user.getId() == model.getId()) {
-                    AppData.CURRENT_USER = user;
-                    Flags.userSource = Flags.UserSource.data;
-                    getActivity().startActivity(new Intent(getContext(), ProfileActivity.class));
+                    Intent profileIntent = new Intent(getContext(), MVPProfileActivity.class);
+                    profileIntent.putExtra(Flags.PROFILE_DATA, user);
+                    getActivity().startActivity(profileIntent);
                     getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
             }

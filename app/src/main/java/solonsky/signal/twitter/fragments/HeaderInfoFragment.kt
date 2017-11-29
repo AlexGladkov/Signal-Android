@@ -24,7 +24,6 @@ import com.twitter.Autolink
 
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.activities.MVPProfileActivity
-import solonsky.signal.twitter.activities.ProfileActivity
 import solonsky.signal.twitter.activities.SearchActivity
 import solonsky.signal.twitter.databinding.FragmentProfileInfoBinding
 import solonsky.signal.twitter.helpers.App

@@ -64,7 +64,6 @@ class ProfileProvider(presenter: ProfilePresenter) {
                 val mediaArray = ArrayList<ImageModel>()
 
                 statuses.forEach({
-                    Log.e(TAG, "statuses date - ${it.createdAt}")
                     val statusModel = gson.fromJson(gson.toJsonTree(it), StatusModel::class.java)
                     statusModel.tuneModel(it)
                     statusModel.linkClarify()

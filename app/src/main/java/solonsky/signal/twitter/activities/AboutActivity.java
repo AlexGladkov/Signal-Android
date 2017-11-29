@@ -64,9 +64,9 @@ public class AboutActivity extends AppCompatActivity {
         binding.llAboutTwitter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppData.CURRENT_SCREEN_NAME = "@getsignaI";
-                Flags.userSource = Flags.UserSource.screenName;
-                mActivity.startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                Intent profileIntent = new Intent(getApplicationContext(), MVPProfileActivity.class);
+                profileIntent.putExtra(Flags.PROFILE_SCREEN_NAME, "@getsignaI");
+                mActivity.startActivity(profileIntent);
                 mActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
@@ -74,9 +74,9 @@ public class AboutActivity extends AppCompatActivity {
         binding.llAboutAuthor.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppData.CURRENT_SCREEN_NAME = "@solonsky";
-                Flags.userSource = Flags.UserSource.screenName;
-                mActivity.startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                Intent profileIntent = new Intent(getApplicationContext(), MVPProfileActivity.class);
+                profileIntent.putExtra(Flags.PROFILE_SCREEN_NAME, "@solonsky");
+                mActivity.startActivity(profileIntent);
                 mActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
@@ -84,9 +84,9 @@ public class AboutActivity extends AppCompatActivity {
         binding.llAboutDeveloper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppData.CURRENT_SCREEN_NAME = "@NeuraSC2";
-                Flags.userSource = Flags.UserSource.screenName;
-                mActivity.startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+                Intent profileIntent = new Intent(getApplicationContext(), MVPProfileActivity.class);
+                profileIntent.putExtra(Flags.PROFILE_SCREEN_NAME, "@NeuraSC2");
+                mActivity.startActivity(profileIntent);
                 mActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });

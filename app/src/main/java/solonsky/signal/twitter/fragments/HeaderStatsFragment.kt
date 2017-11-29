@@ -15,7 +15,6 @@ import android.view.animation.Transformation
 import android.widget.RelativeLayout
 
 import solonsky.signal.twitter.R
-import solonsky.signal.twitter.activities.ProfileActivity
 import solonsky.signal.twitter.activities.StatsFollowersActivity
 import solonsky.signal.twitter.activities.StatsFollowingActivity
 import solonsky.signal.twitter.activities.StatsListedActivity

@@ -53,6 +53,7 @@ import solonsky.signal.twitter.libs.autoLinkTextView.AutoLinkOnClickListener
 import solonsky.signal.twitter.libs.autoLinkTextView.AutoLinkTextView
 import solonsky.signal.twitter.models.ImageModel
 import solonsky.signal.twitter.models.StatusModel
+import solonsky.signal.twitter.models.User
 import solonsky.signal.twitter.overlays.ImageActionsOverlay
 import solonsky.signal.twitter.presenters.StatusPresenter
 import solonsky.signal.twitter.views.StatusView
@@ -398,8 +399,11 @@ class StatusViewHolder(itemView: View, screenWidth: Int) : RecyclerView.ViewHold
             override fun onOpen(layout: SwipeLayout?) {
                 if (!isOpen) {
                     isOpen = true
-                    if (mStatus != null)
-                        mStatusPresenter.avatarClick(statusModel.user)
+                    if (mStatus != null) {
+                        AppData.CURRENT_STATUS_MODEL = statusModel
+                        openDetail()
+                    }
+
 
                     Handler().postDelayed({
                         layout?.close()
@@ -457,9 +461,16 @@ class StatusViewHolder(itemView: View, screenWidth: Int) : RecyclerView.ViewHold
                 startAnim = R.anim.slide_in_right, endAnim = R.anim.slide_out_left)
     }
 
-    override fun openProfile() {
-        statusClickListener?.openActivity(intent = Intent(itemView.context, ProfileActivity::class.java),
-                startAnim = R.anim.slide_in_right, endAnim = R.anim.slide_out_left)
+    override fun openProfile(user: User) {
+        val profileIntent = Intent(itemView.context, MVPProfileActivity::class.java)
+        profileIntent.putExtra(Flags.PROFILE_DATA, user)
+        statusClickListener?.openActivity(intent = profileIntent, startAnim = R.anim.slide_in_right, endAnim = R.anim.slide_out_left)
+    }
+
+    override fun openProfile(screenName: String) {
+        val profileIntent = Intent(itemView.context, MVPProfileActivity::class.java)
+        profileIntent.putExtra(Flags.PROFILE_SCREEN_NAME, screenName)
+        statusClickListener?.openActivity(intent = profileIntent, startAnim = R.anim.slide_in_right, endAnim = R.anim.slide_out_left)
     }
 
     override fun openCompose() {

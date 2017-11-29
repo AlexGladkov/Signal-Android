@@ -19,7 +19,7 @@ import java.util.ConcurrentModificationException;
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.activities.DetailActivity;
 import solonsky.signal.twitter.activities.LoggedActivity;
-import solonsky.signal.twitter.activities.ProfileActivity;
+import solonsky.signal.twitter.activities.MVPProfileActivity;
 import solonsky.signal.twitter.adapters.NotificationsMainAdapter;
 import solonsky.signal.twitter.data.LoggedData;
 import solonsky.signal.twitter.data.NotificationsAllData;
@@ -160,18 +160,18 @@ public class NotificationsAllFragment extends Fragment implements FragmentCounte
 
                 case NotificationModel.TYPE_FOLLOW:
                     if (model.getUser() != null) {
-                        AppData.CURRENT_USER = model.getUser();
-                        Flags.userSource = Flags.UserSource.data;
-                        getActivity().startActivity(new Intent(getContext(), ProfileActivity.class));
+                        Intent profileIntent = new Intent(getContext(), MVPProfileActivity.class);
+                        profileIntent.putExtra(Flags.PROFILE_DATA, model.getUser());
+                        getActivity().startActivity(profileIntent);
                         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }
                     break;
 
                 case NotificationModel.TYPE_LIST:
                     if (model.getUser() != null) {
-                        AppData.CURRENT_USER = model.getUser();
-                        Flags.userSource = Flags.UserSource.data;
-                        getActivity().startActivity(new Intent(getContext(), ProfileActivity.class));
+                        Intent profileIntent = new Intent(getContext(), MVPProfileActivity.class);
+                        profileIntent.putExtra(Flags.PROFILE_DATA, model.getUser());
+                        getActivity().startActivity(profileIntent);
                         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }
                     break;

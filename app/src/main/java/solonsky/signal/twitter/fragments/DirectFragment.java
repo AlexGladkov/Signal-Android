@@ -29,7 +29,7 @@ import java.util.List;
 
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.activities.ChatActivity;
-import solonsky.signal.twitter.activities.ProfileActivity;
+import solonsky.signal.twitter.activities.MVPProfileActivity;
 import solonsky.signal.twitter.adapters.DirectAdapter;
 import solonsky.signal.twitter.api.DirectApi;
 import solonsky.signal.twitter.data.DirectData;
@@ -123,9 +123,9 @@ public class DirectFragment extends Fragment {
 
                     @Override
                     public void onAvatarClick(View v, DirectModel directModel) {
-                        Flags.userSource = Flags.UserSource.id;
-                        AppData.CURRENT_USER_ID = directModel.getOtherId();
-                        getActivity().startActivity(new Intent(getContext(), ProfileActivity.class));
+                        Intent profileIntent = new Intent(getContext(), MVPProfileActivity.class);
+                        profileIntent.putExtra(Flags.PROFILE_ID, directModel.getOtherId());
+                        getActivity().startActivity(profileIntent);
                         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }
                 });

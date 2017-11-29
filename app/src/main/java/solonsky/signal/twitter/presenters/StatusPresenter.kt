@@ -17,7 +17,6 @@ import com.google.gson.JsonObject
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.activities.DetailActivity
 import solonsky.signal.twitter.activities.LoggedActivity
-import solonsky.signal.twitter.activities.ProfileActivity
 import solonsky.signal.twitter.api.ActionsApiFactory
 import solonsky.signal.twitter.data.ShareData
 import solonsky.signal.twitter.dialogs.HashtagDialog
@@ -49,14 +48,14 @@ class StatusPresenter(private val viewState: StatusView) {
         AppData.CURRENT_USER = user
         Flags.userSource = Flags.UserSource.data
         Flags.homeUser = user.id == AppData.ME.id
-        viewState.openProfile()
+        viewState.openProfile(user = user)
     }
 
     fun avatarClick(screenName: String) {
         AppData.CURRENT_SCREEN_NAME = screenName
         Flags.userSource = Flags.UserSource.screenName
         Flags.homeUser = TextUtils.equals(screenName, AppData.ME.screenName)
-        viewState.openProfile()
+        viewState.openProfile(screenName = screenName)
     }
 
     fun showToast(text: String) {

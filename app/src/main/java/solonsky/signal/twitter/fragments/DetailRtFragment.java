@@ -15,7 +15,8 @@ import java.util.ArrayList;
 
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.activities.DetailActivity;
-import solonsky.signal.twitter.activities.ProfileActivity;
+import solonsky.signal.twitter.activities.MVPProfileActivity;
+import solonsky.signal.twitter.activities.StatsFollowersActivity;
 import solonsky.signal.twitter.adapters.UserDetailAdapter;
 import solonsky.signal.twitter.data.UsersData;
 import solonsky.signal.twitter.databinding.FragmentDetailRtBinding;
@@ -55,12 +56,10 @@ public class DetailRtFragment extends Fragment {
                     @Override
                     public void onItemClick(UserModel model, View v) {
                         if (model.getUser() != null) {
-                            AppData.CURRENT_USER = model.getUser();
-                            Flags.userDirection = Flags.Directions.FROM_RIGHT;
-                            Flags.userSource = Flags.UserSource.data;
-                            Flags.homeUser = AppData.CURRENT_USER.getId() == AppData.ME.getId();
-                            mActivity.startActivity(new Intent(getContext(), ProfileActivity.class));
-                            mActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                            Intent profileIntent = new Intent(getContext(), MVPProfileActivity.class);
+                            profileIntent.putExtra(Flags.PROFILE_DATA, model.getUser());
+                            getActivity().startActivity(profileIntent);
+                            getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         }
                     }
                 });

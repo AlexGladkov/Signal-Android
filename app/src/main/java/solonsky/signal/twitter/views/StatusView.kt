@@ -6,6 +6,7 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 import solonsky.signal.twitter.helpers.Flags
 import solonsky.signal.twitter.models.ImageModel
 import solonsky.signal.twitter.models.StatusModel
+import solonsky.signal.twitter.models.User
 import java.text.FieldPosition
 import java.util.*
 
@@ -21,7 +22,8 @@ interface StatusView: MvpView {
 
     fun setClipboard(text: String)
 
-    fun openProfile()
+    fun openProfile(screenName: String)
+    fun openProfile(user: User)
     fun openDetail()
     fun openCompose()
     fun openMedia()

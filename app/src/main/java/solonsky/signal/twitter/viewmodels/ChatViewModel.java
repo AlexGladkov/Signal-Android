@@ -19,7 +19,6 @@ import java.util.ArrayList;
 
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.activities.ChatActivity;
-import solonsky.signal.twitter.activities.ProfileActivity;
 import solonsky.signal.twitter.adapters.ChatAdapter;
 import solonsky.signal.twitter.api.DirectApi;
 import solonsky.signal.twitter.helpers.AppData;

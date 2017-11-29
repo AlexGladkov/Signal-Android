@@ -418,10 +418,9 @@ class DetailActivity : AppCompatActivity(), SmartTabLayout.TabProvider {
         binding.model = viewModel
         binding.click = object : DetailViewModel.DetailClickHandler {
             override fun onAvatarClick(v: View?) {
-                AppData.CURRENT_USER = currentStatus.user
-                Flags.userSource = Flags.UserSource.data
-                Flags.homeUser = currentStatus.user.id == AppData.ME.id
-                startActivity(Intent(applicationContext, ProfileActivity::class.java))
+                val profileIntent = Intent(applicationContext, MVPProfileActivity::class.java)
+                profileIntent.putExtra(Flags.PROFILE_DATA, currentStatus.user)
+                startActivity(profileIntent)
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
             }
 
@@ -526,16 +525,15 @@ class DetailActivity : AppCompatActivity(), SmartTabLayout.TabProvider {
                     mActivity!!.startActivity(Intent(applicationContext, SearchActivity::class.java))
                     mActivity!!.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 } else if (autoLinkMode == AutoLinkMode.MODE_MENTION) {
-                    mActivity!!.startActivity(Intent(applicationContext, ProfileActivity::class.java))
-                    mActivity!!.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                    Flags.userSource = Flags.UserSource.screenName
-                    AppData.CURRENT_SCREEN_NAME = matchedText
+                    val profileIntent = Intent(applicationContext, MVPProfileActivity::class.java)
+                    profileIntent.putExtra(Flags.PROFILE_SCREEN_NAME, matchedText)
+                    this@DetailActivity.startActivity(profileIntent)
+                    this@DetailActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 } else if (autoLinkMode == AutoLinkMode.MODE_SHORT) {
-                    for (jsonElement in currentStatus.urlEntities) {
-                        if (jsonElement.asJsonObject.get("displayURL").asString == matchedText) {
-                            Utilities.openLink(jsonElement.asJsonObject.get("expandedURL").asString, mActivity)
-                        }
-                    }
+                    currentStatus.urlEntities
+                            .asSequence()
+                            .filter { it.asJsonObject.get("displayURL").asString == matchedText }
+                            .forEach { Utilities.openLink(it.asJsonObject.get("expandedURL").asString, mActivity) }
                 }
             }
 

@@ -104,12 +104,10 @@ public class StatsFollowersActivity extends AppCompatActivity {
             @Override
             public void onItemClick(UserModel model, View v) {
                 if (model.getUser() != null) {
-                    AppData.CURRENT_USER = model.getUser();
-                    Flags.userDirection = Flags.Directions.FROM_RIGHT;
-                    Flags.userSource = Flags.UserSource.data;
-                    Flags.homeUser = AppData.CURRENT_USER.getId() == AppData.ME.getId();
-                    mActivity.startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
-                    mActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                    Intent profileIntent = new Intent(getApplicationContext(), MVPProfileActivity.class);
+                    profileIntent.putExtra(Flags.PROFILE_DATA, model.getUser());
+                    StatsFollowersActivity.this.startActivity(profileIntent);
+                    StatsFollowersActivity.this.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
             }
         });

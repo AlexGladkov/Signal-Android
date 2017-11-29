@@ -50,7 +50,6 @@ import java.util.ArrayList;
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.activities.DetailActivity;
 import solonsky.signal.twitter.activities.LoggedActivity;
-import solonsky.signal.twitter.activities.ProfileActivity;
 import solonsky.signal.twitter.databinding.CellStatusBinding;
 import solonsky.signal.twitter.helpers.App;
 import solonsky.signal.twitter.helpers.AppData;
@@ -410,10 +409,10 @@ public class StatusAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     if (autoLinkMode.equals(AutoLinkMode.MODE_HASHTAG)) {
                         mStatusClickListener.onSearch(matchedText, holder.mBinding.statusTxtText);
                     } else if (autoLinkMode.equals(AutoLinkMode.MODE_MENTION)) {
-                        mActivity.startActivity(new Intent(mContext, ProfileActivity.class));
+                        Intent profileIntent = new Intent(mContext, MVPProfileActivity.class);
+                        profileIntent.putExtra(Flags.PROFILE_SCREEN_NAME, matchedText);
+                        mActivity.startActivity(profileIntent);
                         mActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                        Flags.userSource = Flags.UserSource.screenName;
-                        AppData.CURRENT_SCREEN_NAME = matchedText;
                     } else if (autoLinkMode.equals(AutoLinkMode.MODE_SHORT)) {
                         for (JsonElement jsonElement : statusModel.getUrlEntities()) {
                             if (jsonElement.getAsJsonObject().get("displayURL").getAsString().equals(matchedText)) {
@@ -572,17 +571,15 @@ public class StatusAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 holder.mBinding.statusTxtRetweet.setAutoLinkOnClickListener(new AutoLinkOnClickListener() {
                     @Override
                     public void onAutoLinkTextClick(AutoLinkMode autoLinkMode, String matchedText) {
-                        mActivity.startActivity(new Intent(mContext, ProfileActivity.class));
-                        mActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                        Flags.userSource = Flags.UserSource.data;
-
+                        Intent profileIntent = new Intent(mContext, MVPProfileActivity.class);
                         if (matchedText.toLowerCase().equals("You".toLowerCase())) {
-                            Flags.homeUser = true;
-                            AppData.CURRENT_USER = AppData.ME;
+                            profileIntent.putExtra(Flags.PROFILE_DATA, AppData.ME);
                         } else {
-                            Flags.homeUser = false;
-                            AppData.CURRENT_USER = statusModel.getUser();
+                            profileIntent.putExtra(Flags.PROFILE_DATA, statusModel.getUser());
                         }
+
+                        mActivity.startActivity(profileIntent);
+                        mActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }
 
                     @Override
@@ -687,11 +684,9 @@ public class StatusAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                 @Override
                 public void onQuoteUserClick(View v) {
                     if (statusModel.getQuotedStatus() != null) {
-                        AppData.CURRENT_USER = statusModel.getQuotedStatus().getUser();
-                        Flags.userDirection = Flags.Directions.FROM_RIGHT;
-                        Flags.userSource = Flags.UserSource.data;
-                        Flags.homeUser = AppData.CURRENT_USER.getId() == AppData.ME.getId();
-                        mActivity.startActivity(new Intent(mContext, ProfileActivity.class));
+                        Intent profileIntent = new Intent(mContext, MVPProfileActivity.class);
+                        profileIntent.putExtra(Flags.PROFILE_DATA, statusModel.getQuotedStatus().getUser());
+                        mActivity.startActivity(profileIntent);
                         mActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         if (mActivity instanceof LoggedActivity)
                             ((LoggedActivity) mActivity).hidePopup();

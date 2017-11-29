@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.activities.LoggedActivity;
-import solonsky.signal.twitter.activities.ProfileActivity;
+import solonsky.signal.twitter.activities.MVPProfileActivity;
 import solonsky.signal.twitter.adapters.NotificationsDetailAdapter;
 import solonsky.signal.twitter.data.NotificationsFollowData;
 import solonsky.signal.twitter.databinding.FragmentNotificationsFollowBinding;
@@ -98,9 +98,9 @@ public class NotificationsFollowFragment extends Fragment implements FragmentCou
         @Override
         public void onItemClick(NotificationDetailModel model, View v) {
             if (model.getUser() != null) {
-                AppData.CURRENT_USER = model.getUser();
-                Flags.userSource = Flags.UserSource.data;
-                mActivity.startActivity(new Intent(getContext(), ProfileActivity.class));
+                Intent profileIntent = new Intent(getContext(), MVPProfileActivity.class);
+                profileIntent.putExtra(Flags.PROFILE_DATA, model.getUser());
+                getActivity().startActivity(profileIntent);
                 mActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         }

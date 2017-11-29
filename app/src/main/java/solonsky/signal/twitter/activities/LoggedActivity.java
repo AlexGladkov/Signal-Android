@@ -1194,9 +1194,9 @@ public class LoggedActivity extends AppCompatActivity implements ActivityListene
 
         if (input.equals(Flags.NotificationTypes.FAV) || input.equals(Flags.NotificationTypes.UNDEFINED)
                 || input.equals(Flags.NotificationTypes.FOLLOW) || input.equals(Flags.NotificationTypes.MENTION)) {
-            Flags.userSource = Flags.UserSource.screenName;
-            AppData.CURRENT_SCREEN_NAME = sender;
-            mActivity.startActivity(new Intent(getApplicationContext(), ProfileActivity.class));
+            Intent profileIntent = new Intent(getApplicationContext(), MVPProfileActivity.class);
+            profileIntent.putExtra(Flags.PROFILE_SCREEN_NAME, sender);
+            mActivity.startActivity(profileIntent);
             mActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         } else if (input.equals(Flags.NotificationTypes.DIRECT)) {
             DirectApi.getInstance().clear();
