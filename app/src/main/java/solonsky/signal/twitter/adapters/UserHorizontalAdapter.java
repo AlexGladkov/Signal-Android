@@ -11,8 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.github.rahatarmanahmed.cpv.CircularProgressView;
 import com.squareup.picasso.Picasso;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
 
@@ -116,13 +116,13 @@ public class UserHorizontalAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     public static class SearchViewHolder extends RecyclerView.ViewHolder {
         private final TextView mTxtText;
         private final ImageView mImgImage;
-        private final CircularProgressView mCpv;
+        private final AVLoadingIndicatorView mCpv;
 
         public SearchViewHolder(View itemView) {
             super(itemView);
             mTxtText = (TextView) itemView.findViewById(R.id.user_search_text);
             mImgImage = (ImageView) itemView.findViewById(R.id.user_search_img);
-            mCpv = (CircularProgressView) itemView.findViewById(R.id.user_search_cpv);
+            mCpv = (AVLoadingIndicatorView) itemView.findViewById(R.id.user_search_cpv);
         }
 
         public void bind(final UserModel userModel, final UserClickHandler userClickHandler) {

@@ -18,6 +18,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import solonsky.signal.twitter.activities.MVPProfileActivity;
 import solonsky.signal.twitter.activities.MediaActivity;
 import solonsky.signal.twitter.api.ActionsApiFactory;
 import solonsky.signal.twitter.data.FeedData;
@@ -36,11 +37,11 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.daimajia.swipe.SwipeLayout;
-import com.github.rahatarmanahmed.cpv.CircularProgressView;
 import com.google.common.net.MediaType;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import org.joda.time.LocalDateTime;
 
@@ -69,6 +70,7 @@ import solonsky.signal.twitter.libs.autoLinkTextView.AutoLinkTextView;
 import solonsky.signal.twitter.models.ConfigurationModel;
 import solonsky.signal.twitter.models.ImageModel;
 import solonsky.signal.twitter.models.StatusModel;
+import solonsky.signal.twitter.models.User;
 import solonsky.signal.twitter.overlays.ImageActionsOverlay;
 import twitter4j.AsyncTwitter;
 
@@ -656,15 +658,21 @@ public class StatusAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
                 @Override
                 public void onProfileClick(View v) {
-                    AppData.CURRENT_USER = statusModel.isRetweet() && statusModel.getRetweetedStatus() != null ?
+//                    AppData.CURRENT_USER = statusModel.isRetweet() && statusModel.getRetweetedStatus() != null ?
+//                            statusModel.getRetweetedStatus().getUser() : statusModel.getUser();
+//                    Flags.userDirection = Flags.Directions.FROM_RIGHT;
+//                    Flags.userSource = Flags.UserSource.data;
+//                    Flags.homeUser = AppData.CURRENT_USER.getId() == AppData.ME.getId();
+//                    mActivity.startActivity(new Intent(mContext, ProfileActivity.class));
+//                    mActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+//                    if (mActivity instanceof LoggedActivity)
+//                        ((LoggedActivity) mActivity).hidePopup();
+
+                    User user = statusModel.isRetweet() && statusModel.getRetweetedStatus() != null ?
                             statusModel.getRetweetedStatus().getUser() : statusModel.getUser();
-                    Flags.userDirection = Flags.Directions.FROM_RIGHT;
-                    Flags.userSource = Flags.UserSource.data;
-                    Flags.homeUser = AppData.CURRENT_USER.getId() == AppData.ME.getId();
-                    mActivity.startActivity(new Intent(mContext, ProfileActivity.class));
-                    mActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                    if (mActivity instanceof LoggedActivity)
-                        ((LoggedActivity) mActivity).hidePopup();
+                    Intent profileIntent = new Intent(mContext, MVPProfileActivity.class);
+                    profileIntent.putExtra(Flags.PROFILE_DATA, user);
+                    mActivity.startActivity(profileIntent);
                 }
 
                 @Override
@@ -789,7 +797,7 @@ public class StatusAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
     }
 
     private static class FooterViewHolder extends RecyclerView.ViewHolder {
-        private CircularProgressView mCpvFooter;
+        private AVLoadingIndicatorView mCpvFooter;
 
         FooterViewHolder(View itemView) {
             super(itemView);

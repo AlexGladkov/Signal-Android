@@ -85,13 +85,12 @@
         android:background="?attr/backgroundPrimaryColor"
         android:layout_below="@+id/tb_stats_header" />
 
-    <com.github.rahatarmanahmed.cpv.CircularProgressView
+    <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/loader_stats"
-        android:layout_width="@dimen/loader_size"
-        android:layout_height="@dimen/loader_size"
+        android:layout_width="@dimen/new_loader_size"
+        android:layout_height="@dimen/new_loader_size"
         android:layout_centerInParent="true"
-        app:cpv_color="?attr/hintTextColor"
-        app:cpv_indeterminate="true"
-        app:cpv_animAutostart="true" />
+        app:indicatorName="BallScaleMultipleIndicator"
+        app:indicatorColor="?attr/hintTextColor" />
 
 </RelativeLayout>

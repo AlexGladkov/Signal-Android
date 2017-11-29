@@ -44,11 +44,10 @@ class MVPMentionsFragment : MvpAppCompatFragment(), MentionsView {
     @InjectPresenter
     lateinit var mMentionsPresenter: MentionsPresenter
     private lateinit var mCallback: ActivityListener
+    private var mAdapter: MVPStatusAdapter = MVPStatusAdapter(mvpDelegate)
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
             inflater.inflate(R.layout.fragment_mentions, container, false)
-
-    private var mAdapter: MVPStatusAdapter = MVPStatusAdapter(mvpDelegate)
 
     override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -152,13 +151,13 @@ class MVPMentionsFragment : MvpAppCompatFragment(), MentionsView {
         if (isAdded) {
             recycler_mentions.visibility = View.GONE
             txt_mentions_no_items.visibility = View.GONE
-            cpv_mentions.visibility = View.VISIBLE
+            avl_mentions.visibility = View.VISIBLE
         }
     }
 
     override fun endLoading() {
         if (isAdded) {
-            cpv_mentions.visibility = View.GONE
+            avl_mentions.visibility = View.GONE
         }
     }
 

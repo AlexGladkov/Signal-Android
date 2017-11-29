@@ -6,7 +6,7 @@
     android:layout_width="wrap_content"
     android:layout_height="48dp">
     
-    <com.github.rahatarmanahmed.cpv.CircularProgressView
+    <com.wang.avi.AVLoadingIndicatorView
         android:id="@+id/user_search_cpv"
         android:layout_width="24dp"
         android:layout_height="24dp"
@@ -14,9 +14,8 @@
         android:layout_marginStart="12dp"
         android:layout_gravity="center_vertical"
         android:visibility="gone"
-        app:cpv_color="?attr/hintTextColor"
-        app:cpv_animAutostart="true"
-        app:cpv_indeterminate="true" />
+        app:indicatorName="BallScaleMultipleIndicator"
+        app:indicatorColor="?attr/hintTextColor" />
 
     <ImageView
         android:id="@+id/user_search_img"

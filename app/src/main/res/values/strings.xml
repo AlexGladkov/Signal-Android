@@ -388,6 +388,9 @@
     <string name="merchant_id">18296208033601745038</string>
     <string name="download_url">Download</string>
     <string name="geo_disabled_by_twitter">Enable location on Twitter and restart Signal</string>
+    <string name="error_loading_user">Error loading user</string>
+    <string name="follows_you">follows you</string>
+    <string name="not_follow">does not follow you</string>
 
 
 </resources>

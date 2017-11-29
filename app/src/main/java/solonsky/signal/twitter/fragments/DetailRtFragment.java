@@ -89,7 +89,8 @@ public class DetailRtFragment extends Fragment {
 
                     UserModel userModel = new UserModel(user.getId(), user.getBiggerProfileImageURL(),
                             user.getName(), Utilities.parseFollowers(user.getFollowersCount(), "followers"),
-                            UsersData.getInstance().getFollowingList().contains(user.getId()), false, false);
+                            UsersData.getInstance().getFollowingList().contains(user.getId())
+                                    || user.getId() == AppData.ME.getId(), false, false);
                     userModel.setUser(solonsky.signal.twitter.models.User.getFromUserInstance(user));
                     mUsersList.add(userModel);
                 }

@@ -162,6 +162,8 @@
 
         <activity android:name=".activities.MVPSearchActivity"
             android:theme="@style/ActivityThemeLightNoAnimation" />
+        <activity android:name=".activities.MVPProfileActivity"
+            android:theme="@style/ActivityThemeLightNoAnimation"/>
 
         <service
             android:name="solonsky.signal.twitter.services.NListenerExample"

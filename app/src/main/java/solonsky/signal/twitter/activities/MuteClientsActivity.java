@@ -12,7 +12,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.github.rahatarmanahmed.cpv.CircularProgressView;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -37,7 +37,7 @@ import solonsky.signal.twitter.models.SimpleModel;
 public class MuteClientsActivity extends AppCompatActivity {
 
     private final String TAG = MuteClientsActivity.class.getSimpleName();
-    private CircularProgressView mCpvWait;
+    private AVLoadingIndicatorView mCpvWait;
     private RecyclerView mRvClients;
     private ArrayList<SimpleModel> simpleModels;
 
@@ -51,7 +51,7 @@ public class MuteClientsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mute_clients);
 
         mRvClients = (RecyclerView) findViewById(R.id.recycler_mute_client);
-        mCpvWait = (CircularProgressView) findViewById(R.id.cpv_mute_client);
+        mCpvWait = (AVLoadingIndicatorView) findViewById(R.id.cpv_mute_client);
         ImageView mBtnBack = (ImageView) findViewById(R.id.img_mute_add_back);
 
         mBtnBack.setOnClickListener(new View.OnClickListener() {

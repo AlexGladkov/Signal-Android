@@ -29,6 +29,7 @@ import solonsky.signal.twitter.data.ShareData;
 import solonsky.signal.twitter.data.StreamData;
 import solonsky.signal.twitter.data.UsersData;
 import solonsky.signal.twitter.fragments.MVPMentionsFragment;
+import solonsky.signal.twitter.fragments.MVPProfileFragment;
 import solonsky.signal.twitter.fragments.ProfileFragment;
 import solonsky.signal.twitter.fragments.SearchContainerFragment;
 import solonsky.signal.twitter.helpers.Cache;
@@ -132,7 +133,7 @@ public class LoggedActivity extends AppCompatActivity implements ActivityListene
     private LikesFragment likesFragment;
     private DirectFragment directFragment;
     private SearchFragment searchFragment;
-    private ProfileFragment profileFragment;
+    private MVPProfileFragment profileFragment;
     private MuteFragment muteFragment;
 
     private AGBottomBar bottomBar;
@@ -412,8 +413,10 @@ public class LoggedActivity extends AppCompatActivity implements ActivityListene
 //        Log.e(TAG, "current consumer key - " + AppData.userConfiguration.getConsumerKey());
 //        Log.e(TAG, "current consumer secret - " + AppData.userConfiguration.getConsumerSecret());
 
-        AppData.CLIENT_TOKEN = AppData.userConfiguration.getClientToken();
-        AppData.CLIENT_SECRET = AppData.userConfiguration.getClientSecret();
+        if (AppData.configurationUserModels != null) {
+            AppData.CLIENT_TOKEN = AppData.userConfiguration.getClientToken();
+            AppData.CLIENT_SECRET = AppData.userConfiguration.getClientSecret();
+        }
 
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         setStatusBarColor(App.getInstance().isNightEnabled() ?
@@ -990,7 +993,7 @@ public class LoggedActivity extends AppCompatActivity implements ActivityListene
 
                 case 6:
                     if (profileFragment == null)
-                        profileFragment = new ProfileFragment();
+                        profileFragment = new MVPProfileFragment();
                     if (!profileFragment.isAdded())
                         fragmentTransaction.add(R.id.fl_logged_main,
                                 profileFragment, profileFragment.getTag());
@@ -1150,7 +1153,7 @@ public class LoggedActivity extends AppCompatActivity implements ActivityListene
 
                     case 6:
                         bottomBar.updateIcon(3, R.drawable.ic_tabbar_icons_messages);
-                        if (profileFragment == null) profileFragment = new ProfileFragment();
+                        if (profileFragment == null) profileFragment = new MVPProfileFragment();
                         showFragment(profileFragment);
                         break;
 

@@ -207,8 +207,8 @@ public class ProfileActivity extends AppCompatActivity implements SmartTabLayout
 
                             binding.setModel(viewModel);
 
-                            headerInfoFragment.setProfileListener(mActivity);
-                            headerStatsFragment.setProfileListener(mActivity);
+//                            headerInfoFragment.setProfileListener(mActivity);
+//                            headerStatsFragment.setProfileListener(mActivity);
 
                             updateInfo();
                             updateStats();
@@ -339,6 +339,7 @@ public class ProfileActivity extends AppCompatActivity implements SmartTabLayout
             public void onAvatarClick(View v) {
                 ArrayList<String> urls = new ArrayList<>();
                 urls.add(viewModel.getAvatar());
+
                 final solonsky.signal.twitter.overlays.ImageOverlay imageOverlay = new ImageOverlay(urls, mActivity, 0);
                 imageOverlay.setImageOverlayClickHandler(new ImageOverlay.ImageOverlayClickHandler() {
                     @Override
@@ -594,8 +595,8 @@ public class ProfileActivity extends AppCompatActivity implements SmartTabLayout
         headerInfoFragment = new HeaderInfoFragment();
         headerStatsFragment = new HeaderStatsFragment();
 
-        headerInfoFragment.setProfileListener(this);
-        headerStatsFragment.setProfileListener(this);
+//        headerInfoFragment.setProfileListener(this);
+//        headerStatsFragment.setProfileListener(this);
 
         fragments.add(headerInfoFragment);
         fragments.add(headerStatsFragment);
@@ -622,7 +623,6 @@ public class ProfileActivity extends AppCompatActivity implements SmartTabLayout
     }
 
     private void selectFragment(Fragment fragment) {
-        Log.e(TAG, "selected - " + fragment);
         try {
             FragmentManager fragmentManager = getSupportFragmentManager();
             FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

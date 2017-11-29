@@ -10,6 +10,10 @@ public class Flags {
     public static final int PENDING_REPLY = 1;
     public static final int PENDING_FOLLOW = 2;
 
+    public static final String PROFILE_DATA = "ProfileData";
+    public static final String PROFILE_ID = "ProfileId";
+    public static final String PROFILE_SCREEN_NAME = "ProfileScreenName";
+
     public enum Dialogs {
         HASH, USER, MEDIA, LINK
     }

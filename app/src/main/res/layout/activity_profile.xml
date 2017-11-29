@@ -61,6 +61,7 @@
                     android:orientation="vertical">
 
                     <TextView
+                        android:id="@+id/txt_profile_tb_username"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
@@ -71,6 +72,7 @@
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/txt_profile_tb_followers"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
@@ -90,6 +92,7 @@
                     android:layout_marginTop="24dp">
 
                     <ImageView
+                        android:id="@+id/btn_profile_back"
                         android:layout_width="@dimen/tb_icon_size"
                         android:layout_height="@dimen/tb_icon_size"
                         android:background="@drawable/white_ripple_background"
@@ -118,6 +121,7 @@
                         android:tint="@color/white" />
 
                     <ImageView
+                        android:id="@+id/btn_profile_settings"
                         android:layout_width="@dimen/tb_icon_size"
                         android:layout_height="@dimen/tb_icon_size"
                         android:background="@drawable/white_ripple_background"
@@ -292,7 +296,7 @@
         </RelativeLayout>
 
         <FrameLayout
-            android:id="@+id/profile_bottom_more"
+            android:id="@+id/fl_profile_more"
             android:layout_width="match_parent"
             android:layout_height="@dimen/profile_tail_gradient_height"
             android:layout_alignParentBottom="true"

@@ -15,10 +15,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fatboyindustrial.gsonjodatime.Converters;
-import com.github.rahatarmanahmed.cpv.CircularProgressView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
 
@@ -48,7 +48,7 @@ public class StatsLikesActivity extends AppCompatActivity {
     private StatusAdapter mAdapter;
     private ArrayList<StatusModel> mMentionsList;
     private RecyclerView mRvStats;
-    private CircularProgressView mLoader;
+    private AVLoadingIndicatorView mLoader;
     private boolean isLoading = false;
     private User user;
 
@@ -100,7 +100,7 @@ public class StatsLikesActivity extends AppCompatActivity {
                 }
             }
         });
-        mLoader = (CircularProgressView) findViewById(R.id.loader_stats);
+        mLoader = (AVLoadingIndicatorView) findViewById(R.id.loader_stats);
         mMentionsList = new ArrayList<>();
         mAdapter = new StatusAdapter(mMentionsList, this, true, true, new StatusAdapter.StatusClickListener() {
             @Override

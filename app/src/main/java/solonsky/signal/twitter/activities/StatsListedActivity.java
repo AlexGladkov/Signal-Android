@@ -13,8 +13,8 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.github.rahatarmanahmed.cpv.CircularProgressView;
 import com.squareup.picasso.Picasso;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
 
@@ -46,7 +46,7 @@ public class StatsListedActivity extends AppCompatActivity {
     private ArrayList<UserModel> userModels;
     private UserAdapter mAdapter;
     private StatsListedActivity mActivity;
-    private CircularProgressView mLoader;
+    private AVLoadingIndicatorView mLoader;
     private boolean isLoading = false;
 
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -98,7 +98,7 @@ public class StatsListedActivity extends AppCompatActivity {
             }
         });
 
-        mLoader = (CircularProgressView) findViewById(R.id.loader_stats);
+        mLoader = (AVLoadingIndicatorView) findViewById(R.id.loader_stats);
         userModels = new ArrayList<>();
         mAdapter = new UserAdapter(userModels, getApplicationContext(), this, new UserAdapter.UserClickHandler() {
             @Override

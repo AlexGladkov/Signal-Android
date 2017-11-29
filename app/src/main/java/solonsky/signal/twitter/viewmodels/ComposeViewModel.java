@@ -14,7 +14,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.github.rahatarmanahmed.cpv.CircularProgressView;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import solonsky.signal.twitter.adapters.ImageHorizontalAdapter;
 import solonsky.signal.twitter.adapters.SimpleHorizontalAdapter;
@@ -588,7 +588,7 @@ public class ComposeViewModel extends BaseObservable {
         @Override
         public void onSearchClick(final UserModel model, View v) {
             final ImageView imageView = (ImageView) v.findViewById(R.id.user_search_img);
-            final CircularProgressView cpvView = (CircularProgressView) v.findViewById(R.id.user_search_cpv);
+            final AVLoadingIndicatorView cpvView = (AVLoadingIndicatorView) v.findViewById(R.id.user_search_cpv);
             isChanged = false;
 
             cpvView.setVisibility(View.VISIBLE);

@@ -56,6 +56,7 @@ import solonsky.signal.twitter.helpers.FileWork;
 import solonsky.signal.twitter.helpers.Utilities;
 import solonsky.signal.twitter.interfaces.ProfileListener;
 import solonsky.signal.twitter.interfaces.ProfileRefreshHandler;
+import solonsky.signal.twitter.libs.DownloadFiles;
 import solonsky.signal.twitter.viewmodels.ProfileViewModel;
 
 import static android.view.View.inflate;
@@ -173,7 +174,7 @@ public class ProfileFragment extends Fragment implements SmartTabLayout.TabProvi
 
             @Override
             public void onAvatarClick(View v) {
-                ArrayList<String> urls = new ArrayList<>();
+                final ArrayList<String> urls = new ArrayList<>();
                 urls.add(viewModel.getAvatar());
 
                 View overlay = inflate(getContext(), R.layout.overlay_profile, null);
@@ -190,11 +191,18 @@ public class ProfileFragment extends Fragment implements SmartTabLayout.TabProvi
                         imageViewer.onDismiss();
                     }
                 });
+                overlay.findViewById(R.id.img_profile_content_save).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        DownloadFiles downloadFiles = new DownloadFiles(mActivity);
+                        downloadFiles.saveFile(urls.get(0), mActivity.getString(R.string.download_url));
+                    }
+                });
             }
 
             @Override
             public void onBackDropClick(View v) {
-                ArrayList<String> urls = new ArrayList<>();
+                final ArrayList<String> urls = new ArrayList<>();
                 urls.add(viewModel.getBackdrop());
 
                 View overlay = inflate(getContext(), R.layout.overlay_profile, null);
@@ -209,6 +217,13 @@ public class ProfileFragment extends Fragment implements SmartTabLayout.TabProvi
                     @Override
                     public void onClick(View v) {
                         imageViewer.onDismiss();
+                    }
+                });
+                overlay.findViewById(R.id.img_profile_content_save).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        DownloadFiles downloadFiles = new DownloadFiles(mActivity);
+                        downloadFiles.saveFile(urls.get(0), mActivity.getString(R.string.download_url));
                     }
                 });
             }
@@ -424,8 +439,8 @@ public class ProfileFragment extends Fragment implements SmartTabLayout.TabProvi
     private void setupHeaderPager() {
         ArrayList<Fragment> fragments = new ArrayList<>();
 
-        headerStatsFragment.setProfileListener(this);
-        headerInfoFragment.setProfileListener(this);
+//        headerStatsFragment.setProfileListener(this);
+//        headerInfoFragment.setProfileListener(this);
 
         fragments.add(headerStatsFragment);
         fragments.add(headerInfoFragment);

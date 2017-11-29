@@ -2,6 +2,8 @@ package solonsky.signal.twitter.models;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.view.View;
 
 import com.fatboyindustrial.gsonjodatime.Converters;
@@ -17,7 +19,8 @@ import solonsky.signal.twitter.BR;
  * Created by neura on 26.06.17.
  */
 
-public class User extends BaseObservable {
+public class User extends BaseObservable implements Parcelable {
+    public static final String TAG = User.class.getSimpleName();
 
     public interface UserClickHandler {
         void onItemClick(View v);
@@ -59,6 +62,61 @@ public class User extends BaseObservable {
     private boolean isVerified;
     private boolean profileBackgroundTiled;
 
+    public static final Creator<User> CREATOR = new Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel in) {
+            return new User(in);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeLong(id);
+        dest.writeLong(favouritesCount);
+        dest.writeLong(followersCount);
+        dest.writeLong(friendsCount);
+        dest.writeLong(listedCount);
+        dest.writeLong(statusesCount);
+
+        dest.writeString(createdAt);
+        dest.writeString(description);
+        dest.writeString(lang);
+        dest.writeString(location);
+        dest.writeString(name);
+        dest.writeString(screenName);
+        dest.writeString(url);
+
+        dest.writeString(biggerProfileImageURL);
+        dest.writeString(originalProfileImageURL);
+
+        dest.writeString(profileBackgroundImageUrl);
+        dest.writeString(profileBannerImageUrl);
+        dest.writeString(profileImageUrl);
+        dest.writeString(profileLinkColor);
+
+        dest.writeString(descriptionUrlEntities == null ? null : descriptionUrlEntities.toString());
+        dest.writeString(urlEntity == null ? null : urlEntity.toString());
+
+        dest.writeInt(isContributorsEnabled ? 1 : 0);
+        dest.writeInt(isDefaultProfile ? 1 : 0);
+        dest.writeInt(isDefaultProfileImage ? 1 : 0);
+        dest.writeInt(isFollowRequestSent ? 1 : 0);
+        dest.writeInt(isGeoEnabled ? 1 : 0);
+        dest.writeInt(hasProtected ? 1 : 0);
+        dest.writeInt(isVerified ? 1 : 0);
+        dest.writeInt(profileBackgroundTiled ? 1 : 0);
+    }
+
     public static User getFromUserInstance(twitter4j.User source) {
         Gson gson = Converters.registerLocalDateTime(new GsonBuilder()).create();
         User convertedUser = gson.fromJson(gson.toJsonTree(source), User.class);
@@ -66,6 +124,43 @@ public class User extends BaseObservable {
         convertedUser.setOriginalProfileImageURL(source.getOriginalProfileImageURL());
         convertedUser.setDescriptionUrlEntities(gson.toJsonTree(source.getDescriptionURLEntities()).getAsJsonArray());
         return convertedUser;
+    }
+
+    public User(Parcel parcel) {
+        this.id = parcel.readLong();
+        this.favouritesCount = parcel.readLong();
+        this.followersCount = parcel.readLong();
+        this.friendsCount = parcel.readLong();
+        this.listedCount = parcel.readLong();
+        this.statusesCount = parcel.readLong();
+
+        this.createdAt = parcel.readString();
+        this.description = parcel.readString();
+        this.lang = parcel.readString();
+        this.location = parcel.readString();
+        this.name = parcel.readString();
+        this.screenName = parcel.readString();
+        this.url = parcel.readString();
+
+        this.biggerProfileImageURL = parcel.readString();
+        this.originalProfileImageURL = parcel.readString();
+
+        this.profileBackgroundImageUrl = parcel.readString();
+        this.profileBannerImageUrl = parcel.readString();
+        this.profileImageUrl = parcel.readString();
+        this.profileLinkColor = parcel.readString();
+
+        this.descriptionUrlEntities = new Gson().fromJson(parcel.readString(), JsonArray.class);
+        this.urlEntity = new Gson().fromJson(parcel.readString(), JsonObject.class);
+
+        this.isContributorsEnabled = parcel.readInt() == 1;
+        this.isDefaultProfile = parcel.readInt() == 1;
+        this.isDefaultProfileImage = parcel.readInt() == 1;
+        this.isFollowRequestSent = parcel.readInt() == 1;
+        this.isGeoEnabled = parcel.readInt() == 1;
+        this.hasProtected = parcel.readInt() == 1;
+        this.isVerified = parcel.readInt() == 1;
+        this.profileBackgroundTiled = parcel.readInt() == 1;
     }
 
     public User(User user) {

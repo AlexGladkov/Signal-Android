@@ -62,7 +62,7 @@ public class UsersData {
     }
 
     public void init() {
-        if (usersList.size() == 0) {
+        if (usersList.size() == 0 && AppData.ME != null) {
             final Handler handler = new Handler();
             new Thread(new Runnable() {
                 @Override
@@ -71,7 +71,6 @@ public class UsersData {
                     }.getType();
                     Type followersType = new TypeToken<List<Long>>() {
                     }.getType();
-
                     Reservoir.getAsync(Cache.Followers + String.valueOf(AppData.ME.getId()), followersType,
                             new ReservoirGetCallback<List<Long>>() {
                                 @Override

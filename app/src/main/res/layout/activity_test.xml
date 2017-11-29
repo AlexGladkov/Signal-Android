@@ -74,14 +74,13 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1" />
 
-                    <com.github.rahatarmanahmed.cpv.CircularProgressView
+                    <com.wang.avi.AVLoadingIndicatorView
                         android:layout_width="@dimen/tb_icon_size"
                         android:layout_height="@dimen/tb_icon_size"
                         android:layout_gravity="center_vertical"
                         android:padding="16dp"
-                        app:cpv_indeterminate="true"
-                        app:cpv_animAutostart="true"
-                        app:cpv_color="?attr/backgroundSecondaryColor"/>
+                        app:indicatorName="BallScaleMultipleIndicator"
+                        app:indicatorColor="?attr/hintTextColor" />
 
                     <ImageView
                         android:id="@+id/img_detail_arrow"

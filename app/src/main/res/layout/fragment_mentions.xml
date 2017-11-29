@@ -39,15 +39,13 @@
                 android:visibility="@{mentions.state == appData.UI_STATE_NO_ITEMS ? v.VISIBLE : v.GONE}"
                 android:text="@string/mentions_no_items" />
 
-            <com.github.rahatarmanahmed.cpv.CircularProgressView
-                android:id="@+id/cpv_mentions"
-                android:layout_width="@dimen/loader_size"
-                android:layout_height="@dimen/loader_size"
-                android:visibility="@{mentions.state == appData.UI_STATE_LOADING ? v.VISIBLE : v.GONE}"
+            <com.wang.avi.AVLoadingIndicatorView
+                android:id="@+id/avl_mentions"
+                android:layout_width="@dimen/new_loader_size"
+                android:layout_height="@dimen/new_loader_size"
                 android:layout_centerInParent="true"
-                app:cpv_animAutostart="true"
-                app:cpv_indeterminate="true"
-                app:cpv_color="?attr/hintTextColor" />
+                app:indicatorName="BallScaleMultipleIndicator"
+                app:indicatorColor="?attr/hintTextColor" />
 
         </RelativeLayout>
 

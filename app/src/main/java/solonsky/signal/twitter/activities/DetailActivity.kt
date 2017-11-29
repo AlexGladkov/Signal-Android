@@ -159,7 +159,8 @@ class DetailActivity : AppCompatActivity(), SmartTabLayout.TabProvider {
 
     private var isShadow = false
 
-    val statusClickListener: StatusAdapter.StatusClickListener = StatusAdapter.StatusClickListener { searchText, v -> Log.e(TAG, "Search start - " + searchText) }
+    val statusClickListener: StatusAdapter.StatusClickListener = StatusAdapter.StatusClickListener {
+        searchText, v -> Log.e(TAG, "Search start - " + searchText) }
 
     internal var tabY = 100000
     internal var isChange = false

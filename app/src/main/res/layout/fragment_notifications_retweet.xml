@@ -36,14 +36,13 @@
             android:visibility="@{model.state == appData.UI_STATE_VISIBLE ? v.VISIBLE : v.GONE}"
             app:listConfig="@{model.listConfig}" />
 
-        <com.github.rahatarmanahmed.cpv.CircularProgressView
+        <com.wang.avi.AVLoadingIndicatorView
             android:layout_width="@dimen/loader_size"
             android:layout_height="@dimen/loader_size"
             android:layout_gravity="center"
             android:visibility="@{model.state == appData.UI_STATE_LOADING ? v.VISIBLE : v.GONE}"
-            app:cpv_animAutostart="true"
-            app:cpv_color="?attr/hintTextColor"
-            app:cpv_indeterminate="true" />
+            app:indicatorName="BallScaleMultipleIndicator"
+            app:indicatorColor="?attr/hintTextColor" />
 
 
         <TextView

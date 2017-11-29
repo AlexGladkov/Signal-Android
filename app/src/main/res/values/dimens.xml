@@ -107,4 +107,5 @@
     <dimen name="switcher_busy_size">24dp</dimen>
     <dimen name="direct_counter">24dp</dimen>
     <dimen name="little_star_size">24dp</dimen>
+    <dimen name="new_loader_size">60dp</dimen>
 </resources>

@@ -15,10 +15,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fatboyindustrial.gsonjodatime.Converters;
-import com.github.rahatarmanahmed.cpv.CircularProgressView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.squareup.picasso.Picasso;
+import com.wang.avi.AVLoadingIndicatorView;
 
 import java.util.ArrayList;
 
@@ -51,7 +51,7 @@ public class StatsImagesActivity extends AppCompatActivity {
     private MediaStaggeredAdapter mAdapter;
     private ArrayList<ImageModel> mImagesList;
     private RecyclerView mRvStats;
-    private CircularProgressView mLoader;
+    private AVLoadingIndicatorView mLoader;
     private boolean isLoading = false;
     private long maxId = -1;
     private User user;
@@ -104,7 +104,7 @@ public class StatsImagesActivity extends AppCompatActivity {
                 }
             }
         });
-        mLoader = (CircularProgressView) findViewById(R.id.loader_stats);
+        mLoader = (AVLoadingIndicatorView) findViewById(R.id.loader_stats);
         mImagesList = new ArrayList<>();
         mAdapter = new MediaStaggeredAdapter(mImagesList, StatsImagesActivity.this,
                 new MediaStaggeredAdapter.ImageStaggeredListener() {
