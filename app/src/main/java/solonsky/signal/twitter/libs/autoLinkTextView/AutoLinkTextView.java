@@ -6,6 +6,7 @@ import android.support.annotation.ColorInt;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -125,10 +126,6 @@ public class AutoLinkTextView extends TextView {
             Pattern pattern = Pattern.compile(regex);
             Matcher matcher = pattern.matcher(text);
 
-//            if (anAutoLinkMode.equals(AutoLinkMode.MODE_CUSTOM)) {
-//                Log.e(TAG, "regex - " + regex);
-//            }
-
             if (anAutoLinkMode == AutoLinkMode.MODE_PHONE) {
                 while (matcher.find()) {
                     if (matcher.group().length() > MIN_PHONE_NUMBER_LENGTH)
@@ -141,14 +138,13 @@ public class AutoLinkTextView extends TextView {
             } else if (anAutoLinkMode == AutoLinkMode.MODE_SHORT) {
                 if (shortUrls != null) {
                     for (String match : shortUrls) {
-                        pattern = Pattern.compile(match);
-                        matcher = pattern.matcher(text);
-                        while (matcher.find()) {
+                        if (text.contains(match)) {
                             autoLinkItems.add(new AutoLinkItem(
-                                    matcher.start(),
-                                    matcher.end(),
-                                    matcher.group(),
-                                    anAutoLinkMode));
+                                    text.indexOf(match),
+                                    text.indexOf(match) + match.length(),
+                                    match,
+                                    anAutoLinkMode
+                            ));
                         }
                     }
                 }

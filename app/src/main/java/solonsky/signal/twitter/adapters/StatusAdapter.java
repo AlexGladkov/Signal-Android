@@ -383,9 +383,18 @@ public class StatusAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     AutoLinkMode.MODE_SHORT
             );
 
-            String[] urls = new String[statusModel.getUrlEntities().size()];
-            for (int i = 0; i < statusModel.getUrlEntities().size(); i++) {
-                urls[i] = ((JsonObject) statusModel.getUrlEntities().get(0)).get("displayURL").getAsString();
+            String[] urls;
+
+            if (isRetweet) {
+                urls = new String[statusModel.getRetweetedStatus().getUrlEntities().size()];
+                for (int i = 0; i < statusModel.getRetweetedStatus().getUrlEntities().size(); i++) {
+                    urls[i] = ((JsonObject) statusModel.getRetweetedStatus().getUrlEntities().get(i)).get("displayURL").getAsString();
+                }
+            } else {
+                urls = new String[statusModel.getUrlEntities().size()];
+                for (int i = 0; i < statusModel.getUrlEntities().size(); i++) {
+                    urls[i] = ((JsonObject) statusModel.getUrlEntities().get(i)).get("displayURL").getAsString();
+                }
             }
 
             holder.mBinding.statusTxtText.setShortUrls(urls);
@@ -414,9 +423,17 @@ public class StatusAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         mActivity.startActivity(profileIntent);
                         mActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     } else if (autoLinkMode.equals(AutoLinkMode.MODE_SHORT)) {
-                        for (JsonElement jsonElement : statusModel.getUrlEntities()) {
-                            if (jsonElement.getAsJsonObject().get("displayURL").getAsString().equals(matchedText)) {
-                                Utilities.openLink(jsonElement.getAsJsonObject().get("expandedURL").getAsString(), mActivity);
+                        if (isRetweet) {
+                            for (JsonElement jsonElement : statusModel.getRetweetedStatus().getUrlEntities()) {
+                                if (jsonElement.getAsJsonObject().get("displayURL").getAsString().equals(matchedText)) {
+                                    Utilities.openLink(jsonElement.getAsJsonObject().get("expandedURL").getAsString(), mActivity);
+                                }
+                            }
+                        } else {
+                            for (JsonElement jsonElement : statusModel.getUrlEntities()) {
+                                if (jsonElement.getAsJsonObject().get("displayURL").getAsString().equals(matchedText)) {
+                                    Utilities.openLink(jsonElement.getAsJsonObject().get("expandedURL").getAsString(), mActivity);
+                                }
                             }
                         }
                     } else {

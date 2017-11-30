@@ -228,7 +228,6 @@ public class StatusModel extends BaseObservable {
         setRetweet(status.isRetweet());
         setRetweetedByMe(status.isRetweetedByMe());
         setUser(User.getFromUserInstance(status.getUser()));
-        Log.e(TAG, "geo - " + geoLocation);
         parseYoutube();
 
         if (status.getQuotedStatus() != null) {

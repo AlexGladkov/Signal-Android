@@ -36,7 +36,6 @@ class ProfileTweetsFragment : Fragment() {
     private val tweetsArray = ArrayList<StatusModel>()
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        Log.e(TAG, "tweets size ${tweetsArray.size}")
         binding = DataBindingUtil.inflate(inflater!!, R.layout.fragment_profile_tweets, container, false)
         mAdapter = StatusAdapter(tweetsArray, activity as AppCompatActivity, true,
                 true, StatusAdapter.StatusClickListener { searchText, v ->
@@ -56,19 +55,18 @@ class ProfileTweetsFragment : Fragment() {
             AppData.UI_STATE_VISIBLE
         binding.model = viewModel
 
-//        ProfileDataApi.getInstance().tweetHandler = UpdateHandler {
-//            viewModel!!.state = if (ProfileDataApi.getInstance().tweets.size == 0)
-//                AppData.UI_STATE_NO_ITEMS
-//            else
-//                AppData.UI_STATE_VISIBLE
-//        }
-
         return binding.root
     }
 
     fun setupTweets(newTweetsArray: ArrayList<StatusModel>) {
         tweetsArray.addAll(newTweetsArray)
         mAdapter.notifyDataSetChanged()
+
+        if (newTweetsArray.size > 0) {
+            Log.e(TAG, "text ${newTweetsArray[0].retweetedStatus.text}")
+            Log.e(TAG, "url size ${newTweetsArray[0].retweetedStatus.urlEntities.size()}")
+            Log.e(TAG, "url entity ${newTweetsArray[0].retweetedStatus.urlEntities[0]}")
+        }
 
         viewModel.state = if (tweetsArray.size == 0)
             AppData.UI_STATE_NO_ITEMS
