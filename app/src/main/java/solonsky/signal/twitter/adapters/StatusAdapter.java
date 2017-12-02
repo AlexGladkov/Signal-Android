@@ -687,6 +687,7 @@ public class StatusAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     Intent profileIntent = new Intent(mContext, MVPProfileActivity.class);
                     profileIntent.putExtra(Flags.PROFILE_DATA, user);
                     mActivity.startActivity(profileIntent);
+                    mActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 }
 
                 @Override

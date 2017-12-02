@@ -3,6 +3,7 @@ package solonsky.signal.twitter.presenters
 import android.content.Intent
 import android.support.v4.app.Fragment
 import android.support.v4.app.FragmentManager
+import android.text.TextUtils
 import android.util.Log
 import android.view.View
 import com.arellomobile.mvp.InjectViewState
@@ -33,7 +34,7 @@ class ProfilePresenter : MvpPresenter<ProfileView>() {
     fun getUser(user: User) {
         val provider = ProfileProvider(presenter = this)
         setupUser(user = user)
-        provider.loadTweets(id = user.id)
+        provider.loadMedia(id = user.id, screenName = "")
         provider.loadFavorites(id = user.id)
     }
 
@@ -45,18 +46,18 @@ class ProfilePresenter : MvpPresenter<ProfileView>() {
             intent.extras.get(Flags.PROFILE_DATA) != null -> {
                 val extrasUser = intent.extras.get(Flags.PROFILE_DATA) as User
                 setupUser(user = extrasUser)
-                provider.loadTweets(id = extrasUser.id)
+                provider.loadMedia(id = extrasUser.id, screenName = "")
                 provider.loadFavorites(id = extrasUser.id)
             }
             intent.extras.get(Flags.PROFILE_ID) != null -> {
                 provider.loadUser(id = intent.extras.get(Flags.PROFILE_ID) as Long)
-                provider.loadTweets(id = intent.extras.get(Flags.PROFILE_ID) as Long)
+                provider.loadMedia(id = intent.extras.get(Flags.PROFILE_ID) as Long, screenName = "")
                 provider.loadFavorites(id = intent.extras.get(Flags.PROFILE_ID) as Long)
             }
             intent.extras.get(Flags.PROFILE_SCREEN_NAME) != null -> {
                 val screenName = (intent.extras.get(Flags.PROFILE_SCREEN_NAME) as String).replace("@", "")
                 provider.loadUser(screenName = screenName)
-                provider.loadTweets(screenName = screenName)
+                provider.loadMedia(id = Long.MIN_VALUE, screenName = screenName)
                 provider.loadFavorites(screenName = screenName)
             }
             else -> performError()

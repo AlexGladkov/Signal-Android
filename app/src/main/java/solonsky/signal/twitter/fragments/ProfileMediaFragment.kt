@@ -35,11 +35,12 @@ import solonsky.signal.twitter.viewmodels.ProfileMediaViewModel
 class ProfileMediaFragment : Fragment() {
     private val TAG = ProfileMediaFragment::class.java.simpleName
     private var mediaArray = ArrayList<ImageModel>()
+    private var imageAdapter: MediaStaggeredAdapter? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.e(TAG, "mediaArray ${mediaArray.size}")
         val binding = DataBindingUtil.inflate<FragmentProfileMediaBinding>(inflater!!, R.layout.fragment_profile_media, container, false)
-        val imageAdapter = MediaStaggeredAdapter(mediaArray,
+        imageAdapter = MediaStaggeredAdapter(mediaArray,
                 activity as AppCompatActivity, MediaStaggeredAdapter.ImageStaggeredListener { imageModel, _ ->
 
             Log.e(TAG, "image clicked ${imageModel.imageUrl}")
@@ -86,5 +87,6 @@ class ProfileMediaFragment : Fragment() {
     fun setupMedia(mediaArray: ArrayList<ImageModel>) {
         this.mediaArray.clear()
         this.mediaArray.addAll(mediaArray)
+        imageAdapter?.notifyDataSetChanged()
     }
 }

@@ -158,13 +158,13 @@
                                     android:visibility="@{model.reply ? v.GONE : model.followed ? v.GONE : v.VISIBLE}" />
 
                                 <com.wang.avi.AVLoadingIndicatorView
-                                    android:layout_width="@dimen/new_loader_size"
-                                    android:layout_height="@dimen/new_loader_size"
+                                    android:layout_width="@dimen/small_loader_size"
+                                    android:layout_height="@dimen/small_loader_size"
                                     android:layout_gravity="center_vertical"
                                     android:padding="16dp"
                                     android:visibility="@{!model.reply ? v.GONE : model.loaded ? v.GONE : v.VISIBLE}"
                                     app:indicatorName="BallScaleMultipleIndicator"
-                                    app:indicatorColor="?attr/hintTextColor" />
+                                    app:indicatorColor="@color/loaderColor" />
 
                                 <ImageView
                                     android:id="@+id/img_detail_arrow"

@@ -269,6 +269,7 @@ class StatusViewHolder(itemView: View, screenWidth: Int) : RecyclerView.ViewHold
                 R.color.light_background_color
 
         mView.mvp_status_ll_main.setBackgroundColor(itemView.resources.getColor(colorInt))
+        mView.mvp_status_view_surface.setBackgroundColor(itemView.resources.getColor(colorInt))
 
         /* Set RT margin Top */
         var params = mView.mvp_status_ll_retweet.layoutParams as LinearLayout.LayoutParams
@@ -688,10 +689,14 @@ class StatusViewHolder(itemView: View, screenWidth: Int) : RecyclerView.ViewHold
         else
             R.color.light_background_secondary_color
 
-        if (isExpand)
+        if (isExpand) {
             animator.changeColor(colorInt, expandColor, 150, mView.mvp_status_ll_main)
-        else
+            animator.changeColor(colorInt, expandColor, 150, mView.mvp_status_view_surface)
+        } else {
             animator.changeColor(expandColor, colorInt, 150, mView.mvp_status_ll_main)
+            animator.changeColor(expandColor, colorInt, 150, mView.mvp_status_view_surface)
+        }
+
 
         if (isExpand) {
             mView.mvp_status_ll_bottom.visibility = View.VISIBLE

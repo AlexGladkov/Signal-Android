@@ -21,6 +21,7 @@ import android.widget.RelativeLayout
 import android.widget.Toast
 
 import com.twitter.Autolink
+import org.w3c.dom.Text
 
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.activities.MVPProfileActivity
@@ -83,6 +84,12 @@ class HeaderInfoFragment : Fragment() {
                             it.asJsonObject.get("url").asString,
                             it.asJsonObject.get("expandedURL").asString)
                 })
+            }
+
+            if (TextUtils.isEmpty(realDescription)) {
+                realDescription = getString(R.string.no_bio)
+                binding.txtProfileInfoBio.setTypeface(binding.txtProfileInfoBio.typeface, Typeface.ITALIC)
+                binding.txtProfileInfoBio.setTextColor(resources.getColor(R.color.dark_hint_text_color))
             }
 
             val link = user.urlEntity?.get("displayURL")?.asString
@@ -185,21 +192,21 @@ class HeaderInfoFragment : Fragment() {
      * @param location - user's location
      */
     fun setViewModel(bio: String?, link: String, location: String) {
-        viewModel = ProfileInfoViewModel(bio, link, location)
-        if (bio != null) {
-            if (TextUtils.isEmpty(bio)) {
-                binding.txtProfileInfoBio.setAutoLinkText("No Bio")
-                binding.txtProfileInfoBio.setTypeface(binding.txtProfileInfoBio.typeface, Typeface.ITALIC)
-                binding.txtProfileInfoBio.setTextColor(resources.getColor(R.color.dark_hint_text_color))
-
-            } else {
-                binding.txtProfileInfoBio.setAutoLinkText(bio)
-            }
-        }
-        binding.model = viewModel
-
-        measureHeight()
-        changeProfileHeight(false)
+//        viewModel = ProfileInfoViewModel(bio, link, location)
+//        if (bio != null) {
+//            if (TextUtils.isEmpty(bio)) {
+//                binding.txtProfileInfoBio.setAutoLinkText("No Bio")
+//                binding.txtProfileInfoBio.setTypeface(binding.txtProfileInfoBio.typeface, Typeface.ITALIC)
+//                binding.txtProfileInfoBio.setTextColor(resources.getColor(R.color.dark_hint_text_color))
+//
+//            } else {
+//                binding.txtProfileInfoBio.setAutoLinkText(bio)
+//            }
+//        }
+//        binding.model = viewModel
+//
+//        measureHeight()
+//        changeProfileHeight(false)
     }
 
     /**
@@ -215,7 +222,6 @@ class HeaderInfoFragment : Fragment() {
         } catch (e: Exception) {
             Log.e(TAG, "exception - " + e.localizedMessage)
         }
-
     }
 
     fun setProfileListener(profileListener: ProfileView) {

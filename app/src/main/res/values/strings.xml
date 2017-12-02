@@ -391,6 +391,7 @@
     <string name="error_loading_user">Error loading user</string>
     <string name="follows_you">follows you</string>
     <string name="not_follow">does not follow you</string>
+    <string name="no_bio">No bio</string>
 
 
 </resources>

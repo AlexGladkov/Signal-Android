@@ -62,12 +62,6 @@ class ProfileTweetsFragment : Fragment() {
         tweetsArray.addAll(newTweetsArray)
         mAdapter.notifyDataSetChanged()
 
-        if (newTweetsArray.size > 0) {
-            Log.e(TAG, "text ${newTweetsArray[0].retweetedStatus.text}")
-            Log.e(TAG, "url size ${newTweetsArray[0].retweetedStatus.urlEntities.size()}")
-            Log.e(TAG, "url entity ${newTweetsArray[0].retweetedStatus.urlEntities[0]}")
-        }
-
         viewModel.state = if (tweetsArray.size == 0)
             AppData.UI_STATE_NO_ITEMS
         else

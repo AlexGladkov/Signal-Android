@@ -4,6 +4,7 @@
     <color name="about_gradient_end">#7A8A99</color>
     <color name="white">#FFFFFF</color>
     <color name="black">#000000</color>
+    <color name="loaderColor">#807A8A99</color>
 
     <!-- Theme resources -->
     <!-- Other -->

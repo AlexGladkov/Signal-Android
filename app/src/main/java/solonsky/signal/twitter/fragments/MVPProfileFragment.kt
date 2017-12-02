@@ -10,6 +10,7 @@ import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v4.widget.NestedScrollView
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -45,6 +46,7 @@ import java.util.*
  * Created by sunwi on 28.11.2017.
  */
 class MVPProfileFragment: MvpAppCompatFragment(), SmartTabLayout.TabProvider, ProfileView {
+    private val TAG: String = MVPProfileFragment::class.java.simpleName
 
     @InjectPresenter
     lateinit var mProfilePresenter: ProfilePresenter
@@ -96,8 +98,8 @@ class MVPProfileFragment: MvpAppCompatFragment(), SmartTabLayout.TabProvider, Pr
 
     private fun setupHeaderPager() {
         val fragments = ArrayList<Fragment>()
-        headerInfoFragment.setProfileListener(this)
         headerStatsFragment.setProfileListener(this)
+//        headerInfoFragment.setProfileListener(this)
 
         fragments.add(headerStatsFragment)
         fragments.add(headerInfoFragment)
@@ -108,6 +110,9 @@ class MVPProfileFragment: MvpAppCompatFragment(), SmartTabLayout.TabProvider, Pr
         stb_profile_header.setOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
+                headerStatsFragment.setProfileListener(this@MVPProfileFragment)
+                headerInfoFragment.setProfileListener(this@MVPProfileFragment)
+
                 when (position) {
                     1 -> headerInfoFragment.changeProfileHeight(true)
                     0 -> headerStatsFragment.changeProfileHeight(true)
@@ -310,6 +315,7 @@ class MVPProfileFragment: MvpAppCompatFragment(), SmartTabLayout.TabProvider, Pr
     }
 
     override fun updateHeader(diff: Int, isAnimated: Boolean) {
+        Log.e(TAG, "update header ${diff}")
         difference = if (diff == 0) difference else diff
 
         val paramsFader = rl_header_fader.layoutParams as RelativeLayout.LayoutParams

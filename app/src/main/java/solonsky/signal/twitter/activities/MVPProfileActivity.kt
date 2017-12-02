@@ -419,14 +419,21 @@ class MVPProfileActivity : MvpAppCompatActivity(), SmartTabLayout.TabProvider, P
                 .load(user.originalProfileImageURL)
                 .into(img_profile_avatar_image)
 
+        val screenWidth = Utilities.getScreenWidth(this@MVPProfileActivity)
+        val bannerHeight = Utilities.convertDpToPixel(186f, this@MVPProfileActivity)
+
         Picasso.with(applicationContext)
                 .load(user.profileBannerImageUrl)
+                .resize(screenWidth, bannerHeight.toInt())
+                .centerCrop()
                 .into(img_profile_test_header)
 
         txt_profile_username.text = user.name
         txt_profile_tb_username.text = user.name
         txt_profile_screen_name.text = "@${user.screenName}"
         txt_profile_tb_followers.text = Utilities.parseFollowers(user.followersCount, "followers")
+
+        img_profile_verified.visibility = if (user.isVerified) View.VISIBLE else View.GONE
 
         if (homeUser) {
             btn_profile_back.visibility = View.GONE

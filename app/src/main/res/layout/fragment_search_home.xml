@@ -24,13 +24,13 @@
             android:visibility="@{model.state == appData.UI_STATE_VISIBLE ? v.VISIBLE : v.GONE}" />
 
         <com.wang.avi.AVLoadingIndicatorView
-            android:layout_width="@dimen/new_loader_size"
-            android:layout_height="@dimen/new_loader_size"
+            android:layout_width="@dimen/big_loader_size"
+            android:layout_height="@dimen/big_loader_size"
             android:layout_centerInParent="true"
             android:layout_marginTop="48dp"
             android:visibility="@{model.state == appData.UI_STATE_LOADING ? v.VISIBLE : v.GONE}"
             app:indicatorName="BallScaleMultipleIndicator"
-            app:indicatorColor="?attr/hintTextColor" />
+            app:indicatorColor="@color/loaderColor" />
         
         <TextView
             android:layout_width="wrap_content"

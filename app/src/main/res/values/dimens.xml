@@ -108,4 +108,6 @@
     <dimen name="direct_counter">24dp</dimen>
     <dimen name="little_star_size">24dp</dimen>
     <dimen name="new_loader_size">60dp</dimen>
+    <dimen name="small_loader_size">30dp</dimen>
+    <dimen name="big_loader_size">36dp</dimen>
 </resources>
