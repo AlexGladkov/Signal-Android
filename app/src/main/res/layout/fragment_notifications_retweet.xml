@@ -40,6 +40,7 @@
             android:layout_width="@dimen/loader_size"
             android:layout_height="@dimen/loader_size"
             android:layout_gravity="center"
+            android:alpha="0.5"
             android:visibility="@{model.state == appData.UI_STATE_LOADING ? v.VISIBLE : v.GONE}"
             app:indicatorName="BallScaleMultipleIndicator"
             app:indicatorColor="?attr/hintTextColor" />

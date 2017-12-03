@@ -32,6 +32,7 @@ class ProfileLikesFragment : Fragment() {
     private var mAdapter: StatusAdapter? = null
     private var likesArray = ArrayList<StatusModel>()
     private lateinit var binding: FragmentProfileLikesBinding
+    private var viewModel: ProfileLikesViewModel? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         Log.e(TAG, "likes array ${likesArray.size}")
@@ -48,11 +49,12 @@ class ProfileLikesFragment : Fragment() {
             mAdapter!!.notifyItemRemoved(position)
         })
 
-        val viewModel = ProfileLikesViewModel(mAdapter, context)
-        viewModel.state = if (likesArray.size == 0)
-            AppData.UI_STATE_NO_ITEMS
+        viewModel = ProfileLikesViewModel(mAdapter, context)
+        viewModel!!.state = if (likesArray.size == 0)
+            AppData.UI_STATE_LOADING
         else
             AppData.UI_STATE_VISIBLE
+
         binding.model = viewModel
 
         return binding.root
@@ -61,5 +63,12 @@ class ProfileLikesFragment : Fragment() {
     fun setupLikes(likesArray: ArrayList<StatusModel>) {
         this.likesArray.clear()
         this.likesArray.addAll(likesArray)
+
+        mAdapter?.notifyDataSetChanged()
+
+        viewModel?.state = if (likesArray.size == 0)
+            AppData.UI_STATE_NO_ITEMS
+        else
+            AppData.UI_STATE_VISIBLE
     }
 }

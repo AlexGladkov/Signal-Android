@@ -36,14 +36,13 @@ class ProfileMediaFragment : Fragment() {
     private val TAG = ProfileMediaFragment::class.java.simpleName
     private var mediaArray = ArrayList<ImageModel>()
     private var imageAdapter: MediaStaggeredAdapter? = null
+    private var viewModel: ProfileMediaViewModel? = null
 
     override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        Log.e(TAG, "mediaArray ${mediaArray.size}")
         val binding = DataBindingUtil.inflate<FragmentProfileMediaBinding>(inflater!!, R.layout.fragment_profile_media, container, false)
         imageAdapter = MediaStaggeredAdapter(mediaArray,
                 activity as AppCompatActivity, MediaStaggeredAdapter.ImageStaggeredListener { imageModel, _ ->
 
-            Log.e(TAG, "image clicked ${imageModel.imageUrl}")
             val urls = mediaArray
                     .asSequence()
                     .filter { it.imageUrl != null }
@@ -62,7 +61,7 @@ class ProfileMediaFragment : Fragment() {
             })
         })
 
-        val viewModel = ProfileMediaViewModel(context)
+        viewModel = ProfileMediaViewModel(context)
         binding.model = viewModel
 
         val manager = GridLayoutManager(context, 2, GridLayoutManager.VERTICAL, false)
@@ -77,8 +76,8 @@ class ProfileMediaFragment : Fragment() {
         binding.recyclerProfileMedia.adapter = imageAdapter
         binding.recyclerProfileMedia.addItemDecoration(ListConfig.SpacesItemDecoration(Utilities.convertDpToPixel(2f, context).toInt()))
 
-        viewModel.state = if (mediaArray.size == 0)
-            AppData.UI_STATE_NO_ITEMS
+        viewModel!!.state = if (mediaArray.size == 0)
+            AppData.UI_STATE_LOADING
         else
             AppData.UI_STATE_VISIBLE
         return binding.root
@@ -88,5 +87,10 @@ class ProfileMediaFragment : Fragment() {
         this.mediaArray.clear()
         this.mediaArray.addAll(mediaArray)
         imageAdapter?.notifyDataSetChanged()
+
+        viewModel?.state = if (mediaArray.size == 0)
+            AppData.UI_STATE_NO_ITEMS
+        else
+            AppData.UI_STATE_VISIBLE
     }
 }

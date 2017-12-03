@@ -89,6 +89,7 @@
         android:id="@+id/loader_stats"
         android:layout_width="@dimen/big_loader_size"
         android:layout_height="@dimen/big_loader_size"
+        android:alpha="0.5"
         android:layout_centerInParent="true"
         app:indicatorName="BallScaleMultipleIndicator"
         app:indicatorColor="@color/loaderColor" />

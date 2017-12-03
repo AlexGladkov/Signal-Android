@@ -162,6 +162,7 @@
                                     android:layout_height="@dimen/small_loader_size"
                                     android:layout_gravity="center_vertical"
                                     android:padding="16dp"
+                                    android:alpha="0.5"
                                     android:visibility="@{!model.reply ? v.GONE : model.loaded ? v.GONE : v.VISIBLE}"
                                     app:indicatorName="BallScaleMultipleIndicator"
                                     app:indicatorColor="@color/loaderColor" />

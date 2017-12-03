@@ -79,6 +79,7 @@
                         android:layout_height="@dimen/tb_icon_size"
                         android:layout_gravity="center_vertical"
                         android:padding="16dp"
+                        android:alpha="0.5"
                         app:indicatorName="BallScaleMultipleIndicator"
                         app:indicatorColor="?attr/hintTextColor" />
 

@@ -268,8 +268,16 @@ class StatusViewHolder(itemView: View, screenWidth: Int) : RecyclerView.ViewHold
             else
                 R.color.light_background_color
 
+        val surface = if (!isHighlighted) {
+            if (isNight)
+                R.drawable.dark_status_swipe_background else R.drawable.light_status_swipe_background
+        } else {
+            if (isNight)
+                R.drawable.dark_highlight_swipe_background else R.drawable.light_highlight_swipe_background
+        }
+
         mView.mvp_status_ll_main.setBackgroundColor(itemView.resources.getColor(colorInt))
-        mView.mvp_status_view_surface.setBackgroundColor(itemView.resources.getColor(colorInt))
+        mView.mvp_status_view_surface.background = itemView.resources.getDrawable(surface)
 
         /* Set RT margin Top */
         var params = mView.mvp_status_ll_retweet.layoutParams as LinearLayout.LayoutParams
@@ -534,7 +542,7 @@ class StatusViewHolder(itemView: View, screenWidth: Int) : RecyclerView.ViewHold
 
     override fun openImages(urls: ArrayList<String>, startPosition: Int) {
         val imageActionsOverlay = ImageActionsOverlay(mActivity?.get(), urls, mStatus, startPosition)
-        val imageActionsOverlayClickHandler = object: ImageActionsOverlay.ImageActionsOverlayClickHandler {
+        val imageActionsOverlayClickHandler = object : ImageActionsOverlay.ImageActionsOverlayClickHandler {
             override fun onBackClick(v: View?) {
                 imageActionsOverlay.imageViewer.onDismiss()
             }
@@ -607,7 +615,7 @@ class StatusViewHolder(itemView: View, screenWidth: Int) : RecyclerView.ViewHold
         mView.mvp_status_recycler_big_media.layoutParams = params
 
         val imageStaggeredAdapter = ImageStaggeredAdapter(imageModels,
-                itemView.context, ImageStaggeredAdapter.ImageStaggeredListener {imageModel, _ ->
+                itemView.context, ImageStaggeredAdapter.ImageStaggeredListener { imageModel, _ ->
             when (imageModel.mediaType) {
                 Flags.MEDIA_TYPE.YOUTUBE -> openYoutube(imageModel.previewUrl)
                 else -> mStatus?.let { mStatusPresenter.performMediaClick(it, imageModels.indexOf(imageModel)) }
@@ -615,7 +623,7 @@ class StatusViewHolder(itemView: View, screenWidth: Int) : RecyclerView.ViewHold
         }, width)
 
         val manager = GridLayoutManager(itemView.context, 2, GridLayoutManager.VERTICAL, false)
-        manager.spanSizeLookup = object: GridLayoutManager.SpanSizeLookup() {
+        manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
             override fun getSpanSize(position: Int): Int =
                     if (position == 0) if (imageModels.size % 2 == 0) 1 else 2 else 1
         }
@@ -684,31 +692,39 @@ class StatusViewHolder(itemView: View, screenWidth: Int) : RecyclerView.ViewHold
             else
                 R.color.light_background_color
 
+        var colorSurface =
+                if (isHighlighted)
+                    if (isNight) R.drawable.dark_highlight_swipe_background
+                    else R.drawable.light_highlight_swipe_background
+                else
+                    if (isNight) R.drawable.dark_status_swipe_background
+                    else R.drawable.light_status_swipe_background
+
         val expandColor = if (isNight)
             R.color.dark_background_secondary_color
         else
             R.color.light_background_secondary_color
 
+        val expandSurface = if (isNight)
+            R.drawable.dark_expand_swipe_background
+        else
+            R.drawable.light_expand_swipe_background
+
+
         if (isExpand) {
             animator.changeColor(colorInt, expandColor, 150, mView.mvp_status_ll_main)
-            animator.changeColor(colorInt, expandColor, 150, mView.mvp_status_view_surface)
-        } else {
-            animator.changeColor(expandColor, colorInt, 150, mView.mvp_status_ll_main)
-            animator.changeColor(expandColor, colorInt, 150, mView.mvp_status_view_surface)
-        }
-
-
-        if (isExpand) {
+            mView.mvp_status_view_surface.background = itemView.resources.getDrawable(expandSurface)
             mView.mvp_status_ll_bottom.visibility = View.VISIBLE
             animator.changeHeight(0, Utilities.convertDpToPixel(bottomSize.toFloat(), itemView.context).toInt(),
                     expandDuration, mView.mvp_status_ll_bottom)
             mView.mvp_status_ll_bottom.animate().alpha(1f).setDuration(alphaDuration.toLong()).start()
         } else {
+            animator.changeColor(expandColor, colorInt, 150, mView.mvp_status_ll_main)
+            mView.mvp_status_view_surface.background = itemView.resources.getDrawable(colorSurface)
             mView.mvp_status_ll_bottom.animate().alpha(0f).setDuration(alphaDuration.toLong()).start()
             animator.changeHeight(Utilities.convertDpToPixel(bottomSize.toFloat(), itemView.context).toInt(), 0,
                     expandDuration, mView.mvp_status_ll_bottom)
         }
-
     }
 
     override fun changeLike(isLike: Boolean) {

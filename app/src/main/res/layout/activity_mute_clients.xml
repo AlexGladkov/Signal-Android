@@ -63,6 +63,7 @@
             android:layout_width="@dimen/big_loader_size"
             android:layout_height="@dimen/big_loader_size"
             android:layout_gravity="center"
+            android:alpha="0.5"
             app:indicatorName="BallScaleMultipleIndicator"
             app:indicatorColor="@color/loaderColor" />
 

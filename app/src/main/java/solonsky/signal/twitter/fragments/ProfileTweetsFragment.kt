@@ -45,12 +45,12 @@ class ProfileTweetsFragment : Fragment() {
         }, TweetActions.MoreCallback { statusModel ->
             val position = ProfileDataApi.getInstance().tweets.indexOf(statusModel)
             ProfileDataApi.getInstance().tweets.remove(statusModel)
-            mAdapter!!.notifyItemRemoved(position)
+            mAdapter.notifyItemRemoved(position)
         })
 
         viewModel = ProfileTweetsViewModel(mAdapter, context)
-        viewModel!!.state = if (tweetsArray.size == 0)
-            AppData.UI_STATE_NO_ITEMS
+        viewModel.state = if (tweetsArray.size == 0)
+            AppData.UI_STATE_LOADING
         else
             AppData.UI_STATE_VISIBLE
         binding.model = viewModel

@@ -213,8 +213,12 @@ public class ImageViewer implements OnDismissListener, DialogInterface.OnKeyList
         }
 
         String format(T t) {
-            if (formatter == null) return t.toString();
-            else return formatter.format(t);
+            try {
+                if (formatter == null) return t.toString();
+                else return formatter.format(t);
+            } catch (NullPointerException e) {
+                return "";
+            }
         }
 
         public List<T> getData() {

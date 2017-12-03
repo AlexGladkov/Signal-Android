@@ -74,6 +74,10 @@ class MVPProfileActivity : MvpAppCompatActivity(), SmartTabLayout.TabProvider, P
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (App.getInstance().isNightEnabled) {
+            setTheme(R.style.ActivityThemeDarkNoAnimation)
+        }
+
         setContentView(R.layout.activity_profile)
 
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN

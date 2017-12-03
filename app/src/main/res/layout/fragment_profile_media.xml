@@ -15,6 +15,16 @@
         android:layout_height="wrap_content"
         android:background="?attr/backgroundPrimaryColor" >
 
+        <com.wang.avi.AVLoadingIndicatorView
+            android:layout_width="@dimen/big_loader_size"
+            android:layout_height="@dimen/big_loader_size"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/search_placeholder_margin_top"
+            android:alpha="0.5"
+            android:visibility="@{model.state == appData.UI_STATE_LOADING ? v.VISIBLE : v.GONE}"
+            app:indicatorName="BallScaleMultipleIndicator"
+            app:indicatorColor="@color/loaderColor" />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_profile_media"
             android:layout_width="match_parent"
