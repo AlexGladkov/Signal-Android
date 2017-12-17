@@ -520,17 +520,20 @@ class DetailActivity : AppCompatActivity(), SmartTabLayout.TabProvider {
         binding.txtDetailStatus.setAutoLinkText(currentStatus.text)
         binding.txtDetailStatus.setAutoLinkOnClickListener(object : AutoLinkOnClickListener {
             override fun onAutoLinkTextClick(autoLinkMode: AutoLinkMode, matchedText: String) {
-                if (autoLinkMode == AutoLinkMode.MODE_HASHTAG) {
-                    AppData.searchQuery = matchedText
-                    mActivity!!.startActivity(Intent(applicationContext, SearchActivity::class.java))
-                    mActivity!!.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                } else if (autoLinkMode == AutoLinkMode.MODE_MENTION) {
-                    val profileIntent = Intent(applicationContext, MVPProfileActivity::class.java)
-                    profileIntent.putExtra(Flags.PROFILE_SCREEN_NAME, matchedText)
-                    this@DetailActivity.startActivity(profileIntent)
-                    this@DetailActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-                } else if (autoLinkMode == AutoLinkMode.MODE_SHORT) {
-                    currentStatus.urlEntities
+                when (autoLinkMode) {
+                    AutoLinkMode.MODE_HASHTAG -> {
+                        AppData.searchQuery = matchedText
+                        mActivity!!.startActivity(Intent(applicationContext, SearchActivity::class.java))
+                        mActivity!!.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                    }
+                    AutoLinkMode.MODE_URL -> Utilities.openLink(matchedText.trim(), this@DetailActivity)
+                    AutoLinkMode.MODE_MENTION -> {
+                        val profileIntent = Intent(applicationContext, MVPProfileActivity::class.java)
+                        profileIntent.putExtra(Flags.PROFILE_SCREEN_NAME, matchedText)
+                        this@DetailActivity.startActivity(profileIntent)
+                        this@DetailActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                    }
+                    AutoLinkMode.MODE_SHORT -> currentStatus.urlEntities
                             .asSequence()
                             .filter { it.asJsonObject.get("displayURL").asString == matchedText }
                             .forEach { Utilities.openLink(it.asJsonObject.get("expandedURL").asString, mActivity) }

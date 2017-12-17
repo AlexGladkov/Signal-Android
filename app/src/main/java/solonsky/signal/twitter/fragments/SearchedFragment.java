@@ -317,7 +317,9 @@ public class SearchedFragment extends Fragment implements SmartTabLayout.TabProv
             }
         });
 
-        asyncTwitter.search(new Query(AppData.searchQuery));
+        Query query = new Query(AppData.searchQuery);
+        query.setCount(100);
+        asyncTwitter.search(query);
         asyncTwitter.searchUsers(AppData.searchQuery, 0);
         asyncTwitter.getHomeTimeline(new Paging(1, 100));
     }

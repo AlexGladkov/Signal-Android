@@ -25,12 +25,11 @@
                 android:layout_marginTop="@{model.showAvatar ? 16f : 2f}"
                 android:orientation="vertical" >
 
-                <TextView
-                    android:id="@+id/textView3"
+                <solonsky.signal.twitter.libs.autoLinkTextView.AutoLinkTextView
+                    android:id="@+id/chat_other_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif"
-                    android:text="@{model.text}"
                     android:textColor="?attr/primaryTextColor"
                     android:textSize="16dp"
                     android:layout_marginBottom="10.25dp"

@@ -5,6 +5,8 @@ import android.databinding.Bindable;
 
 import com.android.databinding.library.baseAdapters.BR;
 
+import java.util.ArrayList;
+
 import solonsky.signal.twitter.helpers.Flags;
 
 /**
@@ -22,10 +24,11 @@ public class ChatModel extends BaseObservable {
     private boolean showAvatar;
     private boolean showArrow;
     private boolean isAvatar;
+    private ArrayList<String> shortUrls;
     private float alpha;
 
-    public ChatModel(long id, int type, String text, String imageUrl, String avatarUrl, String time, boolean showAvatar,
-                     boolean showArrow) {
+    public ChatModel(long id, int type, String text, String imageUrl, String avatarUrl, String time,
+                     boolean showAvatar, boolean showArrow) {
         this.id = id;
         this.type = type;
         this.text = text;
@@ -35,6 +38,7 @@ public class ChatModel extends BaseObservable {
         this.showAvatar = showAvatar;
         this.showArrow = showArrow;
         this.mediaType = Flags.MEDIA_TYPE.IMAGE;
+        this.shortUrls = new ArrayList<>();
         this.alpha = 0.3f;
     }
 
@@ -130,5 +134,16 @@ public class ChatModel extends BaseObservable {
 
     public void setTime(String time) {
         this.time = time;
+    }
+
+    public String[] getShortUrls() {
+        String[] urlArray = new String[shortUrls.size()];
+        for (int i = 0; i < shortUrls.size(); i++)
+            urlArray[i] = shortUrls.get(i);
+        return urlArray;
+    }
+
+    public void setShortUrls(ArrayList<String> shortUrls) {
+        this.shortUrls = shortUrls;
     }
 }

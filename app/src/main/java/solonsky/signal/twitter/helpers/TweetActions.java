@@ -15,6 +15,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.gson.JsonElement;
+
 import java.util.ArrayList;
 
 import solonsky.signal.twitter.R;
@@ -67,11 +69,26 @@ public class TweetActions {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.more_copy:
-                        ClipboardManager clipboard = (ClipboardManager)
-                                mActivity.getSystemService(Context.CLIPBOARD_SERVICE);
-                        ClipData clip = ClipData.newPlainText(mActivity.getString(R.string.app_name), statusModel.getText());
-                        clipboard.setPrimaryClip(clip);
-                        Toast.makeText(mActivity.getApplicationContext(), mActivity.getString(R.string.success_copy), Toast.LENGTH_SHORT).show();
+                        try {
+                            String text = statusModel.getText();
+
+                            for (JsonElement url : statusModel.getUrlEntities()) {
+                                text = text.replace(url.getAsJsonObject().get("displayURL").getAsString(),
+                                            url.getAsJsonObject().get("expandedURL").getAsString());
+                            }
+
+                            for (JsonElement media : statusModel.getMediaEntities()) {
+                                text = text + " " + media.getAsJsonObject().get("expandedURL").getAsString();
+                            }
+
+                            ClipboardManager clipboard = (ClipboardManager)
+                                    mActivity.getSystemService(Context.CLIPBOARD_SERVICE);
+                            ClipData clip = ClipData.newPlainText(mActivity.getString(R.string.app_name), text);
+                            clipboard.setPrimaryClip(clip);
+                            Toast.makeText(mActivity.getApplicationContext(), mActivity.getString(R.string.success_copy), Toast.LENGTH_SHORT).show();
+                        } catch (NullPointerException e) {
+                            e.printStackTrace();
+                        }
                         break;
 
                     case R.id.more_delete:

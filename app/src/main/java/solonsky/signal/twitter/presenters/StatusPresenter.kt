@@ -13,6 +13,7 @@ import android.widget.Toast
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.daimajia.swipe.SwipeLayout
+import com.google.firebase.crash.FirebaseCrash
 import com.google.gson.JsonObject
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.activities.DetailActivity
@@ -70,10 +71,14 @@ class StatusPresenter(private val viewState: StatusView) {
             }
             AutoLinkMode.MODE_MENTION -> avatarClick(matchedText)
             AutoLinkMode.MODE_SHORT -> {
-                statusModel.urlEntities
-                        .asSequence()
-                        .filter { it.asJsonObject.get("displayUrl").asString == matchedText }
-                        .forEach { viewState.openLink(link = it.asJsonObject.get("expandedUrl").asString) }
+                try {
+                    statusModel.urlEntities
+                            .asSequence()
+                            .filter { it.asJsonObject.get("displayURL").asString == matchedText }
+                            .forEach { viewState.openLink(link = it.asJsonObject.get("expandedURL").asString) }
+                } catch (e: NullPointerException) {
+                    FirebaseCrash.log(e.localizedMessage)
+                }
             }
             else -> {
 

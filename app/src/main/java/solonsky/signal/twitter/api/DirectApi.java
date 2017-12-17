@@ -10,6 +10,7 @@ import com.google.gson.GsonBuilder;
 
 import org.joda.time.LocalDateTime;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -83,7 +84,6 @@ public class DirectApi {
             @Override
             public void onException(TwitterException te, TwitterMethod method) {
                 super.onException(te, method);
-                Log.e(TAG, "Direct error " + te.getLocalizedMessage());
                 loadedDirects.clear();
                 handler.post(new Runnable() {
                     @Override
@@ -212,8 +212,10 @@ public class DirectApi {
 
         if (hasId || hasScreenName || hasName) {
             String text = directMessage.getText();
+            ArrayList<String> shorts = new ArrayList<>();
             for (URLEntity urlEntity : directMessage.getURLEntities()) {
                 text = text.replace(urlEntity.getURL(), urlEntity.getDisplayURL());
+                shorts.add(urlEntity.getDisplayURL());
             }
 
             userName = isMine ? directMessage.getSender().getName() : directMessage.getRecipient().getName();
@@ -237,6 +239,7 @@ public class DirectApi {
                         new LocalDateTime(directMessage.getCreatedAt()).toString("HH:mm"),
                         showArrow, showArrow);
             }
+            chatModel.setShortUrls(shorts);
 
             return chatModel;
         }

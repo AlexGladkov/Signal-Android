@@ -8,6 +8,9 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 
+import solonsky.signal.twitter.libs.autoLinkTextView.AutoLinkMode;
+import solonsky.signal.twitter.libs.autoLinkTextView.AutoLinkTextView;
+
 /**
  * Created by neura on 01.09.17.
  */
@@ -20,6 +23,17 @@ public class AndroidConverters {
         layoutParams.setMargins(layoutParams.leftMargin, (int) Utilities.convertDpToPixel(topMargin, view.getContext()),
                 layoutParams.rightMargin, layoutParams.bottomMargin);
         view.setLayoutParams(layoutParams);
+    }
+
+    @BindingAdapter("android:text")
+    public static void setText(AutoLinkTextView textView, String text) {
+        if (textView == null) return;
+        if (text == null) return;
+
+        textView.addAutoLinkMode(
+                AutoLinkMode.MODE_EMAIL, AutoLinkMode.MODE_MENTION,
+                AutoLinkMode.MODE_URL, AutoLinkMode.MODE_PHONE);
+        textView.setAutoLinkText(text);
     }
 
     @BindingAdapter("android:layout_marginEnd")

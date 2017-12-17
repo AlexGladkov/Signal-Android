@@ -82,13 +82,15 @@ public class ImageStaggeredAdapter extends RecyclerView.Adapter<ImageStaggeredAd
 
 
         Context context = holder.mBinding.getRoot().getContext();
-        Picasso.with(mContext).load(model.getImageUrl())
-                .resize(imageWidth, imageHeight).centerCrop()
-                .transform(new CirclePicasso(
-                        Utilities.convertDpToPixel(4, context),
-                        Utilities.convertDpToPixel(1f, context),
-                        25, R.color.black))
-                .into(holder.mBinding.imgStaggeredMain);
+        if (imageHeight > 0 || imageWidth > 0) {
+            Picasso.with(mContext).load(model.getImageUrl())
+                    .resize(imageWidth, imageHeight).centerCrop()
+                    .transform(new CirclePicasso(
+                            Utilities.convertDpToPixel(4, context),
+                            Utilities.convertDpToPixel(1f, context),
+                            25, R.color.black))
+                    .into(holder.mBinding.imgStaggeredMain);
+        }
 
         if (model.getMediaType().equals(Flags.MEDIA_TYPE.IMAGE)) {
             holder.mBinding.imgStaggeredMedia.setVisibility(View.GONE);

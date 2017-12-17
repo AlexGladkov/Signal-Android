@@ -26,6 +26,8 @@ import solonsky.signal.twitter.databinding.CellChatUserBinding;
 import solonsky.signal.twitter.helpers.App;
 import solonsky.signal.twitter.helpers.AppData;
 import solonsky.signal.twitter.helpers.Utilities;
+import solonsky.signal.twitter.libs.autoLinkTextView.AutoLinkMode;
+import solonsky.signal.twitter.libs.autoLinkTextView.AutoLinkOnClickListener;
 import solonsky.signal.twitter.models.ChatModel;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
@@ -64,6 +66,20 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         }
     }
 
+    private AutoLinkOnClickListener autoLinkOnClickListener = new AutoLinkOnClickListener() {
+        @Override
+        public void onAutoLinkTextClick(AutoLinkMode autoLinkMode, String matchedText) {
+            if (autoLinkMode.equals(AutoLinkMode.MODE_SHORT) || autoLinkMode.equals(AutoLinkMode.MODE_URL)) {
+                Utilities.openLink(matchedText, mActivity);
+            }
+        }
+
+        @Override
+        public void onAutoLinkLongTextClick(AutoLinkMode autoLinkMode, String matchedText) {
+
+        }
+    };
+
     @Override
     public int getItemViewType(int position) {
         return mChatModels.get(position).getType();
@@ -88,8 +104,15 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((UserViewHolder) holder).binding.chatUserCivAvatar.setBorderWidth(isNight ?
                     0 : (int) Utilities.convertDpToPixel(0.5f, mContext));
 
+            ((UserViewHolder) holder).binding.chatUserContent.addAutoLinkMode(
+                    AutoLinkMode.MODE_PHONE, AutoLinkMode.MODE_MENTION,
+                    AutoLinkMode.MODE_URL, AutoLinkMode.MODE_SHORT);
+            ((UserViewHolder) holder).binding.chatUserContent.setShortUrls(model.getShortUrls());
+            ((UserViewHolder) holder).binding.chatUserContent.setAutoLinkOnClickListener(autoLinkOnClickListener);
+
             ((UserViewHolder) holder).binding.setModel(model);
             ((UserViewHolder) holder).binding.chatUserTxtTime.setText(model.getTime());
+            ((UserViewHolder) holder).binding.chatUserContent.setAutoLinkText(model.getText());
 //            ((UserViewHolder) holder).binding.chatUserSl.addSwipeListener(swipeListener);
         } else {
             ((OtherViewHolder) holder).binding.chatOtherCivAvatar.setBorderOverlay(!isNight);
@@ -98,8 +121,15 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             ((OtherViewHolder) holder).binding.chatOtherCivAvatar.setBorderWidth(isNight ?
                     0 : (int) Utilities.convertDpToPixel(0.5f, mContext));
 
+            ((OtherViewHolder) holder).binding.chatOtherContent.addAutoLinkMode(
+                    AutoLinkMode.MODE_PHONE, AutoLinkMode.MODE_MENTION,
+                    AutoLinkMode.MODE_URL, AutoLinkMode.MODE_SHORT);
+            ((OtherViewHolder) holder).binding.chatOtherContent.setShortUrls(model.getShortUrls());
+            ((OtherViewHolder) holder).binding.chatOtherContent.setAutoLinkOnClickListener(autoLinkOnClickListener);
+
             ((OtherViewHolder) holder).binding.setModel(model);
             ((OtherViewHolder) holder).binding.chatOtherTxtTime.setText(model.getTime());
+            ((OtherViewHolder) holder).binding.chatOtherContent.setAutoLinkText(model.getText());
         }
 
         if (!model.getImageUrl().equals("")) {
@@ -168,7 +198,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                             handler.post(new Runnable() {
                                 @Override
                                 public void run() {
-                                    if (model.getType() == AppData.CHAT_ME) {
+                                    if (holder instanceof UserViewHolder) {
                                         ((UserViewHolder) holder).binding.chatUserImage.setImageBitmap(roundedBmp);
                                     } else {
                                         ((OtherViewHolder) holder).binding.chatOtherImage.setImageBitmap(roundedBmp);

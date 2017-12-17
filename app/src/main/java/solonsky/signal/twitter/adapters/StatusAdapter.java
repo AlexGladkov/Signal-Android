@@ -436,6 +436,8 @@ public class StatusAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                                 }
                             }
                         }
+                    } else if (autoLinkMode.equals(AutoLinkMode.MODE_URL)) {
+                        Utilities.openLink(matchedText.trim(), mActivity);
                     } else {
                         performSingleTap(statusModel, previousModel, nextModel, holder);
                     }
@@ -456,6 +458,8 @@ public class StatusAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                                 new UrlDialog(jsonElement.getAsJsonObject().get("expandedURL").getAsString(), mActivity).show();
                             }
                         }
+                    } else if (autoLinkMode.equals(AutoLinkMode.MODE_URL)) {
+                        new UrlDialog(matchedText.trim(), mActivity).show();
                     }
 
                     if (mActivity instanceof LoggedActivity)
@@ -658,7 +662,8 @@ public class StatusAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
                 @Override
                 public void onMoreClick(View v) {
-                    TweetActions.morePopup(mActivity, v, statusModel, moreCallback);
+                    TweetActions.morePopup(mActivity, v, statusModel.isRetweet() || statusModel.getRetweetedStatus() != null ?
+                            statusModel.getRetweetedStatus() : statusModel, moreCallback);
                     if (mActivity instanceof LoggedActivity)
                         ((LoggedActivity) mActivity).hidePopup();
                 }
@@ -1004,12 +1009,27 @@ public class StatusAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
                 ShareContent shareContent = new ShareContent(mActivity);
 
+                StatusModel currentStatus = statusModel.getRetweetedStatus() != null ?
+                        statusModel.getRetweetedStatus() : statusModel;
+                String text = currentStatus.getText();
+
+                for (JsonElement url : statusModel.getUrlEntities()) {
+                    text = text.replace(url.getAsJsonObject().get("displayURL").getAsString(),
+                            url.getAsJsonObject().get("expandedURL").getAsString());
+                }
+
+                for (JsonElement media : statusModel.getMediaEntities()) {
+                    text = text + " " + media.getAsJsonObject().get("expandedURL").getAsString();
+                }
+
+                text = text + "\n\n" + "https://twitter.com/" + currentStatus.getUser().getId() + "/status/" + currentStatus.getId();
+
                 if (ShareData.getInstance().getShares().size() > 0) {
                     String packageName = ShareData.getInstance().getShares().get(0).split("/")[0].replace("ComponentInfo{", "");
                     String packageActivity = ShareData.getInstance().getShares().get(0).split("/")[1].replace("}", "");
-                    shareContent.shareTextWithApp(statusModel.getText(), packageName, packageActivity);
+                    shareContent.shareTextWithApp(text, packageName, packageActivity);
                 } else {
-                    shareContent.shareText(statusModel.getText(), "", new TargetChosenReceiver.IntentCallback() {
+                    shareContent.shareText(text, "", new TargetChosenReceiver.IntentCallback() {
                         @Override
                         public void getComponentName(String componentName) {
                             ShareData.getInstance().addShare(componentName);

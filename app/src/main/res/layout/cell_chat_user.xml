@@ -51,8 +51,8 @@
                 android:background="@drawable/shape_bubble_user"
                 android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/textView3"
+                <solonsky.signal.twitter.libs.autoLinkTextView.AutoLinkTextView
+                    android:id="@+id/chat_user_content"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -63,7 +63,6 @@
                     android:layout_marginTop="8.5dp"
                     android:fontFamily="sans-serif"
                     android:lineSpacingMultiplier="1.06"
-                    android:text="@{model.text}"
                     android:textColor="?attr/primaryTextColor"
                     android:textSize="16dp"
                     android:visibility="@{model.text.empty ? v.GONE : v.VISIBLE}" />

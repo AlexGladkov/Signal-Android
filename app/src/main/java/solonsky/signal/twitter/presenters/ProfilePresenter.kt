@@ -110,17 +110,21 @@ class ProfilePresenter : MvpPresenter<ProfileView>() {
 
     fun showAvatar() {
         user?.let { it ->
-            val urls = ArrayList<String>()
-            urls.add(it.originalProfileImageURL)
-            viewState.showImage(urls = urls, startPosition = 0)
+            if (it.originalProfileImageURL != null) {
+                val urls = ArrayList<String>()
+                urls.add(it.originalProfileImageURL)
+                viewState.showImage(urls = urls, startPosition = 0)
+            }
         }
     }
 
     fun showBackdrop() {
         user?.let { it ->
-            val urls = ArrayList<String>()
-            urls.add(it.profileBannerImageUrl)
-            viewState.showImage(urls = urls, startPosition = 0)
+            if (it.profileBannerImageUrl != null) {
+                val urls = ArrayList<String>()
+                urls.add(it.profileBannerImageUrl)
+                viewState.showImage(urls = urls, startPosition = 0)
+            }
         }
     }
 
