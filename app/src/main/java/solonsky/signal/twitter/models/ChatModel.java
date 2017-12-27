@@ -15,6 +15,7 @@ import solonsky.signal.twitter.helpers.Flags;
 
 public class ChatModel extends BaseObservable {
     private long id;
+    private long senderId;
     private int type;
     private String text;
     private String imageUrl;
@@ -27,9 +28,10 @@ public class ChatModel extends BaseObservable {
     private ArrayList<String> shortUrls;
     private float alpha;
 
-    public ChatModel(long id, int type, String text, String imageUrl, String avatarUrl, String time,
+    public ChatModel(long id, long senderId, int type, String text, String imageUrl, String avatarUrl, String time,
                      boolean showAvatar, boolean showArrow) {
         this.id = id;
+        this.senderId = senderId;
         this.type = type;
         this.text = text;
         this.time = time;
@@ -145,5 +147,13 @@ public class ChatModel extends BaseObservable {
 
     public void setShortUrls(ArrayList<String> shortUrls) {
         this.shortUrls = shortUrls;
+    }
+
+    public long getSenderId() {
+        return senderId;
+    }
+
+    public void setSenderId(long senderId) {
+        this.senderId = senderId;
     }
 }

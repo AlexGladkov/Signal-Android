@@ -4,9 +4,7 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentActivity
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,7 +18,6 @@ import solonsky.signal.twitter.api.ProfileDataApi
 import solonsky.signal.twitter.databinding.FragmentProfileTweetsBinding
 import solonsky.signal.twitter.helpers.AppData
 import solonsky.signal.twitter.helpers.TweetActions
-import solonsky.signal.twitter.interfaces.UpdateHandler
 import solonsky.signal.twitter.models.StatusModel
 import solonsky.signal.twitter.viewmodels.ProfileTweetsViewModel
 

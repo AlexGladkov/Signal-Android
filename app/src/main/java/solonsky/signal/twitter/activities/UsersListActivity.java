@@ -8,7 +8,6 @@ import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
@@ -126,7 +125,7 @@ public class UsersListActivity extends AppCompatActivity {
     private UserAdapter.UserClickHandler itemClickListener = new UserAdapter.UserClickHandler() {
         @Override
         public void onItemClick(UserModel model, View v) {
-            AppData.NOTIFICATIONS_CURRENT_USER = model;
+            AppData.NOTIFICATIONS_CURRENT_USER = (model);
             startActivity(new Intent(getApplicationContext(), UsersNotificationActivity.class));
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }

@@ -20,8 +20,8 @@
 
     <ImageView
         android:id="@+id/user_search_img"
-        android:layout_width="@dimen/cell_user_icon"
-        android:layout_height="@dimen/cell_user_icon"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:padding="8dp"
         android:background="?attr/searchIconResource"
         android:src="@drawable/ic_icons_compose_search"

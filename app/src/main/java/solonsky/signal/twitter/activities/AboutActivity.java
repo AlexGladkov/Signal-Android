@@ -17,7 +17,6 @@ import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.databinding.ActivityAboutBinding;
 import solonsky.signal.twitter.draw.CirclePicasso;
 import solonsky.signal.twitter.helpers.App;
-import solonsky.signal.twitter.helpers.AppData;
 import solonsky.signal.twitter.helpers.Flags;
 import solonsky.signal.twitter.helpers.Utilities;
 import solonsky.signal.twitter.viewmodels.AboutViewModel;

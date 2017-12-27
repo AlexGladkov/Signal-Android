@@ -116,8 +116,8 @@ public class ImageHorizontalAdapter extends RecyclerView.Adapter<ImageHorizontal
                             .build()
                             .show();
                 } else {
-                    AppData.MEDIA_URL = model.getImageUrl();
-                    AppData.MEDIA_TYPE = model.getMediaType();
+                    AppData.MEDIA_URL = (model.getImageUrl());
+                    AppData.MEDIA_TYPE = (model.getMediaType());
                     mActivity.startActivity(new Intent(mActivity.getApplicationContext(), MediaActivity.class));
                 }
                 return true;

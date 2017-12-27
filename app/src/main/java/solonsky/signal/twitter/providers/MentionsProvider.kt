@@ -1,15 +1,10 @@
 package solonsky.signal.twitter.providers
 
 import android.os.Handler
-import android.widget.Toast
 import com.anupcowkur.reservoir.Reservoir
 import com.anupcowkur.reservoir.ReservoirGetCallback
-import com.bumptech.glide.util.Util
 import com.fatboyindustrial.gsonjodatime.Converters
-import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import solonsky.signal.twitter.R
-import solonsky.signal.twitter.data.LoggedData
 import solonsky.signal.twitter.data.MentionsData
 import solonsky.signal.twitter.helpers.AppData
 import solonsky.signal.twitter.helpers.Cache

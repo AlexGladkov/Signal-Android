@@ -1,34 +1,21 @@
 package solonsky.signal.twitter.viewmodels;
 
+import android.content.Intent;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.media.ThumbnailUtils;
-import android.os.Handler;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
 import com.android.databinding.library.baseAdapters.BR;
-import com.facebook.drawee.generic.GenericDraweeHierarchyBuilder;
-
-import java.io.BufferedInputStream;
-import java.io.InputStream;
-import java.util.ArrayList;
 
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.activities.ChatActivity;
+import solonsky.signal.twitter.activities.MVPProfileActivity;
 import solonsky.signal.twitter.adapters.ChatAdapter;
 import solonsky.signal.twitter.api.DirectApi;
-import solonsky.signal.twitter.helpers.AppData;
+import solonsky.signal.twitter.helpers.Flags;
 import solonsky.signal.twitter.helpers.ListConfig;
-import solonsky.signal.twitter.helpers.Utilities;
-import solonsky.signal.twitter.libs.DownloadFiles;
 import solonsky.signal.twitter.models.ChatModel;
-import solonsky.signal.twitter.overlays.ImageOverlay;
-import twitter4j.Twitter;
-import twitter4j.TwitterException;
 
 /**
  * Created by neura on 23.05.17.
@@ -56,53 +43,14 @@ public class ChatViewModel extends BaseObservable {
                 mActivity.getApplicationContext(), mActivity, new ChatAdapter.ChatClickListener() {
             @Override
             public void onItemClick(View v, final ChatModel chatModel) {
-//                switch (chatModel.getMediaType()) {
-//                    case IMAGE:
-//                        if (!TextUtils.isEmpty(chatModel.getImageUrl())) {
-//                            final Handler handler = new Handler();
-//                            new Thread(new Runnable() {
-//                                @Override
-//                                public void run() {
-//                                    Twitter twitter = Utilities.getTwitterInstance();
-//                                    try {
-//                                        InputStream stream = twitter.getDMImageAsStream(chatModel.getImageUrl());
-//                                        BufferedInputStream bufferedInputStream = new BufferedInputStream(stream);
-//                                        Bitmap bmp = BitmapFactory.decodeStream(bufferedInputStream);
-//                                        final ArrayList<Bitmap> bitmaps = new ArrayList<>();
-//                                        bitmaps.add(bmp);
-//
-//                                        handler.post(new Runnable() {
-//                                            @Override
-//                                            public void run() {
-//                                                final solonsky.signal.twitter.overlays.ImageOverlay imageOverlay = new ImageOverlay(bitmaps, mActivity);
-//                                                imageOverlay.setImageOverlayClickHandler(new ImageOverlay.ImageOverlayClickHandler() {
-//                                                    @Override
-//                                                    public void onBackClick(View v) {
-//                                                        imageOverlay.getImageViewer().onDismiss();
-//                                                    }
-//
-//                                                    @Override
-//                                                    public void onSaveClick(View v, String url) {
-//                                                        DownloadFiles downloadFiles = new DownloadFiles(mActivity);
-//                                                        downloadFiles.saveFile(url, mActivity.getString(R.string.app_name));
-//                                                    }
-//                                                });
-//                                            }
-//                                        });
-//                                    } catch (TwitterException e) {
-//                                        Log.e(TAG, "Error to load - " + e.getLocalizedMessage());
-//                                    }
-//                                }
-//                            }).start();
-//                        }
-//                        break;
-//
-//                    case VIDEO:
-//                        break;
-//
-//                    case YOUTUBE:
-//                        break;
-//                }
+            }
+
+            @Override
+            public void onAvatarClick(View v, ChatModel chatModel) {
+                Intent intent = new Intent(mActivity, MVPProfileActivity.class);
+                intent.putExtra(Flags.PROFILE_ID, chatModel.getSenderId());
+                mActivity.startActivity(intent);
+                mActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         });
         this.listConfig = new ListConfig.Builder(chatAdapter)

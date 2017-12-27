@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.GridLayoutManager
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,16 +12,12 @@ import android.view.ViewGroup
 import java.util.ArrayList
 
 import solonsky.signal.twitter.R
-import solonsky.signal.twitter.adapters.DetailStaggeredAdapter
-import solonsky.signal.twitter.adapters.ImageAdapter
 import solonsky.signal.twitter.adapters.MediaStaggeredAdapter
 import solonsky.signal.twitter.api.ProfileDataApi
 import solonsky.signal.twitter.databinding.FragmentProfileMediaBinding
 import solonsky.signal.twitter.helpers.AppData
-import solonsky.signal.twitter.helpers.Flags
 import solonsky.signal.twitter.helpers.ListConfig
 import solonsky.signal.twitter.helpers.Utilities
-import solonsky.signal.twitter.interfaces.UpdateHandler
 import solonsky.signal.twitter.libs.DownloadFiles
 import solonsky.signal.twitter.models.ImageModel
 import solonsky.signal.twitter.overlays.ImageOverlay

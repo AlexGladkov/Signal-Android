@@ -11,7 +11,6 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -21,13 +20,13 @@ import android.view.ViewGroup;
 import solonsky.signal.twitter.activities.MVPProfileActivity;
 import solonsky.signal.twitter.activities.MediaActivity;
 import solonsky.signal.twitter.api.ActionsApiFactory;
-import solonsky.signal.twitter.data.FeedData;
 import solonsky.signal.twitter.data.ShareData;
 import solonsky.signal.twitter.dialogs.HashtagDialog;
 import solonsky.signal.twitter.dialogs.MediaDialog;
 import solonsky.signal.twitter.dialogs.ProfileDialog;
 import solonsky.signal.twitter.dialogs.UrlDialog;
 import solonsky.signal.twitter.draw.CirclePicasso;
+import solonsky.signal.twitter.helpers.AppData;
 import solonsky.signal.twitter.helpers.Flags;
 
 import android.widget.FrameLayout;
@@ -37,7 +36,6 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.daimajia.swipe.SwipeLayout;
-import com.google.common.net.MediaType;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.squareup.picasso.Picasso;
@@ -52,7 +50,6 @@ import solonsky.signal.twitter.activities.DetailActivity;
 import solonsky.signal.twitter.activities.LoggedActivity;
 import solonsky.signal.twitter.databinding.CellStatusBinding;
 import solonsky.signal.twitter.helpers.App;
-import solonsky.signal.twitter.helpers.AppData;
 import solonsky.signal.twitter.helpers.DateConverter;
 import solonsky.signal.twitter.helpers.ImageAnimation;
 import solonsky.signal.twitter.helpers.ListConfig;
@@ -71,7 +68,6 @@ import solonsky.signal.twitter.models.ImageModel;
 import solonsky.signal.twitter.models.StatusModel;
 import solonsky.signal.twitter.models.User;
 import solonsky.signal.twitter.overlays.ImageActionsOverlay;
-import twitter4j.AsyncTwitter;
 
 /**
  * Created by neura on 22.05.17.
@@ -132,7 +128,7 @@ public class StatusAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             int adapterPosition = statusViewHolder.getAdapterPosition();
 
             if (adapterPosition != RecyclerView.NO_POSITION) {
-                // Load image to avatar && preview
+                // Load image to avatar && previewS
             }
 
             return statusViewHolder;
@@ -157,8 +153,12 @@ public class StatusAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
             final DateConverter dateConverter = new DateConverter(mContext);
             String createdAt = AppData.appConfiguration.isRelativeDates() ?
-                    dateConverter.parseTime(new LocalDateTime(statusModel.getCreatedAt())) :
-                    dateConverter.parseAbsTime(new LocalDateTime(statusModel.getCreatedAt()));
+                    dateConverter.parseTime(new LocalDateTime(isRetweet ?
+                            statusModel.getRetweetedStatus().getCreatedAt() :
+                            statusModel.getCreatedAt())) :
+                    dateConverter.parseAbsTime(new LocalDateTime(isRetweet ?
+                            statusModel.getRetweetedStatus().getCreatedAt() :
+                            statusModel.getCreatedAt()));
             String tweetText = isRetweet ? statusModel.getRetweetedStatus().getText() : statusModel.getText();
             String username = isRetweet ? AppData.appConfiguration.isRealNames() ?
                     statusModel.getRetweetedStatus().getUser().getName() :
@@ -1022,7 +1022,7 @@ public class StatusAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     text = text + " " + media.getAsJsonObject().get("expandedURL").getAsString();
                 }
 
-                text = text + "\n\n" + "https://twitter.com/" + currentStatus.getUser().getId() + "/status/" + currentStatus.getId();
+                text = text + "\n\n\n" + "https://twitter.com/" + currentStatus.getUser().getId() + "/status/" + currentStatus.getId();
 
                 if (ShareData.getInstance().getShares().size() > 0) {
                     String packageName = ShareData.getInstance().getShares().get(0).split("/")[0].replace("ComponentInfo{", "");
@@ -1049,7 +1049,7 @@ public class StatusAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
 
             case ConfigurationModel.TAP_SHARE:
                 if (mActivity instanceof LoggedActivity) {
-                    ((LoggedActivity) mActivity).shareContent.shareText("Text", "Url", new TargetChosenReceiver.IntentCallback() {
+                    ((LoggedActivity) mActivity).getShareContent().shareText("Text", "Url", new TargetChosenReceiver.IntentCallback() {
                         @Override
                         public void getComponentName(String componentName) {
                             ShareData.getInstance().addShare(componentName);
@@ -1181,14 +1181,14 @@ public class StatusAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
         if (statusModel.getMediaEntities().size() > 0) {
             String type = statusModel.getMediaEntities().get(0).getAsJsonObject().get("type").getAsString();
             if (type.equals(Flags.MEDIA_GIF)) {
-                AppData.MEDIA_URL = statusModel.getMediaEntities().get(0).getAsJsonObject()
-                        .get("videoVariants").getAsJsonArray().get(0).getAsJsonObject().get("url").getAsString();
+                AppData.MEDIA_URL = (statusModel.getMediaEntities().get(0).getAsJsonObject()
+                        .get("videoVariants").getAsJsonArray().get(0).getAsJsonObject().get("url").getAsString());
                 AppData.MEDIA_TYPE = Flags.MEDIA_TYPE.GIF;
                 mActivity.startActivity(new Intent(mContext, MediaActivity.class));
             } else if (type.equals(Flags.MEDIA_VIDEO)) {
-                AppData.MEDIA_URL = statusModel.getMediaEntities().get(0).getAsJsonObject()
-                        .get("videoVariants").getAsJsonArray().get(0).getAsJsonObject().get("url").getAsString();
-                AppData.MEDIA_TYPE = Flags.MEDIA_TYPE.VIDEO;
+                AppData.MEDIA_URL = (statusModel.getMediaEntities().get(0).getAsJsonObject()
+                        .get("videoVariants").getAsJsonArray().get(0).getAsJsonObject().get("url").getAsString());
+                AppData.MEDIA_TYPE = (Flags.MEDIA_TYPE.VIDEO);
                 mActivity.startActivity(new Intent(mContext, MediaActivity.class));
             } else if (type.equals(Flags.MEDIA_PHOTO)) {
                 final ArrayList<String> urls = new ArrayList<>();

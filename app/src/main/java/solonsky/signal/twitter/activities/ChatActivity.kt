@@ -9,16 +9,12 @@ import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
 import android.util.Log
 import android.view.Gravity
-import android.view.MenuInflater
-import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.Transformation
 import android.widget.FrameLayout
-
-import com.google.android.exoplayer.util.Util
 
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.api.DirectApi
@@ -28,9 +24,7 @@ import solonsky.signal.twitter.helpers.AppData
 import solonsky.signal.twitter.helpers.Flags
 import solonsky.signal.twitter.helpers.Utilities
 import solonsky.signal.twitter.interfaces.UpdateAddHandler
-import solonsky.signal.twitter.models.ChatModel
 import solonsky.signal.twitter.viewmodels.ChatViewModel
-import twitter4j.AsyncTwitter
 import twitter4j.TwitterAdapter
 import twitter4j.TwitterException
 import twitter4j.TwitterMethod

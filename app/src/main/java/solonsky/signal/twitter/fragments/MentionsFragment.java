@@ -10,7 +10,6 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +25,6 @@ import solonsky.signal.twitter.interfaces.ActivityListener;
 import solonsky.signal.twitter.interfaces.FragmentCounterListener;
 import solonsky.signal.twitter.interfaces.UpdateAddHandler;
 import solonsky.signal.twitter.helpers.Utilities;
-import solonsky.signal.twitter.libs.SpeedyLinearLayoutManager;
 import solonsky.signal.twitter.models.StatusModel;
 import solonsky.signal.twitter.viewmodels.MentionsViewModel;
 

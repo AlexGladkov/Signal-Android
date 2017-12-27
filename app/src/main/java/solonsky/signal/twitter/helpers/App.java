@@ -65,13 +65,6 @@ public class App extends Application {
         this.isNightEnabled = mSharedPreferences.getBoolean("NIGHT_MODE", true);
     }
 
-//    public void registerCycleListener() {
-//        Log.e(TAG, "LifeCycler init");
-//        ApplicationLifecycleHandler handler = new ApplicationLifecycleHandler();
-//        registerActivityLifecycleCallbacks(handler);
-//        registerComponentCallbacks(handler);
-//    }
-
     public boolean isNightEnabled() {
         return isNightEnabled;
     }

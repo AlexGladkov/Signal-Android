@@ -1,19 +1,14 @@
 package solonsky.signal.twitter.fragments
 
 import android.content.Intent
-import android.content.res.Resources
 import android.databinding.DataBindingUtil
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
-import android.support.annotation.IntegerRes
 import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
-import android.support.v4.app.FragmentTransaction
 import android.support.v4.view.PagerAdapter
 import android.support.v4.view.ViewPager
 import android.support.v4.widget.NestedScrollView
-import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -27,7 +22,6 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 
-import com.google.gson.JsonElement
 import com.ogaclejapan.smarttablayout.SmartTabLayout
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems
@@ -44,12 +38,8 @@ import solonsky.signal.twitter.adapters.SimplePagerAdapter
 import solonsky.signal.twitter.api.ProfileDataApi
 import solonsky.signal.twitter.data.ProfileRefreshData
 import solonsky.signal.twitter.databinding.ActivityProfileBinding
-import solonsky.signal.twitter.databinding.FragmentProfileBinding
 import solonsky.signal.twitter.helpers.App
-import solonsky.signal.twitter.helpers.AppData
-import solonsky.signal.twitter.helpers.FileWork
 import solonsky.signal.twitter.helpers.Utilities
-import solonsky.signal.twitter.interfaces.ProfileListener
 import solonsky.signal.twitter.interfaces.ProfileRefreshHandler
 import solonsky.signal.twitter.libs.DownloadFiles
 import solonsky.signal.twitter.viewmodels.ProfileViewModel
@@ -58,6 +48,7 @@ import solonsky.signal.twitter.views.ProfileView
 import android.view.View.inflate
 import com.arellomobile.mvp.presenter.InjectPresenter
 import solonsky.signal.twitter.activities.*
+import solonsky.signal.twitter.helpers.AppData
 import solonsky.signal.twitter.models.ImageModel
 import solonsky.signal.twitter.models.StatusModel
 import solonsky.signal.twitter.models.User

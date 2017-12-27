@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.activities.DetailActivity;
 import solonsky.signal.twitter.activities.MVPProfileActivity;
-import solonsky.signal.twitter.activities.StatsFollowersActivity;
 import solonsky.signal.twitter.adapters.UserDetailAdapter;
 import solonsky.signal.twitter.data.UsersData;
 import solonsky.signal.twitter.databinding.FragmentDetailRtBinding;

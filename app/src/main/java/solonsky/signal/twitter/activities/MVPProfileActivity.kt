@@ -11,7 +11,6 @@ import android.support.v4.view.ViewPager
 import android.support.v4.widget.NestedScrollView
 import android.support.v7.widget.PopupMenu
 import android.text.TextUtils
-import android.util.Log
 import android.view.*
 import android.view.animation.AlphaAnimation
 import android.view.animation.Animation

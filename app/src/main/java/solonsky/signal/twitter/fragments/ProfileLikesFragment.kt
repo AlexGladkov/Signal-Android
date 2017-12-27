@@ -15,11 +15,9 @@ import java.util.ArrayList
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.activities.SearchActivity
 import solonsky.signal.twitter.adapters.StatusAdapter
-import solonsky.signal.twitter.api.ProfileDataApi
 import solonsky.signal.twitter.databinding.FragmentProfileLikesBinding
 import solonsky.signal.twitter.helpers.AppData
 import solonsky.signal.twitter.helpers.TweetActions
-import solonsky.signal.twitter.interfaces.UpdateHandler
 import solonsky.signal.twitter.models.StatusModel
 import solonsky.signal.twitter.viewmodels.ProfileLikesViewModel
 

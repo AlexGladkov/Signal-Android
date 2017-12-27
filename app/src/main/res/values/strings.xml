@@ -177,8 +177,8 @@
     <string name="appearance_font_menu_16">16pt&#160;&#160;&#160;•&#160;&#160;&#160;Regular</string>
     <string name="appearance_font_menu_18">18pt&#160;&#160;&#160;•&#160;&#160;&#160;Big</string>
     <string name="appearance_font_menu_20">20pt&#160;&#160;&#160;•&#160;&#160;&#160;Huge</string>
-    <string name="appearance_night_menu_always">Always</string>
-    <string name="appearance_night_menu_night">At night</string>
+    <string name="appearance_night_menu_always">On</string>
+    <string name="appearance_night_menu_night">Auto</string>
     <string name="appearance_night_menu_off">Off</string>
     <string name="text_small">Small</string>
     <string name="text_tiny">Tiny</string>
@@ -392,6 +392,10 @@
     <string name="follows_you">follows you</string>
     <string name="not_follow">does not follow you</string>
     <string name="no_bio">No bio</string>
+    <string name="error_loading_direct">Error</string>
+    <string name="success_mute_user">Done. You won’t see new stuff from [username].</string>
+    <string name="success_mute_tag">Done. You won’t see new stuff with [tag].</string>
+    <string name="success_mute_client">Done. You won’t see new stuff from [clientname].</string>
 
 
 </resources>

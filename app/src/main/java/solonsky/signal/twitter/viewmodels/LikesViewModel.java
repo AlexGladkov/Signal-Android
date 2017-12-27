@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -23,7 +22,6 @@ import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.activities.LoggedActivity;
 import solonsky.signal.twitter.activities.SearchActivity;
 import solonsky.signal.twitter.adapters.StatusAdapter;
-import solonsky.signal.twitter.data.FeedData;
 import solonsky.signal.twitter.data.LikesData;
 import solonsky.signal.twitter.helpers.App;
 import solonsky.signal.twitter.helpers.AppData;
@@ -68,7 +66,7 @@ public class LikesViewModel extends BaseObservable {
                 true, true, new StatusAdapter.StatusClickListener() {
             @Override
             public void onSearch(String searchText, View v) {
-                AppData.searchQuery = searchText;
+                AppData.searchQuery = (searchText);
                 mActivity.startActivity(new Intent(mActivity.getApplicationContext(), SearchActivity.class));
                 mActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }

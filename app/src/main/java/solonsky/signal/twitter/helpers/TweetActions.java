@@ -112,7 +112,7 @@ public class TweetActions {
                         break;
 
                     case R.id.more_details:
-                        AppData.CURRENT_STATUS_MODEL = statusModel;
+                        AppData.CURRENT_STATUS_MODEL = (statusModel);
                         mActivity.startActivity(new Intent(mActivity.getApplicationContext(), DetailActivity.class));
                         mActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                         break;
@@ -214,7 +214,22 @@ public class TweetActions {
      */
     public static void share(StatusModel statusModel, AppCompatActivity mActivity) {
         ShareContent shareContent = new ShareContent(mActivity);
-        shareContent.shareText(statusModel.getText(), "", new TargetChosenReceiver.IntentCallback() {
+
+        StatusModel currentStatus = statusModel.getRetweetedStatus() != null ?
+                statusModel.getRetweetedStatus() : statusModel;
+        String text = currentStatus.getText();
+
+        for (JsonElement url : statusModel.getUrlEntities()) {
+            text = text.replace(url.getAsJsonObject().get("displayURL").getAsString(),
+                    url.getAsJsonObject().get("expandedURL").getAsString());
+        }
+
+        for (JsonElement media : statusModel.getMediaEntities()) {
+            text = text + "\n" + " " + media.getAsJsonObject().get("expandedURL").getAsString();
+        }
+
+        text = text + "\n\n\n" + "https://twitter.com/" + currentStatus.getUser().getId() + "/status/" + currentStatus.getId();
+        shareContent.shareText(text, "", new TargetChosenReceiver.IntentCallback() {
             @Override
             public void getComponentName(String componentName) {
                 ShareData.getInstance().addShare(componentName);
@@ -229,8 +244,8 @@ public class TweetActions {
      * @param mActivity - calling activity
      */
     public static void reply(StatusModel statusModel, AppCompatActivity mActivity) {
-        AppData.CURRENT_STATUS_MODEL = statusModel;
-        AppData.CURRENT_USER = statusModel.getUser();
+        AppData.CURRENT_STATUS_MODEL = (statusModel);
+        AppData.CURRENT_USER = (statusModel.getUser());
         Flags.CURRENT_COMPOSE = Flags.COMPOSE_REPLY;
 
         mActivity.startActivity(new Intent(mActivity.getApplicationContext(), ComposeActivity.class));
@@ -301,7 +316,7 @@ public class TweetActions {
      */
     public static void quote(Activity mActivity, StatusModel statusModel) {
         Flags.CURRENT_COMPOSE = Flags.COMPOSE_QUOTE;
-        AppData.CURRENT_STATUS_MODEL = statusModel;
+        AppData.CURRENT_STATUS_MODEL = (statusModel);
 
         mActivity.startActivity(new Intent(mActivity.getApplicationContext(), ComposeActivity.class));
         mActivity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_no_animation);

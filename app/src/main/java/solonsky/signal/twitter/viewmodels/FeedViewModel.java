@@ -5,7 +5,6 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -30,7 +29,6 @@ import solonsky.signal.twitter.helpers.Cache;
 import solonsky.signal.twitter.helpers.ListConfig;
 import solonsky.signal.twitter.helpers.TweetActions;
 import solonsky.signal.twitter.helpers.Utilities;
-import solonsky.signal.twitter.interfaces.ActivityListener;
 import solonsky.signal.twitter.models.StatusModel;
 import twitter4j.AsyncTwitter;
 import twitter4j.Paging;
@@ -73,7 +71,7 @@ public class FeedViewModel extends BaseObservable {
                 true, true, new StatusAdapter.StatusClickListener() {
             @Override
             public void onSearch(String searchText, View v) {
-                AppData.searchQuery = searchText;
+                AppData.searchQuery = (searchText);
                 mActivity.startActivity(new Intent(mActivity.getApplicationContext(), SearchActivity.class));
                 mActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }

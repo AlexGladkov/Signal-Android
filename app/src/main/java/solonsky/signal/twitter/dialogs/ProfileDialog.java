@@ -3,7 +3,6 @@ package solonsky.signal.twitter.dialogs;
 import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -137,8 +136,8 @@ public class ProfileDialog {
             public void onClick(View v) {
                 Flags.CURRENT_COMPOSE = Flags.COMPOSE_MENTION;
 //                AppData.CURRENT_STATUS_MODEL = statusModel;
-                AppData.COMPOSE_MENTION = mScreenName == null ?
-                        "@" + mUser.getScreenName() : mScreenName;
+                AppData.COMPOSE_MENTION = (mScreenName == null ?
+                        "@" + mUser.getScreenName() : mScreenName);
                 mActivity.startActivity(new Intent(mActivity.getApplicationContext(), ComposeActivity.class));
                 mDialog.dismiss();
             }
@@ -147,8 +146,8 @@ public class ProfileDialog {
         view.findViewById(R.id.dialog_send_message).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AppData.DM_SELECTED_USER = mScreenName == null ?
-                        mUser.getName() : mScreenName;
+                AppData.DM_SELECTED_USER = (mScreenName == null ?
+                        mUser.getName() : mScreenName);
 
                 String screenName = mScreenName == null ?
                         mUser.getScreenName() : mScreenName.replace("@", "");

@@ -11,16 +11,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.databinding.CellDirectBinding;
-import solonsky.signal.twitter.draw.CirclePicasso;
 import solonsky.signal.twitter.helpers.App;
 import solonsky.signal.twitter.helpers.AppData;
-import solonsky.signal.twitter.helpers.DateConverter;
 import solonsky.signal.twitter.helpers.Styling;
 import solonsky.signal.twitter.helpers.Utilities;
 import solonsky.signal.twitter.models.DirectModel;

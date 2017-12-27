@@ -1,8 +1,6 @@
 package solonsky.signal.twitter.overlays;
 
-import android.content.Context;
 import android.os.Handler;
-import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -64,9 +62,9 @@ public class AccountSwitcherOverlay {
     }
 
     private void updateConstraints(boolean isShow) {
-        mActivity.binding.txtLoggedSwitchLimit.setVisibility(isShow ? View.VISIBLE : View.GONE);
+        mActivity.getBinding().txtLoggedSwitchLimit.setVisibility(isShow ? View.VISIBLE : View.GONE);
         long diff = TIME_LIMIT - ((System.currentTimeMillis() - AppData.lastSwitchTime) / 1000);
-        mActivity.binding.txtLoggedSwitchLimit.setText(mActivity.getString(R.string.error_switch_limit)
+        mActivity.getBinding().txtLoggedSwitchLimit.setText(mActivity.getString(R.string.error_switch_limit)
                 .replace("[TIME]", String.valueOf(diff)));
 
         if (isShow) {
@@ -85,10 +83,10 @@ public class AccountSwitcherOverlay {
     }
 
     public void showOverlay() {
-        mActivity.viewModel.setToolbarState(AppData.TOOLBAR_LOOGED_CHOOSE);
-        mActivity.binding.tbLoggedChoose.setVisibility(View.VISIBLE);
-        mActivity.binding.viewLoggedScrim.setVisibility(View.VISIBLE);
-        mActivity.binding.recyclerLoggedUser.setVisibility(View.VISIBLE);
+        mActivity.getViewModel().setToolbarState(AppData.TOOLBAR_LOOGED_CHOOSE);
+        mActivity.getBinding().tbLoggedChoose.setVisibility(View.VISIBLE);
+        mActivity.getBinding().viewLoggedScrim.setVisibility(View.VISIBLE);
+        mActivity.getBinding().recyclerLoggedUser.setVisibility(View.VISIBLE);
 
         updateConstraints(false);
         if (((System.currentTimeMillis() - AppData.lastSwitchTime) / 1000) > (TIME_LIMIT)) {
@@ -110,10 +108,10 @@ public class AccountSwitcherOverlay {
                         public void run() {
                             long diff = TIME_LIMIT - ((System.currentTimeMillis() - AppData.lastSwitchTime) / 1000);
                             if (diff > 0) {
-                                mActivity.binding.txtLoggedSwitchLimit.setText(mActivity.getString(R.string.error_switch_limit)
+                                mActivity.getBinding().txtLoggedSwitchLimit.setText(mActivity.getString(R.string.error_switch_limit)
                                         .replace("[TIME]", String.valueOf(TIME_LIMIT - ((System.currentTimeMillis() - AppData.lastSwitchTime) / 1000)) + "s"));
                             } else {
-                                mActivity.binding.txtLoggedSwitchLimit.setVisibility(View.GONE);
+                                mActivity.getBinding().txtLoggedSwitchLimit.setVisibility(View.GONE);
                                 for (UserModel userModel : mUsersList) {
                                     userModel.setEnabled(true);
                                 }
@@ -140,11 +138,11 @@ public class AccountSwitcherOverlay {
     }
 
     public void hideOverlay() {
-        if (!mActivity.viewModel.isAdding()) {
-            mActivity.viewModel.setToolbarState(AppData.TOOLBAR_LOGGED_MAIN);
-            mActivity.binding.viewLoggedScrim.setVisibility(View.GONE);
-            mActivity.binding.tbLoggedChoose.setVisibility(View.GONE);
-            mActivity.binding.recyclerLoggedUser.setVisibility(View.GONE);
+        if (!mActivity.getViewModel().isAdding()) {
+            mActivity.getViewModel().setToolbarState(AppData.TOOLBAR_LOGGED_MAIN);
+            mActivity.getBinding().viewLoggedScrim.setVisibility(View.GONE);
+            mActivity.getBinding().tbLoggedChoose.setVisibility(View.GONE);
+            mActivity.getBinding().recyclerLoggedUser.setVisibility(View.GONE);
         }
         isStart = false;
     }
@@ -162,11 +160,11 @@ public class AccountSwitcherOverlay {
                             if (configurationUserModel.getUser().getId() == model.getId()) {
                                 mActivity.prepareToRecreate(true);
 
-                                AppData.CLIENT_SECRET = configurationUserModel.getClientSecret();
-                                AppData.CLIENT_TOKEN = configurationUserModel.getClientToken();
+                                AppData.CLIENT_SECRET = (configurationUserModel.getClientSecret());
+                                AppData.CLIENT_TOKEN = (configurationUserModel.getClientToken());
 
-                                AppData.ME = configurationUserModel.getUser();
-                                AppData.userConfiguration = configurationUserModel;
+                                AppData.ME = (configurationUserModel.getUser());
+                                AppData.userConfiguration = (configurationUserModel);
                                 new FileWork(mActivity.getApplicationContext()).writeToFile(String.valueOf(AppData.ME.getId()),
                                         FileNames.USERS_LAST_ID);
 

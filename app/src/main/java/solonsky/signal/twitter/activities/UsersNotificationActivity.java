@@ -68,7 +68,8 @@ public class UsersNotificationActivity extends AppCompatActivity {
         mSubSettingsList = new ArrayList<>();
 
         mSettingsList.add(new SettingsTextModel(getString(R.string.settings_users_notifications_mentions),
-                AppData.userConfiguration.getMentions() == null ? ConfigurationUserModel.Mentions.FROM_ALL.toString() : AppData.userConfiguration.getMentions().toString()));
+                AppData.userConfiguration.getMentions() == null ?
+                        ConfigurationUserModel.Mentions.FROM_ALL.toString() : AppData.userConfiguration.getMentions().toString()));
         mSettingsList.add(new SettingsSwitchModel(1, getString(R.string.settings_users_notifications_messages), AppData.userConfiguration.isMessages()));
         mSettingsList.add(new SettingsSwitchModel(2, getString(R.string.settings_users_notifications_likes), AppData.userConfiguration.isLikes()));
         mSettingsList.add(new SettingsSwitchModel(3, getString(R.string.settings_users_notifications_retweets), AppData.userConfiguration.isRetweets()));

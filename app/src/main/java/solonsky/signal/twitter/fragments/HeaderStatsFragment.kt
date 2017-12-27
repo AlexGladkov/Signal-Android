@@ -4,15 +4,9 @@ import android.content.Intent
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.DecelerateInterpolator
-import android.view.animation.Transformation
-import android.widget.RelativeLayout
 
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.activities.StatsFollowersActivity
@@ -20,10 +14,7 @@ import solonsky.signal.twitter.activities.StatsFollowingActivity
 import solonsky.signal.twitter.activities.StatsListedActivity
 import solonsky.signal.twitter.activities.StatsTweetsActivity
 import solonsky.signal.twitter.databinding.FragmentProfileStatsBinding
-import solonsky.signal.twitter.helpers.AppData
 import solonsky.signal.twitter.helpers.Utilities
-import solonsky.signal.twitter.interfaces.HeaderListener
-import solonsky.signal.twitter.interfaces.ProfileListener
 import solonsky.signal.twitter.models.User
 import solonsky.signal.twitter.viewmodels.ProfileStatsViewModel
 import solonsky.signal.twitter.views.ProfileView

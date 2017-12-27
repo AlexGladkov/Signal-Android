@@ -161,7 +161,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         final SwipeLayout.SwipeListener swipeListener = new SwipeLayout.SwipeListener() {
             @Override public void onOpen(final SwipeLayout layout) {
-                AppData.CURRENT_TWEET_MODEL = feedModel;
+                AppData.CURRENT_TWEET_MODEL = (feedModel);
                 mActivity.startActivity(new Intent(mContext, DetailActivity.class));
                 mActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                 new Handler().postDelayed(new Runnable() {
@@ -378,7 +378,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
             @Override
             public void onClick(View v) {
 //                AppData.CURRENT_COMPOSE = AppData.COMPOSE_REPLY;
-                AppData.CURRENT_TWEET_MODEL = feedModel;
+                AppData.CURRENT_TWEET_MODEL = (feedModel);
                 mActivity.startActivity(new Intent(mContext, ComposeActivity.class));
                 materialDialog.dismiss();
             }
@@ -463,7 +463,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     private void performReply(FeedModel feedModel) {
-        AppData.CURRENT_TWEET_MODEL = feedModel;
+        AppData.CURRENT_TWEET_MODEL = (feedModel);
 //        AppData.CURRENT_COMPOSE = AppData.COMPOSE_REPLY;
         mActivity.startActivity(new Intent(mContext, ComposeActivity.class));
     }
@@ -510,7 +510,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     }
 
     private void performContent(FeedModel feedModel) {
-        AppData.CURRENT_TWEET_MODEL = feedModel;
+        AppData.CURRENT_TWEET_MODEL = (feedModel);
         mActivity.startActivity(new Intent(mContext, ContentActivity.class));
         mActivity.overridePendingTransition(R.anim.fade_in, R.anim.slide_out_no_animation);
     }
@@ -530,7 +530,7 @@ public class FeedAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
                     case R.id.tweet_quote:
 //                        AppData.CURRENT_COMPOSE = AppData.COMPOSE_QUOTE;
-                        AppData.CURRENT_TWEET_MODEL = feedModel;
+                        AppData.CURRENT_TWEET_MODEL = (feedModel);
                         mActivity.startActivity(new Intent(mContext, ComposeActivity.class));
                         break;
                 }

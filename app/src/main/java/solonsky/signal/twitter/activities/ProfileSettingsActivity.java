@@ -9,7 +9,6 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
@@ -23,9 +22,7 @@ import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.PicassoEngine;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Handler;
 
 import pl.aprilapps.easyphotopicker.EasyImage;
 import solonsky.signal.twitter.R;
@@ -33,7 +30,6 @@ import solonsky.signal.twitter.data.ProfileRefreshData;
 import solonsky.signal.twitter.databinding.ActivityProfileSettingsBinding;
 import solonsky.signal.twitter.helpers.App;
 import solonsky.signal.twitter.helpers.AppData;
-import solonsky.signal.twitter.helpers.EasyImageConfig;
 import solonsky.signal.twitter.helpers.FileNames;
 import solonsky.signal.twitter.helpers.FileWork;
 import solonsky.signal.twitter.helpers.Permission;
@@ -109,7 +105,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                         @Override
                         public void updatedProfile(User user) {
                             super.updatedProfile(user);
-                            AppData.ME = solonsky.signal.twitter.models.User.getFromUserInstance(user);
+                            AppData.ME = (solonsky.signal.twitter.models.User.getFromUserInstance(user));
                             fileWork.writeToFile(gson.toJson(AppData.ME), FileNames.USER);
 
                             handler.post(new Runnable() {
@@ -124,7 +120,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                         @Override
                         public void updatedProfileImage(User user) {
                             super.updatedProfileImage(user);
-                            AppData.ME = solonsky.signal.twitter.models.User.getFromUserInstance(user);
+                            AppData.ME = (solonsky.signal.twitter.models.User.getFromUserInstance(user));
                             fileWork.writeToFile(gson.toJson(AppData.ME), FileNames.USER);
 
                             handler.post(new Runnable() {
@@ -146,7 +142,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                         public void lookedupUsers(ResponseList<User> users) {
                             super.lookedupUsers(users);
                             if (users.size() > 0) {
-                                AppData.ME = solonsky.signal.twitter.models.User.getFromUserInstance(users.get(0));
+                                AppData.ME = (solonsky.signal.twitter.models.User.getFromUserInstance(users.get(0)));
                                 fileWork.writeToFile(gson.toJson(AppData.ME), FileNames.USER);
 
                                 handler.post(new Runnable() {

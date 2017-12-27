@@ -55,7 +55,7 @@ public class NotificationsReplyFragment extends Fragment implements FragmentCoun
             @Override
             public void onUpdate() {
                 viewModel.setState(NotificationsReplyData.getInstance().getReplyList().size() == 0 ?
-                    AppData.UI_STATE_NO_ITEMS : AppData.UI_STATE_VISIBLE);
+                        AppData.UI_STATE_NO_ITEMS : AppData.UI_STATE_VISIBLE );
                 mAdapter.notifyDataSetChanged();
                 if (mParent.getUpdateHandler() != null)
                     mParent.getUpdateHandler().onUpdate();

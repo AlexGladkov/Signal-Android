@@ -1,16 +1,13 @@
 package solonsky.signal.twitter.services
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.location.Location
-import android.location.LocationListener
 import android.location.LocationManager
 import android.os.Bundle
 import android.os.IBinder
-import android.support.v4.app.ActivityCompat
 import android.util.Log
 import solonsky.signal.twitter.helpers.AppData
 

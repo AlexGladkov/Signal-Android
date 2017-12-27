@@ -25,7 +25,7 @@ public class ProfileLikesViewModel extends BaseObservable {
                 .setHasFixedSize(true)
                 .build(context);
 
-        this.state = AppData.UI_STATE_VISIBLE;
+        this.state = AppData.UI_STATE_VISIBLE ;
     }
 
     @Bindable

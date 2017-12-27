@@ -16,7 +16,6 @@ import android.view.WindowManager;
 import java.util.ArrayList;
 
 import solonsky.signal.twitter.R;
-import solonsky.signal.twitter.adapters.UserAdapter;
 import solonsky.signal.twitter.adapters.UserDetailAdapter;
 import solonsky.signal.twitter.api.DirectApi;
 import solonsky.signal.twitter.data.UsersData;
@@ -71,7 +70,7 @@ public class ChatSelectActivity extends AppCompatActivity {
         mAdapter = new UserDetailAdapter(mUsersList, getApplicationContext(), this, new UserDetailAdapter.UserClickHandler() {
             @Override
             public void onItemClick(UserModel model, View v) {
-                AppData.DM_SELECTED_USER = model.getUsername();
+                AppData.DM_SELECTED_USER = (model.getUsername());
                 AppData.DM_OTHER_ID = model.getId();
                 DirectApi.getInstance().clear();
                 DirectApi.getInstance().setUserId(model.getId());

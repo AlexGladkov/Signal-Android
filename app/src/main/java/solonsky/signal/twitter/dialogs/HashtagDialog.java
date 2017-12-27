@@ -7,7 +7,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -77,7 +76,7 @@ public class HashtagDialog {
             @Override
             public void onClick(View v) {
                 Flags.CURRENT_COMPOSE = Flags.COMPOSE_HASHTAG;
-                AppData.COMPOSE_HASHTAG = hashtagText;
+                AppData.COMPOSE_HASHTAG = (hashtagText);
                 mActivity.startActivity(new Intent(mActivity, ComposeActivity.class));
                 mDialog.dismiss();
             }

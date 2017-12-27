@@ -52,7 +52,7 @@ public class NotificationsFollowData {
         }.getType();
         try {
             List<NotificationDetailModel> notificationModels = Reservoir.get(Cache.NotificationsFollow +
-                    String.valueOf(AppData.ME.getId()), resultType);
+                    String.valueOf(AppData.ME), resultType);
             getFollowList().addAll(notificationModels);
         } catch (IOException | NullPointerException e) {
             Log.e(TAG, "Error loading notifications all " + e.getLocalizedMessage());

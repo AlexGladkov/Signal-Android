@@ -3,29 +3,22 @@ package solonsky.signal.twitter.activities
 import android.Manifest
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
-import android.media.MediaPlayer
 import android.os.Bundle
 import android.os.Handler
 import android.support.v4.app.ActivityCompat
-import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.SeekBar
-import android.widget.VideoView
 import kotlinx.android.synthetic.main.activity_media.*
 import com.arellomobile.mvp.MvpActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.helpers.AppData
-import solonsky.signal.twitter.helpers.Flags
 import solonsky.signal.twitter.helpers.Permission
 import solonsky.signal.twitter.helpers.Utilities
 import solonsky.signal.twitter.libs.DownloadFiles
-import solonsky.signal.twitter.libs.ShareContent
 import solonsky.signal.twitter.presenters.MediaPresenter
-import solonsky.signal.twitter.viewmodels.MediaViewModel
 import solonsky.signal.twitter.views.MediaView
 
 /**
@@ -75,7 +68,7 @@ class MediaActivity : MvpActivity(), MediaView {
         }
 
         btn_media_save.setOnClickListener {
-            if ((Permission.checkSelfPermission(getApplicationContext(),
+            if ((Permission.checkSelfPermission(applicationContext,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE) &&
                     Permission.checkSelfPermission(applicationContext,
                             Manifest.permission.READ_EXTERNAL_STORAGE))) {

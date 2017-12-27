@@ -90,8 +90,8 @@ public class LoginActivity extends AppCompatActivity {
 
         if (!fileWork.readFromFile(FileNames.CLIENT_SECRET).equals("") &&
                 !fileWork.readFromFile(FileNames.CLIENT_TOKEN).equals("")) {
-            AppData.CLIENT_TOKEN = fileWork.readFromFile(FileNames.CLIENT_TOKEN);
-            AppData.CLIENT_SECRET = fileWork.readFromFile(FileNames.CLIENT_SECRET);
+            AppData.CLIENT_TOKEN = (fileWork.readFromFile(FileNames.CLIENT_TOKEN));
+            AppData.CLIENT_SECRET = (fileWork.readFromFile(FileNames.CLIENT_SECRET));
             startActivity(new Intent(getApplicationContext(), LoggedActivity.class));
             finish();
         }
@@ -112,8 +112,8 @@ public class LoginActivity extends AppCompatActivity {
                 final Handler handler = new Handler();
                 TwitterSession session = TwitterCore.getInstance().getSessionManager().getActiveSession();
                 final TwitterAuthToken authToken = session.getAuthToken();
-                AppData.CLIENT_TOKEN = authToken.token;
-                AppData.CLIENT_SECRET = authToken.secret;
+                AppData.CLIENT_TOKEN = (authToken.token);
+                AppData.CLIENT_SECRET = (authToken.secret);
 
                 final AsyncTwitter asyncTwitter = Utilities.getAsyncTwitter();
                 asyncTwitter.addListener(new TwitterAdapter() {
@@ -123,14 +123,14 @@ public class LoginActivity extends AppCompatActivity {
 
                         /* Save user for next performance */
                         User user = User.getFromUserInstance(users.get(0));
-                        AppData.ME = user;
+                        AppData.ME = (user);
                         fileWork.writeToFile(String.valueOf(AppData.ME.getId()), FileNames.USERS_LAST_ID);
                         fileWork.writeToFile(authToken.token, FileNames.CLIENT_TOKEN);
                         fileWork.writeToFile(authToken.secret, FileNames.CLIENT_SECRET);
 
                         /* Create configuration user for notifications and bottom tabs */
-                        AppData.userConfiguration = ConfigurationUserModel.getDefaultInstance(user,
-                                AppData.CONSUMER_KEY, AppData.CONSUMER_SECRET, authToken.token, authToken.secret);
+                        AppData.userConfiguration = (ConfigurationUserModel.getDefaultInstance(user,
+                                AppData.CONSUMER_KEY, AppData.CONSUMER_SECRET, authToken.token, authToken.secret));
                         AppData.configurationUserModels.add(AppData.userConfiguration);
                         ConfigurationUserModel.saveData();
 
@@ -177,7 +177,7 @@ public class LoginActivity extends AppCompatActivity {
         binding.setClick(new LoginViewModel.LoginClickHandler() {
             @Override
             public void onLoginClick(View v) {
-                 binding.btnLoginTwitter.performClick();
+                binding.btnLoginTwitter.performClick();
             }
         });
     }

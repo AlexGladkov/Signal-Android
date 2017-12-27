@@ -1,11 +1,8 @@
 package solonsky.signal.twitter.data;
 
-import android.util.Log;
-
 import com.anupcowkur.reservoir.Reservoir;
 import com.google.common.reflect.TypeToken;
 
-import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;

@@ -15,7 +15,6 @@ import solonsky.signal.twitter.activities.MVPProfileActivity;
 import solonsky.signal.twitter.adapters.NotificationsDetailAdapter;
 import solonsky.signal.twitter.data.NotificationsFollowData;
 import solonsky.signal.twitter.databinding.FragmentNotificationsFollowBinding;
-import solonsky.signal.twitter.helpers.AppData;
 import solonsky.signal.twitter.helpers.Flags;
 import solonsky.signal.twitter.interfaces.FragmentCounterListener;
 import solonsky.signal.twitter.interfaces.UpdateHandler;

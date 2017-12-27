@@ -372,7 +372,8 @@ public class MuteAddActivity extends AppCompatActivity {
                             if (!MuteData.getInstance().getmHashtagsList().contains(removeModel)) {
                                 MuteData.getInstance().getmHashtagsList().add(0, removeModel);
                                 MuteData.getInstance().saveCache();
-                                Toast.makeText(getApplicationContext(), getString(R.string.success_mute), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), getString(R.string.success_mute_tag)
+                                        .replace("[tag]", binding.txtMuteAddHashtag.getText().toString()), Toast.LENGTH_SHORT).show();
                             }
                         }
 
@@ -381,7 +382,8 @@ public class MuteAddActivity extends AppCompatActivity {
                             if (!MuteData.getInstance().getmUsersList().contains(removeModel)) {
                                 MuteData.getInstance().getmHashtagsList().add(0, removeModel);
                                 MuteData.getInstance().saveCache();
-                                Toast.makeText(getApplicationContext(), getString(R.string.success_mute), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getApplicationContext(), getString(R.string.success_mute_user)
+                                        .replace("[username]", binding.txtMuteAddUser.getText().toString()), Toast.LENGTH_SHORT).show();
                                 asyncTwitter.createMute(binding.txtMuteAddUser.getText().toString().replace(" ", ""));
                             }
                         }

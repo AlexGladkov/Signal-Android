@@ -19,6 +19,7 @@ import com.wang.avi.AVLoadingIndicatorView;
 import solonsky.signal.twitter.adapters.ImageHorizontalAdapter;
 import solonsky.signal.twitter.adapters.SimpleHorizontalAdapter;
 import solonsky.signal.twitter.adapters.UserHorizontalAdapter;
+import solonsky.signal.twitter.helpers.AppData;
 import solonsky.signal.twitter.helpers.Cache;
 import solonsky.signal.twitter.helpers.Flags;
 
@@ -28,7 +29,6 @@ import java.util.List;
 
 import solonsky.signal.twitter.BR;
 import solonsky.signal.twitter.R;
-import solonsky.signal.twitter.helpers.AppData;
 import solonsky.signal.twitter.helpers.ListConfig;
 import solonsky.signal.twitter.helpers.Permission;
 import solonsky.signal.twitter.helpers.Utilities;
@@ -192,7 +192,7 @@ public class ComposeViewModel extends BaseObservable {
         isChanged = true;
         int length = s.toString().replaceAll(Patterns.WEB_URL.pattern(), "").length();
         setMore(AppData.TWITTER_RESTRICT < length);
-        setEnabled(AppData.TWITTER_RESTRICT >= length && (length > 0 || mediaCount > 0));
+        setEnabled(AppData.TWITTER_RESTRICT  >= length && (length > 0 || mediaCount > 0));
 
         String title = mActivity.getString(R.string.compose_default_title);
 

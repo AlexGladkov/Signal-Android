@@ -1,7 +1,6 @@
 package solonsky.signal.twitter.fragments
 
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
@@ -19,7 +18,6 @@ import android.view.animation.DecelerateInterpolator
 import android.view.animation.Transformation
 import android.widget.*
 import com.arellomobile.mvp.MvpAppCompatFragment
-import com.arellomobile.mvp.MvpFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.ogaclejapan.smarttablayout.SmartTabLayout
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter
@@ -29,7 +27,6 @@ import kotlinx.android.synthetic.main.activity_profile.*
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.activities.*
 import solonsky.signal.twitter.adapters.SimplePagerAdapter
-import solonsky.signal.twitter.databinding.ActivityProfileBinding
 import solonsky.signal.twitter.helpers.App
 import solonsky.signal.twitter.helpers.AppData
 import solonsky.signal.twitter.helpers.Utilities

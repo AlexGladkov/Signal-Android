@@ -3,13 +3,13 @@ package solonsky.signal.twitter.data
 import android.util.Log
 
 import com.anupcowkur.reservoir.Reservoir
+import solonsky.signal.twitter.helpers.AppData
 
 import java.io.IOException
 import java.util.ArrayList
 import java.util.Collections
 import java.util.ConcurrentModificationException
 
-import solonsky.signal.twitter.helpers.AppData
 import solonsky.signal.twitter.helpers.Cache
 import solonsky.signal.twitter.interfaces.UpdateAddHandler
 import solonsky.signal.twitter.models.StatusModel

@@ -10,7 +10,6 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,13 +25,10 @@ import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 import java.util.ArrayList;
 
 import solonsky.signal.twitter.R;
-import solonsky.signal.twitter.activities.LoggedActivity;
 import solonsky.signal.twitter.helpers.App;
 import solonsky.signal.twitter.helpers.AppData;
 import solonsky.signal.twitter.helpers.Flags;
-import solonsky.signal.twitter.helpers.Transitions;
 import solonsky.signal.twitter.helpers.Utilities;
-import solonsky.signal.twitter.interfaces.ActivityListener;
 import solonsky.signal.twitter.interfaces.SearchListener;
 import solonsky.signal.twitter.models.StatusModel;
 import solonsky.signal.twitter.models.User;
@@ -318,10 +314,10 @@ public class SearchedFragment extends Fragment implements SmartTabLayout.TabProv
         });
 
         Query query = new Query(AppData.searchQuery);
-        query.setCount(100);
+        query.setCount(50);
         asyncTwitter.search(query);
         asyncTwitter.searchUsers(AppData.searchQuery, 0);
-        asyncTwitter.getHomeTimeline(new Paging(1, 100));
+        asyncTwitter.getHomeTimeline(new Paging(1, 50));
     }
 
     private void selectFragment(Fragment fragment) {

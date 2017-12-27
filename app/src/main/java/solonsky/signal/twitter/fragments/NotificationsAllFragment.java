@@ -18,7 +18,6 @@ import java.util.ConcurrentModificationException;
 
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.activities.DetailActivity;
-import solonsky.signal.twitter.activities.LoggedActivity;
 import solonsky.signal.twitter.activities.MVPProfileActivity;
 import solonsky.signal.twitter.adapters.NotificationsMainAdapter;
 import solonsky.signal.twitter.data.LoggedData;
@@ -136,7 +135,7 @@ public class NotificationsAllFragment extends Fragment implements FragmentCounte
             switch (model.getType()) {
                 case NotificationModel.TYPE_REPLY:
                     if (model.getStatusModel() != null) {
-                        AppData.CURRENT_STATUS_MODEL = model.getStatusModel();
+                        AppData.CURRENT_STATUS_MODEL = (model.getStatusModel());
                         getActivity().startActivity(new Intent(getContext(), DetailActivity.class));
                         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }
@@ -144,7 +143,7 @@ public class NotificationsAllFragment extends Fragment implements FragmentCounte
 
                 case NotificationModel.TYPE_RT:
                     if (model.getStatusModel() != null) {
-                        AppData.CURRENT_STATUS_MODEL = model.getStatusModel();
+                        AppData.CURRENT_STATUS_MODEL = (model.getStatusModel());
                         getActivity().startActivity(new Intent(getContext(), DetailActivity.class));
                         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }
@@ -152,7 +151,7 @@ public class NotificationsAllFragment extends Fragment implements FragmentCounte
 
                 case NotificationModel.TYPE_LIKE:
                     if (model.getStatusModel() != null) {
-                        AppData.CURRENT_STATUS_MODEL = model.getStatusModel();
+                        AppData.CURRENT_STATUS_MODEL = (model.getStatusModel());
                         getActivity().startActivity(new Intent(getContext(), DetailActivity.class));
                         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }
@@ -178,7 +177,7 @@ public class NotificationsAllFragment extends Fragment implements FragmentCounte
 
                 case NotificationModel.TYPE_QUOTE:
                     if (model.getStatusModel() != null) {
-                        AppData.CURRENT_STATUS_MODEL = model.getStatusModel();
+                        AppData.CURRENT_STATUS_MODEL = (model.getStatusModel());
                         getActivity().startActivity(new Intent(getContext(), DetailActivity.class));
                         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }

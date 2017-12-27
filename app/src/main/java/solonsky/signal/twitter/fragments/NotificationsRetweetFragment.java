@@ -63,7 +63,7 @@ public class NotificationsRetweetFragment extends Fragment implements FragmentCo
             @Override
             public void onUpdate() {
                 viewModel.setState(NotificationsRetweetData.getInstance().getRetweetList().size() == 0 ?
-                    AppData.UI_STATE_NO_ITEMS : AppData.UI_STATE_VISIBLE);
+                        AppData.UI_STATE_NO_ITEMS : AppData.UI_STATE_VISIBLE);
                 mAdapter.notifyDataSetChanged();
                 if (mParent.getUpdateHandler() != null)
                     mParent.getUpdateHandler().onUpdate();

@@ -10,6 +10,7 @@ import org.joda.time.LocalDateTime;
 
 import solonsky.signal.twitter.helpers.AppData;
 import solonsky.signal.twitter.helpers.Flags;
+import twitter4j.DirectMessage;
 
 /**
  * Created by neura on 23.05.17.
@@ -42,6 +43,15 @@ public class DirectModel extends BaseObservable {
         this.dateTime = dateTime;
         this.isHighlighted = isHighlighted;
         this.divideState = AppData.DIVIDER_SHORT;
+    }
+
+    public static DirectModel getInstance(DirectMessage directMessage, Long myId) {
+        long otherId = directMessage.getSenderId() == myId ? directMessage.getRecipientId() : directMessage.getSenderId();
+        twitter4j.User user = directMessage.getSenderId() == myId ? directMessage.getRecipient() : directMessage.getSender();
+
+        return new DirectModel(
+                directMessage.getId(), otherId, user.getOriginalProfileImageURL(), user.getName(),
+                directMessage.getText(), new LocalDateTime(directMessage.getCreatedAt()), true);
     }
 
     @Override

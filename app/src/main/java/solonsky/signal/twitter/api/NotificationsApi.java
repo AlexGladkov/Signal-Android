@@ -119,7 +119,8 @@ public class NotificationsApi {
                     NotificationDetailModel notificationDetailModel = NotificationDetailModel.getRetweetInstance(convertedUser.getId(),
                             convertedUser.getName(), "@" + convertedUser.getScreenName(), convertedUser.getOriginalProfileImageURL(),
                             convertedUser.getDescription(),
-                            UsersData.getInstance().getFollowingList().contains(convertedUser.getId()) || convertedUser.getId() == AppData.ME.getId(),
+                            UsersData.getInstance().getFollowingList().contains(convertedUser.getId())
+                                    || convertedUser.getId() == AppData.ME.getId(),
                             !fromStart);
 
                     NotificationModel notificationModel = NotificationModel.getRetweetInstance(status.getId(),

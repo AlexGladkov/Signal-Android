@@ -13,8 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.daimajia.swipe.SwipeLayout;
-
 import java.io.BufferedInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -45,6 +43,7 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     public interface ChatClickListener {
         void onItemClick(View v, ChatModel chatModel);
+        void onAvatarClick(View v, ChatModel chatModel);
     }
 
     public ChatAdapter(ArrayList<ChatModel> mChatModels, Context mContext, ChatActivity activity, ChatClickListener chatClickListener) {
@@ -103,6 +102,12 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     Color.parseColor("#00000000") : Color.parseColor("#1A000000"));
             ((UserViewHolder) holder).binding.chatUserCivAvatar.setBorderWidth(isNight ?
                     0 : (int) Utilities.convertDpToPixel(0.5f, mContext));
+            ((UserViewHolder) holder).binding.chatUserCivAvatar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    chatClickListener.onAvatarClick(v, model);
+                }
+            });
 
             ((UserViewHolder) holder).binding.chatUserContent.addAutoLinkMode(
                     AutoLinkMode.MODE_PHONE, AutoLinkMode.MODE_MENTION,
@@ -120,6 +125,12 @@ public class ChatAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
                     Color.parseColor("#00000000") : Color.parseColor("#1A000000"));
             ((OtherViewHolder) holder).binding.chatOtherCivAvatar.setBorderWidth(isNight ?
                     0 : (int) Utilities.convertDpToPixel(0.5f, mContext));
+            ((OtherViewHolder) holder).binding.chatOtherCivAvatar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    chatClickListener.onAvatarClick(v, model);
+                }
+            });
 
             ((OtherViewHolder) holder).binding.chatOtherContent.addAutoLinkMode(
                     AutoLinkMode.MODE_PHONE, AutoLinkMode.MODE_MENTION,

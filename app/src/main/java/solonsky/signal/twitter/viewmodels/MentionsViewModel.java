@@ -5,7 +5,6 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -23,7 +22,6 @@ import java.util.Comparator;
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.activities.SearchActivity;
 import solonsky.signal.twitter.adapters.StatusAdapter;
-import solonsky.signal.twitter.data.FeedData;
 import solonsky.signal.twitter.data.LoggedData;
 import solonsky.signal.twitter.data.MentionsData;
 import solonsky.signal.twitter.helpers.AppData;
@@ -31,7 +29,6 @@ import solonsky.signal.twitter.helpers.Cache;
 import solonsky.signal.twitter.helpers.ListConfig;
 import solonsky.signal.twitter.helpers.TweetActions;
 import solonsky.signal.twitter.helpers.Utilities;
-import solonsky.signal.twitter.interfaces.ActivityListener;
 import solonsky.signal.twitter.models.StatusModel;
 import twitter4j.AsyncTwitter;
 import twitter4j.Paging;
@@ -69,7 +66,7 @@ public class MentionsViewModel extends BaseObservable {
                 mActivity, true, true, new StatusAdapter.StatusClickListener() {
             @Override
             public void onSearch(String searchText, View v) {
-                AppData.searchQuery = searchText;
+                AppData.searchQuery = (searchText);
                 mActivity.startActivity(new Intent(mActivity.getApplicationContext(), SearchActivity.class));
                 mActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }

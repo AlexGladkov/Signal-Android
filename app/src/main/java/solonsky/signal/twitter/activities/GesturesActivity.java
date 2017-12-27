@@ -58,19 +58,19 @@ public class GesturesActivity extends AppCompatActivity {
         mActivity = this;
         mSettingsList = new ArrayList<>();
 
-        String shortGesture = AppData.appConfiguration.getShortTap() == ConfigurationModel.TAP_SHOW_ACTIONS ?
-                getString(R.string.gestures_show) : AppData.appConfiguration.getShortTap() == ConfigurationModel.TAP_VIEW_DETAILS ?
-                getString(R.string.gestures_details) : AppData.appConfiguration.getShortTap() == ConfigurationModel.TAP_OPEN_MEDIA ?
+        String shortGesture =  AppData.appConfiguration.getShortTap() == ConfigurationModel.TAP_SHOW_ACTIONS ?
+                getString(R.string.gestures_show) :  AppData.appConfiguration.getShortTap() == ConfigurationModel.TAP_VIEW_DETAILS ?
+                getString(R.string.gestures_details) :  AppData.appConfiguration.getShortTap() == ConfigurationModel.TAP_OPEN_MEDIA ?
                 getString(R.string.gestures_media) : getString(R.string.gestures_link);
 
-        String longGesture = AppData.appConfiguration.getLongTap() == ConfigurationModel.TAP_LAST_SHARING ?
-                getString(R.string.gestures_last) : AppData.appConfiguration.getLongTap() == ConfigurationModel.TAP_READ_LATER ?
-                getString(R.string.gestures_later) : AppData.appConfiguration.getLongTap() == ConfigurationModel.TAP_TRANSLATE ?
+        String longGesture =  AppData.appConfiguration.getLongTap() == ConfigurationModel.TAP_LAST_SHARING ?
+                getString(R.string.gestures_last) :  AppData.appConfiguration.getLongTap() == ConfigurationModel.TAP_READ_LATER ?
+                getString(R.string.gestures_later) :  AppData.appConfiguration.getLongTap() == ConfigurationModel.TAP_TRANSLATE ?
                 getString(R.string.gestures_translate) : getString(R.string.gestures_share);
 
-        String doubleGesture = AppData.appConfiguration.getDoubleTap() == ConfigurationModel.TAP_REPLY ?
-                getString(R.string.gestures_reply) : AppData.appConfiguration.getDoubleTap() == ConfigurationModel.TAP_QUOTE ?
-                getString(R.string.gestures_quote) : AppData.appConfiguration.getDoubleTap() == ConfigurationModel.TAP_RETWEET ?
+        String doubleGesture =  AppData.appConfiguration.getDoubleTap() == ConfigurationModel.TAP_REPLY ?
+                getString(R.string.gestures_reply) :  AppData.appConfiguration.getDoubleTap() == ConfigurationModel.TAP_QUOTE ?
+                getString(R.string.gestures_quote) :  AppData.appConfiguration.getDoubleTap() == ConfigurationModel.TAP_RETWEET ?
                 getString(R.string.gestures_retweet) : getString(R.string.gestures_like);
 
         mSettingsList.add(new SettingsTextModel(getString(R.string.settings_gestures_short), shortGesture));

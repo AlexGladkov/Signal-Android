@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -86,7 +85,7 @@ public class LikesFragment extends Fragment implements FragmentCounterListener {
         if (LikesData.getInstance().getLikesStatuses().size() == 0) {
             viewModel = new LikesViewModel(mActivity, AppData.UI_STATE_LOADING);
         } else {
-            viewModel = new LikesViewModel(mActivity, AppData.UI_STATE_VISIBLE);
+            viewModel = new LikesViewModel(mActivity, AppData.UI_STATE_VISIBLE );
         }
 
         binding.setModel(viewModel);
@@ -108,7 +107,7 @@ public class LikesFragment extends Fragment implements FragmentCounterListener {
             @Override
             public void onUpdate() {
                 viewModel.setState(LikesData.getInstance().getLikesStatuses().size() > 0 ?
-                        AppData.UI_STATE_VISIBLE : AppData.UI_STATE_NO_ITEMS);
+                        AppData.UI_STATE_VISIBLE  : AppData.UI_STATE_NO_ITEMS);
                 viewModel.getLikesAdapter().notifyDataSetChanged();
                 binding.recyclerLike.postDelayed(new Runnable() {
                     @Override

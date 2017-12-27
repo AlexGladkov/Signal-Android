@@ -186,7 +186,7 @@ public class FeedFragment extends Fragment implements FragmentCounterListener {
         if (FeedData.getInstance().getFeedStatuses().size() == 0) {
             viewModel = new FeedViewModel((AppCompatActivity) getActivity(), AppData.UI_STATE_LOADING);
         } else {
-            viewModel = new FeedViewModel((AppCompatActivity) getActivity(), AppData.UI_STATE_VISIBLE);
+            viewModel = new FeedViewModel((AppCompatActivity) getActivity(), AppData.UI_STATE_VISIBLE );
         }
 
         binding.setFeed(viewModel);
@@ -215,7 +215,7 @@ public class FeedFragment extends Fragment implements FragmentCounterListener {
             @Override
             public void onUpdate() {
                 viewModel.setState(FeedData.getInstance().getFeedStatuses().size() > 0 ?
-                        AppData.UI_STATE_VISIBLE : AppData.UI_STATE_NO_ITEMS);
+                        AppData.UI_STATE_VISIBLE  : AppData.UI_STATE_NO_ITEMS);
                 viewModel.getmFeedAdapter().notifyDataSetChanged();
                 binding.recyclerFeed.postDelayed(new Runnable() {
                     @Override

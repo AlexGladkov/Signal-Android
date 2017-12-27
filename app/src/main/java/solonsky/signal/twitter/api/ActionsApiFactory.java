@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.Toast;
@@ -285,7 +284,7 @@ public class ActionsApiFactory {
                             final MediaPlayer mediaPlayer = MediaPlayer.create(context, R.raw.mute);
                             mediaPlayer.start();
                         }
-                        Toast.makeText(context, context.getString(R.string.success_mute), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.success_mute_user), Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -299,7 +298,8 @@ public class ActionsApiFactory {
                     boolean hasUpdate = false;
                     ArrayList<StatusModel> temp = new ArrayList<>();
                     for (StatusModel statusModel : FeedData.getInstance().getFeedStatuses()) {
-                        if (!TextUtils.equals(statusModel.getUser().getScreenName().toLowerCase(), screenName.toLowerCase())) {
+                        if (TextUtils.equals(statusModel.getUser().getScreenName().toLowerCase(), screenName.toLowerCase())) {
+                            Log.e(TAG, "teeemp temp t-t-t-t-temp temp");
                             temp.add(statusModel);
                             hasUpdate = true;
                         }
@@ -331,7 +331,7 @@ public class ActionsApiFactory {
             }
 
             @Override
-            public void createdMute(twitter4j.User user) {
+            public void createdMute(final twitter4j.User user) {
                 super.createdMute(user);
                 RemoveModel removeModel = new RemoveModel(user.getId(), "@" + user.getScreenName());
 
@@ -347,7 +347,9 @@ public class ActionsApiFactory {
                             final MediaPlayer mediaPlayer = MediaPlayer.create(context, R.raw.mute);
                             mediaPlayer.start();
                         }
-                        Toast.makeText(context, context.getString(R.string.success_mute), Toast.LENGTH_SHORT).show();
+
+                        Toast.makeText(context, context.getString(R.string.success_mute_user)
+                                .replace("[username]", "@" + user.getScreenName()), Toast.LENGTH_SHORT).show();
                     }
                 });
             }

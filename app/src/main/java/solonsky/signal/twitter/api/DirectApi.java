@@ -10,7 +10,6 @@ import com.google.gson.GsonBuilder;
 
 import org.joda.time.LocalDateTime;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -225,7 +224,7 @@ public class DirectApi {
             ChatModel chatModel;
             if (directMessage.getMediaEntities().length > 0) {
                 chatModel = new ChatModel(
-                        directMessage.getId(),
+                        directMessage.getId(), directMessage.getSenderId(),
                         isMine ? AppData.CHAT_ME : AppData.CHAT_NOT_ME, "",
                         directMessage.getMediaEntities()[0].getMediaURL(),
                         directMessage.getSender().getOriginalProfileImageURL(),
@@ -233,7 +232,7 @@ public class DirectApi {
                         showArrow, showArrow);
             } else {
                 chatModel = new ChatModel(
-                        directMessage.getId(),
+                        directMessage.getId(), directMessage.getSenderId(),
                         isMine ? AppData.CHAT_ME : AppData.CHAT_NOT_ME, text, "",
                         directMessage.getSender().getOriginalProfileImageURL(),
                         new LocalDateTime(directMessage.getCreatedAt()).toString("HH:mm"),

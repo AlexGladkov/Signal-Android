@@ -187,13 +187,17 @@ public class FeedData {
     }
 
     public void addNewItems() {
-        Collections.reverse(newStatuses);
-        for (StatusModel statusModel : newStatuses) {
-            if (!feedStatuses.contains(statusModel))
-                this.feedStatuses.add(0, statusModel);
-        }
+        try {
+            Collections.reverse(newStatuses);
+            for (StatusModel statusModel : newStatuses) {
+                if (!feedStatuses.contains(statusModel))
+                    this.feedStatuses.add(0, statusModel);
+            }
 
-        this.newStatuses.clear();
+            this.newStatuses.clear();
+        } catch (ConcurrentModificationException e) {
+            e.printStackTrace();
+        }
     }
 
     public void clearNew() {

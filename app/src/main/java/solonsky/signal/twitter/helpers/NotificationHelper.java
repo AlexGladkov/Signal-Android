@@ -501,7 +501,8 @@ public class NotificationHelper {
         mBuilder.setGroup(mContext.getString(R.string.app_name));
         mBuilder.setAutoCancel(true);
 
-        if (AppData.userConfiguration.isSound() && AppData.userConfiguration.isVibration() && AppData.appConfiguration.isSounds()) {
+        if (AppData.userConfiguration.isSound() &&
+                AppData.userConfiguration.isVibration() && AppData.appConfiguration.isSounds()) {
             mBuilder.setDefaults(Notification.DEFAULT_SOUND | Notification.DEFAULT_VIBRATE);
         } else if (AppData.userConfiguration.isSound() && AppData.appConfiguration.isSounds()) {
             mBuilder.setDefaults(Notification.DEFAULT_SOUND);

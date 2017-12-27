@@ -1,23 +1,22 @@
 package solonsky.signal.twitter.helpers;
 
 import android.location.Location;
-
-import org.jetbrains.annotations.Nullable;
+import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
 
 import solonsky.signal.twitter.models.ConfigurationModel;
 import solonsky.signal.twitter.models.ConfigurationUserModel;
+import solonsky.signal.twitter.models.DirectMessage;
 import solonsky.signal.twitter.models.FeedModel;
 import solonsky.signal.twitter.models.StatusModel;
 import solonsky.signal.twitter.models.User;
 import solonsky.signal.twitter.models.UserModel;
-import twitter4j.DirectMessage;
 
 /**
- * Created by neura on 21.05.17.
- * Helper class for contains global app data
+ * Created by sunwi on 18.12.2017.
  */
+
 
 public class AppData {
     public static final String KEY_TEXT_REPLY = "key_text_reply";
@@ -29,6 +28,8 @@ public class AppData {
     public static final String USERS_NOTIFICATION_MENTIONS = "From All";
     public static ArrayList<DirectMessage> CURRENT_DIRECT = new ArrayList<>();
     public static final String notificationFilter = "ru.arktos.agladkov.signal";
+
+    public static boolean isRecreate = false;
 
     public static String DM_SELECTED_USER;
     public static long DM_OTHER_ID;
@@ -105,4 +106,6 @@ public class AppData {
 
     @Nullable
     public static Location currentLocation = null;
+
+
 }

@@ -38,7 +38,6 @@ import java.util.ConcurrentModificationException;
 import java.util.List;
 
 import solonsky.signal.twitter.R;
-import solonsky.signal.twitter.activities.ComposeActivity;
 import solonsky.signal.twitter.activities.LoggedActivity;
 import solonsky.signal.twitter.activities.SearchActivity;
 import solonsky.signal.twitter.adapters.SearchAdapter;
@@ -53,7 +52,6 @@ import solonsky.signal.twitter.helpers.Utilities;
 import solonsky.signal.twitter.interfaces.ActivityListener;
 import solonsky.signal.twitter.models.SearchModel;
 import solonsky.signal.twitter.models.SimpleModel;
-import solonsky.signal.twitter.viewmodels.ComposeViewModel;
 import solonsky.signal.twitter.viewmodels.SearchViewModel;
 import twitter4j.AsyncTwitter;
 import twitter4j.GeoLocation;
@@ -115,13 +113,13 @@ public class SearchFragment extends Fragment {
         mActivity = (LoggedActivity) getActivity();
         setupActivity();
 
-        mActivity.binding.txtLoggedSearch.requestFocus();
-        mActivity.binding.txtLoggedSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        mActivity.getBinding().txtLoggedSearch.requestFocus();
+        mActivity.getBinding().txtLoggedSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                if (!mActivity.binding.txtLoggedSearch.getText().toString().equals("")) {
-                    mActivity.binding.rlLoggedContainer.requestFocus();
-                    AppData.searchQuery = mActivity.binding.txtLoggedSearch.getText().toString();
+                if (!mActivity.getBinding().txtLoggedSearch.getText().toString().equals("")) {
+                    mActivity.getBinding().rlLoggedContainer.requestFocus();
+                    AppData.searchQuery = (mActivity.getBinding().txtLoggedSearch.getText().toString());
                     getActivity().startActivity(new Intent(getContext(), SearchActivity.class));
                     getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     Utilities.hideKeyboard(mActivity);
@@ -130,12 +128,12 @@ public class SearchFragment extends Fragment {
             }
         });
 
-        mActivity.binding.txtLoggedSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        mActivity.getBinding().txtLoggedSearch.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    if (!mActivity.binding.txtLoggedSearch.getText().toString().equals("")) {
-                        mActivity.binding.txtLoggedSearch.setSelection(0, mActivity.binding.txtLoggedSearch.getText().toString().length());
+                    if (!mActivity.getBinding().txtLoggedSearch.getText().toString().equals("")) {
+                        mActivity.getBinding().txtLoggedSearch.setSelection(0, mActivity.getBinding().txtLoggedSearch.getText().toString().length());
                     }
                 }
             }
@@ -153,7 +151,7 @@ public class SearchFragment extends Fragment {
         binding.srlSearch.setProgressViewOffset(false,
                 (int) Utilities.convertDpToPixel(80, getContext()),
                 (int) Utilities.convertDpToPixel(96, getContext()));
-        mActivity.binding.txtLoggedSearch.setText("");
+        mActivity.getBinding().txtLoggedSearch.setText("");
 
         if (SearchData.getInstance().getRecentList().size() == 0 && SearchData.getInstance().getSavedList().size() == 0
                 && SearchData.getInstance().getTrendsList().size() == 0) {
@@ -199,8 +197,8 @@ public class SearchFragment extends Fragment {
             mActivity.endSearching(false);
             mActivity.resetBars();
             setupActivity();
-            mActivity.binding.txtLoggedSearch.setText("");
-            mActivity.binding.txtLoggedSearch.requestFocus();
+            mActivity.getBinding().txtLoggedSearch.setText("");
+            mActivity.getBinding().txtLoggedSearch.requestFocus();
             mActivity.setStatusBarColor(App.getInstance().isNightEnabled() ?
                     R.color.dark_status_bar_timeline_color : R.color.light_status_bar_timeline_color);
         } else {
@@ -213,9 +211,9 @@ public class SearchFragment extends Fragment {
     }
 
     private void setupActivity() {
-        mActivity.viewModel.setToolbarState(AppData.TOOLBAR_LOGGED_SEARCH);
-        mActivity.viewModel.setStaticBottomBar(true);
-        mActivity.viewModel.setStaticToolbar(true);
+        mActivity.getViewModel().setToolbarState(AppData.TOOLBAR_LOGGED_SEARCH);
+        mActivity.getViewModel().setStaticBottomBar(true);
+        mActivity.getViewModel().setStaticToolbar(true);
     }
 
     public void updateData() {
@@ -225,10 +223,10 @@ public class SearchFragment extends Fragment {
     }
 
     public boolean onBackPressed() {
-        mActivity.binding.rlLoggedContainer.requestFocus();
+        mActivity.getBinding().rlLoggedContainer.requestFocus();
         if (!viewModel.isSearch()) {
             viewModel.setSearch(true);
-            mActivity.binding.txtLoggedSearch.setText("");
+            mActivity.getBinding().txtLoggedSearch.setText("");
             return true;
         } else {
             return false;
@@ -478,7 +476,7 @@ public class SearchFragment extends Fragment {
     }
 
     public void initPopup() {
-        popupMenu = new PopupMenu(mActivity, mActivity.binding.btnLoggedMore, 0, 0, R.style.popup_menu);
+        popupMenu = new PopupMenu(mActivity, mActivity.getBinding().btnLoggedMore, 0, 0, R.style.popup_menu);
         final MenuInflater menuInflater = popupMenu.getMenuInflater();
         menuInflater.inflate(R.menu.menu_search_start, popupMenu.getMenu());
 
@@ -540,7 +538,7 @@ public class SearchFragment extends Fragment {
                     case R.id.show_local_trends:
                         if (ActivityCompat.checkSelfPermission(mActivity, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
                                 && ActivityCompat.checkSelfPermission(mActivity, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                            ActivityCompat.requestPermissions(mActivity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, mActivity.REQUEST_LOCATION_CODE);
+                            ActivityCompat.requestPermissions(mActivity, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, mActivity.getRequestLocationCode());
                         } else {
                             viewModel.setCountry("");
                             viewModel.setGlobal(false);
@@ -556,7 +554,7 @@ public class SearchFragment extends Fragment {
             }
         });
 
-        mActivity.binding.btnLoggedMore.setOnClickListener(moreClickListener);
+        mActivity.getBinding().btnLoggedMore.setOnClickListener(moreClickListener);
     }
 
     private View.OnClickListener moreClickListener = new View.OnClickListener() {
@@ -569,7 +567,7 @@ public class SearchFragment extends Fragment {
     private SimpleAdapter.SimpleClickListener trendsClickListener = new SimpleAdapter.SimpleClickListener() {
         @Override
         public void onItemClick(SimpleModel model, View v) {
-            AppData.searchQuery = model.getTitle();
+            AppData.searchQuery = (model.getTitle());
             getActivity().startActivity(new Intent(getContext(), SearchActivity.class));
             getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
@@ -584,7 +582,7 @@ public class SearchFragment extends Fragment {
     private SearchAdapter.SearchClickListener savedClickListener = new SearchAdapter.SearchClickListener() {
         @Override
         public void onClick(SearchModel model, View v) {
-            AppData.searchQuery = model.getTitle();
+            AppData.searchQuery = (model.getTitle());
             getActivity().startActivity(new Intent(getContext(), SearchActivity.class));
             getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
@@ -616,7 +614,7 @@ public class SearchFragment extends Fragment {
     private SearchAdapter.SearchClickListener recentClickListener = new SearchAdapter.SearchClickListener() {
         @Override
         public void onClick(SearchModel model, View v) {
-            AppData.searchQuery = model.getTitle();
+            AppData.searchQuery = (model.getTitle());
             getActivity().startActivity(new Intent(getContext(), SearchActivity.class));
             getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }

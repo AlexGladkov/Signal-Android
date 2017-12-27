@@ -17,7 +17,6 @@ import solonsky.signal.twitter.helpers.AppData;
 import solonsky.signal.twitter.helpers.Flags;
 import solonsky.signal.twitter.helpers.Utilities;
 import twitter4j.Status;
-import twitter4j.URLEntity;
 
 /**
  * Created by neura on 26.06.17.

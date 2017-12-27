@@ -75,7 +75,8 @@ public class MuteClientsActivity extends AppCompatActivity {
                         if (!MuteData.getInstance().getmClientsList().contains(removeModel)) {
                             MuteData.getInstance().getmClientsList().add(0, removeModel);
                             MuteData.getInstance().saveCache();
-                            Toast.makeText(getApplicationContext(), getString(R.string.success_mute), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), getString(R.string.success_mute_client)
+                                    .replace("[clientname]", model.getTitle()), Toast.LENGTH_SHORT).show();
                         }
 
                         onBackPressed();

@@ -105,7 +105,7 @@ public class StatsLikesActivity extends AppCompatActivity {
         mAdapter = new StatusAdapter(mMentionsList, this, true, true, new StatusAdapter.StatusClickListener() {
             @Override
             public void onSearch(String searchText, View v) {
-                AppData.searchQuery = searchText;
+                AppData.searchQuery = (searchText);
                 startActivity(new Intent(getApplicationContext(), SearchActivity.class));
                 overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }

@@ -59,7 +59,7 @@ public class StatsTweetsFragment extends Fragment {
                 new StatusAdapter.StatusClickListener() {
                     @Override
                     public void onSearch(String searchText, View v) {
-                        AppData.searchQuery = searchText;
+                        AppData.searchQuery = (searchText);
                         getActivity().startActivity(new Intent(getContext(), SearchActivity.class));
                         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }

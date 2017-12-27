@@ -23,7 +23,6 @@ import com.wang.avi.AVLoadingIndicatorView;
 import java.util.ArrayList;
 
 import solonsky.signal.twitter.R;
-import solonsky.signal.twitter.adapters.ImageAdapter;
 import solonsky.signal.twitter.adapters.MediaStaggeredAdapter;
 import solonsky.signal.twitter.api.ProfileDataApi;
 import solonsky.signal.twitter.helpers.App;
@@ -33,7 +32,6 @@ import solonsky.signal.twitter.helpers.Utilities;
 import solonsky.signal.twitter.libs.DownloadFiles;
 import solonsky.signal.twitter.models.ImageModel;
 import solonsky.signal.twitter.models.User;
-import solonsky.signal.twitter.overlays.*;
 import twitter4j.AsyncTwitter;
 import twitter4j.Paging;
 import twitter4j.ResponseList;

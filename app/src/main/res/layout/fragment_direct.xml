@@ -8,40 +8,47 @@
         <variable name="appData" type="solonsky.signal.twitter.helpers.AppData" />
         <import type="android.view.View" alias="v" />
     </data>
-
-    <RelativeLayout
+    
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/srl_direct_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/backgroundSecondaryColor" >
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_direct"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingTop="@dimen/default_toolbar_margin_top"
-            android:clipToPadding="false"
-            android:overScrollMode="never"
-            android:visibility="@{model.state == appData.UI_STATE_VISIBLE ? v.VISIBLE : v.GONE}"
-            app:listConfig="@{model.listConfig}" />
+            android:background="?attr/backgroundSecondaryColor" >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:gravity="center"
-            android:text="@string/direct_no_items"
-            android:visibility="@{model.state == appData.UI_STATE_NO_ITEMS ? v.VISIBLE : v.GONE}" />
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_direct"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingTop="@dimen/default_toolbar_margin_top"
+                android:clipToPadding="false"
+                android:overScrollMode="never"
+                android:visibility="@{model.state == appData.UI_STATE_VISIBLE ? v.VISIBLE : v.GONE}"
+                app:listConfig="@{model.listConfig}" />
 
-        <com.wang.avi.AVLoadingIndicatorView
-            android:layout_width="@dimen/big_loader_size"
-            android:layout_height="@dimen/big_loader_size"
-            android:layout_centerInParent="true"
-            android:alpha="0.5"
-            android:visibility="@{model.state == appData.UI_STATE_LOADING ? v.VISIBLE : v.GONE}"
-            app:indicatorName="BallScaleMultipleIndicator"
-            app:indicatorColor="@color/loaderColor" />
-        
-    </RelativeLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                android:gravity="center"
+                android:text="@string/direct_no_items"
+                android:visibility="@{model.state == appData.UI_STATE_NO_ITEMS ? v.VISIBLE : v.GONE}" />
+
+            <com.wang.avi.AVLoadingIndicatorView
+                android:layout_width="@dimen/big_loader_size"
+                android:layout_height="@dimen/big_loader_size"
+                android:layout_centerInParent="true"
+                android:alpha="0.5"
+                android:visibility="@{model.state == appData.UI_STATE_LOADING ? v.VISIBLE : v.GONE}"
+                app:indicatorName="BallScaleMultipleIndicator"
+                app:indicatorColor="@color/loaderColor" />
+
+        </RelativeLayout>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 </layout>

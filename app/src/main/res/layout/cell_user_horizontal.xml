@@ -21,8 +21,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/user_civ_avatar"
-                android:layout_width="@dimen/cell_user_icon"
-                android:layout_height="@dimen/cell_user_icon"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:layout_marginStart="12dp"
                 android:layout_gravity="center_vertical"
                 android:background="?attr/backgroundRoundImage" />
