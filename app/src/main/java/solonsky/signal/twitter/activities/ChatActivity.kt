@@ -1,5 +1,6 @@
 package solonsky.signal.twitter.activities
 
+import android.annotation.SuppressLint
 import android.databinding.DataBindingUtil
 import android.graphics.Color
 import android.os.Bundle
@@ -15,6 +16,7 @@ import android.view.WindowManager
 import android.view.animation.Animation
 import android.view.animation.Transformation
 import android.widget.FrameLayout
+import android.widget.Toast
 
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.api.DirectApi
@@ -24,7 +26,10 @@ import solonsky.signal.twitter.helpers.AppData
 import solonsky.signal.twitter.helpers.Flags
 import solonsky.signal.twitter.helpers.Utilities
 import solonsky.signal.twitter.interfaces.UpdateAddHandler
+import solonsky.signal.twitter.models.ChatModel
+import solonsky.signal.twitter.providers.ChatProvider
 import solonsky.signal.twitter.viewmodels.ChatViewModel
+import solonsky.signal.twitter.views.ChatView
 import twitter4j.TwitterAdapter
 import twitter4j.TwitterException
 import twitter4j.TwitterMethod
@@ -34,10 +39,9 @@ import twitter4j.TwitterMethod
  * Performs chat interaction activity
  */
 
-class ChatActivity : AppCompatActivity() {
+class ChatActivity : AppCompatActivity(), ChatView {
     private val TAG = ChatActivity::class.java.simpleName
-    var binding: ActivityChatBinding? = null
-        private set
+    lateinit var binding: ActivityChatBinding
     private var mActivity: ChatActivity? = null
     private var _xDelta: Int = 0
     private var _yDelta: Int = 0
@@ -51,6 +55,7 @@ class ChatActivity : AppCompatActivity() {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         if (App.getInstance().isNightEnabled) {
@@ -63,13 +68,13 @@ class ChatActivity : AppCompatActivity() {
         mActivity = this
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_chat)
-        setSupportActionBar(binding!!.tbChat)
+        setSupportActionBar(binding.tbChat)
 
         if (Flags.DM_IS_NEW) {
-            binding!!.txtChatMessage.requestFocus()
-            Utilities.showKeyboard(binding!!.txtChatMessage)
+            binding.txtChatMessage.requestFocus()
+            Utilities.showKeyboard(binding.txtChatMessage)
         } else {
-            binding!!.chatRlMain.requestFocus()
+            binding.chatRlMain.requestFocus()
         }
 
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -84,8 +89,8 @@ class ChatActivity : AppCompatActivity() {
                     DirectApi.getInstance().screenName
                 else
                     DirectApi.getInstance().userName, AppData.UI_STATE_LOADING)
-        binding!!.model = viewModel
-        binding!!.click = object : ChatViewModel.ChatClickHandler {
+        binding.model = viewModel
+        binding.click = object : ChatViewModel.ChatClickHandler {
             override fun onSendClick(v: View) {
                 val asyncTwitter = Utilities.getAsyncTwitter()
                 asyncTwitter.addListener(object : TwitterAdapter() {
@@ -159,15 +164,22 @@ class ChatActivity : AppCompatActivity() {
         }
 
         DirectApi.getInstance().loadData()
-        binding!!.chatSendDivider.setBackgroundColor(if (isNight) Color.parseColor("#15191D") else Color.parseColor("#DFE4E7"))
-        binding!!.txtChatMessage.setHintTextColor(if (isNight) Color.parseColor("#4DBEC8D2") else Color.parseColor("#4D3D454C"))
+        binding.chatSendDivider.setBackgroundColor(if (isNight) Color.parseColor("#15191D")
+        else Color.parseColor("#DFE4E7"))
+        binding.txtChatMessage.setHintTextColor(if (isNight) Color.parseColor("#4DBEC8D2")
+        else Color.parseColor("#4D3D454C"))
 
-        val params = binding!!.recyclerChat.layoutParams as FrameLayout.LayoutParams
+        binding.chatSrl.setOnRefreshListener {
+            val provider = ChatProvider(viewState = this@ChatActivity)
+            provider.refreshData(lastId = DirectApi.getInstance().chatModels[DirectApi.getInstance().chatModels.size - 1].id)
+        }
+
+        val params = binding.recyclerChat.layoutParams as FrameLayout.LayoutParams
         val startMargin = params.leftMargin
         val endMargin = params.rightMargin
 
-        binding!!.recyclerChat.setOnScrollListener(onScrollListener)
-        binding!!.recyclerChat.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
+        binding.recyclerChat.setOnScrollListener(onScrollListener)
+        binding.recyclerChat.addOnItemTouchListener(object : RecyclerView.OnItemTouchListener {
             override fun onInterceptTouchEvent(rv: RecyclerView, event: MotionEvent): Boolean {
                 val X = event.rawX.toInt()
                 val Y = event.rawY.toInt()
@@ -267,5 +279,23 @@ class ChatActivity : AppCompatActivity() {
         for (chatModel in DirectApi.getInstance().chatModels) {
             chatModel.alpha = alpha
         }
+    }
+
+    // MARK: -View implementation
+    override fun showError(text: String) {
+        Toast.makeText(applicationContext, text, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun showError(text: Int) {
+        Toast.makeText(applicationContext, getString(text), Toast.LENGTH_SHORT).show()
+    }
+
+    override fun stopRefresh() {
+        binding.chatSrl.isRefreshing = false
+    }
+
+    override fun refreshList(data: List<ChatModel>) {
+        DirectApi.getInstance().chatModels.addAll(data)
+        binding.model?.chatAdapter?.notifyDataSetChanged()
     }
 }

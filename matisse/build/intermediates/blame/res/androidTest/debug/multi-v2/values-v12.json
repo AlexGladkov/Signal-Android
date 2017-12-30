@@ -1,10 +1,26 @@
 {
     "logs": [
         {
-            "outputFile": "F:\\Projects\\Android\\Signal\\matisse\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v12\\values-v12.xml",
+            "outputFile": "/Users/neura/Desktop/Documents.nosync/Android/Signal Release/matisse/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-v12/values-v12.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\sunwi\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.0.2.aar\\24caf6c3083c8375ca47c8a91d62ae77\\res\\values-v12\\values-v12.xml",
+                    "source": "/Users/neura/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.0.2.aar/46bc19256af91649e011b29f49bd6344/res/values-v12/values-v12.xml",
+                    "from": {
+                        "startLines": "2,5,8,9",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,279,479,598",
+                        "endLines": "4,7,8,9",
+                        "endColumns": "12,12,118,94",
+                        "endOffsets": "274,474,593,688"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/neura/Desktop/Documents.nosync/Android/Signal Release/F:\\Projects\\Android\\Signal\\matisse\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v12\\values-v12.xml",
+            "map": [
+                {
+                    "source": "/Users/neura/Desktop/Documents.nosync/Android/Signal Release/C:\\Users\\sunwi\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.0.2.aar\\24caf6c3083c8375ca47c8a91d62ae77\\res\\values-v12\\values-v12.xml",
                     "from": {
                         "startLines": "2,5,8,9",
                         "startColumns": "4,4,4,4",

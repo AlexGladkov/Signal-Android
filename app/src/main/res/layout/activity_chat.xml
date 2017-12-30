@@ -1,30 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <data>      
-        <variable name="model" type="solonsky.signal.twitter.viewmodels.ChatViewModel" />
-        <variable name="click" type="solonsky.signal.twitter.viewmodels.ChatViewModel.ChatClickHandler" />
+
+    <data>
+
+        <variable
+            name="model"
+            type="solonsky.signal.twitter.viewmodels.ChatViewModel" />
+
+        <variable
+            name="click"
+            type="solonsky.signal.twitter.viewmodels.ChatViewModel.ChatClickHandler" />
+
         <variable
             name="appData"
             type="solonsky.signal.twitter.helpers.AppData" />
-        <import type="android.view.View" alias="v" />
+
+        <import
+            alias="v"
+            type="android.view.View" />
+
         <import type="solonsky.signal.twitter.R" />
     </data>
 
     <RelativeLayout
         android:id="@+id/chat_rl_main"
-        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?attr/backgroundPrimaryColor"
+        android:fitsSystemWindows="true"
         android:focusableInTouchMode="true"
-        android:fitsSystemWindows="true" >
+        android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/tb_chat"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
-            app:contentInsetStart="0dp" >
+            app:contentInsetStart="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -34,33 +46,33 @@
                     android:id="@+id/btn_chat_back"
                     android:layout_width="@dimen/tb_icon_size"
                     android:layout_height="@dimen/tb_icon_size"
-                    android:src="@drawable/ic_icons_toolbar_back"
-                    android:padding="16dp"
+                    android:background="?attr/buttonRipple"
                     android:onClick="@{click::onBackClick}"
-                    android:tint="?attr/buttonTintColor"
-                    android:background="?attr/buttonRipple" />
+                    android:padding="16dp"
+                    android:src="@drawable/ic_icons_toolbar_back"
+                    android:tint="?attr/buttonTintColor" />
 
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_gravity="center_vertical"
                     android:layout_marginEnd="16dp"
                     android:layout_marginStart="16dp"
-                    android:textSize="16dp"
-                    android:textStyle="bold"
+                    android:layout_weight="1"
                     android:includeFontPadding="false"
-                    android:layout_gravity="center_vertical"
+                    android:text="@{model.title}"
                     android:textColor="?attr/primaryTextColor"
-                    android:text="@{model.title}" />
+                    android:textSize="16dp"
+                    android:textStyle="bold" />
 
                 <ImageView
                     android:layout_width="@dimen/tb_icon_size"
                     android:layout_height="@dimen/tb_icon_size"
-                    android:padding="16dp"
-                    android:onClick="@{click::onDestroyClick}"
                     android:background="?attr/buttonRipple"
-                    android:tint="?attr/buttonTintColor"
-                    android:src="@drawable/ic_icons_more_hor"/>
+                    android:onClick="@{click::onDestroyClick}"
+                    android:padding="16dp"
+                    android:src="@drawable/ic_icons_more_hor"
+                    android:tint="?attr/buttonTintColor" />
 
             </LinearLayout>
         </android.support.v7.widget.Toolbar>
@@ -68,19 +80,32 @@
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/tb_chat"
-            android:layout_above="@+id/ll_chat_bottom">
+            android:layout_above="@+id/ll_chat_bottom"
+            android:layout_below="@+id/tb_chat">
 
-            <solonsky.signal.twitter.libs.ChatRecyclerView
-                android:id="@+id/recycler_chat"
+            <com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout
+                android:id="@+id/chat_srl"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:overScrollMode="never"
-                android:paddingBottom="16dp"
-                android:layout_marginEnd="-50dp"
-                android:clipToPadding="false"
-                android:visibility="@{model.state == appData.UI_STATE_VISIBLE ? v.VISIBLE : v.GONE}"
-                app:listConfig="@{model.listConfig}" />
+                android:layout_height="match_parent"
+                app:srl_direction="bottom">
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <solonsky.signal.twitter.libs.ChatRecyclerView
+                        android:id="@+id/recycler_chat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="-50dp"
+                        android:clipToPadding="false"
+                        android:overScrollMode="never"
+                        android:paddingBottom="16dp"
+                        android:visibility="@{model.state == appData.UI_STATE_VISIBLE ? v.VISIBLE : v.GONE}"
+                        app:listConfig="@{model.listConfig}" />
+
+                </FrameLayout>
+            </com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout>
 
             <com.wang.avi.AVLoadingIndicatorView
                 android:layout_width="@dimen/big_loader_size"
@@ -88,28 +113,28 @@
                 android:layout_gravity="center"
                 android:alpha="0.5"
                 android:visibility="@{model.state == appData.UI_STATE_LOADING ? v.VISIBLE : v.GONE}"
-                app:indicatorName="BallScaleMultipleIndicator"
-                app:indicatorColor="@color/loaderColor" />
+                app:indicatorColor="@color/loaderColor"
+                app:indicatorName="BallScaleMultipleIndicator" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:includeFontPadding="false"
+                android:text="@string/chat_no_text"
                 android:textColor="?attr/hintTextColor"
                 android:textStyle="normal"
-                android:includeFontPadding="false"
-                android:visibility="@{model.state == appData.UI_STATE_NO_ITEMS ? v.VISIBLE : v.GONE}"
-                android:layout_gravity="center"
-                android:text="@string/chat_no_text" />
+                android:visibility="@{model.state == appData.UI_STATE_NO_ITEMS ? v.VISIBLE : v.GONE}" />
 
         </FrameLayout>
-        
+
         <FrameLayout
             android:id="@+id/ll_chat_bottom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="48dp"
             android:layout_alignParentBottom="true"
-            android:background="?attr/backgroundSecondaryColor" >
+            android:background="?attr/backgroundSecondaryColor"
+            android:minHeight="48dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -119,31 +144,31 @@
                     android:id="@+id/txt_chat_message"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="@string/message_send_hint"
-                    android:background="?attr/backgroundSecondaryColor"
+                    android:layout_marginBottom="13.5dp"
                     android:layout_marginStart="16dp"
                     android:layout_marginTop="13dp"
-                    android:layout_marginBottom="13.5dp"
-                    android:textSize="16dp"
-                    android:textColor="?attr/primaryTextColor"
-                    android:includeFontPadding="false"
-                    android:textStyle="normal"
+                    android:layout_weight="1"
+                    android:background="?attr/backgroundSecondaryColor"
                     android:fontFamily="sans-serif"
+                    android:hint="@string/message_send_hint"
+                    android:includeFontPadding="false"
                     android:lineSpacingMultiplier="1.042"
-                    android:onTextChanged="@{model::onTextChanged}" />
+                    android:onTextChanged="@{model::onTextChanged}"
+                    android:textColor="?attr/primaryTextColor"
+                    android:textSize="16dp"
+                    android:textStyle="normal" />
 
                 <ImageView
                     android:id="@+id/btn_chat_send"
                     android:layout_width="@dimen/message_button_send"
                     android:layout_height="@dimen/message_button_send"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginStart="24dp"
                     android:layout_marginEnd="24dp"
-                    android:onClick="@{click::onSendClick}"
+                    android:layout_marginStart="24dp"
                     android:alpha="@{model.enabled ? 1.0f : 0.2f}"
-                    android:tint="?attr/buttonSendTintColor"
-                    android:src="@drawable/ic_icons_toolbar_send" />
+                    android:onClick="@{click::onSendClick}"
+                    android:src="@drawable/ic_icons_toolbar_send"
+                    android:tint="?attr/buttonSendTintColor" />
 
             </LinearLayout>
 
@@ -158,8 +183,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/dropShadowHeight"
-            android:background="?attr/dropShadowResource"
-            android:layout_below="@+id/tb_chat" />
+            android:layout_below="@+id/tb_chat"
+            android:background="?attr/dropShadowResource" />
 
     </RelativeLayout>
 </layout>
