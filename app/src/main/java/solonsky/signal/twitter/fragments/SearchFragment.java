@@ -39,7 +39,7 @@ import java.util.List;
 
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.activities.LoggedActivity;
-import solonsky.signal.twitter.activities.SearchActivity;
+import solonsky.signal.twitter.activities.MVPSearchActivity;
 import solonsky.signal.twitter.adapters.SearchAdapter;
 import solonsky.signal.twitter.adapters.SimpleAdapter;
 import solonsky.signal.twitter.data.SearchData;
@@ -48,6 +48,7 @@ import solonsky.signal.twitter.helpers.App;
 import solonsky.signal.twitter.helpers.AppData;
 import solonsky.signal.twitter.helpers.Cache;
 import solonsky.signal.twitter.helpers.Flags;
+import solonsky.signal.twitter.helpers.Keys;
 import solonsky.signal.twitter.helpers.Utilities;
 import solonsky.signal.twitter.interfaces.ActivityListener;
 import solonsky.signal.twitter.models.SearchModel;
@@ -119,8 +120,9 @@ public class SearchFragment extends Fragment {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (!mActivity.getBinding().txtLoggedSearch.getText().toString().equals("")) {
                     mActivity.getBinding().rlLoggedContainer.requestFocus();
-                    AppData.searchQuery = (mActivity.getBinding().txtLoggedSearch.getText().toString());
-                    getActivity().startActivity(new Intent(getContext(), SearchActivity.class));
+                    Intent searchIntent = new Intent(getContext(), MVPSearchActivity.class);
+                    searchIntent.putExtra(Keys.SearchQuery.getValue(), mActivity.getBinding().txtLoggedSearch.getText().toString());
+                    getActivity().startActivity(searchIntent);
                     getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     Utilities.hideKeyboard(mActivity);
                 }
@@ -567,8 +569,9 @@ public class SearchFragment extends Fragment {
     private SimpleAdapter.SimpleClickListener trendsClickListener = new SimpleAdapter.SimpleClickListener() {
         @Override
         public void onItemClick(SimpleModel model, View v) {
-            AppData.searchQuery = (model.getTitle());
-            getActivity().startActivity(new Intent(getContext(), SearchActivity.class));
+            Intent searchIntent = new Intent(getContext(), MVPSearchActivity.class);
+            searchIntent.putExtra(Keys.SearchQuery.getValue(), model.getTitle());
+            getActivity().startActivity(searchIntent);
             getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 
             SearchModel searchModel = new SearchModel(0, 0, model.getTitle(), false);
@@ -582,8 +585,9 @@ public class SearchFragment extends Fragment {
     private SearchAdapter.SearchClickListener savedClickListener = new SearchAdapter.SearchClickListener() {
         @Override
         public void onClick(SearchModel model, View v) {
-            AppData.searchQuery = (model.getTitle());
-            getActivity().startActivity(new Intent(getContext(), SearchActivity.class));
+            Intent searchIntent = new Intent(getContext(), MVPSearchActivity.class);
+            searchIntent.putExtra(Keys.SearchQuery.getValue(), model.getTitle());
+            getActivity().startActivity(searchIntent);
             getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
 
@@ -615,7 +619,9 @@ public class SearchFragment extends Fragment {
         @Override
         public void onClick(SearchModel model, View v) {
             AppData.searchQuery = (model.getTitle());
-            getActivity().startActivity(new Intent(getContext(), SearchActivity.class));
+            Intent searchIntent = new Intent(getContext(), MVPSearchActivity.class);
+            searchIntent.putExtra(Keys.SearchQuery.getValue(), model.getTitle());
+            getActivity().startActivity(searchIntent);
             getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
         }
 

@@ -41,6 +41,8 @@ import android.widget.RelativeLayout
 import android.widget.Toast
 
 import com.anupcowkur.reservoir.Reservoir
+import com.arellomobile.mvp.MvpAppCompatActivity
+import com.arellomobile.mvp.presenter.InjectPresenter
 import com.fatboyindustrial.gsonjodatime.Converters
 import com.google.common.reflect.TypeToken
 import com.google.gson.Gson
@@ -82,8 +84,10 @@ import solonsky.signal.twitter.models.ConfigurationModel
 import solonsky.signal.twitter.models.ConfigurationUserModel
 import solonsky.signal.twitter.models.StatusModel
 import solonsky.signal.twitter.overlays.AccountSwitcherOverlay
+import solonsky.signal.twitter.presenters.LoggedPresenter
 import solonsky.signal.twitter.services.MyLocationService
 import solonsky.signal.twitter.viewmodels.LoggedViewModel
+import solonsky.signal.twitter.views.LoggedView
 import twitter4j.ResponseList
 import twitter4j.Status
 import twitter4j.TwitterAdapter
@@ -91,7 +95,11 @@ import twitter4j.TwitterException
 import twitter4j.TwitterMethod
 import twitter4j.User
 
-class LoggedActivity : AppCompatActivity(), ActivityListener {
+class LoggedActivity : MvpAppCompatActivity(), LoggedView, ActivityListener {
+
+    @InjectPresenter
+    lateinit var mPresenter: LoggedPresenter
+
     val requestLocationCode = 1
     private val TAG = "LOGGEDACTIVITY"
     lateinit var binding: ActivityLoggedBinding
@@ -331,7 +339,7 @@ class LoggedActivity : AppCompatActivity(), ActivityListener {
         binding.tbLogged.setOnTouchListener { _, event -> gestureDetector.onTouchEvent(event) }
         binding.tbLoggedMute.setOnTouchListener { _, event -> gestureDetector.onTouchEvent(event) }
 
-        binding.txtLoggedFeedCount.setOnTouchListener { v, event ->
+        binding.txtLoggedFeedCount.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> binding.txtLoggedFeedCount.startAnimation(
                         AnimationUtils.loadAnimation(applicationContext, R.anim.scale_down))

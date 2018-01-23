@@ -535,8 +535,10 @@ class StatusViewHolder(itemView: View, screenWidth: Int) : RecyclerView.ViewHold
         clipboard.primaryClip = clip
     }
 
-    override fun openSearch() {
-        statusClickListener?.openActivity(intent = Intent(itemView.context, SearchActivity::class.java),
+    override fun openSearch(text: String) {
+        val intent = Intent(itemView.context, MVPSearchActivity::class.java)
+        intent.putExtra(Keys.SearchQuery.value, text)
+        statusClickListener?.openActivity(intent = intent,
                 startAnim = R.anim.slide_in_right, endAnim = R.anim.slide_out_left)
     }
 

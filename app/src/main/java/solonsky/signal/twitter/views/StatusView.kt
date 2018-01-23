@@ -27,7 +27,7 @@ interface StatusView: MvpView {
     fun openDetail()
     fun openCompose()
     fun openMedia()
-    fun openSearch()
+    fun openSearch(text: String)
     fun openImages(urls: ArrayList<String>, startPosition: Int)
     fun openYoutube(url: String)
     fun openLink(link: String)

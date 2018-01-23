@@ -20,10 +20,17 @@ android {
         vectorDrawables.useSupportLibrary = true
         minSdkVersion 23
         targetSdkVersion 25
-        versionCode 384
+        versionCode 386
         versionName "1.0"
         multiDexEnabled true  // this line will solve this problem
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation":
+                                     "$projectDir/schemas".toString()]
+            }
+        }
     }
 
     packagingOptions {
@@ -33,6 +40,7 @@ android {
 
     dataBinding {
         enabled = true
+        version '2.3.0'
     }
 
     sourceSets {
@@ -48,9 +56,9 @@ android {
     }
 }
 
-kapt {
-    generateStubs = true
-}
+//kapt {
+//    generateStubs = true
+//}
 
 buildscript {
     ext.kotlin_version = '1.1.51'
@@ -84,9 +92,13 @@ dependencies {
     compile 'com.twitter.sdk.android:tweet-ui:3.0.0'
     compile 'com.twitter.sdk.android:tweet-composer:3.0.0'
     compile 'com.twitter.sdk.android:twitter-mopub:3.0.0'
+
+    // Twitter core
+    String twitterCoreVersion = '4.0.6'
     compile 'org.twitter4j:twitter4j-core:4.0.6'
     compile 'org.twitter4j:twitter4j-stream:4.0.6'
     compile 'org.twitter4j:twitter4j-async:4.0.6'
+
     compile 'com.google.firebase:firebase-crash:11.6.0'
     compile 'com.google.android.gms:play-services-location:11.6.0'
     compile 'com.google.code.gson:gson:2.8.0'
@@ -101,14 +113,23 @@ dependencies {
     compile 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
 
     // Support
-    String supportVersion = '26.0.2'
+    String supportVersion = '26.1.0'
     compile "com.android.support:appcompat-v7:$supportVersion"
     compile "com.android.support:support-v13:$supportVersion"
     compile "com.android.support:design:$supportVersion"
     compile "com.android.support:support-v4:$supportVersion"
     compile "com.android.support:recyclerview-v7:$supportVersion"
 
+    // Cicerone
+    compile 'ru.terrakok.cicerone:cicerone:3.0.0'
 
+    // Room
+    String roomVersion = '1.0.0'
+    compile "android.arch.persistence.room:runtime:$roomVersion"
+    annotationProcessor "android.arch.persistence.room:compiler:$roomVersion"
+    kapt "android.arch.persistence.room:compiler:$roomVersion"
+
+    // Dagger
     compile 'net.sourceforge.htmlcleaner:htmlcleaner:2.18'
     compile 'jp.wasabeef:picasso-transformations:2.1.2'
     compile 'com.github.githubwing:DragPhotoView:1.0.1'
@@ -125,7 +146,6 @@ dependencies {
     compile 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.0'
     compile 'com.anupcowkur:reservoir:3.1.0'
     compile 'com.github.jkwiecien:EasyImage:2.0.2'
-//    compile 'com.github.rahatarmanahmed:circularprogressview:2.5.0'
     compile 'com.github.stfalcon:multiimageview:0.1'
     compile 'com.github.bumptech.glide:glide:4.0.0'
     compile 'com.wang.avi:library:2.1.3'

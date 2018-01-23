@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.databinding.CellNotificationsDetailBinding;
@@ -29,7 +30,7 @@ import twitter4j.TwitterMethod;
 
 public class NotificationsDetailAdapter extends RecyclerView.Adapter<NotificationsDetailAdapter.DetailViewHolder> {
     private final String TAG = NotificationDetailModel.class.getSimpleName();
-    private final ArrayList<NotificationDetailModel> detailModels;
+    private final List<NotificationDetailModel> detailModels;
     private final Context mContext;
     private final DetailClickListener clickListener;
 
@@ -37,7 +38,7 @@ public class NotificationsDetailAdapter extends RecyclerView.Adapter<Notificatio
         void onItemClick(NotificationDetailModel model, View v);
     }
 
-    public NotificationsDetailAdapter(ArrayList<NotificationDetailModel> detailModels,
+    public NotificationsDetailAdapter(List<NotificationDetailModel> detailModels,
                                       Context mContext, NotificationsDetailAdapter.DetailClickListener clickListener) {
         this.detailModels = detailModels;
         this.mContext = mContext;

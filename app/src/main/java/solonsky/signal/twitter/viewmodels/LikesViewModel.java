@@ -20,13 +20,14 @@ import java.util.Comparator;
 
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.activities.LoggedActivity;
-import solonsky.signal.twitter.activities.SearchActivity;
+import solonsky.signal.twitter.activities.MVPSearchActivity;
 import solonsky.signal.twitter.adapters.StatusAdapter;
 import solonsky.signal.twitter.data.LikesData;
 import solonsky.signal.twitter.helpers.App;
 import solonsky.signal.twitter.helpers.AppData;
 import solonsky.signal.twitter.helpers.Cache;
 import solonsky.signal.twitter.helpers.Flags;
+import solonsky.signal.twitter.helpers.Keys;
 import solonsky.signal.twitter.helpers.ListConfig;
 import solonsky.signal.twitter.helpers.TweetActions;
 import solonsky.signal.twitter.helpers.Utilities;
@@ -66,8 +67,9 @@ public class LikesViewModel extends BaseObservable {
                 true, true, new StatusAdapter.StatusClickListener() {
             @Override
             public void onSearch(String searchText, View v) {
-                AppData.searchQuery = (searchText);
-                mActivity.startActivity(new Intent(mActivity.getApplicationContext(), SearchActivity.class));
+                Intent searchIntent = new Intent(mActivity.getApplicationContext(), MVPSearchActivity.class);
+                searchIntent.putExtra(Keys.SearchQuery.getValue(), searchText);
+                mActivity.startActivity(searchIntent);
                 mActivity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         }, new TweetActions.MoreCallback() {

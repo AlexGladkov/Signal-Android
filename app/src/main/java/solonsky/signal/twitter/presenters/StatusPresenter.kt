@@ -66,8 +66,7 @@ class StatusPresenter(private val viewState: StatusView) {
     fun autoTextClick(autoLinkMode: AutoLinkMode, matchedText: String, statusModel: StatusModel) {
         when (autoLinkMode) {
             AutoLinkMode.MODE_HASHTAG -> {
-                AppData.searchQuery = matchedText
-                viewState.openSearch()
+                viewState.openSearch(text = matchedText)
             }
             AutoLinkMode.MODE_MENTION -> avatarClick(matchedText)
             AutoLinkMode.MODE_SHORT -> {

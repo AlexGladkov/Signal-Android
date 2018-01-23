@@ -50,30 +50,31 @@ public class SearchMediaFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_media, container, false);
 
-        mAdapter = new StatusAdapter(mTweetsList, (AppCompatActivity) getActivity(), true,
-                false, new StatusAdapter.StatusClickListener() {
-            @Override
-            public void onSearch(String searchText, View v) {
-                if (mCallback != null)
-                    mCallback.startSearch(searchText);
-            }
-        }, new TweetActions.MoreCallback() {
-            @Override
-            public void onDelete(StatusModel statusModel) {
-                int position = mTweetsList.indexOf(statusModel);
-                mTweetsList.remove(statusModel);
-                mAdapter.notifyItemRemoved(position);
-            }
-        });
 
-        ListConfig config = new ListConfig.Builder(mAdapter)
-                .setHasFixedSize(true)
-                .setDefaultDividerEnabled(true)
-                .setHasNestedScroll(false)
-                .build(getContext());
-
-        viewModel = new SearchDetailViewModel(config);
-        binding.setModel(viewModel);
+//        mAdapter = new StatusAdapter(mTweetsList, (AppCompatActivity) getActivity(), true,
+//                false, new StatusAdapter.StatusClickListener() {
+//            @Override
+//            public void onSearch(String searchText, View v) {
+//                if (mCallback != null)
+//                    mCallback.startSearch(searchText);
+//            }
+//        }, new TweetActions.MoreCallback() {
+//            @Override
+//            public void onDelete(StatusModel statusModel) {
+//                int position = mTweetsList.indexOf(statusModel);
+//                mTweetsList.remove(statusModel);
+//                mAdapter.notifyItemRemoved(position);
+//            }
+//        });
+//
+//        ListConfig config = new ListConfig.Builder(mAdapter)
+//                .setHasFixedSize(true)
+//                .setDefaultDividerEnabled(true)
+//                .setHasNestedScroll(false)
+//                .build(getContext());
+//
+//        viewModel = new SearchDetailViewModel(config);
+//        binding.setModel(viewModel);
         return binding.getRoot();
     }
 

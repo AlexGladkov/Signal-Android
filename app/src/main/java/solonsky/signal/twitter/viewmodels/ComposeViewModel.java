@@ -188,6 +188,8 @@ public class ComposeViewModel extends BaseObservable {
         loadRecentMedia();
     }
 
+
+
     public void onTextChanged(CharSequence s, int start, int before, int count) {
         isChanged = true;
         int length = s.toString().replaceAll(Patterns.WEB_URL.pattern(), "").length();

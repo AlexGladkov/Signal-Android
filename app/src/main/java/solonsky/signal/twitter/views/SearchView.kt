@@ -13,4 +13,7 @@ interface SearchView: MvpView {
     fun updateStatusBarColor(color: Int)
     fun showFragment()
     fun setupSearch(query: String)
+    fun showMessage(text: String)
+    fun performExit()
+    fun openPopup(resource: Int)
 }

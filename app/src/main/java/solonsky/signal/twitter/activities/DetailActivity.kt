@@ -496,9 +496,10 @@ class DetailActivity : AppCompatActivity(), SmartTabLayout.TabProvider {
             override fun onAutoLinkTextClick(autoLinkMode: AutoLinkMode, matchedText: String) {
                 when (autoLinkMode) {
                     AutoLinkMode.MODE_HASHTAG -> {
-                        AppData.searchQuery = matchedText
-                        mActivity!!.startActivity(Intent(applicationContext, SearchActivity::class.java))
-                        mActivity!!.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                        val searchIntent = Intent(applicationContext, MVPSearchActivity::class.java)
+                        searchIntent.putExtra(Keys.SearchQuery.value, matchedText)
+                        startActivity(searchIntent)
+                        overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                     }
                     AutoLinkMode.MODE_URL -> Utilities.openLink(matchedText.trim(), this@DetailActivity)
                     AutoLinkMode.MODE_MENTION -> {

@@ -16,12 +16,9 @@ import android.view.ViewTreeObserver
 
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.activities.MVPProfileActivity
-import solonsky.signal.twitter.activities.SearchActivity
+import solonsky.signal.twitter.activities.MVPSearchActivity
 import solonsky.signal.twitter.databinding.FragmentProfileInfoBinding
-import solonsky.signal.twitter.helpers.App
-import solonsky.signal.twitter.helpers.AppData
-import solonsky.signal.twitter.helpers.Flags
-import solonsky.signal.twitter.helpers.Utilities
+import solonsky.signal.twitter.helpers.*
 import solonsky.signal.twitter.libs.autoLinkTextView.AutoLinkMode
 import solonsky.signal.twitter.libs.autoLinkTextView.AutoLinkOnClickListener
 import solonsky.signal.twitter.models.User
@@ -124,8 +121,9 @@ class HeaderInfoFragment : Fragment() {
                             }
                             AutoLinkMode.MODE_URL -> Utilities.openLink(matchedText.trim { it <= ' ' }, activity)
                             AutoLinkMode.MODE_HASHTAG -> {
-                                AppData.searchQuery = matchedText
-                                activity.startActivity(Intent(context, SearchActivity::class.java))
+                                val searchIntent = Intent(context, MVPSearchActivity::class.java)
+                                searchIntent.putExtra(Keys.SearchQuery.value, matchedText)
+                                startActivity(searchIntent)
                                 activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                             }
                             else -> Log.e(TAG, "unhandled touch")

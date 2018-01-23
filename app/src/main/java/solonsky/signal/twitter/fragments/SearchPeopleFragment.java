@@ -6,11 +6,14 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.activities.MVPProfileActivity;
@@ -19,9 +22,11 @@ import solonsky.signal.twitter.data.UsersData;
 import solonsky.signal.twitter.databinding.FragmentSearchPeopleBinding;
 import solonsky.signal.twitter.helpers.AppData;
 import solonsky.signal.twitter.helpers.Flags;
+import solonsky.signal.twitter.helpers.Keys;
 import solonsky.signal.twitter.helpers.ListConfig;
 import solonsky.signal.twitter.interfaces.SearchListener;
 import solonsky.signal.twitter.models.NotificationDetailModel;
+import solonsky.signal.twitter.models.StatusModel;
 import solonsky.signal.twitter.models.User;
 import solonsky.signal.twitter.viewmodels.SearchDetailViewModel;
 
@@ -31,53 +36,74 @@ import solonsky.signal.twitter.viewmodels.SearchDetailViewModel;
 
 public class SearchPeopleFragment extends Fragment {
     private final String TAG = SearchPeopleFragment.class.getSimpleName();
-    private ArrayList<NotificationDetailModel> mTweetList = new ArrayList<>();
-    private ArrayList<User> mSourceList = new ArrayList<>();
     private NotificationsDetailAdapter mAdapter;
     private SearchDetailViewModel viewModel;
     private FragmentSearchPeopleBinding binding;
-
-    private boolean isVerified = false;
-    private boolean isFollowers = false;
-
-    private final int followers = 2;
-    private final int verified = 3;
+    private List<User> mUsersList;
 
     private SearchListener mCallback;
+
+    NotificationsDetailAdapter.DetailClickListener detailClickListener =
+            new NotificationsDetailAdapter.DetailClickListener() {
+                @Override
+                public void onItemClick(NotificationDetailModel model, View v) {
+                    for (User user : mUsersList) {
+                        if (user.getId() == model.getId()) {
+                            Intent profileIntent = new Intent(getContext(), MVPProfileActivity.class);
+                            profileIntent.putExtra(Flags.PROFILE_DATA, user);
+                            getActivity().startActivity(profileIntent);
+                            getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+                        }
+                    }
+                }
+            };
+
+    public static SearchPeopleFragment getNewInstance(Bundle args) {
+        SearchPeopleFragment fragment = new SearchPeopleFragment();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_search_people, container, false);
-
-//        mActivity = (LoggedActivity) getActivity();
-        mAdapter = new NotificationsDetailAdapter(mTweetList, getContext(), detailClickListener);
-
-        ListConfig config = new ListConfig.Builder(mAdapter)
-                .setHasFixedSize(false)
-                .setDefaultDividerEnabled(true)
-                .setHasNestedScroll(false)
-                .build(getContext());
-
-        viewModel = new SearchDetailViewModel(config);
-        binding.setModel(viewModel);
         return binding.getRoot();
     }
 
-    NotificationsDetailAdapter.DetailClickListener detailClickListener =
-            new NotificationsDetailAdapter.DetailClickListener() {
-        @Override
-        public void onItemClick(NotificationDetailModel model, View v) {
-            for (User user : mSourceList) {
-                if (user.getId() == model.getId()) {
-                    Intent profileIntent = new Intent(getContext(), MVPProfileActivity.class);
-                    profileIntent.putExtra(Flags.PROFILE_DATA, user);
-                    getActivity().startActivity(profileIntent);
-                    getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-                }
+    @Override
+    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        if (getArguments() != null) {
+            mUsersList = getArguments().getParcelableArrayList(Keys.SearchList.getValue());
+            boolean isLoaded = getArguments().getBoolean(Keys.SearchLoaded.getValue());
+            if (mUsersList == null) mUsersList = new ArrayList<>();
+
+            List<NotificationDetailModel> mFinalUsers = new LinkedList<>();
+            for (int i = 0; i < mUsersList.size(); i++) {
+                User user = mUsersList.get(i);
+                NotificationDetailModel notificationDetailModel = NotificationDetailModel.getFollowInstance(user.getId(),
+                        user.getName(), "@" + user.getScreenName(), user.getOriginalProfileImageURL(),
+                        user.getDescription(), UsersData.getInstance().getFollowingList().contains(user.getId()), false);
+
+                mFinalUsers.add(notificationDetailModel);
             }
+
+            Log.e(TAG, "final users count " + mFinalUsers.size());
+            mAdapter = new NotificationsDetailAdapter(mFinalUsers, getContext(), detailClickListener);
+
+            ListConfig config = new ListConfig.Builder(mAdapter)
+                    .setHasFixedSize(false)
+                    .setDefaultDividerEnabled(true)
+                    .setHasNestedScroll(false)
+                    .build(getContext());
+
+            viewModel = new SearchDetailViewModel(config);
+            viewModel.setState(!isLoaded ? AppData.UI_STATE_LOADING : mFinalUsers.size() == 0 ?
+                    AppData.UI_STATE_NO_ITEMS : AppData.UI_STATE_VISIBLE);
+            binding.setModel(viewModel);
         }
-    };
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -104,58 +130,58 @@ public class SearchPeopleFragment extends Fragment {
         }
     }
 
-    public void filterSource(int source, boolean value) {
-        switch (source) {
-            case followers:
-                isFollowers = value;
-                break;
-
-            case verified:
-                isVerified = value;
-                break;
-        }
-
-        mTweetList = new ArrayList<>();
-        for (User user : mSourceList) {
-            if ((!isVerified || user.isVerified()) && (!isFollowers || user.isFollowRequestSent())) {
-                NotificationDetailModel notificationDetailModel = NotificationDetailModel.getFollowInstance(user.getId(),
-                        user.getName(), user.getScreenName(), user.getBiggerProfileImageURL(),
-                        user.getDescription(), user.isFollowRequestSent(), false);
-
-                mTweetList.add(notificationDetailModel);
-            }
-        }
-
-        mAdapter.notifyDataSetChanged();
-    }
-
-    public void setupList() {
-        mAdapter = new NotificationsDetailAdapter(mTweetList, getContext(), detailClickListener);
-
-        ListConfig config = new ListConfig.Builder(mAdapter)
-                .setHasFixedSize(false)
-                .setDefaultDividerEnabled(true)
-                .setHasNestedScroll(false)
-                .build(getContext());
-
-        viewModel = new SearchDetailViewModel(config);
-        viewModel.setState(mTweetList.size() == 0 ? AppData.UI_STATE_NO_ITEMS : AppData.UI_STATE_VISIBLE);
-
-        binding.setModel(viewModel);
-    }
-
-    public void updateData(ArrayList<User> userModels) {
-        for (int i = 0; i < userModels.size(); i++) {
-            User user = userModels.get(i);
-            NotificationDetailModel notificationDetailModel = NotificationDetailModel.getFollowInstance(user.getId(),
-                    user.getName(), "@" + user.getScreenName(), user.getOriginalProfileImageURL(),
-                    user.getDescription(), UsersData.getInstance().getFollowingList().contains(user.getId()), false);
-
-            mTweetList.add(notificationDetailModel);
-            mSourceList.add(user);
-        }
-
-        viewModel.setState(mTweetList.size() == 0 ? AppData.UI_STATE_NO_ITEMS : AppData.UI_STATE_VISIBLE);
-        mAdapter.notifyDataSetChanged();
-    }
+//    public void filterSource(int source, boolean value) {
+//        switch (source) {
+//            case followers:
+//                isFollowers = value;
+//                break;
+//
+//            case verified:
+//                isVerified = value;
+//                break;
+//        }
+//
+//        mTweetList = new ArrayList<>();
+//        for (User user : mSourceList) {
+//            if ((!isVerified || user.isVerified()) && (!isFollowers || user.isFollowRequestSent())) {
+//                NotificationDetailModel notificationDetailModel = NotificationDetailModel.getFollowInstance(user.getId(),
+//                        user.getName(), user.getScreenName(), user.getBiggerProfileImageURL(),
+//                        user.getDescription(), user.isFollowRequestSent(), false);
+//
+//                mTweetList.add(notificationDetailModel);
+//            }
+//        }
+//
+//        mAdapter.notifyDataSetChanged();
+//    }
+//
+//    public void setupList() {
+//        mAdapter = new NotificationsDetailAdapter(mTweetList, getContext(), detailClickListener);
+//
+//        ListConfig config = new ListConfig.Builder(mAdapter)
+//                .setHasFixedSize(false)
+//                .setDefaultDividerEnabled(true)
+//                .setHasNestedScroll(false)
+//                .build(getContext());
+//
+//        viewModel = new SearchDetailViewModel(config);
+//        viewModel.setState(mTweetList.size() == 0 ? AppData.UI_STATE_NO_ITEMS : AppData.UI_STATE_VISIBLE);
+//
+//        binding.setModel(viewModel);
+//    }
+//
+//    public void updateData(ArrayList<User> userModels) {
+//        for (int i = 0; i < userModels.size(); i++) {
+//            User user = userModels.get(i);
+//            NotificationDetailModel notificationDetailModel = NotificationDetailModel.getFollowInstance(user.getId(),
+//                    user.getName(), "@" + user.getScreenName(), user.getOriginalProfileImageURL(),
+//                    user.getDescription(), UsersData.getInstance().getFollowingList().contains(user.getId()), false);
+//
+//            mTweetList.add(notificationDetailModel);
+//            mSourceList.add(user);
+//        }
+//
+//        viewModel.setState(mTweetList.size() == 0 ? AppData.UI_STATE_NO_ITEMS : AppData.UI_STATE_VISIBLE);
+//        mAdapter.notifyDataSetChanged();
+//    }
 }

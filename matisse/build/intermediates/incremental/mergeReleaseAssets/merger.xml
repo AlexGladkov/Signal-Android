@@ -1,2 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<merger version="3"><dataSet config="main"><source path="F:\Projects\Android\Signal\matisse\src\main\assets"/><source path="F:\Projects\Android\Signal\matisse\build\generated\assets\shaders\release"/></dataSet><dataSet config="release"><source path="F:\Projects\Android\Signal\matisse\src\release\assets"/></dataSet></merger>

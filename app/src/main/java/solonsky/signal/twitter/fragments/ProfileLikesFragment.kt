@@ -13,10 +13,11 @@ import android.view.ViewGroup
 import java.util.ArrayList
 
 import solonsky.signal.twitter.R
-import solonsky.signal.twitter.activities.SearchActivity
+import solonsky.signal.twitter.activities.MVPSearchActivity
 import solonsky.signal.twitter.adapters.StatusAdapter
 import solonsky.signal.twitter.databinding.FragmentProfileLikesBinding
 import solonsky.signal.twitter.helpers.AppData
+import solonsky.signal.twitter.helpers.Keys
 import solonsky.signal.twitter.helpers.TweetActions
 import solonsky.signal.twitter.models.StatusModel
 import solonsky.signal.twitter.viewmodels.ProfileLikesViewModel
@@ -38,8 +39,9 @@ class ProfileLikesFragment : Fragment() {
 
         mAdapter = StatusAdapter(likesArray, activity as AppCompatActivity, true,
                 true, StatusAdapter.StatusClickListener { searchText, _ ->
-            AppData.searchQuery = searchText
-            activity.startActivity(Intent(context, SearchActivity::class.java))
+            val searchIntent = Intent(context, MVPSearchActivity::class.java)
+            searchIntent.putExtra(Keys.SearchQuery.value, searchText)
+            activity.startActivity(searchIntent)
             activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }, TweetActions.MoreCallback { statusModel ->
             val position = likesArray.indexOf(statusModel)

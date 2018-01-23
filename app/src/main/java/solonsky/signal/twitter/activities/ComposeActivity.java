@@ -29,6 +29,9 @@ import solonsky.signal.twitter.helpers.Utilities;
 import solonsky.signal.twitter.helpers.drafts.DraftModel;
 import solonsky.signal.twitter.helpers.drafts.Drafts;
 import solonsky.signal.twitter.models.*;
+import solonsky.signal.twitter.models.User;
+import solonsky.signal.twitter.presenters.ComposePresenter;
+import solonsky.signal.twitter.views.ComposeView;
 import twitter4j.*;
 
 import android.view.MenuInflater;
@@ -40,6 +43,8 @@ import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.anupcowkur.reservoir.ReservoirGetCallback;
+import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -48,6 +53,8 @@ import com.google.gson.JsonElement;
 import com.zhihu.matisse.Matisse;
 import com.zhihu.matisse.MimeType;
 import com.zhihu.matisse.engine.impl.PicassoEngine;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -70,7 +77,12 @@ import twitter4j.conf.ConfigurationBuilder;
 /**
  * Created by neura on 22.05.17.
  */
-public class ComposeActivity extends AppCompatActivity {
+public class ComposeActivity extends MvpAppCompatActivity
+        implements ComposeView {
+
+    @InjectPresenter
+    ComposePresenter mPresenter;
+
     private static final int REQUEST_LOCATION_CODE = 2;
     private final String TAG = ComposeActivity.class.getSimpleName();
     private static final int REQUEST_LIBRARY_CODE = 0;
@@ -121,10 +133,10 @@ public class ComposeActivity extends AppCompatActivity {
 
         /* Setup mentions panel */
         ArrayList<UserModel> mentionsSource = new ArrayList<>();
-        for (solonsky.signal.twitter.models.User user : UsersData.getInstance().getUsersList()) {
-            mentionsSource.add(new UserModel(user.getId(), user.getOriginalProfileImageURL(),
-                    user.getName(), "@" + user.getScreenName(), false, false, false));
-        }
+//        for (solonsky.signal.twitter.models.User user : UsersData.getInstance().getUsersList()) {
+//            mentionsSource.add(new UserModel(user.getId(), user.getOriginalProfileImageURL(),
+//                    user.getName(), "@" + user.getScreenName(), false, false, false));
+//        }
 
         viewModel = new ComposeViewModel(title, AppData.ME.getOriginalProfileImageURL(),
                 AppData.ME.getLocation(), ComposeActivity.this, mentionsSource);
@@ -767,5 +779,11 @@ public class ComposeActivity extends AppCompatActivity {
         viewModel.setFragment(false);
         viewModel.setFromDraft(true);
         viewModel.setTweetText(message);
+    }
+
+    // MARK: - View implementation
+    @Override
+    public void setupMentions(@NotNull List<? extends UserModel> data) {
+        viewModel.set
     }
 }

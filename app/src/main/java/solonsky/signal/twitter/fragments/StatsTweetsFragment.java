@@ -19,9 +19,10 @@ import java.util.ArrayList;
 
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.activities.LoggedActivity;
-import solonsky.signal.twitter.activities.SearchActivity;
+import solonsky.signal.twitter.activities.MVPSearchActivity;
 import solonsky.signal.twitter.adapters.StatusAdapter;
 import solonsky.signal.twitter.helpers.AppData;
+import solonsky.signal.twitter.helpers.Keys;
 import solonsky.signal.twitter.helpers.ListConfig;
 import solonsky.signal.twitter.helpers.TweetActions;
 import solonsky.signal.twitter.helpers.Utilities;
@@ -59,8 +60,9 @@ public class StatsTweetsFragment extends Fragment {
                 new StatusAdapter.StatusClickListener() {
                     @Override
                     public void onSearch(String searchText, View v) {
-                        AppData.searchQuery = (searchText);
-                        getActivity().startActivity(new Intent(getContext(), SearchActivity.class));
+                        Intent searchIntent = new Intent(getContext(), MVPSearchActivity.class);
+                        searchIntent.putExtra(Keys.SearchQuery.getValue(), searchText);
+                        getActivity().startActivity(searchIntent);
                         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }
                 }, new TweetActions.MoreCallback() {

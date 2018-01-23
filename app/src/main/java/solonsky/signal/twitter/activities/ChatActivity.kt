@@ -224,16 +224,16 @@ class ChatActivity : AppCompatActivity(), ChatView {
 
                     val a = object : Animation() {
                         override fun applyTransformation(interpolatedTime: Float, t: Transformation) {
-                            val params = binding!!.recyclerChat.layoutParams as FrameLayout.LayoutParams
+                            val params = binding.recyclerChat.layoutParams as FrameLayout.LayoutParams
                             params.leftMargin = oldLeftMargin + (-oldLeftMargin * interpolatedTime).toInt()
                             params.rightMargin = (oldRightMargin * (1 - interpolatedTime) + endMargin * interpolatedTime).toInt()
-                            binding!!.recyclerChat.layoutParams = params
+                            binding.recyclerChat.layoutParams = params
                         }
                     }
 
                     a.duration = 150 // in ms
                     if (oldLeftMargin < 0) {
-                        binding!!.recyclerChat.startAnimation(a)
+                        binding.recyclerChat.startAnimation(a)
                     }
                 }
 

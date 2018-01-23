@@ -158,11 +158,11 @@ public class SearchedFragment extends Fragment implements SmartTabLayout.TabProv
     public void filterSource(int position, int source, boolean value) {
         switch (position) {
             case 0:
-                searchAllFragment.filterSource(source, value);
+//                searchAllFragment.filterSource(source, value);
                 break;
 
             case 1:
-                searchPeopleFragment.filterSource(source, value);
+//                searchPeopleFragment.filterSource(source, value);
                 break;
 
             case 2:
@@ -178,11 +178,11 @@ public class SearchedFragment extends Fragment implements SmartTabLayout.TabProv
     public void setupList(int position) {
         switch (position) {
             case 0:
-                searchAllFragment.setupList();
+//                searchAllFragment.setupList();
                 break;
 
             case 1:
-                searchPeopleFragment.setupList();
+//                searchPeopleFragment.setupList();
                 break;
 
             case 2:
@@ -274,7 +274,7 @@ public class SearchedFragment extends Fragment implements SmartTabLayout.TabProv
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        searchPeopleFragment.updateData(userModels);
+//                        searchPeopleFragment.updateData(userModels);
                         if (Flags.isSearchUser) {
                             selectFragment(searchPeopleFragment);
                             viewPager.setCurrentItem(1);
@@ -306,7 +306,7 @@ public class SearchedFragment extends Fragment implements SmartTabLayout.TabProv
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        searchAllFragment.updateData(searchedModels);
+//                        searchAllFragment.updateData(searchedModels);
                         searchMediaFragment.updateData(searchedMedia);
                     }
                 }, 100);

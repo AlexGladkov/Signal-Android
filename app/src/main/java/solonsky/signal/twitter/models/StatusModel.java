@@ -2,9 +2,12 @@ package solonsky.signal.twitter.models;
 
 import android.databinding.BaseObservable;
 import android.databinding.Bindable;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -22,7 +25,7 @@ import twitter4j.Status;
  * Created by neura on 26.06.17.
  */
 
-public class StatusModel extends BaseObservable {
+public class StatusModel extends BaseObservable implements Parcelable {
     private final String TAG = StatusModel.class.getSimpleName();
     private long id;
     private long currentUserRetweetId;
@@ -69,6 +72,81 @@ public class StatusModel extends BaseObservable {
     private boolean isExpand = false;
     private boolean isHighlighted = false;
 
+    protected StatusModel(Parcel in) {
+        id = in.readLong();
+        currentUserRetweetId = in.readLong();
+        favoriteCount = in.readLong();
+        inReplyToStatusId = in.readLong();
+        quotedStatusId = in.readLong();
+        retweetCount = in.readLong();
+        lang = in.readString();
+        source = in.readString();
+        text = in.readString();
+        rtText = in.readString();
+        inReplyToScreenName = in.readString();
+        user = in.readParcelable(User.class.getClassLoader());
+        retweetedStatus = in.readParcelable(StatusModel.class.getClassLoader());
+        quotedStatus = in.readParcelable(StatusModel.class.getClassLoader());
+        isFavorited = in.readByte() != 0;
+        isRetweetedByMe = in.readByte() != 0;
+        isRetweeted = in.readByte() != 0;
+        isRetweet = in.readByte() != 0;
+        isReplyStart = in.readByte() != 0;
+        isReplyEnd = in.readByte() != 0;
+        isNewStatus = in.readByte() != 0;
+        mediaType = in.readString();
+        divideState = in.readInt();
+        isExpand = in.readByte() != 0;
+        isHighlighted = in.readByte() != 0;
+    }
+
+    public static final Creator<StatusModel> CREATOR = new Creator<StatusModel>() {
+        @Override
+        public StatusModel createFromParcel(Parcel in) {
+            return new StatusModel(in);
+        }
+
+        @Override
+        public StatusModel[] newArray(int size) {
+            return new StatusModel[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(TAG);
+        dest.writeLong(id);
+        dest.writeLong(currentUserRetweetId);
+        dest.writeLong(favoriteCount);
+        dest.writeLong(inReplyToStatusId);
+        dest.writeLong(quotedStatusId);
+        dest.writeLong(retweetCount);
+        dest.writeString(lang);
+        dest.writeString(source);
+        dest.writeString(text);
+        dest.writeString(rtText);
+        dest.writeString(inReplyToScreenName);
+        dest.writeParcelable(user, flags);
+        dest.writeParcelable(retweetedStatus, flags);
+        dest.writeParcelable(quotedStatus, flags);
+        dest.writeByte((byte) (isFavorited ? 1 : 0));
+        dest.writeByte((byte) (isRetweetedByMe ? 1 : 0));
+        dest.writeByte((byte) (isRetweeted ? 1 : 0));
+        dest.writeByte((byte) (isRetweet ? 1 : 0));
+        dest.writeByte((byte) (isReplyStart ? 1 : 0));
+        dest.writeByte((byte) (isReplyEnd ? 1 : 0));
+        dest.writeByte((byte) (isNewStatus ? 1 : 0));
+        dest.writeString(mediaType);
+        dest.writeInt(divideState);
+        dest.writeByte((byte) (isExpand ? 1 : 0));
+        dest.writeByte((byte) (isHighlighted ? 1 : 0));
+    }
+
     public interface StatusClickHandler {
 
         void onShareClick(View v);
@@ -96,6 +174,18 @@ public class StatusModel extends BaseObservable {
         boolean longContentClick(View v);
 
         boolean longQuoteContentClick(View v);
+    }
+
+    public static StatusModel getNewInstance(Status status, Gson gson) {
+        StatusModel statusModel = gson.fromJson(gson.toJsonTree(status), StatusModel.class);
+        statusModel.parseYoutubeTest();
+        statusModel.tuneModel(status);
+        statusModel.linkClarify();
+
+        statusModel.setRetweet(status.isRetweet());
+        statusModel.setRetweetedByMe(status.isRetweetedByMe());
+
+        return statusModel;
     }
 
     public StatusModel(long id, long currentUserRetweetId, long favoriteCount, long inReplyToStatusId,

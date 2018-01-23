@@ -1,7 +1,11 @@
 package solonsky.signal.twitter.helpers;
 
 import android.app.Application;
+import android.arch.persistence.db.SupportSQLiteDatabase;
+import android.arch.persistence.room.Room;
+import android.arch.persistence.room.migration.Migration;
 import android.content.SharedPreferences;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.twitter.sdk.android.core.DefaultLogger;
@@ -10,9 +14,13 @@ import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterConfig;
 
 import solonsky.signal.twitter.R;
+import solonsky.signal.twitter.di.AppComponent;
+import solonsky.signal.twitter.di.DaggerAppComponent;
 import solonsky.signal.twitter.libs.AppVisibilityDetector;
 import solonsky.signal.twitter.libs.ApplicationLifecycleHandler;
 import solonsky.signal.twitter.models.ConfigurationModel;
+import solonsky.signal.twitter.room.AppDatabase;
+import solonsky.signal.twitter.room.RoomContract;
 import twitter4j.conf.ConfigurationBuilder;
 
 /**
@@ -23,6 +31,7 @@ public class App extends Application {
     public static final String TAG = "App";
     private static volatile App instance;
     private boolean isNightEnabled = false;
+    private AppComponent appComponent;
 
     private final String CONSUMER_KEY = "5OPDgxPnwuMkhFtkZfJmNDJj7";
     private final String CONSUMER_SECRET = "q2vCmYnI2h3ah2pjzAQYwipiQVskEZjkFAH83wJ3OaDglhDcaF";
@@ -43,9 +52,23 @@ public class App extends Application {
         return localInstance;
     }
 
+    static final Migration MIGRATION_1_2 = new Migration(1, 2) {
+        @Override
+        public void migrate(@NonNull SupportSQLiteDatabase database) {
+            database.execSQL( "CREATE TABLE " + RoomContract.USER_ID_TABLE + " " +
+                    "(id INTEGER NOT NULL, id_keys TEXT, PRIMARY KEY(id))");
+        }
+    };
+
+    public static AppDatabase db;
     @Override
     public void onCreate() {
         super.onCreate();
+        db = Room.databaseBuilder(getApplicationContext(), AppDatabase.class,
+                RoomContract.DB_NAME)
+                .addMigrations(MIGRATION_1_2)
+                .fallbackToDestructiveMigration()
+                .build();
 
         AppVisibilityDetector.init(App.this, new AppVisibilityDetector.AppVisibilityCallback() {
             @Override
@@ -63,6 +86,13 @@ public class App extends Application {
         //We load the Night State here
         SharedPreferences mSharedPreferences = getSharedPreferences(getString(R.string.app_name), 0);
         this.isNightEnabled = mSharedPreferences.getBoolean("NIGHT_MODE", true);
+    }
+
+    public AppComponent getAppComponent() {
+        if (appComponent == null) {
+            appComponent = DaggerAppComponent.builder().build();
+        }
+        return appComponent;
     }
 
     public boolean isNightEnabled() {

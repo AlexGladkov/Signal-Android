@@ -36,6 +36,7 @@ buildscript {
 }
 
 allprojects {
+
     repositories {
         jcenter()
         mavenCentral()
@@ -43,6 +44,13 @@ allprojects {
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
         maven { url "https://mvn.arello-mobile.com/" }
         maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
+    }
+
+    gradle.projectsEvaluated {
+        tasks.withType(JavaCompile) {
+            options.compilerArgs << "-Xmaxerrs" << "4000"
+            options.compilerArgs << "-Xmaxwarns" << "4000"
+        }
     }
 }
 

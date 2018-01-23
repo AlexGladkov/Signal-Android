@@ -221,6 +221,7 @@ public class UsersData {
                 }
             }
         });
+
         asyncTwitter.getFriendsIDs(-1);
         asyncTwitter.getBlocksIDs(-1);
     }
