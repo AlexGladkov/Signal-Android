@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.wang.avi.AVLoadingIndicatorView;
 
+import solonsky.signal.twitter.activities.ComposeActivity;
 import solonsky.signal.twitter.adapters.ImageHorizontalAdapter;
 import solonsky.signal.twitter.adapters.SimpleHorizontalAdapter;
 import solonsky.signal.twitter.adapters.UserHorizontalAdapter;
@@ -625,6 +626,9 @@ public class ComposeViewModel extends BaseObservable {
                     Log.e(TAG, "found users - " + userList.size());
                     if (!isChanged) {
                         for (User user : userList) {
+                            if (mActivity instanceof ComposeActivity) {
+                                ((ComposeActivity) mActivity).mPresenter.addUser(user);
+                            }
                             mentionsSource.add(new UserModel(user.getId(), user.getOriginalProfileImageURL(),
                                     user.getName(), "@" + user.getScreenName(), false, false, false));
                         }
@@ -902,5 +906,10 @@ public class ComposeViewModel extends BaseObservable {
             Toast.makeText(mActivity.getApplicationContext(), "Location disabled", Toast.LENGTH_SHORT).show();
             setLocationState(LOCATION_OFF);
         }
+    }
+
+    public void setMentions(List<UserModel> userModels) {
+        this.mentionsSource.clear();
+        this.mentionsSource.addAll(userModels);
     }
 }

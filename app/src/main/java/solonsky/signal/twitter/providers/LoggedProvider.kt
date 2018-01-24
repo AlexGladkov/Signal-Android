@@ -18,8 +18,10 @@ import java.util.*
  */
 
 class LoggedProvider(val presenter: LoggedPresenter) {
+    private val handler = Handler()
     private val TAG: String = LoggedProvider::class.java.simpleName
     private val userConverter = UsersConverterImpl()
+    private val maxUsers = 100
 
     fun fetchUsers() {
         fetchRemoteUsers()
@@ -29,26 +31,14 @@ class LoggedProvider(val presenter: LoggedPresenter) {
         val asyncTwitter = Utilities.getAsyncTwitter()
         val idSet: MutableSet<Long> = HashSet()
 
-        asyncTwitter.addListener(object: TwitterAdapter() {
+        asyncTwitter.addListener(object : TwitterAdapter() {
             override fun onException(te: TwitterException?, method: TwitterMethod?) {
                 super.onException(te, method)
                 method?.let {
-                    when (it) {
-                        TwitterMethod.FRIENDS_IDS -> {
-                            val arr = LongArray(idSet.size, {idSet.elementAt(it)})
-                            val userIds = UserIDEntity(AppData.ME.id, idSet.toString())
-                            App.db.userIDsDao().insert(userIds)
-                            asyncTwitter.lookupUsers(*arr)
-                        }
-
-                        TwitterMethod.FOLLOWERS_IDS -> {
-                            val arr = LongArray(idSet.size, {idSet.elementAt(it)})
-                            val userIds = UserIDEntity(AppData.ME.id, idSet.toString())
-                            App.db.userIDsDao().insert(userIds)
-                            asyncTwitter.lookupUsers(*arr)
-                        }
-                        else -> Log.e(TAG, "method name is ${it.name}")
-                    }
+                    val arr = LongArray(idSet.size, { idSet.elementAt(it) })
+                    val userIds = UserIDEntity(AppData.ME.id, idSet.toString())
+                    App.db.userIDsDao().insert(userIds)
+                    asyncTwitter.lookupUsers(*arr)
                 }
             }
 
@@ -60,26 +50,46 @@ class LoggedProvider(val presenter: LoggedPresenter) {
 
             override fun gotFollowersIDs(ids: IDs) {
                 super.gotFollowersIDs(ids)
-                ids.iDs.forEach { idSet.add(it) }
+                ids.iDs.forEach {
+                    if (idSet.size < maxUsers)
+                        idSet.add(it)
+                }
 
-                if (ids.nextCursor == 0L) {
-                    val arr = LongArray(idSet.size, {idSet.elementAt(it)})
+                if (idSet.size >= maxUsers) {
+                    val arr = LongArray(idSet.size, { idSet.elementAt(it) })
                     val userIds = UserIDEntity(AppData.ME.id, idSet.toString())
                     App.db.userIDsDao().insert(userIds)
                     asyncTwitter.lookupUsers(*arr)
                 } else {
-                    asyncTwitter.getFollowersIDs(ids.nextCursor)
+                    if (ids.nextCursor == 0L) {
+                        val arr = LongArray(idSet.size, { idSet.elementAt(it) })
+                        val userIds = UserIDEntity(AppData.ME.id, idSet.toString())
+                        App.db.userIDsDao().insert(userIds)
+                        asyncTwitter.lookupUsers(*arr)
+                    } else {
+                        asyncTwitter.getFollowersIDs(ids.nextCursor)
+                    }
                 }
             }
 
             override fun gotFriendsIDs(ids: IDs) {
                 super.gotFriendsIDs(ids)
-                ids.iDs.forEach { idSet.add(it) }
+                ids.iDs.forEach {
+                    if (idSet.size < maxUsers)
+                        idSet.add(it)
+                }
 
-                if (ids.nextCursor == 0L) {
-                    asyncTwitter.getFollowersIDs(-1)
+                if (idSet.size >= maxUsers) {
+                    val arr = LongArray(idSet.size, { idSet.elementAt(it) })
+                    val userIds = UserIDEntity(AppData.ME.id, idSet.toString())
+                    App.db.userIDsDao().insert(userIds)
+                    asyncTwitter.lookupUsers(*arr)
                 } else {
-                    asyncTwitter.getFriendsIDs(ids.nextCursor)
+                    if (ids.nextCursor == 0L) {
+                        asyncTwitter.getFollowersIDs(-1)
+                    } else {
+                        asyncTwitter.getFriendsIDs(ids.nextCursor)
+                    }
                 }
             }
         })

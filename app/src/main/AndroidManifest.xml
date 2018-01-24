@@ -40,7 +40,7 @@
             android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/ActivityThemeLight"
-            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
 
         <activity
             android:name=".activities.ThanksActivity"

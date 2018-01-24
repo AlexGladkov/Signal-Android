@@ -129,6 +129,7 @@ public class NotificationsApi {
 
                     notificationDetailModel.setUser(convertedUser);
                     notificationModel.setStatusModel(statusModel);
+                    notificationModel.setUser(convertedUser);
 
                     if (!NotificationsRetweetData.getInstance().getRetweetList().contains(notificationDetailModel))
                         NotificationsRetweetData.getInstance().getRetweetList().add(notificationDetailModel);
@@ -197,6 +198,7 @@ public class NotificationsApi {
                     }
 
                     notificationModel.setStatusModel(statusModel);
+                    notificationModel.setUser(convertedUser);
 
                     if (!NotificationsAllData.getInstance().getDataList().contains(notificationModel)) {
                         NotificationsAllData.getInstance().getDataList().add(notificationModel);

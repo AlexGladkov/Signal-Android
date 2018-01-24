@@ -22,4 +22,8 @@ class ComposePresenter: MvpPresenter<ComposeView>() {
     fun setupData(users: MutableList<UserModel>) {
         viewState.setupMentions(users)
     }
+
+    fun addUser(user: twitter4j.User) {
+        provider.addUser(user = user)
+    }
 }

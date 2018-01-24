@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "F:\\Projects\\Android\\Signal\\matisse\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v24\\values-v24.xml",
+            "outputFile": "/Users/agladkov/Downloads/signal/F:\\Projects\\Android\\Signal\\matisse\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v24\\values-v24.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\sunwi\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.0.2.aar\\24caf6c3083c8375ca47c8a91d62ae77\\res\\values-v24\\values-v24.xml",
+                    "source": "/Users/agladkov/Downloads/signal/C:\\Users\\sunwi\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.0.2.aar\\24caf6c3083c8375ca47c8a91d62ae77\\res\\values-v24\\values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7",
                         "startColumns": "4,4,4,4,4,4",
@@ -14,7 +14,39 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\sunwi\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.0.2.aar\\8cfb48e2a3ca4ac2629bf4b3fc794afd\\res\\values-v24\\values-v24.xml",
+                    "source": "/Users/agladkov/Downloads/signal/C:\\Users\\sunwi\\.gradle\\caches\\transforms-1\\files-1.1\\support-media-compat-26.0.2.aar\\8cfb48e2a3ca4ac2629bf4b3fc794afd\\res\\values-v24\\values-v24.xml",
+                    "from": {
+                        "startLines": "2,3,4,5",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "55,121,182,248",
+                        "endColumns": "65,60,65,66",
+                        "endOffsets": "116,177,243,310"
+                    },
+                    "to": {
+                        "startLines": "8,9,10,11",
+                        "startColumns": "4,4,4,4",
+                        "startOffsets": "619,685,746,812",
+                        "endColumns": "65,60,65,66",
+                        "endOffsets": "680,741,807,874"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/agladkov/Downloads/signal/matisse/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-v24/values-v24.xml",
+            "map": [
+                {
+                    "source": "/Users/agladkov/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.0.2.aar/7320997b2bb9b1a9c6a42348d77c5836/res/values-v24/values-v24.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,7",
+                        "startColumns": "4,4,4,4,4,4",
+                        "startOffsets": "55,212,347,416,480,549",
+                        "endColumns": "156,134,68,63,68,69",
+                        "endOffsets": "207,342,411,475,544,614"
+                    }
+                },
+                {
+                    "source": "/Users/agladkov/.gradle/caches/transforms-1/files-1.1/support-media-compat-26.0.2.aar/5eb77ef44bac29b525915b79df34c59f/res/values-v24/values-v24.xml",
                     "from": {
                         "startLines": "2,3,4,5",
                         "startColumns": "4,4,4,4",

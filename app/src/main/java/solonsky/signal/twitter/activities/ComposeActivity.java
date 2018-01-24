@@ -81,7 +81,7 @@ public class ComposeActivity extends MvpAppCompatActivity
         implements ComposeView {
 
     @InjectPresenter
-    ComposePresenter mPresenter;
+    public ComposePresenter mPresenter;
 
     private static final int REQUEST_LOCATION_CODE = 2;
     private final String TAG = ComposeActivity.class.getSimpleName();
@@ -475,7 +475,6 @@ public class ComposeActivity extends MvpAppCompatActivity
      * Performs send tweet to Twitter
      */
     private void sendTweet() {
-        Log.e(TAG, "sending tweet start");
         if (viewModel.isEnabled()) {
             viewModel.setEnabled(false);
             final Handler handler = new Handler();
@@ -783,7 +782,7 @@ public class ComposeActivity extends MvpAppCompatActivity
 
     // MARK: - View implementation
     @Override
-    public void setupMentions(@NotNull List<? extends UserModel> data) {
-        viewModel.set
+    public void setupMentions(@NonNull List<UserModel> data) {
+        viewModel.setMentions(data);
     }
 }

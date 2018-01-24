@@ -9,4 +9,5 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
  */
 @StateStrategyType(value = AddToEndSingleStrategy::class)
 interface LoggedView: MvpView {
+    fun showMessage(text: String)
 }

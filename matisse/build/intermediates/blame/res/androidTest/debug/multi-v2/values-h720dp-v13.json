@@ -1,10 +1,25 @@
 {
     "logs": [
         {
-            "outputFile": "F:\\Projects\\Android\\Signal\\matisse\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-h720dp-v13\\values-h720dp-v13.xml",
+            "outputFile": "/Users/agladkov/Downloads/signal/F:\\Projects\\Android\\Signal\\matisse\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-h720dp-v13\\values-h720dp-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\sunwi\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.0.2.aar\\24caf6c3083c8375ca47c8a91d62ae77\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
+                    "source": "/Users/agladkov/Downloads/signal/C:\\Users\\sunwi\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-26.0.2.aar\\24caf6c3083c8375ca47c8a91d62ae77\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "66",
+                        "endOffsets": "117"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "/Users/agladkov/Downloads/signal/matisse/build/intermediates/incremental/mergeDebugAndroidTestResources/merged.dir/values-h720dp-v13/values-h720dp-v13.xml",
+            "map": [
+                {
+                    "source": "/Users/agladkov/.gradle/caches/transforms-1/files-1.1/appcompat-v7-26.0.2.aar/7320997b2bb9b1a9c6a42348d77c5836/res/values-h720dp-v13/values-h720dp-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

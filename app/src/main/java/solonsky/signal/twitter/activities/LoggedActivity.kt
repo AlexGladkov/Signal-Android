@@ -1136,4 +1136,9 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ActivityListener {
     fun setFeedCount(feedCount: Int) {
         this.feedCount = feedCount
     }
+
+    // MARK: - View implementation
+    override fun showMessage(text: String) {
+        Toast.makeText(applicationContext, text, Toast.LENGTH_SHORT).show()
+    }
 }

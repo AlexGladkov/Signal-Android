@@ -1,5 +1,6 @@
 package solonsky.signal.twitter.room.converters
 
+import solonsky.signal.twitter.models.UserModel
 import solonsky.signal.twitter.room.models.UserEntity
 import twitter4j.User
 
@@ -8,6 +9,12 @@ import twitter4j.User
  */
 
 class UsersConverterImpl: UsersConverter {
+    override fun dbToModel(userEntity: UserEntity): UserModel {
+        return UserModel(userEntity.id, userEntity.biggerProfileImageURL, userEntity.name,
+                "@${userEntity.screenName}", userEntity.isFollowRequestSent, false, false)
+    }
+
     override fun apiToDb(apiUser: User): UserEntity =
             UserEntity.createInstance(apiUser)
+
 }

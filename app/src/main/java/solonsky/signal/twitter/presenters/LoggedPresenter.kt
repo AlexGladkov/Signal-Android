@@ -16,4 +16,8 @@ class LoggedPresenter: MvpPresenter<LoggedView>() {
         super.onFirstViewAttach()
         provider.fetchUsers()
     }
+
+    fun showMessage(text: String) {
+        viewState.showMessage(text = text)
+    }
 }

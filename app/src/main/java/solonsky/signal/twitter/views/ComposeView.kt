@@ -11,5 +11,5 @@ import solonsky.signal.twitter.models.UserModel
  */
 @StateStrategyType(value = AddToEndSingleStrategy::class)
 interface ComposeView: MvpView {
-    fun setupMentions(data: List<UserModel>)
+    fun setupMentions(data: MutableList<UserModel>)
 }

@@ -42,6 +42,12 @@ public class NotificationsAllFragment extends Fragment implements FragmentCounte
     private FragmentNotificationsAllBinding binding;
     private ActivityListener mCallback;
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mAdapter = new NotificationsMainAdapter();
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -55,7 +61,8 @@ public class NotificationsAllFragment extends Fragment implements FragmentCounte
         super.onViewCreated(view, savedInstanceState);
         final NotificationsFragment mParentFragment = (NotificationsFragment) getParentFragment();
 
-        mAdapter = new NotificationsMainAdapter(NotificationsAllData.getInstance().getDataList(), getContext(), clickListener);
+        mAdapter.setData(NotificationsAllData.getInstance().getDataList());
+        mAdapter.attachListener(clickListener);
         NotificationsMainViewModel viewModel = new NotificationsMainViewModel(mAdapter, getContext());
 
         binding.setModel(viewModel);
@@ -79,27 +86,35 @@ public class NotificationsAllFragment extends Fragment implements FragmentCounte
                 }
             }
         });
-        binding.recyclerNotificationsAll.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+
+        binding.recyclerNotificationsAll.setOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-                final LinearLayoutManager linearLayoutManager = (LinearLayoutManager) binding.recyclerNotificationsAll.getLayoutManager();
-                int hiddenPosition = linearLayoutManager.findFirstVisibleItemPosition();
-
-                if (hiddenPosition > 0 && NotificationsAllData.getInstance().getDataList().get(hiddenPosition - 1).isHighlighted()) {
-                    NotificationsAllData.getInstance().getDataList().get(hiddenPosition - 1).setHighlighted(false);
-                    NotificationsAllData.getInstance().decEntryCount();
-
-                    if (NotificationsAllData.getInstance().getEntryCount() == 0) {
-                        LoggedData.getInstance().setNewActivity(false);
-                        LoggedData.getInstance().getUpdateHandler().onUpdate();
-                    }
-
-                    if (mParentFragment.getUpdateHandler() != null) {
-                        mParentFragment.getUpdateHandler().onUpdate();
-                    }
-                }
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
             }
         });
+
+//        binding.recyclerNotificationsAll.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+//            @Override
+//            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+//                final LinearLayoutManager linearLayoutManager = (LinearLayoutManager) binding.recyclerNotificationsAll.getLayoutManager();
+//                int hiddenPosition = linearLayoutManager.findFirstVisibleItemPosition();
+//
+//                if (hiddenPosition > 0 && NotificationsAllData.getInstance().getDataList().get(hiddenPosition - 1).isHighlighted()) {
+//                    NotificationsAllData.getInstance().getDataList().get(hiddenPosition - 1).setHighlighted(false);
+//                    NotificationsAllData.getInstance().decEntryCount();
+//
+//                    if (NotificationsAllData.getInstance().getEntryCount() == 0) {
+//                        LoggedData.getInstance().setNewActivity(false);
+//                        LoggedData.getInstance().getUpdateHandler().onUpdate();
+//                    }
+//
+//                    if (mParentFragment.getUpdateHandler() != null) {
+//                        mParentFragment.getUpdateHandler().onUpdate();
+//                    }
+//                }
+//            }
+//        });
 
         binding.srlNotificationAll.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -119,7 +134,7 @@ public class NotificationsAllFragment extends Fragment implements FragmentCounte
         NotificationsAllData.getInstance().setUpdateHandler(new UpdateHandler() {
             @Override
             public void onUpdate() {
-                mAdapter.notifyDataSetChanged();
+                mAdapter.setData(NotificationsAllData.getInstance().getDataList());
                 binding.txtNotificationNoData.setVisibility(NotificationsAllData.getInstance()
                             .getDataList().size() == 0 ? View.VISIBLE : View.GONE);
 
@@ -182,6 +197,16 @@ public class NotificationsAllFragment extends Fragment implements FragmentCounte
                         getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
                     }
                     break;
+            }
+        }
+
+        @Override
+        public void onAvatarClick(NotificationModel model, View v) {
+            if (model.getUser() != null) {
+                Intent profileIntent = new Intent(getContext(), MVPProfileActivity.class);
+                profileIntent.putExtra(Flags.PROFILE_DATA, model.getUser());
+                getActivity().startActivity(profileIntent);
+                getActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
             }
         }
     };

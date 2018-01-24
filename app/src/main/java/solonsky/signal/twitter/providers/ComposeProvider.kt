@@ -5,6 +5,7 @@ import android.util.Log
 import solonsky.signal.twitter.helpers.App
 import solonsky.signal.twitter.helpers.AppData
 import solonsky.signal.twitter.models.User
+import solonsky.signal.twitter.models.UserModel
 import solonsky.signal.twitter.presenters.ComposePresenter
 import solonsky.signal.twitter.room.converters.UsersConverterImpl
 import java.util.*
@@ -17,11 +18,12 @@ class ComposeProvider(private val presenter: ComposePresenter) {
     private val TAG: String = ComposeProvider::class.java.simpleName
     private val converter = UsersConverterImpl()
 
+    // Load mentions from DB
     fun fetchMentions() {
         Thread({
             val data = App.db.userIDsDao().getAllById(AppData.ME.id)
             if (data.size > 0) {
-                val users: MutableList<User> = LinkedList()
+                val users: MutableList<UserModel> = LinkedList()
                 App.db.usersDao().all
                         .map { converter.dbToModel(it) }
                         .forEach({
@@ -32,6 +34,12 @@ class ComposeProvider(private val presenter: ComposePresenter) {
                     presenter.setupData(users = users)
                 }
             }
+        }).start()
+    }
+
+    fun addUser(user: twitter4j.User) {
+        Thread({
+            App.db.usersDao().insert(converter.apiToDb(user))
         }).start()
     }
 }

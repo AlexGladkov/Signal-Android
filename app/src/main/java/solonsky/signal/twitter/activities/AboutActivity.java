@@ -145,7 +145,7 @@ public class AboutActivity extends AppCompatActivity {
         }
 
         AboutViewModel viewModel = new AboutViewModel(getApplicationContext(), "Signal " + version +
-                " (" + codeVersion + ") © 2017 Alex Solonsky");
+                " (" + codeVersion + ") © 2018 Alex Solonsky");
         binding.setModel(viewModel);
     }
 
