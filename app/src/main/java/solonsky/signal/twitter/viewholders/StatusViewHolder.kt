@@ -733,13 +733,13 @@ class StatusViewHolder(itemView: View, screenWidth: Int) : RecyclerView.ViewHold
         if (isLike) {
             mView.mvp_status_img_favorite.visibility = View.VISIBLE
             if (isNight) {
-                mView.mvp_status_img_like.setColorFilter(itemView.context.getColor(R.color.dark_like_tint_color))
+                mView.mvp_status_img_like.setColorFilter(ContextCompat.getColor(itemView.context, R.color.dark_like_tint_color))
             } else {
-                mView.mvp_status_img_like.setColorFilter(itemView.context.getColor(R.color.light_like_tint_color))
+                mView.mvp_status_img_like.setColorFilter(ContextCompat.getColor(itemView.context, R.color.light_like_tint_color))
             }
         } else {
             mView.mvp_status_img_favorite.visibility = View.GONE
-            mView.mvp_status_img_like.setColorFilter(itemView.context.getColor(R.color.dark_hint_text_color))
+            mView.mvp_status_img_like.setColorFilter(ContextCompat.getColor(itemView.context, R.color.dark_hint_text_color))
         }
     }
 }

@@ -5,6 +5,7 @@ import android.databinding.DataBindingUtil
 import android.graphics.Color
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.PopupMenu
 import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
@@ -50,8 +51,11 @@ class ChatActivity : AppCompatActivity(), ChatView {
     private var THRESHOLD = 0
 
     private val onScrollListener = object : RecyclerView.OnScrollListener() {
-        override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
+            val mLayoutManager = recyclerView.layoutManager as LinearLayoutManager
+            val pastVisibleItem = mLayoutManager.findLastCompletelyVisibleItemPosition()
+            binding.chatSrl.isEnabled = pastVisibleItem == DirectApi.getInstance().chatModels.size - 1
         }
     }
 

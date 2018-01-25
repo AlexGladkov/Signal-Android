@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.data.UsersData;
@@ -34,7 +35,7 @@ import twitter4j.User;
 
 public class UserDetailAdapter extends RecyclerView.Adapter<UserDetailAdapter.UserViewHolder> {
     private final String TAG = "FEEDADAPTER";
-    private final ArrayList<UserModel> mUserModels;
+    private final List<UserModel> mUserModels;
     private final Context mContext;
     private final AppCompatActivity mActivity;
     private final UserClickHandler clickHandler;
@@ -43,7 +44,7 @@ public class UserDetailAdapter extends RecyclerView.Adapter<UserDetailAdapter.Us
         void onItemClick(UserModel model, View v);
     }
 
-    public UserDetailAdapter(ArrayList<UserModel> mUserModels, Context mContext,
+    public UserDetailAdapter(List<UserModel> mUserModels, Context mContext,
                              AppCompatActivity mActivity, UserClickHandler clickHandler) {
         this.mUserModels = mUserModels;
         this.mContext = mContext;

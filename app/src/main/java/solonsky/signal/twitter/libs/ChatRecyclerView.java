@@ -27,6 +27,12 @@ public class ChatRecyclerView extends RecyclerView {
     }
 
     @Override
+    public boolean canScrollVertically(int direction) {
+        // check if scrolling up
+        return true;
+    }
+
+    @Override
     public boolean onInterceptHoverEvent(MotionEvent event) {
         return false;
     }

@@ -84,6 +84,10 @@ class MVPSearchActivity : MvpAppCompatActivity(), SearchView, SmartTabLayout.Tab
 
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         Utilities.setWindowFlag(this@MVPSearchActivity, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false)
+        window.statusBarColor = resources.getColor(if (App.getInstance().isNightEnabled)
+            R.color.dark_status_bar_timeline_color
+        else
+            R.color.light_status_bar_timeline_color)
 
         stb_search.setCustomTabView(this@MVPSearchActivity)
         stb_search.setOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
