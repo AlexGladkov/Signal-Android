@@ -11,6 +11,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -380,7 +381,8 @@ public class StatusAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                     AutoLinkMode.MODE_HASHTAG,
                     AutoLinkMode.MODE_MENTION,
                     AutoLinkMode.MODE_URL,
-                    AutoLinkMode.MODE_SHORT
+                    AutoLinkMode.MODE_SHORT,
+                    AutoLinkMode.MODE_EMAIL
             );
 
             String[] urls;
@@ -438,6 +440,15 @@ public class StatusAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         }
                     } else if (autoLinkMode.equals(AutoLinkMode.MODE_URL)) {
                         Utilities.openLink(matchedText.trim(), mActivity);
+                    } else if (autoLinkMode.equals(AutoLinkMode.MODE_EMAIL)) {
+                        Intent i = new Intent(Intent.ACTION_SEND);
+                        i.setType("message/rfc822");
+                        i.putExtra(Intent.EXTRA_EMAIL  , new String[]{matchedText});
+                        try {
+                            mActivity.startActivity(Intent.createChooser(i, "Send mail..."));
+                        } catch (android.content.ActivityNotFoundException ex) {
+                            Toast.makeText(mActivity, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
                         performSingleTap(statusModel, previousModel, nextModel, holder);
                     }

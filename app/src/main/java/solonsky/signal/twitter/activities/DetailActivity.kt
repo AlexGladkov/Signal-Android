@@ -27,6 +27,8 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
+import com.arellomobile.mvp.MvpAppCompatActivity
+import com.arellomobile.mvp.presenter.InjectPresenter
 
 import com.daimajia.swipe.SwipeLayout
 import com.google.gson.JsonObject
@@ -34,6 +36,7 @@ import com.ogaclejapan.smarttablayout.SmartTabLayout
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_detail.*
 
 import org.joda.time.LocalDateTime
 
@@ -45,6 +48,7 @@ import solonsky.signal.twitter.adapters.StatusAdapter
 import solonsky.signal.twitter.data.FeedData
 import solonsky.signal.twitter.data.UsersData
 import solonsky.signal.twitter.databinding.ActivityDetailBinding
+import solonsky.signal.twitter.dialogs.ClientDialog
 import solonsky.signal.twitter.draw.CirclePicasso
 import solonsky.signal.twitter.fragments.DetailReplyFragment
 import solonsky.signal.twitter.fragments.DetailRtFragment
@@ -63,6 +67,7 @@ import solonsky.signal.twitter.viewmodels.DetailViewModel
  */
 
 class DetailActivity : AppCompatActivity(), SmartTabLayout.TabProvider {
+
     private var CURRENT_POSITION = 1
     private val TAG = DetailActivity::class.java.simpleName
     private var mActivity: DetailActivity? = null
@@ -257,9 +262,9 @@ class DetailActivity : AppCompatActivity(), SmartTabLayout.TabProvider {
         else
             "@" + currentStatus.user.screenName
 
-        val dateClient = ("  •  via " + AppData.CURRENT_STATUS_MODEL.source.replace(">",
+        val clientName = AppData.CURRENT_STATUS_MODEL.source.replace(">",
                 "special").replace("<", "special").split("special".toRegex()).dropLastWhile { it.isEmpty() }.toTypedArray()[2]
-                + if (currentStatus.geoLocation == null) "" else "  •  ")
+        val dateClient = ("  •  via " + clientName + if (currentStatus.geoLocation == null) "" else "  •  ")
         val postTime = LocalDateTime(currentStatus.createdAt).toString("dd.MM.YY, HH:mm")
         val location = if (currentStatus.place == null) "" else currentStatus.place.get("fullName").asString
 
@@ -376,9 +381,8 @@ class DetailActivity : AppCompatActivity(), SmartTabLayout.TabProvider {
 
         val manager = GridLayoutManager(mActivity!!.applicationContext, 2, GridLayoutManager.VERTICAL, false)
         manager.spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                return if (position == 0) if (imagesFiltered.size % 2 == 0) 1 else 2 else 1
-            }
+            override fun getSpanSize(position: Int): Int =
+                    if (position == 0) if (imagesFiltered.size % 2 == 0) 1 else 2 else 1
         }
 
         binding.recyclerDetailMedia.setHasFixedSize(true)
@@ -530,6 +534,11 @@ class DetailActivity : AppCompatActivity(), SmartTabLayout.TabProvider {
 
         lastFragment = detailRtFragment
         binding.vpDetail.currentItem = 1
+
+        txtDetailClient.setOnLongClickListener {
+            ClientDialog(mActivity = this@DetailActivity, clientName = clientName).show()
+            true
+        }
 
         detailRtFragment.loadApi()
         detailReplyFragment.loadApi()

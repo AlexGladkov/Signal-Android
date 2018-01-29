@@ -14,6 +14,10 @@ class LoggedPresenter: MvpPresenter<LoggedView>() {
 
     override fun onFirstViewAttach() {
         super.onFirstViewAttach()
+//        provider.fetchUsers()
+    }
+
+    fun fetchUsers() {
         provider.fetchUsers()
     }
 

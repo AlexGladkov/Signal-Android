@@ -65,7 +65,7 @@
             android:layout_height="wrap_content"
             android:textSize="16dp"
             android:textColor="?attr/primaryTextColor"
-            android:text="@string/debug_tweet_text_1"
+            android:text=""
             android:layout_margin="16dp" />
         
         <RelativeLayout

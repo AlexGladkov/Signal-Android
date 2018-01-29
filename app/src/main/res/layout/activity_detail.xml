@@ -242,7 +242,8 @@
                                         android:textColor="?attr/secondaryTextColor"
                                         android:visibility="gone" />
 
-                                    <com.example.kmoaz.testapp1.CustomTextView.CustomTextView
+                                    <solonsky.signal.twitter.libs.CustomTextView
+                                        android:id="@+id/txtDetailClient"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:layout_marginTop="-1.25dp"

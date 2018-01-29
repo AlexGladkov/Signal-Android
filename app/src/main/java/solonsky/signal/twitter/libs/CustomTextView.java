@@ -1,10 +1,11 @@
-package com.example.kmoaz.testapp1.CustomTextView;
+package solonsky.signal.twitter.libs;
 
 import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Handler;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.AppCompatTextView;
 import android.text.Layout;
 import android.text.TextPaint;
 import android.util.AttributeSet;

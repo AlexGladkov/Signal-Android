@@ -94,8 +94,9 @@
                     android:textSize="14dp"
                     android:includeFontPadding="false"
                     android:fontFamily="sans-serif"
-                    android:layout_marginTop="1.5dp"
-                    app:text="@{model.subline}" />
+                    android:layout_marginTop="1.5dp" />
+                    <!--app:text="@{model.subline}"-->
+                    <!--/>-->
 
                 <TextView
                     android:layout_width="wrap_content"

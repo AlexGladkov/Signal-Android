@@ -284,7 +284,8 @@ public class ActionsApiFactory {
                             final MediaPlayer mediaPlayer = MediaPlayer.create(context, R.raw.mute);
                             mediaPlayer.start();
                         }
-                        Toast.makeText(context, context.getString(R.string.success_mute_user), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, context.getString(R.string.success_mute_user)
+                                .replace("[username]", "@" + screenName), Toast.LENGTH_SHORT).show();
                     }
                 });
             }

@@ -94,27 +94,27 @@ public class NotificationsAllFragment extends Fragment implements FragmentCounte
             }
         });
 
-//        binding.recyclerNotificationsAll.setOnScrollChangeListener(new View.OnScrollChangeListener() {
-//            @Override
-//            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
-//                final LinearLayoutManager linearLayoutManager = (LinearLayoutManager) binding.recyclerNotificationsAll.getLayoutManager();
-//                int hiddenPosition = linearLayoutManager.findFirstVisibleItemPosition();
-//
-//                if (hiddenPosition > 0 && NotificationsAllData.getInstance().getDataList().get(hiddenPosition - 1).isHighlighted()) {
-//                    NotificationsAllData.getInstance().getDataList().get(hiddenPosition - 1).setHighlighted(false);
-//                    NotificationsAllData.getInstance().decEntryCount();
-//
-//                    if (NotificationsAllData.getInstance().getEntryCount() == 0) {
-//                        LoggedData.getInstance().setNewActivity(false);
-//                        LoggedData.getInstance().getUpdateHandler().onUpdate();
-//                    }
-//
-//                    if (mParentFragment.getUpdateHandler() != null) {
-//                        mParentFragment.getUpdateHandler().onUpdate();
-//                    }
-//                }
-//            }
-//        });
+        binding.recyclerNotificationsAll.setOnScrollChangeListener(new View.OnScrollChangeListener() {
+            @Override
+            public void onScrollChange(View v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
+                final LinearLayoutManager linearLayoutManager = (LinearLayoutManager) binding.recyclerNotificationsAll.getLayoutManager();
+                int hiddenPosition = linearLayoutManager.findFirstVisibleItemPosition();
+
+                if (hiddenPosition > 0 && NotificationsAllData.getInstance().getDataList().get(hiddenPosition - 1).isHighlighted()) {
+                    NotificationsAllData.getInstance().getDataList().get(hiddenPosition - 1).setHighlighted(false);
+                    NotificationsAllData.getInstance().decEntryCount();
+
+                    if (NotificationsAllData.getInstance().getEntryCount() == 0) {
+                        LoggedData.getInstance().setNewActivity(false);
+                        LoggedData.getInstance().getUpdateHandler().onUpdate();
+                    }
+
+                    if (mParentFragment.getUpdateHandler() != null) {
+                        mParentFragment.getUpdateHandler().onUpdate();
+                    }
+                }
+            }
+        });
 
         binding.srlNotificationAll.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override

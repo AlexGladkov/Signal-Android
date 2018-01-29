@@ -4,6 +4,7 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,6 +63,7 @@ public class NotificationsMainAdapter extends RecyclerView.Adapter<Notifications
 
     public static class NotificationViewHolder extends RecyclerView.ViewHolder {
         CellNotificationsMainBinding mBinding;
+        private final String TAG = NotificationViewHolder.class.getSimpleName();
 
         public NotificationViewHolder(View itemView) {
             super(itemView);
@@ -90,14 +92,23 @@ public class NotificationsMainAdapter extends RecyclerView.Adapter<Notifications
                             R.color.dark_reply_tint_color : R.color.light_reply_tint_color));
                     mBinding.notificationTxtType.setTextColor(mContext.getResources().getColor(isNight ?
                             R.color.dark_reply_tint_color : R.color.light_reply_tint_color));
+                    mBinding.notificationTxtType.setText(itemView.getContext().getText(R.string.notification_title_reply));
                     break;
 
                 case NotificationModel.TYPE_QUOTE:
+                    mBinding.notificationImgBadge.setColorFilter(mContext.getResources().getColor(isNight ?
+                        R.color.dark_rt_tint_color : R.color.light_rt_tint_color));
+                    mBinding.notificationTxtType.setTextColor(mContext.getResources().getColor(isNight ?
+                            R.color.dark_rt_tint_color : R.color.light_rt_tint_color));
+                    mBinding.notificationTxtType.setText(itemView.getContext().getText(R.string.notification_title_quote));
+                    break;
+
                 case NotificationModel.TYPE_RT:
                     mBinding.notificationImgBadge.setColorFilter(mContext.getResources().getColor(isNight ?
                             R.color.dark_rt_tint_color : R.color.light_rt_tint_color));
                     mBinding.notificationTxtType.setTextColor(mContext.getResources().getColor(isNight ?
                             R.color.dark_rt_tint_color : R.color.light_rt_tint_color));
+                    mBinding.notificationTxtType.setText(itemView.getContext().getText(R.string.notification_title_rt));
                     break;
 
                 case NotificationModel.TYPE_LIKE:
@@ -105,14 +116,23 @@ public class NotificationsMainAdapter extends RecyclerView.Adapter<Notifications
                             R.color.dark_like_tint_color : R.color.light_like_tint_color));
                     mBinding.notificationTxtType.setTextColor(mContext.getResources().getColor(isNight ?
                             R.color.dark_like_tint_color : R.color.light_like_tint_color));
+                    mBinding.notificationTxtType.setText(itemView.getContext().getText(R.string.notification_title_like));
                     break;
 
                 case NotificationModel.TYPE_FOLLOW:
+                    mBinding.notificationImgBadge.setColorFilter(mContext.getResources().getColor(isNight ?
+                            R.color.dark_profile_tint_color : R.color.light_profile_tint_color));
+                    mBinding.notificationTxtType.setTextColor(mContext.getResources().getColor(isNight ?
+                            R.color.dark_profile_tint_color : R.color.light_profile_tint_color));
+                    mBinding.notificationTxtType.setText(itemView.getContext().getText(R.string.notification_title_follow));
+                    break;
+
                 case NotificationModel.TYPE_LIST:
                     mBinding.notificationImgBadge.setColorFilter(mContext.getResources().getColor(isNight ?
                             R.color.dark_profile_tint_color : R.color.light_profile_tint_color));
                     mBinding.notificationTxtType.setTextColor(mContext.getResources().getColor(isNight ?
                             R.color.dark_profile_tint_color : R.color.light_profile_tint_color));
+                    mBinding.notificationTxtType.setText(itemView.getContext().getText(R.string.notification_title_list));
                     break;
             }
 

@@ -18,9 +18,9 @@ android {
     defaultConfig {
         applicationId "solonsky.signal.twitter"
         vectorDrawables.useSupportLibrary = true
-        minSdkVersion 21
+        minSdkVersion 23
         targetSdkVersion 25
-        versionCode 394
+        versionCode 396
         versionName "1.0"
         multiDexEnabled true  // this line will solve this problem
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

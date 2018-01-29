@@ -21,18 +21,15 @@ class ComposeProvider(private val presenter: ComposePresenter) {
     // Load mentions from DB
     fun fetchMentions() {
         Thread({
-            val data = App.db.userIDsDao().getAllById(AppData.ME.id)
-            if (data.size > 0) {
-                val users: MutableList<UserModel> = LinkedList()
-                App.db.usersDao().all
-                        .map { converter.dbToModel(it) }
-                        .forEach({
-                            users.add(it)
-                        })
+            val users: MutableList<UserModel> = LinkedList()
+            App.db.usersDao().all
+                    .map { converter.dbToModel(it) }
+                    .forEach({
+                        users.add(it)
+                    })
 
-                handler.post {
-                    presenter.setupData(users = users)
-                }
+            handler.post {
+                presenter.setupData(users = users)
             }
         }).start()
     }

@@ -187,6 +187,7 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ActivityListener {
 
     override fun onResume() {
         super.onResume()
+        mPresenter.fetchUsers()
     }
 
     override fun updateCounter(count: Int) {

@@ -65,9 +65,11 @@ public class HashtagDialog {
             public void onClick(View v) {
                 ClipboardManager clipboard = (ClipboardManager)
                         mActivity.getSystemService(Context.CLIPBOARD_SERVICE);
-                ClipData clip = ClipData.newPlainText(mActivity.getString(R.string.app_name), hashtagText);
-                clipboard.setPrimaryClip(clip);
-                Toast.makeText(mActivity, mActivity.getString(R.string.success_copy), Toast.LENGTH_SHORT).show();
+                if (clipboard != null) {
+                    ClipData clip = ClipData.newPlainText(mActivity.getString(R.string.app_name), hashtagText);
+                    clipboard.setPrimaryClip(clip);
+                    Toast.makeText(mActivity, mActivity.getString(R.string.success_copy), Toast.LENGTH_SHORT).show();
+                }
                 mDialog.dismiss();
             }
         });
@@ -101,7 +103,8 @@ public class HashtagDialog {
                         handler.post(new Runnable() {
                             @Override
                             public void run() {
-                                Toast.makeText(mActivity, mActivity.getString(R.string.success_mute), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mActivity, mActivity.getString(R.string.success_mute_tag)
+                                        .replace("[tag]", hashtagText), Toast.LENGTH_SHORT).show();
                             }
                         });
                     }

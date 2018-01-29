@@ -167,6 +167,7 @@ public class AutoLinkTextView extends TextView {
             case MODE_MENTION:
             case MODE_URL:
             case MODE_SHORT:
+            case MODE_EMAIL:
                 return Color.parseColor(App.getInstance().isNightEnabled() ?
                        "#3396BEFF" : "#336791E6");
 
