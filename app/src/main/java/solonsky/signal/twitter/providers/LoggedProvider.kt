@@ -5,9 +5,12 @@ import android.util.Log
 import solonsky.signal.twitter.helpers.App
 import solonsky.signal.twitter.helpers.AppData
 import solonsky.signal.twitter.helpers.Utilities
+import solonsky.signal.twitter.models.ConfigurationModel
 import solonsky.signal.twitter.models.User
 import solonsky.signal.twitter.presenters.LoggedPresenter
+import solonsky.signal.twitter.room.converters.SettingsConverterImpl
 import solonsky.signal.twitter.room.converters.UsersConverterImpl
+import solonsky.signal.twitter.room.models.SettingsEntity
 import solonsky.signal.twitter.room.models.UserEntity
 import solonsky.signal.twitter.room.models.UserIDEntity
 import twitter4j.*
@@ -21,6 +24,7 @@ class LoggedProvider(val presenter: LoggedPresenter) {
     private val handler = Handler()
     private val TAG: String = LoggedProvider::class.java.simpleName
     private val userConverter = UsersConverterImpl()
+    private val settingsConverter = SettingsConverterImpl()
     private val maxUsers = 100
 
     fun fetchUsers() {
@@ -95,5 +99,29 @@ class LoggedProvider(val presenter: LoggedPresenter) {
         })
 
         asyncTwitter.getFriendsIDs(-1)
+    }
+
+    fun fetchSettings() {
+        Thread({
+            val settings: List<ConfigurationModel> = App.db.settingsDao().getAll().map {
+                settingsConverter.dbToModel(it)
+            }
+
+            if (settings.isNotEmpty()) {
+                presenter.setupSettings(model = settings[0])
+            } else {
+                if (AppData.appConfiguration != null) {
+                    App.db.settingsDao().insert(settingsConverter.modelToDb(AppData.appConfiguration))
+                } else {
+                    presenter.reloadSettings()
+                }
+            }
+        }).start()
+    }
+
+    fun saveSettings(settings: ConfigurationModel) {
+        Thread({
+            App.db.settingsDao().insert(settingsConverter.modelToDb(settings))
+        }).start()
     }
 }

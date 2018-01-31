@@ -300,6 +300,8 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ActivityListener {
     override fun checkState(): Flags.STATUS_TYPE = viewModel.statusType
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mPresenter.initState()
+
         try {
             val gson = Converters.registerLocalDateTime(GsonBuilder()).create()
             Reservoir.init(applicationContext, (50 * 1024 * 1024).toLong(), gson)
@@ -309,23 +311,23 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ActivityListener {
         }
 
         if (savedInstanceState == null) {
-            loadSettings() // load app settings
+//            loadSettings() // load app settings
             loadProfile() // load current user configuration
             loadConfigurations() // load users configuration
 
             AppData.lastSwitchTime = System.currentTimeMillis()
             ShareData.getInstance().loadCache() // Load shares
 
-            if (!AppData.isRecreate) {
-                when (AppData.appConfiguration.darkMode) {
-                    ConfigurationModel.DARK_ALWAYS -> App.getInstance().isNightEnabled = true
-                    ConfigurationModel.DARK_AT_NIGHT -> App.getInstance().isNightEnabled = LocalTime().hourOfDay >= 18
-                    ConfigurationModel.DARK_OFF -> App.getInstance().isNightEnabled = false
-                    else -> App.getInstance().isNightEnabled = false
-                }
-            } else {
-                AppData.isRecreate = false
-            }
+//            if (!AppData.isRecreate) {
+//                when (AppData.appConfiguration.darkMode) {
+//                    ConfigurationModel.DARK_ALWAYS -> App.getInstance().isNightEnabled = true
+//                    ConfigurationModel.DARK_AT_NIGHT -> App.getInstance().isNightEnabled = LocalTime().hourOfDay >= 18
+//                    ConfigurationModel.DARK_OFF -> App.getInstance().isNightEnabled = false
+//                    else -> App.getInstance().isNightEnabled = false
+//                }
+//            } else {
+//                AppData.isRecreate = false
+//            }
         }
 
         if (App.getInstance().isNightEnabled) {
@@ -1141,5 +1143,18 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ActivityListener {
     // MARK: - View implementation
     override fun showMessage(text: String) {
         Toast.makeText(applicationContext, text, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun setupSettings() {
+        val fileWork = FileWork(applicationContext)
+        val loadedConfig = fileWork.readFromFile(FileNames.APP_CONFIGURATION)
+
+        if (loadedConfig == "") {
+            mPresenter.saveSettings(settings = ConfigurationModel.defaultSettings())
+        } else {
+            val jsonParser = JsonParser()
+            val jsonObject = jsonParser.parse(loadedConfig) as JsonObject
+            mPresenter.saveSettings(settings = ConfigurationModel.createFromJson(jsonObject))
+        }
     }
 }

@@ -3,6 +3,8 @@ package solonsky.signal.twitter.models;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import solonsky.signal.twitter.room.models.SettingsEntity;
+
 /**
  * Created by neura on 26.07.17.
  */
@@ -65,6 +67,29 @@ public class ConfigurationModel {
     private boolean groupPushNotifications; // group push notifications if true
     private boolean pinToTopOnStreaming; // TODO
     private boolean sounds; // TODO
+
+    public ConfigurationModel(SettingsEntity settingsEntity) {
+        this.fontSize = settingsEntity.getFontSize();
+        this.thumbnails = settingsEntity.getThumbnails();
+        this.darkMode = settingsEntity.getDarkMode();
+        this.realNames = settingsEntity.isRealNames();
+        this.roundAvatars = settingsEntity.isRoundAvatars();
+        this.relativeDates = settingsEntity.isRelativeDates();
+        this.staticTopBars = settingsEntity.isStaticTopBars();
+        this.staticBottomBar = settingsEntity.isStaticBottomBar();
+        this.groupDialogs = settingsEntity.isGroupDialogs();
+        this.showMentions = settingsEntity.isShowMentions();
+        this.showRetweets = settingsEntity.isShowRetweets();
+        this.tweetMarker = settingsEntity.isTweetMarker();
+        this.streamOnWifi = settingsEntity.isStreamOnWifi();
+        this.shortTap = settingsEntity.getShortTap();
+        this.longTap = settingsEntity.getLongTap();
+        this.doubleTap = settingsEntity.getDoubleTap();
+        this.dimMediaAtNight = settingsEntity.isDimMediaAtNight();
+        this.groupPushNotifications = settingsEntity.isGroupPushNotifications();
+        this.pinToTopOnStreaming = settingsEntity.isPinToTopOnStreaming();
+        this.sounds = settingsEntity.isSounds();
+    }
 
     private ConfigurationModel(int fontSize, int thumbnails, int darkMode, boolean realNames, boolean roundAvatars,
                               boolean relativeDates, boolean staticTopBars, boolean staticBottomBar,

@@ -11,6 +11,7 @@ public class RoomContract {
     // Table names
     public final static String USER_TABLE = "user_table";
     public final static String USER_ID_TABLE = "user_id_table";
+    public final static String SETTINGS_TABLE = "settings_table";
 
     // User queries
     public final static String USER_GET_ALL = "SELECT * FROM " + USER_TABLE;
@@ -20,4 +21,5 @@ public class RoomContract {
             "LIKE :name";
     public final static String USER_GET_BY_ID = "SELECT * FROM " + USER_ID_TABLE + " WHERE id " +
             "LIKE :id";
+
 }
