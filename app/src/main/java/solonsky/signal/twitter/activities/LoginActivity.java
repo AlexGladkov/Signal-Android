@@ -62,46 +62,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        try {
-            ImagePipelineConfig imagePipelineConfig = ImagePipelineConfig.newBuilder(this)
-                    .setProgressiveJpegConfig(new SimpleProgressiveJpegConfig())
-                    .setResizeAndRotateEnabledForNetwork(true)
-                    .setDownsampleEnabled(true)
-                    .build();
-            Fresco.initialize(this, imagePipelineConfig);
-            Log.e(TAG, "Fresco successfully init");
-        } catch (Exception e) {
-            Log.e(TAG, "Fresco wasnt init " + e.getLocalizedMessage());
-        }
-
-        try {
-            Gson gson = Converters.registerLocalDateTime(new GsonBuilder()).create();
-            Reservoir.init(getApplicationContext(), 50 * 1024 * 1024, gson);
-            Log.e(TAG, "Cache successfully init");
-        } catch (IOException e) {
-            Log.e(TAG, "Failure init cache - " + e.getLocalizedMessage());
-        }
-
         final FileWork fileWork = new FileWork(getApplicationContext());
 
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         Utilities.setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
         getWindow().setStatusBarColor(Color.parseColor("#33000000"));
-
-        if (!fileWork.readFromFile(FileNames.CLIENT_SECRET).equals("") &&
-                !fileWork.readFromFile(FileNames.CLIENT_TOKEN).equals("")) {
-            AppData.CLIENT_TOKEN = (fileWork.readFromFile(FileNames.CLIENT_TOKEN));
-            AppData.CLIENT_SECRET = (fileWork.readFromFile(FileNames.CLIENT_SECRET));
-            startActivity(new Intent(getApplicationContext(), LoggedActivity.class));
-            finish();
-        }
-
-        TwitterConfig config = new TwitterConfig.Builder(this)
-                .logger(new DefaultLogger(Log.DEBUG))
-                .twitterAuthConfig(new TwitterAuthConfig(AppData.CONSUMER_KEY, AppData.CONSUMER_SECRET))
-                .debug(true)
-                .build();
-        Twitter.initialize(config);
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         mActivity = this;

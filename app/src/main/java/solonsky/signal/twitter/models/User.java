@@ -13,7 +13,10 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.annotations.SerializedName;
 
+import org.jetbrains.annotations.NotNull;
+
 import solonsky.signal.twitter.BR;
+import solonsky.signal.twitter.room.models.UserEntity;
 
 /**
  * Created by neura on 26.06.17.
@@ -192,6 +195,19 @@ public class User extends BaseObservable implements Parcelable {
         this.hasProtected = user.isHasProtected();
         this.isVerified = user.isVerified;
         this.profileBackgroundTiled = user.profileBackgroundTiled;
+    }
+
+    @NotNull
+    public static User createInstance(@NotNull UserEntity userEntity) {
+        return new User(userEntity.getId(), userEntity.getFavouritesCount(),
+                userEntity.getFollowersCount(), userEntity.getFriendsCount(), userEntity.getListedCount(),
+                userEntity.getStatusesCount(), userEntity.getCreatedAt(), userEntity.getDescription(),
+                userEntity.getLang(), userEntity.getLocation(), userEntity.getName(), userEntity.getScreenName(),
+                "", userEntity.getBiggerProfileImageURL(), userEntity.getProfileBackgroundImageUrl(),
+                userEntity.getProfileBannerImageUrl(), userEntity.getProfileImageUrl(), userEntity.getProfileLinkColor(),
+                new JsonArray(), new JsonObject(), userEntity.isContributorsEnabled(), userEntity.isDefaultProfile(),
+                userEntity.isDefaultProfileImage(), userEntity.isFollowRequestSent(), userEntity.isGeoEnabled(),
+                userEntity.isHasProtected(), userEntity.isVerified(), userEntity.isProfileBackgroundTiled());
     }
 
     public User(long id, long favouritesCount, long followersCount, long friendsCount, long listedCount,

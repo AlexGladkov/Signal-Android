@@ -100,28 +100,4 @@ class LoggedProvider(val presenter: LoggedPresenter) {
 
         asyncTwitter.getFriendsIDs(-1)
     }
-
-    fun fetchSettings() {
-        Thread({
-            val settings: List<ConfigurationModel> = App.db.settingsDao().getAll().map {
-                settingsConverter.dbToModel(it)
-            }
-
-            if (settings.isNotEmpty()) {
-                presenter.setupSettings(model = settings[0])
-            } else {
-                if (AppData.appConfiguration != null) {
-                    App.db.settingsDao().insert(settingsConverter.modelToDb(AppData.appConfiguration))
-                } else {
-                    presenter.reloadSettings()
-                }
-            }
-        }).start()
-    }
-
-    fun saveSettings(settings: ConfigurationModel) {
-        Thread({
-            App.db.settingsDao().insert(settingsConverter.modelToDb(settings))
-        }).start()
-    }
 }

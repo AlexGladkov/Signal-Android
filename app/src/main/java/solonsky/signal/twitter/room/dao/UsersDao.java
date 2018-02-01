@@ -9,6 +9,7 @@ import android.arch.persistence.room.Room;
 import java.util.List;
 
 import solonsky.signal.twitter.room.RoomContract;
+import solonsky.signal.twitter.room.contracts.UsersContract;
 import solonsky.signal.twitter.room.models.UserEntity;
 
 /**
@@ -25,6 +26,9 @@ public interface UsersDao {
 
     @Query(RoomContract.USER_GET_BY_NAME)
     List<UserEntity> getAllByName(String name);
+
+    @Query(UsersContract.GET_USERS)
+    List<UserEntity> getById(long id);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(UserEntity... users);

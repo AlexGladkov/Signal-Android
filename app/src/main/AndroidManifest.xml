@@ -25,14 +25,19 @@
             android:enabled="true"
             android:exported="false" />
 
-        <activity
-            android:name="solonsky.signal.twitter.activities.LoginActivity"
-            android:theme="@style/ActivityThemeLight">
+        <activity android:name=".activities.SplashActivity"
+            android:theme="@style/ActivityThemeLight" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name="solonsky.signal.twitter.activities.LoginActivity"
+            android:theme="@style/ActivityThemeLight">
+
         </activity>
 
         <activity

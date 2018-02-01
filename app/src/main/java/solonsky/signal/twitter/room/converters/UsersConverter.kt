@@ -10,4 +10,5 @@ import twitter4j.User
 interface UsersConverter {
     fun apiToDb(apiUser: User): UserEntity
     fun dbToModel(userEntity: UserEntity): UserModel
+    fun dbToApi(userEntity: UserEntity): solonsky.signal.twitter.models.User
 }

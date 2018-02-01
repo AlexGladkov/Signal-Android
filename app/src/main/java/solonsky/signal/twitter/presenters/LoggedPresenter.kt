@@ -19,10 +19,6 @@ class LoggedPresenter: MvpPresenter<LoggedView>() {
     private val provider = LoggedProvider(presenter = this@LoggedPresenter)
 
     // Fetch and setup app settings
-    fun initState() {
-        provider.fetchSettings()
-    }
-
     fun fetchUsers() {
         provider.fetchUsers()
     }
@@ -30,21 +26,4 @@ class LoggedPresenter: MvpPresenter<LoggedView>() {
     fun showMessage(text: String) {
         viewState.showMessage(text = text)
     }
-
-    fun setupSettings(model: ConfigurationModel) {
-        Log.e(TAG, "setup settings")
-        AppData.appConfiguration = model
-        App.getInstance().isNightEnabled = AppData.appConfiguration.darkMode == ConfigurationModel.DARK_ALWAYS
-    }
-
-    fun reloadSettings() {
-        viewState.setupSettings()
-    }
-
-    fun saveSettings(settings: ConfigurationModel) {
-        provider.saveSettings(settings = settings)
-        setupSettings(settings)
-    }
-
-
 }

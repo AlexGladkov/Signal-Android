@@ -12,6 +12,7 @@ public class RoomContract {
     public final static String USER_TABLE = "user_table";
     public final static String USER_ID_TABLE = "user_id_table";
     public final static String SETTINGS_TABLE = "settings_table";
+    public final static String HOSTERS_TABLE = "hosters_table";
 
     // User queries
     public final static String USER_GET_ALL = "SELECT * FROM " + USER_TABLE;

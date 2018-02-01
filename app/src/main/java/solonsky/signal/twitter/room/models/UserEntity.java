@@ -7,6 +7,7 @@ import android.arch.persistence.room.PrimaryKey;
 import com.google.gson.annotations.SerializedName;
 
 import org.jetbrains.annotations.NotNull;
+import org.joda.time.DateTime;
 
 import solonsky.signal.twitter.room.RoomContract;
 import twitter4j.User;
@@ -264,6 +265,17 @@ public class UserEntity {
         entity.id = fromApi.getId();
         entity.biggerProfileImageURL = fromApi.getBiggerProfileImageURL();
         entity.originalProfileImageURL = fromApi.getOriginalProfileImageURL();
+
+        entity.favouritesCount = fromApi.getFavouritesCount();
+        entity.followersCount = fromApi.getFollowersCount();
+        entity.statusesCount = fromApi.getStatusesCount();
+        entity.listedCount = fromApi.getListedCount();
+
+        entity.description = fromApi.getDescription();
+        entity.createdAt = new DateTime(fromApi.getCreatedAt()).toString("dd.MM.yyyy HH:mm:ss");
+        entity.location = fromApi.getLocation();
+
+        entity.isVerified = fromApi.isVerified();
 
         entity.name = fromApi.getName();
         entity.screenName = fromApi.getScreenName();

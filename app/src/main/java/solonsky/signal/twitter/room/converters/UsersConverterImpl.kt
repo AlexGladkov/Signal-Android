@@ -9,6 +9,9 @@ import twitter4j.User
  */
 
 class UsersConverterImpl: UsersConverter {
+    override fun dbToApi(userEntity: UserEntity): solonsky.signal.twitter.models.User =
+            solonsky.signal.twitter.models.User.createInstance(userEntity)
+
     override fun dbToModel(userEntity: UserEntity): UserModel {
         return UserModel(userEntity.id, userEntity.biggerProfileImageURL, userEntity.name,
                 "@${userEntity.screenName}", userEntity.isFollowRequestSent, false, false)

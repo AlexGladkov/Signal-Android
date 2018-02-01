@@ -300,7 +300,6 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ActivityListener {
     override fun checkState(): Flags.STATUS_TYPE = viewModel.statusType
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        mPresenter.initState()
 
         try {
             val gson = Converters.registerLocalDateTime(GsonBuilder()).create()
@@ -311,23 +310,21 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ActivityListener {
         }
 
         if (savedInstanceState == null) {
-//            loadSettings() // load app settings
-            loadProfile() // load current user configuration
             loadConfigurations() // load users configuration
 
             AppData.lastSwitchTime = System.currentTimeMillis()
             ShareData.getInstance().loadCache() // Load shares
 
-//            if (!AppData.isRecreate) {
-//                when (AppData.appConfiguration.darkMode) {
-//                    ConfigurationModel.DARK_ALWAYS -> App.getInstance().isNightEnabled = true
-//                    ConfigurationModel.DARK_AT_NIGHT -> App.getInstance().isNightEnabled = LocalTime().hourOfDay >= 18
-//                    ConfigurationModel.DARK_OFF -> App.getInstance().isNightEnabled = false
-//                    else -> App.getInstance().isNightEnabled = false
-//                }
-//            } else {
-//                AppData.isRecreate = false
-//            }
+            if (!AppData.isRecreate) {
+                when (AppData.appConfiguration.darkMode) {
+                    ConfigurationModel.DARK_ALWAYS -> App.getInstance().isNightEnabled = true
+                    ConfigurationModel.DARK_AT_NIGHT -> App.getInstance().isNightEnabled = LocalTime().hourOfDay >= 18
+                    ConfigurationModel.DARK_OFF -> App.getInstance().isNightEnabled = false
+                    else -> App.getInstance().isNightEnabled = false
+                }
+            } else {
+                AppData.isRecreate = false
+            }
         }
 
         if (App.getInstance().isNightEnabled) {
@@ -623,27 +620,6 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ActivityListener {
     }
 
     /**
-     * Loading App settings into ConfigurationModel
-     */
-    private fun loadSettings() {
-        if (AppData.appConfiguration == null) {
-            val fileWork = FileWork(applicationContext)
-            val loadedConfig = fileWork.readFromFile(FileNames.APP_CONFIGURATION)
-
-            if (loadedConfig == "") {
-                AppData.appConfiguration = ConfigurationModel.defaultSettings()
-                fileWork.writeToFile(AppData.appConfiguration.exportConfiguration().toString(), FileNames.APP_CONFIGURATION)
-            } else {
-                val jsonParser = JsonParser()
-                val jsonObject = jsonParser.parse(loadedConfig) as JsonObject
-                AppData.appConfiguration = ConfigurationModel.createFromJson(jsonObject)
-            }
-
-            App.getInstance().isNightEnabled = AppData.appConfiguration.darkMode == ConfigurationModel.DARK_ALWAYS
-        }
-    }
-
-    /**
      * Load user's configurations
      */
     private fun loadConfigurations() {
@@ -696,46 +672,46 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ActivityListener {
     /**
      * Load cached profile
      */
-    private fun loadProfile() {
-        val jsonParser = JsonParser()
-        val gson = Gson()
-        val fileWork = FileWork(applicationContext)
-        val userString = fileWork.readFromFile(FileNames.USER)
-        if (userString == "") {
-            loadMe()
-        } else {
-            AppData.ME = gson.fromJson(jsonParser.parse(userString), solonsky.signal.twitter.models.User::class.java)
-            Log.e(TAG, "My id - " + AppData.ME.id)
-            Log.e(TAG, "My name - " + AppData.ME.name)
-            Handler().postDelayed({ loadMe() }, 1000)
-        }
-    }
+//    private fun loadProfile() {
+//        val jsonParser = JsonParser()
+//        val gson = Gson()
+//        val fileWork = FileWork(applicationContext)
+//        val userString = fileWork.readFromFile(FileNames.USER)
+//        if (userString == "") {
+//            loadMe()
+//        } else {
+//            AppData.ME = gson.fromJson(jsonParser.parse(userString), solonsky.signal.twitter.models.User::class.java)
+//            Log.e(TAG, "My id - " + AppData.ME.id)
+//            Log.e(TAG, "My name - " + AppData.ME.name)
+//            Handler().postDelayed({ loadMe() }, 1000)
+//        }
+//    }
 
-    private fun loadMe() {
-        val asyncTwitter = Utilities.getAsyncTwitter()
-        asyncTwitter.addListener(object : TwitterAdapter() {
-            override fun lookedupUsers(users: ResponseList<User>?) {
-                super.lookedupUsers(users)
-                AppData.ME = gson.fromJson(gson.toJsonTree(users!![0]), solonsky.signal.twitter.models.User::class.java)
-                AppData.ME.biggerProfileImageURL = users[0].biggerProfileImageURL
-                AppData.ME.originalProfileImageURL = users[0].originalProfileImageURL
-
-                saveProfile()
-                loadConfigurations()
-                viewModel.avatar = AppData.ME.originalProfileImageURL
-            }
-        })
-
-        Thread(Runnable {
-            try {
-                val myId = asyncTwitter.id
-                Log.e(TAG, "loaded id - " + myId)
-                asyncTwitter.lookupUsers(myId)
-            } catch (e: TwitterException) {
-                Log.e(TAG, "error - " + e.localizedMessage)
-            }
-        }).start()
-    }
+//    private fun loadMe() {
+//        val asyncTwitter = Utilities.getAsyncTwitter()
+//        asyncTwitter.addListener(object : TwitterAdapter() {
+//            override fun lookedupUsers(users: ResponseList<User>?) {
+//                super.lookedupUsers(users)
+//                AppData.ME = gson.fromJson(gson.toJsonTree(users!![0]), solonsky.signal.twitter.models.User::class.java)
+//                AppData.ME.biggerProfileImageURL = users[0].biggerProfileImageURL
+//                AppData.ME.originalProfileImageURL = users[0].originalProfileImageURL
+//
+//                saveProfile()
+//                loadConfigurations()
+//                viewModel.avatar = AppData.ME.originalProfileImageURL
+//            }
+//        })
+//
+//        Thread(Runnable {
+//            try {
+//                val myId = asyncTwitter.id
+//                Log.e(TAG, "loaded id - " + myId)
+//                asyncTwitter.lookupUsers(myId)
+//            } catch (e: TwitterException) {
+//                Log.e(TAG, "error - " + e.localizedMessage)
+//            }
+//        }).start()
+//    }
 
     override fun onBackPressed() {
         if (viewModel.isSearch) {
@@ -1143,18 +1119,5 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ActivityListener {
     // MARK: - View implementation
     override fun showMessage(text: String) {
         Toast.makeText(applicationContext, text, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun setupSettings() {
-        val fileWork = FileWork(applicationContext)
-        val loadedConfig = fileWork.readFromFile(FileNames.APP_CONFIGURATION)
-
-        if (loadedConfig == "") {
-            mPresenter.saveSettings(settings = ConfigurationModel.defaultSettings())
-        } else {
-            val jsonParser = JsonParser()
-            val jsonObject = jsonParser.parse(loadedConfig) as JsonObject
-            mPresenter.saveSettings(settings = ConfigurationModel.createFromJson(jsonObject))
-        }
     }
 }
