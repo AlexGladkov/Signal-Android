@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 4,
-    "identityHash": "0ecf0f7bf73ecb67a5bd43b87dea1479",
+    "identityHash": "7867f9b32d4869b0909cb61cf47a20dd",
     "entities": [
       {
         "tableName": "user_table",
@@ -383,11 +383,145 @@
             ]
           }
         ]
+      },
+      {
+        "tableName": "configuration_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userId` INTEGER NOT NULL, `conf_user` BLOB, `conf_consumer_key` TEXT, `conf_consumer_secret` TEXT, `conf_client_token` TEXT, `conf_client_secret` TEXT, `conf_bottom_ids` BLOB, `conf_mute_keywords` BLOB, `conf_mute_hashtags` BLOB, `conf_mute_clients` BLOB, `conf_tab_position` INTEGER NOT NULL, `conf_mentions` BLOB, `conf_is_messages` INTEGER NOT NULL, `conf_is_likes` INTEGER NOT NULL, `conf_is_retweets` INTEGER NOT NULL, `conf_is_quotes` INTEGER NOT NULL, `conf_is_followers` INTEGER NOT NULL, `conf_is_lists` INTEGER NOT NULL, `conf_is_sound` INTEGER NOT NULL, `conf_is_vibration` INTEGER NOT NULL, PRIMARY KEY(`userId`))",
+        "fields": [
+          {
+            "fieldPath": "userId",
+            "columnName": "userId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "user",
+            "columnName": "conf_user",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "consumerKey",
+            "columnName": "conf_consumer_key",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "consumerSecret",
+            "columnName": "conf_consumer_secret",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "clientToken",
+            "columnName": "conf_client_token",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "clientSecret",
+            "columnName": "conf_client_secret",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bottomIds",
+            "columnName": "conf_bottom_ids",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "muteKeywords",
+            "columnName": "conf_mute_keywords",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "muteHashtags",
+            "columnName": "conf_mute_hashtags",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "muteClients",
+            "columnName": "conf_mute_clients",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tabPosition",
+            "columnName": "conf_tab_position",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mentions",
+            "columnName": "conf_mentions",
+            "affinity": "BLOB",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isMessages",
+            "columnName": "conf_is_messages",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isLikes",
+            "columnName": "conf_is_likes",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isRetweets",
+            "columnName": "conf_is_retweets",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isQuotes",
+            "columnName": "conf_is_quotes",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isFollowers",
+            "columnName": "conf_is_followers",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isLists",
+            "columnName": "conf_is_lists",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isSound",
+            "columnName": "conf_is_sound",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isVibration",
+            "columnName": "conf_is_vibration",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "userId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"0ecf0f7bf73ecb67a5bd43b87dea1479\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"7867f9b32d4869b0909cb61cf47a20dd\")"
     ]
   }
 }

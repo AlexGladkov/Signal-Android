@@ -5,11 +5,15 @@ import android.util.Log;
 import com.anupcowkur.reservoir.Reservoir;
 import com.google.gson.JsonArray;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
 import solonsky.signal.twitter.helpers.AppData;
 import solonsky.signal.twitter.helpers.Cache;
+import solonsky.signal.twitter.helpers.SerializationUtils;
+import solonsky.signal.twitter.room.models.ConfigurationEntity;
 
 /**
  * Created by neura on 30.07.17.
@@ -17,6 +21,33 @@ import solonsky.signal.twitter.helpers.Cache;
 
 public class ConfigurationUserModel {
     private static final String TAG = ConfigurationUserModel.class.getSimpleName();
+
+    public static ConfigurationUserModel createFromEntity(@NotNull ConfigurationEntity configurationEntity) {
+        ConfigurationUserModel configurationUserModel = new ConfigurationUserModel();
+        configurationUserModel.consumerKey = configurationEntity.getConsumerKey();
+        configurationUserModel.consumerSecret = configurationEntity.getConsumerSecret();
+        configurationUserModel.clientToken = configurationEntity.getClientToken();
+        configurationUserModel.clientSecret = configurationEntity.getClientSecret();
+
+        try {
+            configurationUserModel.bottomIds = (ArrayList<Integer>) SerializationUtils.deserialize(configurationEntity.getBottomIds());
+        } catch (IOException | ClassNotFoundException e) {
+            configurationUserModel.bottomIds = new ArrayList<>();
+            configurationUserModel.bottomIds.add(0);
+            configurationUserModel.bottomIds.add(1);
+            configurationUserModel.bottomIds.add(2);
+            configurationUserModel.bottomIds.add(3);
+            configurationUserModel.bottomIds.add(4);
+        }
+
+        try {
+            configurationUserModel.user = (User) SerializationUtils.deserialize(configurationEntity.getUser());
+        } catch (IOException | ClassNotFoundException e) {
+            configurationUserModel.user = null;
+        }
+
+        return configurationUserModel;
+    }
 
     public enum Mentions {
         FROM_ALL("From All"), FROM_FOLLOW("From people you follow"), OFF("Off");
@@ -57,6 +88,10 @@ public class ConfigurationUserModel {
     private boolean isLists;
     private boolean isSound;
     private boolean isVibration;
+
+    public ConfigurationUserModel() {
+
+    }
 
     public ConfigurationUserModel(User user, String consumerKey,
                                   String consumerSecret, String clientToken,
