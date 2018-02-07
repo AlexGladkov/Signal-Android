@@ -26,4 +26,15 @@ class LoggedPresenter: MvpPresenter<LoggedView>() {
     fun showMessage(text: String) {
         viewState.showMessage(text = text)
     }
+
+    fun saveConfiguration() {
+        for (configurationUserModel in AppData.configurationUserModels) {
+            if (configurationUserModel.user.id == AppData.userConfiguration.user.id) {
+                configurationUserModel.tabPosition = AppData.userConfiguration.tabPosition
+                configurationUserModel.bottomIds = AppData.userConfiguration.bottomIds
+            }
+        }
+
+        provider.saveConfiguration(configurationUserModel = AppData.userConfiguration)
+    }
 }

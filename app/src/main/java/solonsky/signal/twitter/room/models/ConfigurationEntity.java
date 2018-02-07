@@ -9,7 +9,6 @@ import com.google.gson.JsonArray;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import solonsky.signal.twitter.helpers.SerializationUtils;
 import solonsky.signal.twitter.models.ConfigurationModel;
 import solonsky.signal.twitter.models.ConfigurationUserModel;
 import solonsky.signal.twitter.models.User;
@@ -23,21 +22,21 @@ public class ConfigurationEntity {
 
     @PrimaryKey private long userId;
 
-    @ColumnInfo(name = "conf_user") private byte[] user;
+    @ColumnInfo(name = "conf_user") private User user;
 
     @ColumnInfo(name = "conf_consumer_key") private String consumerKey;
     @ColumnInfo(name = "conf_consumer_secret") private String consumerSecret;
     @ColumnInfo(name = "conf_client_token") private String clientToken;
     @ColumnInfo(name = "conf_client_secret") private String clientSecret;
 
-    @ColumnInfo(name = "conf_bottom_ids") private byte[] bottomIds;
-    @ColumnInfo(name = "conf_mute_keywords") private byte[] muteKeywords;
-    @ColumnInfo(name = "conf_mute_hashtags") private byte[] muteHashtags;
-    @ColumnInfo(name = "conf_mute_clients") private byte[] muteClients;
+    @ColumnInfo(name = "conf_bottom_ids") private ArrayList<Integer> bottomIds;
+    @ColumnInfo(name = "conf_mute_keywords") private JsonArray muteKeywords;
+    @ColumnInfo(name = "conf_mute_hashtags") private JsonArray muteHashtags;
+    @ColumnInfo(name = "conf_mute_clients") private JsonArray muteClients;
 
     @ColumnInfo(name = "conf_tab_position") private int tabPosition = 0;
 
-    @ColumnInfo(name = "conf_mentions") private byte[] mentions;
+    @ColumnInfo(name = "conf_mentions") private ConfigurationUserModel.Mentions mentions;
 
     @ColumnInfo(name = "conf_is_messages") private boolean isMessages;
     @ColumnInfo(name = "conf_is_likes") private boolean isLikes;
@@ -50,21 +49,13 @@ public class ConfigurationEntity {
 
     public static ConfigurationEntity createFromModel(ConfigurationUserModel configurationModel) {
         ConfigurationEntity configurationEntity = new ConfigurationEntity();
-
-        try {
-            configurationEntity.user = SerializationUtils.serialize(configurationModel.getUser());
-            configurationEntity.bottomIds = SerializationUtils.serialize(configurationModel.getBottomIds());
-            configurationEntity.muteKeywords = SerializationUtils.serialize(configurationModel.getMuteKeywords());
-            configurationEntity.muteClients = SerializationUtils.serialize(configurationModel.getMuteClients());
-            configurationEntity.muteHashtags = SerializationUtils.serialize(configurationModel.getMuteHashtags());
-            configurationEntity.mentions = SerializationUtils.serialize(configurationModel.getMentions());
-        } catch (IOException e) {
-            configurationEntity.user = null;
-            configurationEntity.bottomIds = null;
-            configurationEntity.muteKeywords = null;
-            configurationEntity.muteHashtags = null;
-            configurationEntity.mentions = null;
-        }
+        configurationEntity.userId = configurationModel.getUser().getId();
+        configurationEntity.muteKeywords = configurationModel.getMuteKeywords();
+        configurationEntity.muteClients = configurationModel.getMuteClients();
+        configurationEntity.muteHashtags = configurationModel.getMuteHashtags();
+        configurationEntity.mentions = configurationModel.getMentions();
+        configurationEntity.user = configurationModel.getUser();
+        configurationEntity.bottomIds = configurationModel.getBottomIds();
 
         configurationEntity.consumerKey = configurationModel.getConsumerKey();
         configurationEntity.consumerSecret = configurationModel.getConsumerSecret();
@@ -91,14 +82,6 @@ public class ConfigurationEntity {
 
     public void setUserId(long userId) {
         this.userId = userId;
-    }
-
-    public byte[] getUser() {
-        return user;
-    }
-
-    public void setUser(byte[] user) {
-        this.user = user;
     }
 
     public String getConsumerKey() {
@@ -131,54 +114,6 @@ public class ConfigurationEntity {
 
     public void setClientSecret(String clientSecret) {
         this.clientSecret = clientSecret;
-    }
-
-    public byte[] getBottomIds() {
-        return bottomIds;
-    }
-
-    public void setBottomIds(byte[] bottomIds) {
-        this.bottomIds = bottomIds;
-    }
-
-    public byte[] getMuteKeywords() {
-        return muteKeywords;
-    }
-
-    public void setMuteKeywords(byte[] muteKeywords) {
-        this.muteKeywords = muteKeywords;
-    }
-
-    public byte[] getMuteHashtags() {
-        return muteHashtags;
-    }
-
-    public void setMuteHashtags(byte[] muteHashtags) {
-        this.muteHashtags = muteHashtags;
-    }
-
-    public byte[] getMuteClients() {
-        return muteClients;
-    }
-
-    public void setMuteClients(byte[] muteClients) {
-        this.muteClients = muteClients;
-    }
-
-    public int getTabPosition() {
-        return tabPosition;
-    }
-
-    public void setTabPosition(int tabPosition) {
-        this.tabPosition = tabPosition;
-    }
-
-    public byte[] getMentions() {
-        return mentions;
-    }
-
-    public void setMentions(byte[] mentions) {
-        this.mentions = mentions;
     }
 
     public boolean isMessages() {
@@ -243,5 +178,61 @@ public class ConfigurationEntity {
 
     public void setVibration(boolean vibration) {
         isVibration = vibration;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public ArrayList<Integer> getBottomIds() {
+        return bottomIds;
+    }
+
+    public void setBottomIds(ArrayList<Integer> bottomIds) {
+        this.bottomIds = bottomIds;
+    }
+
+    public JsonArray getMuteKeywords() {
+        return muteKeywords;
+    }
+
+    public void setMuteKeywords(JsonArray muteKeywords) {
+        this.muteKeywords = muteKeywords;
+    }
+
+    public JsonArray getMuteHashtags() {
+        return muteHashtags;
+    }
+
+    public void setMuteHashtags(JsonArray muteHashtags) {
+        this.muteHashtags = muteHashtags;
+    }
+
+    public JsonArray getMuteClients() {
+        return muteClients;
+    }
+
+    public void setMuteClients(JsonArray muteClients) {
+        this.muteClients = muteClients;
+    }
+
+    public int getTabPosition() {
+        return tabPosition;
+    }
+
+    public void setTabPosition(int tabPosition) {
+        this.tabPosition = tabPosition;
+    }
+
+    public ConfigurationUserModel.Mentions getMentions() {
+        return mentions;
+    }
+
+    public void setMentions(ConfigurationUserModel.Mentions mentions) {
+        this.mentions = mentions;
     }
 }

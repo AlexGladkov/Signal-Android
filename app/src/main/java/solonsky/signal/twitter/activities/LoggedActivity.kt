@@ -310,7 +310,6 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ActivityListener {
         }
 
         if (savedInstanceState == null) {
-            loadConfigurations() // load users configuration
 
             AppData.lastSwitchTime = System.currentTimeMillis()
             ShareData.getInstance().loadCache() // Load shares
@@ -619,42 +618,43 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ActivityListener {
         isDown = false
     }
 
+
     /**
      * Load user's configurations
      */
-    private fun loadConfigurations() {
-        val resultType = object : TypeToken<List<ConfigurationUserModel>>() {
-
-        }.type
-        try {
-            val configurationUserModels = Reservoir.get<List<ConfigurationUserModel>>(Cache.UsersConfigurations, resultType)
-            val ids = ArrayList<Long>()
-            AppData.configurationUserModels.clear()
-            Log.e(TAG, "Me id - " + AppData.ME.id + " Me name - " + AppData.ME.name)
-            for (configurationModel in configurationUserModels) {
-                if (!ids.contains(configurationModel.user.id)) {
-                    AppData.configurationUserModels.add(configurationModel)
-                    ids.add(configurationModel.user.id)
-
-                    if (AppData.ME != null && configurationModel.user.id == AppData.ME.id) {
-                        AppData.userConfiguration = configurationModel
-                    }
-                }
-            }
-        } catch (e: IOException) {
-            Log.e(TAG, "Error load configurations cache " + e.localizedMessage)
-            AppData.userConfiguration = ConfigurationUserModel.getDefaultInstance(AppData.ME,
-                    AppData.CONSUMER_KEY, AppData.CONSUMER_SECRET, AppData.CLIENT_TOKEN, AppData.CLIENT_SECRET)
-            AppData.configurationUserModels = ArrayList()
-            AppData.configurationUserModels.add(AppData.userConfiguration)
-        } catch (e: NullPointerException) {
-            Log.e(TAG, "Error load configurations cache " + e.localizedMessage)
-            AppData.userConfiguration = ConfigurationUserModel.getDefaultInstance(AppData.ME, AppData.CONSUMER_KEY, AppData.CONSUMER_SECRET, AppData.CLIENT_TOKEN, AppData.CLIENT_SECRET)
-            AppData.configurationUserModels = ArrayList()
-            AppData.configurationUserModels.add(AppData.userConfiguration)
-        }
-
-    }
+//    private fun loadConfigurations() {
+//        val resultType = object : TypeToken<List<ConfigurationUserModel>>() {
+//
+//        }.type
+//        try {
+//            val configurationUserModels = Reservoir.get<List<ConfigurationUserModel>>(Cache.UsersConfigurations, resultType)
+//            val ids = ArrayList<Long>()
+//            AppData.configurationUserModels.clear()
+//            Log.e(TAG, "Me id - " + AppData.ME.id + " Me name - " + AppData.ME.name)
+//            for (configurationModel in configurationUserModels) {
+//                if (!ids.contains(configurationModel.user.id)) {
+//                    AppData.configurationUserModels.add(configurationModel)
+//                    ids.add(configurationModel.user.id)
+//
+//                    if (AppData.ME != null && configurationModel.user.id == AppData.ME.id) {
+//                        AppData.userConfiguration = configurationModel
+//                    }
+//                }
+//            }
+//        } catch (e: IOException) {
+//            Log.e(TAG, "Error load configurations cache " + e.localizedMessage)
+//            AppData.userConfiguration = ConfigurationUserModel.getDefaultInstance(AppData.ME,
+//                    AppData.CONSUMER_KEY, AppData.CONSUMER_SECRET, AppData.CLIENT_TOKEN, AppData.CLIENT_SECRET)
+//            AppData.configurationUserModels = ArrayList()
+//            AppData.configurationUserModels.add(AppData.userConfiguration)
+//        } catch (e: NullPointerException) {
+//            Log.e(TAG, "Error load configurations cache " + e.localizedMessage)
+//            AppData.userConfiguration = ConfigurationUserModel.getDefaultInstance(AppData.ME, AppData.CONSUMER_KEY, AppData.CONSUMER_SECRET, AppData.CLIENT_TOKEN, AppData.CLIENT_SECRET)
+//            AppData.configurationUserModels = ArrayList()
+//            AppData.configurationUserModels.add(AppData.userConfiguration)
+//        }
+//
+//    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -1044,7 +1044,8 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ActivityListener {
                 }
             }
 
-            ConfigurationUserModel.saveCache()
+//            ConfigurationUserModel.saveCache()
+            mPresenter.saveConfiguration()
             hidePopup()
         }
 

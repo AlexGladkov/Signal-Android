@@ -6,8 +6,10 @@ import solonsky.signal.twitter.helpers.App
 import solonsky.signal.twitter.helpers.AppData
 import solonsky.signal.twitter.helpers.Utilities
 import solonsky.signal.twitter.models.ConfigurationModel
+import solonsky.signal.twitter.models.ConfigurationUserModel
 import solonsky.signal.twitter.models.User
 import solonsky.signal.twitter.presenters.LoggedPresenter
+import solonsky.signal.twitter.room.converters.ConfigurationConverterImpl
 import solonsky.signal.twitter.room.converters.SettingsConverterImpl
 import solonsky.signal.twitter.room.converters.UsersConverterImpl
 import solonsky.signal.twitter.room.models.SettingsEntity
@@ -24,7 +26,7 @@ class LoggedProvider(val presenter: LoggedPresenter) {
     private val handler = Handler()
     private val TAG: String = LoggedProvider::class.java.simpleName
     private val userConverter = UsersConverterImpl()
-    private val settingsConverter = SettingsConverterImpl()
+    private val configurationConverter = ConfigurationConverterImpl()
     private val maxUsers = 100
 
     fun fetchUsers() {
@@ -99,5 +101,11 @@ class LoggedProvider(val presenter: LoggedPresenter) {
         })
 
         asyncTwitter.getFriendsIDs(-1)
+    }
+
+    fun saveConfiguration(configurationUserModel: ConfigurationUserModel) {
+        Thread({
+            App.db.configurationDao().insert(configurationConverter.modelToDb(configurationUserModel = configurationUserModel))
+        })
     }
 }

@@ -57,12 +57,6 @@ class SplashActivity: MvpAppCompatActivity(), SplashView {
             Log.e(TAG, "Failure init cache - " + e.localizedMessage)
         }
 
-        val fileWork = FileWork(applicationContext)
-        if (fileWork.readFromFile(FileNames.CLIENT_SECRET) != "" && fileWork.readFromFile(FileNames.CLIENT_TOKEN) != "") {
-            AppData.CLIENT_TOKEN = fileWork.readFromFile(FileNames.CLIENT_TOKEN)
-            AppData.CLIENT_SECRET = fileWork.readFromFile(FileNames.CLIENT_SECRET)
-        }
-
         val config = TwitterConfig.Builder(this)
                 .logger(DefaultLogger(Log.DEBUG))
                 .twitterAuthConfig(TwitterAuthConfig(AppData.CONSUMER_KEY, AppData.CONSUMER_SECRET))
@@ -70,12 +64,20 @@ class SplashActivity: MvpAppCompatActivity(), SplashView {
                 .build()
         Twitter.initialize(config)
 
-        mPresenter.initState()
+        val fileWork = FileWork(applicationContext)
+        if (fileWork.readFromFile(FileNames.CLIENT_SECRET) != "" && fileWork.readFromFile(FileNames.CLIENT_TOKEN) != "") {
+            AppData.CLIENT_TOKEN = fileWork.readFromFile(FileNames.CLIENT_TOKEN)
+            AppData.CLIENT_SECRET = fileWork.readFromFile(FileNames.CLIENT_SECRET)
+            mPresenter.initState()
+        } else {
+            mPresenter.cleanBoot()
+        }
     }
 
     // View implementation
     override fun performLogin() {
-
+        startActivity(Intent(applicationContext, LoginActivity::class.java))
+        finish()
     }
 
     override fun performLogged() {

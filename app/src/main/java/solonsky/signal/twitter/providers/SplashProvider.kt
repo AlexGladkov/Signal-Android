@@ -1,18 +1,24 @@
 package solonsky.signal.twitter.providers
 
 import android.os.Handler
+import android.util.Log
+import com.anupcowkur.reservoir.Reservoir
+import com.google.common.reflect.TypeToken
 import com.google.gson.Gson
 import org.joda.time.DateTime
 import solonsky.signal.twitter.helpers.App
 import solonsky.signal.twitter.helpers.AppData
+import solonsky.signal.twitter.helpers.Cache
 import solonsky.signal.twitter.helpers.Utilities
 import solonsky.signal.twitter.models.ConfigurationModel
+import solonsky.signal.twitter.models.ConfigurationUserModel
 import solonsky.signal.twitter.presenters.SplashPresenter
 import solonsky.signal.twitter.room.converters.ConfigurationConverterImpl
 import solonsky.signal.twitter.room.converters.SettingsConverterImpl
 import solonsky.signal.twitter.room.converters.UsersConverterImpl
 import solonsky.signal.twitter.room.models.HosterEntity
 import twitter4j.*
+import java.util.*
 
 /**
  * Created by agladkov on 01.02.18.
@@ -41,7 +47,7 @@ class SplashProvider(val presenter: SplashPresenter) {
                 App.db.usersDao().insert(usersConverter.apiToDb(users[0]))
                 App.db.hostersDao().insert(
                         HosterEntity(AppData.ME.id,
-                        DateTime().toString("dd.MM.yyyy HH:mm:ss"), AppData.ME.id))
+                                DateTime().toString("dd.MM.yyyy HH:mm:ss"), AppData.ME.id))
 
                 if (!isLoaded) {
                     handler.post {
@@ -114,7 +120,7 @@ class SplashProvider(val presenter: SplashPresenter) {
                     }
                 }
             } else {
-                handler.post{
+                handler.post {
                     fetchRemoteProfile(isLoaded = false)
                 }
             }
@@ -130,13 +136,25 @@ class SplashProvider(val presenter: SplashPresenter) {
         }).start()
     }
 
-    /** Performs fetch user configuration from DB or load it from legacy if empty
-     */
+    /** Performs fetch user configuration from DB or load it from legacy if empty */
     fun fetchConfiguration() {
         Thread({
             val configurationModels = App.db.configurationDao().getConfigurationById(AppData.ME.id)
-            if (configurationModels.isEmpty()) { // Legacy support
+                        .filter { it.userId == AppData.ME.id }
 
+            if (configurationModels.isEmpty()) { // Legacy support
+                val resultType = object : TypeToken<List<ConfigurationUserModel>>() {}.type
+                val configurationUserModels = Reservoir.get<List<ConfigurationUserModel>>(Cache.UsersConfigurations, resultType)
+                        .filter { it.user.id == AppData.ME.id }
+
+                if (configurationUserModels.isEmpty()) {
+                    // TODO
+                } else {
+                    saveConfiguration(configurationUserModel = configurationUserModels[0])
+                    handler.post {
+                        presenter.setupConfigurations(model = configurationUserModels[0])
+                    }
+                }
             } else {
                 handler.post {
                     presenter.setupConfigurations(model = configurationsConverter
@@ -144,5 +162,12 @@ class SplashProvider(val presenter: SplashPresenter) {
                 }
             }
         }).start()
+    }
+
+    /** Performs saving configuration in DB
+     * @param configurationUserModel - model to save */
+    private fun saveConfiguration(configurationUserModel: ConfigurationUserModel) {
+        App.db.configurationDao().insert(configurationsConverter
+                .modelToDb(configurationUserModel = configurationUserModel))
     }
 }

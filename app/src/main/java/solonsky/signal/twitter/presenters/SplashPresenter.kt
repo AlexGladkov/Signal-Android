@@ -49,4 +49,8 @@ class SplashPresenter: MvpPresenter<SplashView>() {
         AppData.userConfiguration = model
         viewState.performLogged()
     }
+
+    fun cleanBoot() {
+        viewState.performLogin()
+    }
 }

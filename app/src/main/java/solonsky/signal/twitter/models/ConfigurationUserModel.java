@@ -12,7 +12,6 @@ import java.util.ArrayList;
 
 import solonsky.signal.twitter.helpers.AppData;
 import solonsky.signal.twitter.helpers.Cache;
-import solonsky.signal.twitter.helpers.SerializationUtils;
 import solonsky.signal.twitter.room.models.ConfigurationEntity;
 
 /**
@@ -29,22 +28,23 @@ public class ConfigurationUserModel {
         configurationUserModel.clientToken = configurationEntity.getClientToken();
         configurationUserModel.clientSecret = configurationEntity.getClientSecret();
 
-        try {
-            configurationUserModel.bottomIds = (ArrayList<Integer>) SerializationUtils.deserialize(configurationEntity.getBottomIds());
-        } catch (IOException | ClassNotFoundException e) {
-            configurationUserModel.bottomIds = new ArrayList<>();
-            configurationUserModel.bottomIds.add(0);
-            configurationUserModel.bottomIds.add(1);
-            configurationUserModel.bottomIds.add(2);
-            configurationUserModel.bottomIds.add(3);
-            configurationUserModel.bottomIds.add(4);
-        }
+        configurationUserModel.bottomIds = configurationEntity.getBottomIds();
+        configurationUserModel.user = configurationEntity.getUser();
+        configurationUserModel.mentions = configurationEntity.getMentions();
+        configurationUserModel.muteClients = configurationEntity.getMuteClients();
+        configurationUserModel.muteHashtags = configurationEntity.getMuteHashtags();
+        configurationUserModel.muteKeywords = configurationEntity.getMuteKeywords();
 
-        try {
-            configurationUserModel.user = (User) SerializationUtils.deserialize(configurationEntity.getUser());
-        } catch (IOException | ClassNotFoundException e) {
-            configurationUserModel.user = null;
-        }
+        configurationUserModel.tabPosition = configurationEntity.getTabPosition();
+
+        configurationUserModel.isMessages = configurationEntity.isMessages();
+        configurationUserModel.isLikes = configurationEntity.isLikes();
+        configurationUserModel.isRetweets = configurationEntity.isRetweets();
+        configurationUserModel.isQuotes = configurationEntity.isQuotes();
+        configurationUserModel.isFollowers = configurationEntity.isFollowers();
+        configurationUserModel.isLists = configurationEntity.isLists();
+        configurationUserModel.isSound = configurationEntity.isSound();
+        configurationUserModel.isVibration = configurationEntity.isVibration();
 
         return configurationUserModel;
     }

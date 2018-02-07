@@ -13,6 +13,8 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.anupcowkur.reservoir.Reservoir;
+import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.facebook.imagepipeline.core.ImagePipelineConfig;
 import com.facebook.imagepipeline.decoder.SimpleProgressiveJpegConfig;
@@ -35,6 +37,7 @@ import java.io.IOException;
 
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.databinding.ActivityLoginBinding;
+import solonsky.signal.twitter.helpers.App;
 import solonsky.signal.twitter.helpers.AppData;
 import solonsky.signal.twitter.helpers.Cache;
 import solonsky.signal.twitter.helpers.FileNames;
@@ -42,7 +45,9 @@ import solonsky.signal.twitter.helpers.FileWork;
 import solonsky.signal.twitter.helpers.Utilities;
 import solonsky.signal.twitter.models.ConfigurationUserModel;
 import solonsky.signal.twitter.models.User;
+import solonsky.signal.twitter.presenters.LoginPresenter;
 import solonsky.signal.twitter.viewmodels.LoginViewModel;
+import solonsky.signal.twitter.views.LoginView;
 import twitter4j.AsyncTwitter;
 import twitter4j.ResponseList;
 import twitter4j.TwitterAdapter;
@@ -52,11 +57,14 @@ import twitter4j.TwitterMethod;
  * Created by neura on 22.05.17.
  */
 
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends MvpAppCompatActivity implements LoginView {
     private final String TAG = "LOGINACTIVITY";
     private LoginActivity mActivity;
     private TwitterAuthClient twitterAuthClient;
     private ActivityLoginBinding binding;
+
+    @InjectPresenter
+    LoginPresenter presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -85,7 +93,6 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void lookedupUsers(ResponseList<twitter4j.User> users) {
                         super.lookedupUsers(users);
-
                         /* Save user for next performance */
                         User user = User.getFromUserInstance(users.get(0));
                         AppData.ME = (user);
@@ -96,22 +103,25 @@ public class LoginActivity extends AppCompatActivity {
                         /* Create configuration user for notifications and bottom tabs */
                         AppData.userConfiguration = (ConfigurationUserModel.getDefaultInstance(user,
                                 AppData.CONSUMER_KEY, AppData.CONSUMER_SECRET, authToken.token, authToken.secret));
+
                         AppData.configurationUserModels.add(AppData.userConfiguration);
                         ConfigurationUserModel.saveData();
 
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                try {
-                                    Reservoir.put(Cache.Me + AppData.ME.getId(), AppData.ME);
-                                } catch (IOException e) {
-                                    Log.e(TAG, "Error saving me - " + e.getLocalizedMessage());
-                                }
+                        presenter.prepareSignal(users.get(0));
 
-                                startActivity(new Intent(getApplicationContext(), LoggedActivity.class));
-                                finish();
-                            }
-                        });
+//                        handler.post(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                try {
+//                                    Reservoir.put(Cache.Me + AppData.ME.getId(), AppData.ME);
+//                                } catch (IOException e) {
+//                                    Log.e(TAG, "Error saving me - " + e.getLocalizedMessage());
+//                                }
+//
+//                                startActivity(new Intent(getApplicationContext(), LoggedActivity.class));
+//                                finish();
+//                            }
+//                        });
                     }
 
                     @Override
@@ -151,5 +161,12 @@ public class LoginActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         binding.btnLoginTwitter.onActivityResult(requestCode, resultCode, data);
+    }
+
+    // MARK: - View implementation
+    @Override
+    public void performLogged() {
+        startActivity(new Intent(getApplicationContext(), LoggedActivity.class));
+        finish();
     }
 }
