@@ -108,7 +108,6 @@ class SplashProvider(val presenter: SplashPresenter) {
                 val users = App.db.usersDao().getById(hosters[0].userId)
                 if (users.isNotEmpty()) {
                     AppData.ME = usersConverter.dbToApi(users[0])
-                    Log.e(TAG, "Me avatar ${users[0].originalProfileImageURL}")
                     handler.post {
                         presenter.setupProfile()
                     }
@@ -136,28 +135,36 @@ class SplashProvider(val presenter: SplashPresenter) {
         }).start()
     }
 
+    /** <tt>LEGACY CODE</tt>
+     * Copy configs from old arch to new */
+    fun copyConfigsFromOld() {
+        val resultType = object : TypeToken<List<ConfigurationUserModel>>() {}.type
+        val configurationUserModels = Reservoir.get<List<ConfigurationUserModel>>(Cache.UsersConfigurations, resultType)
+        if (configurationUserModels.isEmpty()) {
+            presenter.errorLoadingChain()
+        } else {
+            configurationUserModels.forEach({ App.db.configurationDao().insert(configurationsConverter.modelToDb(it)) })
+            if (configurationUserModels.filter { it.user.id == AppData.ME.id }.isEmpty()) {
+                presenter.errorLoadingChain()
+            } else {
+                handler.post {
+                    presenter.setupConfigurations(model = configurationUserModels
+                            .first { it.user.id == AppData.ME.id })
+                }
+            }
+        }
+    }
+
     /** Performs fetch user configuration from DB or load it from legacy if empty */
     fun fetchConfiguration() {
         Thread({
             AppData.configurationUserModels = App.db.configurationDao().getAllConfigurations()
                     .map { configurationsConverter.dbToModel(it) }
-            Log.e(TAG, "config size ${AppData.configurationUserModels.size}, me id ${AppData.ME.id}")
             val configurationModels = AppData.configurationUserModels
                         .filter { it.user.id == AppData.ME.id }
 
             if (configurationModels.isEmpty()) { // Legacy support
-                val resultType = object : TypeToken<List<ConfigurationUserModel>>() {}.type
-                val configurationUserModels = Reservoir.get<List<ConfigurationUserModel>>(Cache.UsersConfigurations, resultType)
-                        .filter { it.user.id == AppData.ME.id }
-
-                if (configurationUserModels.isEmpty()) {
-                    presenter.errorLoadingChain()
-                } else {
-                    saveConfiguration(configurationUserModel = configurationUserModels[0])
-                    handler.post {
-                        presenter.setupConfigurations(model = configurationUserModels[0])
-                    }
-                }
+                copyConfigsFromOld()
             } else {
                 handler.post {
                     presenter.setupConfigurations(model = configurationModels[0])

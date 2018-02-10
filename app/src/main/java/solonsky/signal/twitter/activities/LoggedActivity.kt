@@ -52,6 +52,7 @@ import com.twitter.sdk.android.core.TwitterSession
 import kotlinx.android.synthetic.main.activity_logged.*
 
 import org.joda.time.LocalTime
+import ru.terrakok.cicerone.Router
 
 import java.io.IOException
 import java.util.ArrayList
@@ -92,9 +93,13 @@ import twitter4j.Status
 import twitter4j.TwitterAdapter
 import twitter4j.TwitterMethod
 import twitter4j.User
+import javax.inject.Inject
 
 class LoggedActivity : MvpAppCompatActivity(), LoggedView, ConfigurationView, ActivityListener {
     private val TAG: String = LoggedActivity::class.java.simpleName
+
+//    @Inject
+//    lateinit var router: Router
 
     @InjectPresenter
     lateinit var mPresenter: LoggedPresenter
