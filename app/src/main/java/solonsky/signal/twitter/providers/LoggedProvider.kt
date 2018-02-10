@@ -1,18 +1,13 @@
 package solonsky.signal.twitter.providers
 
 import android.os.Handler
-import android.util.Log
 import solonsky.signal.twitter.helpers.App
 import solonsky.signal.twitter.helpers.AppData
 import solonsky.signal.twitter.helpers.Utilities
-import solonsky.signal.twitter.models.ConfigurationModel
 import solonsky.signal.twitter.models.ConfigurationUserModel
-import solonsky.signal.twitter.models.User
 import solonsky.signal.twitter.presenters.LoggedPresenter
 import solonsky.signal.twitter.room.converters.ConfigurationConverterImpl
-import solonsky.signal.twitter.room.converters.SettingsConverterImpl
 import solonsky.signal.twitter.room.converters.UsersConverterImpl
-import solonsky.signal.twitter.room.models.SettingsEntity
 import solonsky.signal.twitter.room.models.UserEntity
 import solonsky.signal.twitter.room.models.UserIDEntity
 import twitter4j.*
@@ -105,7 +100,7 @@ class LoggedProvider(val presenter: LoggedPresenter) {
 
     fun saveConfiguration(configurationUserModel: ConfigurationUserModel) {
         Thread({
-            App.db.configurationDao().insert(configurationConverter.modelToDb(configurationUserModel = configurationUserModel))
+            App.db.configurationDao().update(configurationConverter.modelToDb(configurationUserModel = configurationUserModel))
         })
     }
 }

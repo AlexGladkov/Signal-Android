@@ -8,6 +8,7 @@ import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
@@ -59,7 +60,7 @@ public class UsersListActivity extends AppCompatActivity {
                 android.R.color.transparent : R.color.light_status_bar_timeline_color));
 
         mUsersList = new ArrayList<>();
-
+        Log.e(TAG, "list size " + mUsersList.size());
         for (ConfigurationUserModel configurationUserModel : AppData.configurationUserModels) {
             User user = configurationUserModel.getUser();
             mUsersList.add(new UserModel(user.getId(), user.getProfileImageUrl(), user.getName(),

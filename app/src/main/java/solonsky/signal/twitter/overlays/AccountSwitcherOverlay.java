@@ -1,6 +1,8 @@
 package solonsky.signal.twitter.overlays;
 
+import android.content.Intent;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 
 import java.util.ArrayList;
@@ -9,6 +11,7 @@ import java.util.Comparator;
 
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.activities.LoggedActivity;
+import solonsky.signal.twitter.activities.SplashActivity;
 import solonsky.signal.twitter.adapters.SelectorAdapter;
 import solonsky.signal.twitter.helpers.AppData;
 import solonsky.signal.twitter.helpers.FileNames;
@@ -65,7 +68,7 @@ public class AccountSwitcherOverlay {
         mActivity.getBinding().txtLoggedSwitchLimit.setVisibility(isShow ? View.VISIBLE : View.GONE);
         long diff = TIME_LIMIT - ((System.currentTimeMillis() - AppData.lastSwitchTime) / 1000);
         mActivity.getBinding().txtLoggedSwitchLimit.setText(mActivity.getString(R.string.error_switch_limit)
-                .replace("[TIME]", String.valueOf(diff)));
+                .replace("[TIME]", String.valueOf(diff)) + "s");
 
         if (isShow) {
             for (UserModel userModel : mUsersList) {
@@ -153,31 +156,39 @@ public class AccountSwitcherOverlay {
             if (model.getId() == AppData.userConfiguration.getUser().getId()) return;
             if (((System.currentTimeMillis() - AppData.lastSwitchTime) / 1000) > (TIME_LIMIT)) {
                 final Handler handler = new Handler();
+                mActivity.prepareToRecreate(true);
+                mActivity.configPresenter.updateUser(model.getId());
+                mActivity.startActivity(new Intent(mActivity.getApplicationContext(), SplashActivity.class));
+                mActivity.finish();
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        for (ConfigurationUserModel configurationUserModel : AppData.configurationUserModels) {
-                            if (configurationUserModel.getUser().getId() == model.getId()) {
-                                mActivity.prepareToRecreate(true);
 
-                                AppData.CLIENT_SECRET = (configurationUserModel.getClientSecret());
-                                AppData.CLIENT_TOKEN = (configurationUserModel.getClientToken());
-
-                                AppData.ME = (configurationUserModel.getUser());
-                                AppData.userConfiguration = (configurationUserModel);
-                                new FileWork(mActivity.getApplicationContext()).writeToFile(String.valueOf(AppData.ME.getId()),
-                                        FileNames.USERS_LAST_ID);
-
-                                mActivity.saveProfile();
-                                handler.post(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        mActivity.recreate();
-                                    }
-                                });
-                                break;
-                            }
-                        }
+//                        mActivity.configPresenter.updateUser(model.getUser());
+//                        mActivity.startActivity(new Intent(mActivity.getApplicationContext(),
+//                                SplashActivity.class));
+//                        for (ConfigurationUserModel configurationUserModel : AppData.configurationUserModels) {
+//                            if (configurationUserModel.getUser().getId() == model.getId()) {
+//                                mActivity.prepareToRecreate(true);
+//
+//                                AppData.CLIENT_SECRET = (configurationUserModel.getClientSecret());
+//                                AppData.CLIENT_TOKEN = (configurationUserModel.getClientToken());
+//
+//                                AppData.ME = (configurationUserModel.getUser());
+//                                AppData.userConfiguration = (configurationUserModel);
+//                                new FileWork(mActivity.getApplicationContext()).writeToFile(String.valueOf(AppData.ME.getId()),
+//                                        FileNames.USERS_LAST_ID);
+//
+//                                mActivity.saveProfile();
+//                                handler.post(new Runnable() {
+//                                    @Override
+//                                    public void run() {
+//                                        mActivity.recreate();
+//                                    }
+//                                });
+//                                break;
+//                            }
+//                        }
                     }
                 }).start();
             } else {

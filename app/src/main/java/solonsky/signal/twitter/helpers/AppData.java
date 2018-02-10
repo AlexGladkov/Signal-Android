@@ -4,6 +4,7 @@ import android.location.Location;
 import android.support.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import solonsky.signal.twitter.models.ConfigurationModel;
 import solonsky.signal.twitter.models.ConfigurationUserModel;
@@ -88,7 +89,7 @@ public class AppData {
 
     public static String TWEET_CURRENT_SIZE = "14pt";
 
-    public static ArrayList<ConfigurationUserModel> configurationUserModels = new ArrayList<>();
+    public static List<ConfigurationUserModel> configurationUserModels = new ArrayList<>();
     public static ConfigurationModel appConfiguration = null;
     public static ConfigurationUserModel userConfiguration = null;
 

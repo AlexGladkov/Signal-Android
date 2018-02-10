@@ -10,6 +10,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.arellomobile.mvp.presenter.InjectPresenter;
+
 import java.util.ArrayList;
 
 import solonsky.signal.twitter.R;
@@ -24,16 +27,21 @@ import solonsky.signal.twitter.models.ConfigurationModel;
 import solonsky.signal.twitter.models.SettingsModel;
 import solonsky.signal.twitter.models.SettingsSwitchModel;
 import solonsky.signal.twitter.models.SettingsTextModel;
+import solonsky.signal.twitter.presenters.ConfigurationsPresenter;
 import solonsky.signal.twitter.viewmodels.GesturesViewModel;
+import solonsky.signal.twitter.views.ConfigurationView;
 
 /**
  * Created by neura on 23.05.17.
  */
 
-public class GesturesActivity extends AppCompatActivity {
+public class GesturesActivity extends MvpAppCompatActivity implements ConfigurationView {
     private ArrayList<SettingsModel> mSettingsList;
     private SettingsAdapter mAdapter;
     private GesturesActivity mActivity;
+
+    @InjectPresenter
+    ConfigurationsPresenter configurationsPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -170,6 +178,7 @@ public class GesturesActivity extends AppCompatActivity {
 
                     new FileWork(getApplicationContext()).writeToFile(
                             AppData.appConfiguration.exportConfiguration().toString(), FileNames.APP_CONFIGURATION);
+                    configurationsPresenter.updateAppSettings(AppData.appConfiguration);
                     return false;
                 }
             });
@@ -182,4 +191,10 @@ public class GesturesActivity extends AppCompatActivity {
 
         }
     };
+
+    // MARK: - View implementation
+    @Override
+    public void settingsUpdated() {
+
+    }
 }

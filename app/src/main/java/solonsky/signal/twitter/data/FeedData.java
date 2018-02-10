@@ -71,6 +71,7 @@ public class FeedData {
 
     public void loadCache() {
         try {
+            Log.e(TAG, "Load cache " + AppData.ME.getId());
             FeedData feedData = Reservoir.get(Cache.Feed + String.valueOf(AppData.ME.getId()), FeedData.class);
             entryCount = feedData.getEntryCount();
 
@@ -92,6 +93,7 @@ public class FeedData {
     public void saveCache(String source) {
         if (FeedData.getInstance().getFeedStatuses().size() > 0) {
             try {
+                Log.e(TAG, "Save cache " + AppData.ME.getId());
                 Reservoir.put(Cache.Feed + String.valueOf(AppData.ME.getId()), this);
             } catch (IOException | NullPointerException | ConcurrentModificationException e) {
                 Log.e(TAG, "Error caching feed " + e.getLocalizedMessage());

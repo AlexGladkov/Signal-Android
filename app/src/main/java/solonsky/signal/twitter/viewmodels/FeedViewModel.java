@@ -5,6 +5,7 @@ import android.databinding.BaseObservable;
 import android.databinding.Bindable;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -176,6 +177,7 @@ public class FeedViewModel extends BaseObservable {
         new Thread(new Runnable() {
             @Override
             public void run() {
+                Log.e(TAG, "Load cache " + AppData.ME.getId());
                 Reservoir.getAsync(Cache.Feed + String.valueOf(AppData.ME.getId()), FeedData.class,
                         new ReservoirGetCallback<FeedData>() {
                             @Override

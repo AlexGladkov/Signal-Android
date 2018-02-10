@@ -46,11 +46,17 @@ class SplashPresenter: MvpPresenter<SplashView>() {
     }
 
     fun setupConfigurations(model: ConfigurationUserModel) {
+        AppData.CLIENT_TOKEN = model.clientToken
+        AppData.CLIENT_SECRET = model.clientSecret
         AppData.userConfiguration = model
         viewState.performLogged()
     }
 
     fun cleanBoot() {
+        viewState.performLogin()
+    }
+
+    fun errorLoadingChain() {
         viewState.performLogin()
     }
 }

@@ -65,6 +65,7 @@
                     android:layout_marginTop="24dp" >
 
                     <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/imgLoggedAvatar"
                         android:layout_width="@dimen/tb_icon_size"
                         android:layout_height="@dimen/tb_icon_size"
                         android:padding="12dp"

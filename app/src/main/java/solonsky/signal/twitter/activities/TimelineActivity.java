@@ -8,6 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.arellomobile.mvp.presenter.InjectPresenter;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,16 +25,21 @@ import solonsky.signal.twitter.models.SettingsModel;
 import solonsky.signal.twitter.models.SettingsSwitchModel;
 import solonsky.signal.twitter.models.SettingsTextModel;
 import solonsky.signal.twitter.models.StatusModel;
+import solonsky.signal.twitter.presenters.ConfigurationsPresenter;
 import solonsky.signal.twitter.viewmodels.TimelineViewModel;
+import solonsky.signal.twitter.views.ConfigurationView;
 
 /**
  * Created by neura on 23.05.17.
  */
 
-public class TimelineActivity extends AppCompatActivity {
+public class TimelineActivity extends MvpAppCompatActivity implements ConfigurationView {
     private final String TAG = TimelineActivity.class.getSimpleName();
     private ArrayList<SettingsModel> mSettingsList;
     private SettingsAdapter mAdapter;
+
+    @InjectPresenter
+    ConfigurationsPresenter presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -83,6 +91,7 @@ public class TimelineActivity extends AppCompatActivity {
 
         @Override
         public void onSwitchClick(SettingsSwitchModel model, View v) {
+            presenter.updateAppSettings(AppData.appConfiguration);
             switch (model.getId()) {
                 case 3:
                     if (!model.isOn()) {
@@ -148,4 +157,10 @@ public class TimelineActivity extends AppCompatActivity {
             }
         }
     };
+
+    // MARK: - View implementation
+    @Override
+    public void settingsUpdated() {
+
+    }
 }

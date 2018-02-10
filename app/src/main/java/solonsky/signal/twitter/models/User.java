@@ -166,6 +166,10 @@ public class User extends BaseObservable implements Parcelable {
         this.profileBackgroundTiled = parcel.readInt() == 1;
     }
 
+    public User() {
+
+    }
+
     public User(User user) {
         this.id = user.id;
         this.favouritesCount = user.favouritesCount;
@@ -199,15 +203,39 @@ public class User extends BaseObservable implements Parcelable {
 
     @NotNull
     public static User createInstance(@NotNull UserEntity userEntity) {
-        return new User(userEntity.getId(), userEntity.getFavouritesCount(),
-                userEntity.getFollowersCount(), userEntity.getFriendsCount(), userEntity.getListedCount(),
-                userEntity.getStatusesCount(), userEntity.getCreatedAt(), userEntity.getDescription(),
-                userEntity.getLang(), userEntity.getLocation(), userEntity.getName(), userEntity.getScreenName(),
-                "", userEntity.getBiggerProfileImageURL(), userEntity.getProfileBackgroundImageUrl(),
-                userEntity.getProfileBannerImageUrl(), userEntity.getProfileImageUrl(), userEntity.getProfileLinkColor(),
-                new JsonArray(), new JsonObject(), userEntity.isContributorsEnabled(), userEntity.isDefaultProfile(),
-                userEntity.isDefaultProfileImage(), userEntity.isFollowRequestSent(), userEntity.isGeoEnabled(),
-                userEntity.isHasProtected(), userEntity.isVerified(), userEntity.isProfileBackgroundTiled());
+        User user = new User();
+        user.setId(userEntity.getId());
+
+        user.setStatusesCount(userEntity.getStatusesCount());
+        user.setFavouritesCount(userEntity.getFavouritesCount());
+        user.setFollowersCount(userEntity.getFollowersCount());
+        user.setFriendsCount(userEntity.getFriendsCount());
+        user.setListedCount(userEntity.getListedCount());
+
+        user.setOriginalProfileImageURL(userEntity.getOriginalProfileImageURL());
+        user.setBiggerProfileImageURL(userEntity.getBiggerProfileImageURL());
+        user.setProfileImageUrl(userEntity.getProfileImageUrl());
+        user.setProfileBannerImageUrl(userEntity.getProfileBannerImageUrl());
+        user.setProfileBackgroundImageUrl(userEntity.getProfileBackgroundImageUrl());
+
+        user.setLocation(userEntity.getLocation());
+        user.setCreatedAt(userEntity.getCreatedAt());
+
+        user.setScreenName(userEntity.getScreenName());
+        user.setName(userEntity.getName());
+        user.setDescription(userEntity.getDescription());
+
+        user.setContributorsEnabled(userEntity.isContributorsEnabled());
+        user.setDefaultProfile(userEntity.isDefaultProfile());
+        user.setVerified(userEntity.isVerified());
+        user.setProtected(userEntity.isHasProtected());
+        user.setDefaultProfileImage(userEntity.isDefaultProfileImage());
+
+        user.setDescriptionUrlEntities(new JsonArray());
+        user.setUrlEntity(new JsonObject());
+        user.setUrl("");
+
+        return user;
     }
 
     public User(long id, long favouritesCount, long followersCount, long friendsCount, long listedCount,

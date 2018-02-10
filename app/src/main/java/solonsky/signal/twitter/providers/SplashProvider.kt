@@ -6,6 +6,7 @@ import com.anupcowkur.reservoir.Reservoir
 import com.google.common.reflect.TypeToken
 import com.google.gson.Gson
 import org.joda.time.DateTime
+import org.joda.time.format.DateTimeFormat
 import solonsky.signal.twitter.helpers.App
 import solonsky.signal.twitter.helpers.AppData
 import solonsky.signal.twitter.helpers.Cache
@@ -18,7 +19,6 @@ import solonsky.signal.twitter.room.converters.SettingsConverterImpl
 import solonsky.signal.twitter.room.converters.UsersConverterImpl
 import solonsky.signal.twitter.room.models.HosterEntity
 import twitter4j.*
-import java.util.*
 
 /**
  * Created by agladkov on 01.02.18.
@@ -29,7 +29,7 @@ class SplashProvider(val presenter: SplashPresenter) {
     private val usersConverter = UsersConverterImpl()
     private val configurationsConverter = ConfigurationConverterImpl()
     private val handler = Handler()
-    private val profileDelay = 1000L
+    private val profileDelay = 0L
 
     /** Download current profile from Twitter api
      * @param isLoaded = if false then perform next move else just update profile
@@ -40,12 +40,11 @@ class SplashProvider(val presenter: SplashPresenter) {
         asyncTwitter.addListener(object : TwitterAdapter() {
             override fun lookedupUsers(users: ResponseList<User>) {
                 super.lookedupUsers(users)
-                AppData.ME = gson.fromJson(gson.toJsonTree(users[0]), solonsky.signal.twitter.models.User::class.java)
-                AppData.ME.biggerProfileImageURL = users[0].biggerProfileImageURL
-                AppData.ME.originalProfileImageURL = users[0].originalProfileImageURL
+                AppData.ME = solonsky.signal.twitter.models.User.getFromUserInstance(users[0])
+                Log.e(TAG, "New avatar ${usersConverter.apiToDb(users[0]).originalProfileImageURL}")
 
                 App.db.usersDao().insert(usersConverter.apiToDb(users[0]))
-                App.db.hostersDao().insert(
+                App.db.hostersDao().update(
                         HosterEntity(AppData.ME.id,
                                 DateTime().toString("dd.MM.yyyy HH:mm:ss"), AppData.ME.id))
 
@@ -104,11 +103,12 @@ class SplashProvider(val presenter: SplashPresenter) {
      */
     fun fetchProfile() {
         Thread({
-            val hosters = App.db.hostersDao().getAll()
+            val hosters = App.db.hostersDao().getAllByDate()
             if (hosters.isNotEmpty()) {
                 val users = App.db.usersDao().getById(hosters[0].userId)
                 if (users.isNotEmpty()) {
                     AppData.ME = usersConverter.dbToApi(users[0])
+                    Log.e(TAG, "Me avatar ${users[0].originalProfileImageURL}")
                     handler.post {
                         presenter.setupProfile()
                     }
@@ -139,8 +139,11 @@ class SplashProvider(val presenter: SplashPresenter) {
     /** Performs fetch user configuration from DB or load it from legacy if empty */
     fun fetchConfiguration() {
         Thread({
-            val configurationModels = App.db.configurationDao().getConfigurationById(AppData.ME.id)
-                        .filter { it.userId == AppData.ME.id }
+            AppData.configurationUserModels = App.db.configurationDao().getAllConfigurations()
+                    .map { configurationsConverter.dbToModel(it) }
+            Log.e(TAG, "config size ${AppData.configurationUserModels.size}, me id ${AppData.ME.id}")
+            val configurationModels = AppData.configurationUserModels
+                        .filter { it.user.id == AppData.ME.id }
 
             if (configurationModels.isEmpty()) { // Legacy support
                 val resultType = object : TypeToken<List<ConfigurationUserModel>>() {}.type
@@ -148,7 +151,7 @@ class SplashProvider(val presenter: SplashPresenter) {
                         .filter { it.user.id == AppData.ME.id }
 
                 if (configurationUserModels.isEmpty()) {
-                    // TODO
+                    presenter.errorLoadingChain()
                 } else {
                     saveConfiguration(configurationUserModel = configurationUserModels[0])
                     handler.post {
@@ -157,8 +160,7 @@ class SplashProvider(val presenter: SplashPresenter) {
                 }
             } else {
                 handler.post {
-                    presenter.setupConfigurations(model = configurationsConverter
-                            .dbToModel(configurationModels[0]))
+                    presenter.setupConfigurations(model = configurationModels[0])
                 }
             }
         }).start()
@@ -167,7 +169,7 @@ class SplashProvider(val presenter: SplashPresenter) {
     /** Performs saving configuration in DB
      * @param configurationUserModel - model to save */
     private fun saveConfiguration(configurationUserModel: ConfigurationUserModel) {
-        App.db.configurationDao().insert(configurationsConverter
+        App.db.configurationDao().update(configurationsConverter
                 .modelToDb(configurationUserModel = configurationUserModel))
     }
 }

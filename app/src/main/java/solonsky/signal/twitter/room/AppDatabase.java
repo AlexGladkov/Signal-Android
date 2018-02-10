@@ -20,7 +20,7 @@ import solonsky.signal.twitter.room.models.UserIDEntity;
  * Created by sunwi on 22.01.2018.
  */
 @Database(entities = {UserEntity.class, UserIDEntity.class, SettingsEntity.class,
-        HosterEntity.class, ConfigurationEntity.class}, version = 6)
+        HosterEntity.class, ConfigurationEntity.class}, version = 7)
 @TypeConverters(Converter.class)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract UsersDao usersDao();

@@ -18,6 +18,11 @@ class LoggedPresenter: MvpPresenter<LoggedView>() {
     private val TAG: String = LoggedPresenter::class.java.simpleName
     private val provider = LoggedProvider(presenter = this@LoggedPresenter)
 
+    override fun onFirstViewAttach() {
+        super.onFirstViewAttach()
+        viewState.setupProfile(avatar = AppData.ME.originalProfileImageURL)
+    }
+
     // Fetch and setup app settings
     fun fetchUsers() {
         provider.fetchUsers()

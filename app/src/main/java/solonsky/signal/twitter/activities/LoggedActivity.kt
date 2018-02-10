@@ -30,7 +30,6 @@ import solonsky.signal.twitter.fragments.MVPProfileFragment
 import android.os.Handler
 import android.support.annotation.ColorRes
 import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
@@ -44,15 +43,13 @@ import com.anupcowkur.reservoir.Reservoir
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.fatboyindustrial.gsonjodatime.Converters
-import com.google.common.reflect.TypeToken
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
-import com.google.gson.JsonObject
-import com.google.gson.JsonParser
 import com.twitter.sdk.android.core.Callback
 import com.twitter.sdk.android.core.Result
 import com.twitter.sdk.android.core.TwitterCore
 import com.twitter.sdk.android.core.TwitterSession
+import kotlinx.android.synthetic.main.activity_logged.*
 
 import org.joda.time.LocalTime
 
@@ -84,24 +81,28 @@ import solonsky.signal.twitter.models.ConfigurationModel
 import solonsky.signal.twitter.models.ConfigurationUserModel
 import solonsky.signal.twitter.models.StatusModel
 import solonsky.signal.twitter.overlays.AccountSwitcherOverlay
+import solonsky.signal.twitter.presenters.ConfigurationsPresenter
 import solonsky.signal.twitter.presenters.LoggedPresenter
 import solonsky.signal.twitter.services.MyLocationService
 import solonsky.signal.twitter.viewmodels.LoggedViewModel
+import solonsky.signal.twitter.views.ConfigurationView
 import solonsky.signal.twitter.views.LoggedView
 import twitter4j.ResponseList
 import twitter4j.Status
 import twitter4j.TwitterAdapter
-import twitter4j.TwitterException
 import twitter4j.TwitterMethod
 import twitter4j.User
 
-class LoggedActivity : MvpAppCompatActivity(), LoggedView, ActivityListener {
+class LoggedActivity : MvpAppCompatActivity(), LoggedView, ConfigurationView, ActivityListener {
+    private val TAG: String = LoggedActivity::class.java.simpleName
 
     @InjectPresenter
     lateinit var mPresenter: LoggedPresenter
 
+    @InjectPresenter
+    lateinit var configPresenter: ConfigurationsPresenter
+
     val requestLocationCode = 1
-    private val TAG = "LOGGEDACTIVITY"
     lateinit var binding: ActivityLoggedBinding
     lateinit var viewModel: LoggedViewModel
     private val mAdapter: SelectorAdapter? = null
@@ -310,7 +311,6 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ActivityListener {
         }
 
         if (savedInstanceState == null) {
-
             AppData.lastSwitchTime = System.currentTimeMillis()
             ShareData.getInstance().loadCache() // Load shares
 
@@ -374,10 +374,10 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ActivityListener {
         //        Log.e(TAG, "current consumer key - " + AppData.userConfiguration.getConsumerKey());
         //        Log.e(TAG, "current consumer secret - " + AppData.userConfiguration.getConsumerSecret());
 
-        if (AppData.configurationUserModels != null) {
-            AppData.CLIENT_TOKEN = AppData.userConfiguration.clientToken
-            AppData.CLIENT_SECRET = AppData.userConfiguration.clientSecret
-        }
+//        if (AppData.configurationUserModels != null) {
+//            AppData.CLIENT_TOKEN = AppData.userConfiguration.clientToken
+//            AppData.CLIENT_SECRET = AppData.userConfiguration.clientSecret
+//        }
 
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         setStatusBarColor(if (App.getInstance().isNightEnabled)
@@ -474,25 +474,23 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ActivityListener {
                         handler.post { Toast.makeText(applicationContext, "Error adding user", Toast.LENGTH_SHORT).show() }
                     }
 
-                    override fun lookedupUsers(users: ResponseList<User>?) {
+                    override fun lookedupUsers(users: ResponseList<User>) {
                         super.lookedupUsers(users)
                         val fileWork = FileWork(applicationContext)
 
                         /* Save user for next performance */
-                        val user = solonsky.signal.twitter.models.User.getFromUserInstance(users!![0])
+                        val user = solonsky.signal.twitter.models.User.getFromUserInstance(users[0])
                         AppData.ME = user
                         fileWork.writeToFile(AppData.ME.id.toString(), FileNames.USERS_LAST_ID)
                         fileWork.writeToFile(authToken.token, FileNames.CLIENT_TOKEN)
                         fileWork.writeToFile(authToken.secret, FileNames.CLIENT_SECRET)
+                        configPresenter.addNewHost(user = users[0])
 
                         /* Create configuration user for notifications and bottom tabs */
-                        val hasUser = AppData.configurationUserModels.any { it.user.id == user.id }
-                        if (!hasUser) {
-                            AppData.userConfiguration = ConfigurationUserModel.getDefaultInstance(user,
-                                    AppData.CONSUMER_KEY, AppData.CONSUMER_SECRET, authToken.token, authToken.secret)
-                            AppData.configurationUserModels.add(AppData.userConfiguration)
-                            ConfigurationUserModel.saveData()
-                        }
+                        AppData.userConfiguration = ConfigurationUserModel.getDefaultInstance(user,
+                                AppData.CONSUMER_KEY, AppData.CONSUMER_SECRET, authToken.token, authToken.secret)
+                        AppData.configurationUserModels.add(AppData.userConfiguration)
+                        configPresenter.addNewUserConfiguration(newConfig = AppData.userConfiguration)
 
                         prepareToRecreate(true)
                         FileWork(applicationContext).writeToFile(AppData.ME.id.toString(),
@@ -1120,5 +1118,14 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ActivityListener {
     // MARK: - View implementation
     override fun showMessage(text: String) {
         Toast.makeText(applicationContext, text, Toast.LENGTH_SHORT).show()
+    }
+
+    override fun setupProfile(avatar: String?) {
+        ImageLoader.loadImage(avatar, imgLoggedAvatar)
+    }
+
+    // MARK: - Config view implementation
+    override fun settingsUpdated() {
+
     }
 }

@@ -10,6 +10,8 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.anupcowkur.reservoir.Reservoir;
+import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.arellomobile.mvp.presenter.InjectPresenter;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,16 +28,21 @@ import solonsky.signal.twitter.models.ConfigurationModel;
 import solonsky.signal.twitter.models.SettingsModel;
 import solonsky.signal.twitter.models.SettingsSwitchModel;
 import solonsky.signal.twitter.models.SettingsTextModel;
+import solonsky.signal.twitter.presenters.ConfigurationsPresenter;
 import solonsky.signal.twitter.viewmodels.AdvancedViewModel;
+import solonsky.signal.twitter.views.ConfigurationView;
 
 /**
  * Created by neura on 23.05.17.
  */
 
-public class AdvancedActivity extends AppCompatActivity {
+public class AdvancedActivity extends MvpAppCompatActivity implements ConfigurationView {
     private final String TAG = AdvancedActivity.class.getSimpleName();
     private ArrayList<SettingsModel> mSettingsList;
     private SettingsAdapter mAdapter;
+
+    @InjectPresenter
+    ConfigurationsPresenter presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -110,7 +117,13 @@ public class AdvancedActivity extends AppCompatActivity {
 
         @Override
         public void onSwitchClick(SettingsSwitchModel model, View v) {
-
+            presenter.updateAppSettings(AppData.appConfiguration);
         }
     };
+
+    // MARK: - View implementation
+    @Override
+    public void settingsUpdated() {
+
+    }
 }

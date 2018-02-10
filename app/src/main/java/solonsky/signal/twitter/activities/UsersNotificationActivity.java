@@ -12,9 +12,12 @@ import android.view.View;
 import android.view.WindowManager;
 
 import com.anupcowkur.reservoir.Reservoir;
+import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.arellomobile.mvp.presenter.InjectPresenter;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.adapters.SettingsAdapter;
@@ -27,19 +30,24 @@ import solonsky.signal.twitter.models.ConfigurationUserModel;
 import solonsky.signal.twitter.models.SettingsModel;
 import solonsky.signal.twitter.models.SettingsSwitchModel;
 import solonsky.signal.twitter.models.SettingsTextModel;
+import solonsky.signal.twitter.presenters.ConfigurationsPresenter;
 import solonsky.signal.twitter.viewmodels.UsersNotificationsViewModel;
+import solonsky.signal.twitter.views.ConfigurationView;
 
 /**
  * Created by neura on 24.05.17.
  */
 
-public class UsersNotificationActivity extends AppCompatActivity {
+public class UsersNotificationActivity extends MvpAppCompatActivity implements ConfigurationView {
     private final String TAG = UsersNotificationActivity.class.getSimpleName();
     private ArrayList<SettingsModel> mSettingsList;
     private ArrayList<SettingsModel> mSubSettingsList;
     private SettingsAdapter mAdapter;
     private SettingsAdapter mSubAdapter;
     private UsersNotificationActivity mActivity;
+
+    @InjectPresenter
+    ConfigurationsPresenter presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -107,23 +115,24 @@ public class UsersNotificationActivity extends AppCompatActivity {
                     switch (item.getItemId()) {
                         case R.id.notifications_all:
                             model.setSubtitle(getString(R.string.notifications_all));
-                            AppData.configurationUserModels.get(position).setMentions(ConfigurationUserModel.Mentions.FROM_ALL);
+//                            AppData.configurationUserModels.get(position).setMentions(ConfigurationUserModel.Mentions.FROM_ALL);
                             AppData.userConfiguration.setMentions(ConfigurationUserModel.Mentions.FROM_ALL);
                             break;
 
                         case R.id.notifications_follow:
                             model.setSubtitle(getString(R.string.notifications_follow));
-                            AppData.configurationUserModels.get(position).setMentions(ConfigurationUserModel.Mentions.FROM_FOLLOW);
+//                            AppData.configurationUserModels.get(position).setMentions(ConfigurationUserModel.Mentions.FROM_FOLLOW);
                             AppData.userConfiguration.setMentions(ConfigurationUserModel.Mentions.FROM_FOLLOW);
                             break;
 
                         case R.id.notifications_off:
                             model.setSubtitle(getString(R.string.notifications_off));
-                            AppData.configurationUserModels.get(position).setMentions(ConfigurationUserModel.Mentions.OFF);
+//                            AppData.configurationUserModels.get(position).setMentions(ConfigurationUserModel.Mentions.OFF);
                             AppData.userConfiguration.setMentions(ConfigurationUserModel.Mentions.OFF);
                             break;
                     }
 
+                    presenter.updateUserConfiguration(AppData.userConfiguration);
                     return false;
                 }
             });
@@ -139,46 +148,47 @@ public class UsersNotificationActivity extends AppCompatActivity {
                     break;
 
                 case 1:
-                    AppData.configurationUserModels.get(position).setMessages(model.isOn());
+//                    AppData.configurationUserModels.get(position).setMessages(model.isOn());
                     AppData.userConfiguration.setMessages(model.isOn());
                     break;
 
                 case 2:
-                    AppData.configurationUserModels.get(position).setLikes(model.isOn());
+//                    AppData.configurationUserModels.get(position).setLikes(model.isOn());
                     AppData.userConfiguration.setLikes(model.isOn());
                     break;
 
                 case 3:
-                    AppData.configurationUserModels.get(position).setRetweets(model.isOn());
+//                    AppData.configurationUserModels.get(position).setRetweets(model.isOn());
                     AppData.userConfiguration.setRetweets(model.isOn());
                     break;
 
                 case 4:
-                    AppData.configurationUserModels.get(position).setQuotes(model.isOn());
+//                    AppData.configurationUserModels.get(position).setQuotes(model.isOn());
                     AppData.userConfiguration.setQuotes(model.isOn());
                     break;
 
                 case 5:
-                    AppData.configurationUserModels.get(position).setFollowers(model.isOn());
+//                    AppData.configurationUserModels.get(position).setFollowers(model.isOn());
                     AppData.userConfiguration.setFollowers(model.isOn());
                     break;
 
                 case 6:
-                    AppData.configurationUserModels.get(position).setLists(model.isOn());
+//                    AppData.configurationUserModels.get(position).setLists(model.isOn());
                     AppData.userConfiguration.setLists(model.isOn());
                     break;
 
                 case 7:
-                    AppData.configurationUserModels.get(position).setSound(model.isOn());
+//                    AppData.configurationUserModels.get(position).setSound(model.isOn());
                     AppData.userConfiguration.setSound(model.isOn());
                     break;
 
                 case 8:
-                    AppData.configurationUserModels.get(position).setVibration(model.isOn());
+//                    AppData.configurationUserModels.get(position).setVibration(model.isOn());
                     AppData.userConfiguration.setVibration(model.isOn());
                     break;
             }
 
+            presenter.updateUserConfiguration(AppData.userConfiguration);
             try {
                 Reservoir.put(Cache.UsersConfigurations, AppData.configurationUserModels);
             } catch (IOException e) {
@@ -186,4 +196,10 @@ public class UsersNotificationActivity extends AppCompatActivity {
             }
         }
     };
+
+    // MARK: - View implementation
+    @Override
+    public void settingsUpdated() {
+
+    }
 }

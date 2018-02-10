@@ -13,7 +13,7 @@ class UsersConverterImpl: UsersConverter {
             solonsky.signal.twitter.models.User.createInstance(userEntity)
 
     override fun dbToModel(userEntity: UserEntity): UserModel {
-        return UserModel(userEntity.id, userEntity.biggerProfileImageURL, userEntity.name,
+        return UserModel(userEntity.id, userEntity.originalProfileImageURL, userEntity.name,
                 "@${userEntity.screenName}", userEntity.isFollowRequestSent, false, false)
     }
 

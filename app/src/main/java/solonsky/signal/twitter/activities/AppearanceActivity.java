@@ -14,7 +14,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
+import com.arellomobile.mvp.MvpAppCompatActivity;
+import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.squareup.picasso.Picasso;
 
 import org.joda.time.LocalDateTime;
@@ -38,18 +41,23 @@ import solonsky.signal.twitter.models.ConfigurationModel;
 import solonsky.signal.twitter.models.SettingsModel;
 import solonsky.signal.twitter.models.SettingsSwitchModel;
 import solonsky.signal.twitter.models.SettingsTextModel;
+import solonsky.signal.twitter.presenters.ConfigurationsPresenter;
 import solonsky.signal.twitter.viewmodels.AppearanceViewModel;
+import solonsky.signal.twitter.views.ConfigurationView;
 
 /**
  * Created by neura on 23.05.17.
  */
 
-public class AppearanceActivity extends AppCompatActivity {
+public class AppearanceActivity extends MvpAppCompatActivity implements ConfigurationView {
     private static final String TAG = AppearanceActivity.class.getSimpleName();
     private ArrayList<SettingsModel> mSettingsList;
     private SettingsAdapter mAdapter;
     private AppearanceActivity mActivity;
     private ActivityAppearanceBinding binding;
+
+    @InjectPresenter
+    ConfigurationsPresenter presenter;
 
     private final String PREVIEW_URL = "http://getsignal.co/images/app/promo-image.png";
     private final String AVATAR_URL_SMALL = "http://getsignal.co/images/app/twitter-profile-a.png";
@@ -374,6 +382,7 @@ public class AppearanceActivity extends AppCompatActivity {
                     }
 
                     fileWork.writeToFile(AppData.appConfiguration.exportConfiguration().toString(), FileNames.APP_CONFIGURATION);
+                    presenter.updateAppSettings(AppData.appConfiguration);
                     applyStyling();
                     return false;
                 }
@@ -384,6 +393,7 @@ public class AppearanceActivity extends AppCompatActivity {
 
         @Override
         public void onSwitchClick(SettingsSwitchModel model, View v) {
+            presenter.updateAppSettings(AppData.appConfiguration);
             switch (model.getId()) {
                 case 0:
                     binding.txtAppearanceUsername.setText(model.isOn() ? "Signal for Twitter" : "Signal");
@@ -404,4 +414,10 @@ public class AppearanceActivity extends AppCompatActivity {
             }
         }
     };
+
+    // MARK: - View implementation
+    @Override
+    public void settingsUpdated() {
+        Log.e(TAG, "Settings updated");
+    }
 }

@@ -1,10 +1,12 @@
 package solonsky.signal.twitter.room.models;
 
+import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.ForeignKey;
 import android.arch.persistence.room.PrimaryKey;
 
 import solonsky.signal.twitter.room.RoomContract;
+import solonsky.signal.twitter.room.contracts.HostersContract;
 
 import static android.arch.persistence.room.ForeignKey.CASCADE;
 
@@ -14,12 +16,12 @@ import static android.arch.persistence.room.ForeignKey.CASCADE;
 @Entity(tableName = RoomContract.HOSTERS_TABLE,
         foreignKeys = @ForeignKey(entity = UserEntity.class,
                                 parentColumns = "id",
-                                childColumns = "userId",
+                                childColumns = HostersContract.USER_ID,
                                 onDelete = CASCADE))
 public class HosterEntity {
     @PrimaryKey public final long id;
-    private String timestamp;
-    private final long userId;
+    @ColumnInfo(name = HostersContract.TIMESTAMP) private String timestamp;
+    @ColumnInfo(name = HostersContract.USER_ID) private final long userId;
 
     public HosterEntity(long id, String timestamp, long userId) {
         this.id = id;

@@ -6,7 +6,6 @@ import solonsky.signal.twitter.helpers.App
 import solonsky.signal.twitter.helpers.AppData
 import solonsky.signal.twitter.models.ConfigurationModel
 import solonsky.signal.twitter.models.ConfigurationUserModel
-import solonsky.signal.twitter.presenters.LoggedPresenter
 import solonsky.signal.twitter.presenters.LoginPresenter
 import solonsky.signal.twitter.room.converters.ConfigurationConverterImpl
 import solonsky.signal.twitter.room.converters.SettingsConverterImpl
@@ -25,7 +24,7 @@ class LoginProvider(val presenter: LoginPresenter) {
 
     fun saveConfiguration(configurationUserModel: ConfigurationUserModel) {
         Thread({
-            App.db.configurationDao().insert(configurationConverter.modelToDb(configurationUserModel = configurationUserModel))
+            App.db.configurationDao().update(configurationConverter.modelToDb(configurationUserModel = configurationUserModel))
 
             handler.post {
                 presenter.configLoaded()
@@ -49,7 +48,7 @@ class LoginProvider(val presenter: LoginPresenter) {
             AppData.ME = solonsky.signal.twitter.models.User.getFromUserInstance(user)
 
             App.db.usersDao().insert(usersConverter.apiToDb(user))
-            App.db.hostersDao().insert(
+            App.db.hostersDao().update(
                     HosterEntity(AppData.ME.id,
                             DateTime().toString("dd.MM.yyyy HH:mm:ss"), AppData.ME.id))
 
