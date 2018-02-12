@@ -16,6 +16,7 @@ import com.twitter.sdk.android.core.TwitterConfig;
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.di.AppComponent;
 import solonsky.signal.twitter.di.DaggerAppComponent;
+import solonsky.signal.twitter.di.modules.LocalNavigationModule;
 import solonsky.signal.twitter.libs.AppVisibilityDetector;
 import solonsky.signal.twitter.libs.ApplicationLifecycleHandler;
 import solonsky.signal.twitter.models.ConfigurationModel;
@@ -90,7 +91,9 @@ public class App extends Application {
 
     public AppComponent getAppComponent() {
         if (appComponent == null) {
-            appComponent = DaggerAppComponent.builder().build();
+            appComponent = DaggerAppComponent.builder()
+                    .localNavigationModule(new LocalNavigationModule())
+                    .build();
         }
         return appComponent;
     }

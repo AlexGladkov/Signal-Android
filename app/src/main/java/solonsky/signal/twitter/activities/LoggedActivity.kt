@@ -52,7 +52,12 @@ import com.twitter.sdk.android.core.TwitterSession
 import kotlinx.android.synthetic.main.activity_logged.*
 
 import org.joda.time.LocalTime
+import ru.terrakok.cicerone.Navigator
+import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.Router
+import ru.terrakok.cicerone.commands.Back
+import ru.terrakok.cicerone.commands.Replace
+import ru.terrakok.cicerone.commands.SystemMessage
 
 import java.io.IOException
 import java.util.ArrayList
@@ -106,6 +111,12 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ConfigurationView, Ac
 
     @InjectPresenter
     lateinit var configPresenter: ConfigurationsPresenter
+
+    @Inject
+    lateinit var navigatorHolder: NavigatorHolder
+
+    @Inject
+    lateinit var routerMain: Router
 
     val requestLocationCode = 1
     lateinit var binding: ActivityLoggedBinding
@@ -305,6 +316,7 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ConfigurationView, Ac
 
     override fun checkState(): Flags.STATUS_TYPE = viewModel.statusType
     override fun onCreate(savedInstanceState: Bundle?) {
+        App.getInstance().appComponent.inject(this)
         super.onCreate(savedInstanceState)
 
         try {
@@ -390,7 +402,7 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ConfigurationView, Ac
         else
             R.color.light_status_bar_timeline_color)
 
-        val switcherOverlay = AccountSwitcherOverlay(this)
+        val switcherOverlay = AccountSwitcherOverlay(this, routerMain)
         switcherOverlay.createSwitcher()
         viewModel = LoggedViewModel(switcherOverlay.getmAdapter(), applicationContext, feedCount)
 
@@ -592,6 +604,18 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ConfigurationView, Ac
         startService(Intent(applicationContext, MyLocationService::class.java))
     }
 
+    override fun onResumeFragments() {
+        super.onResumeFragments()
+        navigatorHolder.setNavigator(navigator)
+    }
+
+    override fun onPause() {
+        navigatorHolder.removeNavigator()
+        super.onPause()
+        LoggedData.getInstance().saveCache()
+
+    }
+
     override fun onDestroy() {
         super.onDestroy()
         System.gc()
@@ -600,6 +624,21 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ConfigurationView, Ac
     override fun onLowMemory() {
         super.onLowMemory()
         System.gc()
+    }
+
+    private val navigator = Navigator { command ->
+        when (command) {
+            is Back -> finish()
+            is SystemMessage -> Toast.makeText(applicationContext, command.message, Toast.LENGTH_SHORT).show()
+            is Replace -> {
+                when (command.screenKey) {
+                    ScreenKeys.Splash.value -> {
+                        startActivity(Intent(applicationContext, SplashActivity::class.java))
+                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                    }
+                }
+            }
+        }
     }
 
     /**
@@ -722,11 +761,6 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ConfigurationView, Ac
         } else {
             super.onBackPressed()
         }
-    }
-
-    override fun onPause() {
-        super.onPause()
-        LoggedData.getInstance().saveCache()
     }
 
     fun setStatusBarColor(color: Int) {

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import ru.terrakok.cicerone.Router;
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.activities.LoggedActivity;
 import solonsky.signal.twitter.activities.SplashActivity;
@@ -16,6 +17,7 @@ import solonsky.signal.twitter.adapters.SelectorAdapter;
 import solonsky.signal.twitter.helpers.AppData;
 import solonsky.signal.twitter.helpers.FileNames;
 import solonsky.signal.twitter.helpers.FileWork;
+import solonsky.signal.twitter.helpers.ScreenKeys;
 import solonsky.signal.twitter.models.ConfigurationUserModel;
 import solonsky.signal.twitter.models.User;
 import solonsky.signal.twitter.models.UserModel;
@@ -27,13 +29,15 @@ import solonsky.signal.twitter.models.UserModel;
 public class AccountSwitcherOverlay {
     private final String TAG = AccountSwitcherOverlay.class.getSimpleName();
     private final int TIME_LIMIT = 30;
+    private final Router router;
     private LoggedActivity mActivity;
     private SelectorAdapter mAdapter;
     private boolean isStart = false;
     private ArrayList<UserModel> mUsersList;
 
-    public AccountSwitcherOverlay(LoggedActivity loggedActivity) {
+    public AccountSwitcherOverlay(LoggedActivity loggedActivity, Router router) {
         this.mActivity = loggedActivity;
+        this.router = router;
     }
 
     public void createSwitcher() {
@@ -158,39 +162,8 @@ public class AccountSwitcherOverlay {
                 final Handler handler = new Handler();
                 mActivity.prepareToRecreate(true);
                 mActivity.configPresenter.updateUser(model.getId());
-                mActivity.startActivity(new Intent(mActivity.getApplicationContext(), SplashActivity.class));
-                mActivity.finish();
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-
-//                        mActivity.configPresenter.updateUser(model.getUser());
-//                        mActivity.startActivity(new Intent(mActivity.getApplicationContext(),
-//                                SplashActivity.class));
-//                        for (ConfigurationUserModel configurationUserModel : AppData.configurationUserModels) {
-//                            if (configurationUserModel.getUser().getId() == model.getId()) {
-//                                mActivity.prepareToRecreate(true);
-//
-//                                AppData.CLIENT_SECRET = (configurationUserModel.getClientSecret());
-//                                AppData.CLIENT_TOKEN = (configurationUserModel.getClientToken());
-//
-//                                AppData.ME = (configurationUserModel.getUser());
-//                                AppData.userConfiguration = (configurationUserModel);
-//                                new FileWork(mActivity.getApplicationContext()).writeToFile(String.valueOf(AppData.ME.getId()),
-//                                        FileNames.USERS_LAST_ID);
-//
-//                                mActivity.saveProfile();
-//                                handler.post(new Runnable() {
-//                                    @Override
-//                                    public void run() {
-//                                        mActivity.recreate();
-//                                    }
-//                                });
-//                                break;
-//                            }
-//                        }
-                    }
-                }).start();
+                router.replaceScreen(ScreenKeys.Splash.getValue());
+                router.exit();
             } else {
                 updateConstraints(true);
             }

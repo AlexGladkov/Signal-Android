@@ -5,5 +5,6 @@ package solonsky.signal.twitter.helpers
  */
 
 enum class ScreenKeys(var value: String) {
-    SearchAll("searchAll"), SearchMedia("searchMedia"), SearchUsers("searchUsers"), SearchHome("searchHome")
+    SearchAll("searchAll"), SearchMedia("searchMedia"), SearchUsers("searchUsers"), SearchHome("searchHome"),
+    Splash("splash")
 }

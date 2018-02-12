@@ -17,6 +17,7 @@ import com.twitter.sdk.android.core.DefaultLogger
 import com.twitter.sdk.android.core.Twitter
 import com.twitter.sdk.android.core.TwitterAuthConfig
 import com.twitter.sdk.android.core.TwitterConfig
+import solonsky.signal.twitter.R
 import solonsky.signal.twitter.helpers.AppData
 import solonsky.signal.twitter.helpers.FileNames
 import solonsky.signal.twitter.helpers.FileWork
@@ -82,6 +83,7 @@ class SplashActivity: MvpAppCompatActivity(), SplashView {
 
     override fun performLogged() {
         startActivity(Intent(applicationContext, LoggedActivity::class.java))
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         finish()
     }
 
