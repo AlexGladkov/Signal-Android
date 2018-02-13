@@ -5,6 +5,7 @@ import android.util.Log
 import com.anupcowkur.reservoir.Reservoir
 import com.google.common.reflect.TypeToken
 import com.google.gson.Gson
+import com.pawegio.kandroid.i
 import org.joda.time.DateTime
 import org.joda.time.format.DateTimeFormat
 import solonsky.signal.twitter.helpers.App
@@ -29,7 +30,7 @@ class SplashProvider(val presenter: SplashPresenter) {
     private val usersConverter = UsersConverterImpl()
     private val configurationsConverter = ConfigurationConverterImpl()
     private val handler = Handler()
-    private val profileDelay = 0L
+    private val profileDelay = 5000L
 
     /** Download current profile from Twitter api
      * @param isLoaded = if false then perform next move else just update profile
@@ -43,6 +44,7 @@ class SplashProvider(val presenter: SplashPresenter) {
                 AppData.ME = solonsky.signal.twitter.models.User.getFromUserInstance(users[0])
                 Log.e(TAG, "New avatar ${usersConverter.apiToDb(users[0]).originalProfileImageURL}")
 
+                Log.e(TAG, "fetched ${AppData.ME.id}")
                 App.db.usersDao().insert(usersConverter.apiToDb(users[0]))
                 App.db.hostersDao().update(
                         HosterEntity(AppData.ME.id,
@@ -104,6 +106,9 @@ class SplashProvider(val presenter: SplashPresenter) {
     fun fetchProfile() {
         Thread({
             val hosters = App.db.hostersDao().getAllByDate()
+            hosters.forEach {
+                Log.e(TAG, "hoster id ${it.id}, hoster name ${it.timestamp}")
+            }
             if (hosters.isNotEmpty()) {
                 val users = App.db.usersDao().getById(hosters[0].userId)
                 if (users.isNotEmpty()) {

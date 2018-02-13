@@ -74,6 +74,7 @@ public class AccountSwitcherOverlay {
         mActivity.getBinding().txtLoggedSwitchLimit.setText(mActivity.getString(R.string.error_switch_limit)
                 .replace("[TIME]", String.valueOf(diff)) + "s");
 
+        Log.e(TAG, "my id " + AppData.ME.getId());
         if (isShow) {
             for (UserModel userModel : mUsersList) {
                 if (userModel.getId() != AppData.ME.getId()) {
@@ -159,11 +160,11 @@ public class AccountSwitcherOverlay {
         public void onItemClick(final UserModel model, View v) {
             if (model.getId() == AppData.userConfiguration.getUser().getId()) return;
             if (((System.currentTimeMillis() - AppData.lastSwitchTime) / 1000) > (TIME_LIMIT)) {
-                final Handler handler = new Handler();
                 mActivity.prepareToRecreate(true);
                 mActivity.configPresenter.updateUser(model.getId());
-                router.replaceScreen(ScreenKeys.Splash.getValue());
-                router.exit();
+                mActivity.startActivity(new Intent(mActivity.getApplicationContext(), SplashActivity.class));
+                mActivity.overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+                mActivity.finish();
             } else {
                 updateConstraints(true);
             }

@@ -1,6 +1,7 @@
 package solonsky.signal.twitter.presenters
 
 import android.content.res.Configuration
+import android.util.Log
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import solonsky.signal.twitter.helpers.App
@@ -16,6 +17,7 @@ import solonsky.signal.twitter.views.SplashView
  */
 @InjectViewState
 class SplashPresenter: MvpPresenter<SplashView>() {
+    private val TAG: String = SplashPresenter::class.java.simpleName
     private val provider = SplashProvider(presenter = this)
 
     override fun onFirstViewAttach() {

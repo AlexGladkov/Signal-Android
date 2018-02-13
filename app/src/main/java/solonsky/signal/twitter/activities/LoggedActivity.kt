@@ -628,13 +628,15 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ConfigurationView, Ac
 
     private val navigator = Navigator { command ->
         when (command) {
-            is Back -> finish()
+            is Back -> {
+                Log.e(TAG, "back")
+                finish()
+            }
             is SystemMessage -> Toast.makeText(applicationContext, command.message, Toast.LENGTH_SHORT).show()
             is Replace -> {
                 when (command.screenKey) {
                     ScreenKeys.Splash.value -> {
-                        startActivity(Intent(applicationContext, SplashActivity::class.java))
-                        overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
+                        Log.e(TAG, "splash")
                     }
                 }
             }
