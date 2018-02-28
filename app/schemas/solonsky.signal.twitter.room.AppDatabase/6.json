@@ -1,0 +1,527 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 6,
+    "identityHash": "c54d160b8bb99a94d097f337eca7208f",
+    "entities": [
+      {
+        "tableName": "user_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `favorites_count` INTEGER NOT NULL, `followers_count` INTEGER NOT NULL, `friends_count` INTEGER NOT NULL, `listed_count` INTEGER NOT NULL, `statuses_count` INTEGER NOT NULL, `name` TEXT, `screen_name` TEXT, `bigger_profile_image_url` TEXT, `original_profile_image_url` TEXT, `created_at` TEXT, `description` TEXT, `lang` TEXT, `location` TEXT, `profile_background_image_url` TEXT, `profile_banner_image_url` TEXT, `profile_image_url` TEXT, `profile_link_color` TEXT, `is_contributors_enabled` INTEGER NOT NULL, `is_default_profile` INTEGER NOT NULL, `is_default_profile_image` INTEGER NOT NULL, `is_follow_request_sent` INTEGER NOT NULL, `is_geo_enabled` INTEGER NOT NULL, `has_protected` INTEGER NOT NULL, `is_verified` INTEGER NOT NULL, `profile_background_tiled` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "favouritesCount",
+            "columnName": "favorites_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "followersCount",
+            "columnName": "followers_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "friendsCount",
+            "columnName": "friends_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "listedCount",
+            "columnName": "listed_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "statusesCount",
+            "columnName": "statuses_count",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "name",
+            "columnName": "name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "screenName",
+            "columnName": "screen_name",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "biggerProfileImageURL",
+            "columnName": "bigger_profile_image_url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "originalProfileImageURL",
+            "columnName": "original_profile_image_url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "lang",
+            "columnName": "lang",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "location",
+            "columnName": "location",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "profileBackgroundImageUrl",
+            "columnName": "profile_background_image_url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "profileBannerImageUrl",
+            "columnName": "profile_banner_image_url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "profileImageUrl",
+            "columnName": "profile_image_url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "profileLinkColor",
+            "columnName": "profile_link_color",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isContributorsEnabled",
+            "columnName": "is_contributors_enabled",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isDefaultProfile",
+            "columnName": "is_default_profile",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isDefaultProfileImage",
+            "columnName": "is_default_profile_image",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isFollowRequestSent",
+            "columnName": "is_follow_request_sent",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isGeoEnabled",
+            "columnName": "is_geo_enabled",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "hasProtected",
+            "columnName": "has_protected",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isVerified",
+            "columnName": "is_verified",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "profileBackgroundTiled",
+            "columnName": "profile_background_tiled",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "user_id_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `id_keys` TEXT, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idKeys",
+            "columnName": "id_keys",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "settings_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `fontSize` INTEGER NOT NULL, `thumbnails` INTEGER NOT NULL, `darkMode` INTEGER NOT NULL, `realNames` INTEGER NOT NULL, `roundAvatars` INTEGER NOT NULL, `relativeDates` INTEGER NOT NULL, `staticTopBars` INTEGER NOT NULL, `staticBottomBars` INTEGER NOT NULL, `groupDialogs` INTEGER NOT NULL, `showMentions` INTEGER NOT NULL, `showRetweets` INTEGER NOT NULL, `tweetMarker` INTEGER NOT NULL, `streamOnWifi` INTEGER NOT NULL, `shortTap` INTEGER NOT NULL, `longTap` INTEGER NOT NULL, `doubleTap` INTEGER NOT NULL, `dimMediaAtNight` INTEGER NOT NULL, `groupPushNotifications` INTEGER NOT NULL, `pinToTopOnStreaming` INTEGER NOT NULL, `sounds` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fontSize",
+            "columnName": "fontSize",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "thumbnails",
+            "columnName": "thumbnails",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "darkMode",
+            "columnName": "darkMode",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "realNames",
+            "columnName": "realNames",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "roundAvatars",
+            "columnName": "roundAvatars",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "relativeDates",
+            "columnName": "relativeDates",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "staticTopBars",
+            "columnName": "staticTopBars",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "staticBottomBar",
+            "columnName": "staticBottomBars",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "groupDialogs",
+            "columnName": "groupDialogs",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "showMentions",
+            "columnName": "showMentions",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "showRetweets",
+            "columnName": "showRetweets",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tweetMarker",
+            "columnName": "tweetMarker",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "streamOnWifi",
+            "columnName": "streamOnWifi",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "shortTap",
+            "columnName": "shortTap",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "longTap",
+            "columnName": "longTap",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "doubleTap",
+            "columnName": "doubleTap",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "dimMediaAtNight",
+            "columnName": "dimMediaAtNight",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "groupPushNotifications",
+            "columnName": "groupPushNotifications",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "pinToTopOnStreaming",
+            "columnName": "pinToTopOnStreaming",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sounds",
+            "columnName": "sounds",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "hosters_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `timestamp` TEXT, `userId` INTEGER NOT NULL, PRIMARY KEY(`id`), FOREIGN KEY(`userId`) REFERENCES `user_table`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "timestamp",
+            "columnName": "timestamp",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "userId",
+            "columnName": "userId",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": [
+          {
+            "table": "user_table",
+            "onDelete": "CASCADE",
+            "onUpdate": "NO ACTION",
+            "columns": [
+              "userId"
+            ],
+            "referencedColumns": [
+              "id"
+            ]
+          }
+        ]
+      },
+      {
+        "tableName": "configuration_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userId` INTEGER NOT NULL, `conf_user` TEXT, `conf_consumer_key` TEXT, `conf_consumer_secret` TEXT, `conf_client_token` TEXT, `conf_client_secret` TEXT, `conf_bottom_ids` TEXT, `conf_mute_keywords` TEXT, `conf_mute_hashtags` TEXT, `conf_mute_clients` TEXT, `conf_tab_position` INTEGER NOT NULL, `conf_mentions` INTEGER, `conf_is_messages` INTEGER NOT NULL, `conf_is_likes` INTEGER NOT NULL, `conf_is_retweets` INTEGER NOT NULL, `conf_is_quotes` INTEGER NOT NULL, `conf_is_followers` INTEGER NOT NULL, `conf_is_lists` INTEGER NOT NULL, `conf_is_sound` INTEGER NOT NULL, `conf_is_vibration` INTEGER NOT NULL, PRIMARY KEY(`userId`))",
+        "fields": [
+          {
+            "fieldPath": "userId",
+            "columnName": "userId",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "user",
+            "columnName": "conf_user",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "consumerKey",
+            "columnName": "conf_consumer_key",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "consumerSecret",
+            "columnName": "conf_consumer_secret",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "clientToken",
+            "columnName": "conf_client_token",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "clientSecret",
+            "columnName": "conf_client_secret",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bottomIds",
+            "columnName": "conf_bottom_ids",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "muteKeywords",
+            "columnName": "conf_mute_keywords",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "muteHashtags",
+            "columnName": "conf_mute_hashtags",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "muteClients",
+            "columnName": "conf_mute_clients",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tabPosition",
+            "columnName": "conf_tab_position",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "mentions",
+            "columnName": "conf_mentions",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "isMessages",
+            "columnName": "conf_is_messages",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isLikes",
+            "columnName": "conf_is_likes",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isRetweets",
+            "columnName": "conf_is_retweets",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isQuotes",
+            "columnName": "conf_is_quotes",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isFollowers",
+            "columnName": "conf_is_followers",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isLists",
+            "columnName": "conf_is_lists",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isSound",
+            "columnName": "conf_is_sound",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "isVibration",
+            "columnName": "conf_is_vibration",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "userId"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"c54d160b8bb99a94d097f337eca7208f\")"
+    ]
+  }
+}

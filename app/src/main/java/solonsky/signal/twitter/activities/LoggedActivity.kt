@@ -993,6 +993,10 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ConfigurationView, Ac
         items.add(bottomBarItem6)
         items.add(bottomBarItem7)
 
+        Log.e(TAG, "====================================")
+        Log.e(TAG, "BOTTOM_IDS ${AppData.userConfiguration.bottomIds}")
+        Log.e(TAG, "====================================")
+
         var firstPosition = 0
         var secondPosition = 1
 

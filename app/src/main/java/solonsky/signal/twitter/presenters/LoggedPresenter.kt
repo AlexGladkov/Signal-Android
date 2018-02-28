@@ -40,6 +40,7 @@ class LoggedPresenter: MvpPresenter<LoggedView>() {
             }
         }
 
+        Log.e(TAG, "SAVED_BOTTOM_IDS " + AppData.userConfiguration.bottomIds)
         provider.saveConfiguration(configurationUserModel = AppData.userConfiguration)
     }
 }

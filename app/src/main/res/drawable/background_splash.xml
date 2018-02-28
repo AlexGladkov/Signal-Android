@@ -4,5 +4,5 @@
     <item android:gravity="center"
         android:height="88dp"
         android:width="88dp"
-        android:drawable="@drawable/ic_splash_icon"/>
+        android:drawable="@drawable/ic_icon"/>
 </layer-list>

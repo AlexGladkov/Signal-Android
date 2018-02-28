@@ -54,7 +54,7 @@ class SplashPresenter: MvpPresenter<SplashView>() {
         viewState.performLogged()
     }
 
-    fun cleanBoot() {
+    fun performCleanBoot() {
         viewState.performLogin()
     }
 

@@ -163,6 +163,12 @@ class SplashProvider(val presenter: SplashPresenter) {
     /** Performs fetch user configuration from DB or load it from legacy if empty */
     fun fetchConfiguration() {
         Thread({
+            Log.e(TAG, "===============")
+            App.db.configurationDao().getAllConfigurations().forEach {
+                Log.e(TAG, "id ${it.userId}, bottom ids ${it.bottomIds}")
+            }
+            Log.e(TAG, "===============")
+
             AppData.configurationUserModels = App.db.configurationDao().getAllConfigurations()
                     .map { configurationsConverter.dbToModel(it) }
             val configurationModels = AppData.configurationUserModels

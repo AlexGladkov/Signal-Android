@@ -101,6 +101,6 @@ class LoggedProvider(val presenter: LoggedPresenter) {
     fun saveConfiguration(configurationUserModel: ConfigurationUserModel) {
         Thread({
             App.db.configurationDao().update(configurationConverter.modelToDb(configurationUserModel = configurationUserModel))
-        })
+        }).start()
     }
 }
