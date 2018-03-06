@@ -11,7 +11,7 @@ android {
         checkReleaseBuilds false
     }
 
-//    dexOptions {
+//    dexOptions {п
 //        preDexLibraries = false
 //    }
 
@@ -20,7 +20,7 @@ android {
         vectorDrawables.useSupportLibrary = true
         minSdkVersion 23
         targetSdkVersion 25
-        versionCode 399
+        versionCode 400
         versionName "1.0"
         multiDexEnabled true  // this line will solve this problem
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
