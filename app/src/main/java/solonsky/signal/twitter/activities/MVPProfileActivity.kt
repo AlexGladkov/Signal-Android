@@ -439,11 +439,9 @@ class MVPProfileActivity : MvpAppCompatActivity(), SmartTabLayout.TabProvider, P
         img_profile_verified.visibility = if (user.isVerified) View.VISIBLE else View.GONE
 
         if (homeUser) {
-            btn_profile_back.visibility = View.GONE
             btn_profile_more.visibility = View.GONE
             btn_profile_settings.visibility = View.VISIBLE
         } else {
-            btn_profile_back.visibility = View.VISIBLE
             btn_profile_more.visibility = View.VISIBLE
             btn_profile_settings.visibility = View.GONE
         }

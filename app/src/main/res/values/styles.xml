@@ -115,6 +115,7 @@
         <item name="profileTailButton">@drawable/ic_badge_more_t1</item>
 
         <item name="selectorBusyResource">@drawable/ic_busy_t1</item>
+        <item name="splashIcon">@drawable/ic_splash_icon_t1</item>
 
         <item name="statsDividerColor">@color/light_divider_stats_color</item>
         <item name="dividerColor">@color/light_divider_color</item>
@@ -187,6 +188,7 @@
         <item name="profileTailButton">@drawable/ic_badge_more_t2</item>
 
         <item name="selectorBusyResource">@drawable/ic_busy_t2</item>
+        <item name="splashIcon">@drawable/ic_splash_icon_t2</item>
 
         <item name="statsDividerColor">@color/dark_divider_stats_color</item>
         <item name="dividerColor">@color/dark_divider_color</item>

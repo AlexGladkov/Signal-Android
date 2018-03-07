@@ -106,9 +106,9 @@ class SplashProvider(val presenter: SplashPresenter) {
     fun fetchProfile() {
         Thread({
             val hosters = App.db.hostersDao().getAllByDate()
-            hosters.forEach {
-                Log.e(TAG, "hoster id ${it.id}, hoster name ${it.timestamp}")
-            }
+//            hosters.forEach {
+//                Log.e(TAG, "hoster id ${it.id}, hoster name ${it.timestamp}")
+//            }
             if (hosters.isNotEmpty()) {
                 val users = App.db.usersDao().getById(hosters[0].userId)
                 if (users.isNotEmpty()) {

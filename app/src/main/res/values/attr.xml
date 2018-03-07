@@ -47,6 +47,8 @@
         <attr name="backgroundSecondaryColor" format="color" />
         <attr name="backgroundHighlightColor" format="color" />
 
+        <attr name="splashIcon" format="integer" />
+
         <attr name="buttonTintColor" format="color"/>
         <attr name="buttonSendTintColor" format="color" />
         <attr name="likeTintColor" format="color" />

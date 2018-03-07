@@ -64,6 +64,7 @@ class ProfilePresenter : MvpPresenter<ProfileView>() {
     }
 
     fun setupTweets(tweetsArray: ArrayList<StatusModel>) {
+        Log.e(TAG, "tweets loaded ${System.currentTimeMillis()}")
         this.tweetsArray.clear()
         this.tweetsArray.addAll(tweetsArray)
         viewState.setupTweets(tweetsArray = this.tweetsArray)

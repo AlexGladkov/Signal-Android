@@ -14,6 +14,7 @@ import solonsky.signal.twitter.activities.StatsFollowingActivity
 import solonsky.signal.twitter.activities.StatsListedActivity
 import solonsky.signal.twitter.activities.StatsTweetsActivity
 import solonsky.signal.twitter.databinding.FragmentProfileStatsBinding
+import solonsky.signal.twitter.helpers.AppData
 import solonsky.signal.twitter.helpers.Utilities
 import solonsky.signal.twitter.models.User
 import solonsky.signal.twitter.viewmodels.ProfileStatsViewModel
@@ -54,21 +55,25 @@ class HeaderStatsFragment : Fragment() {
             binding!!.model = viewModel
             binding!!.click = object : ProfileStatsViewModel.ProfileStatsClickHandler {
                 override fun onFollowersClick(view: View) {
+                    AppData.CURRENT_USER = user
                     activity.startActivity(Intent(context, StatsFollowersActivity::class.java))
                     activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 }
 
                 override fun onFollowingClick(view: View) {
+                    AppData.CURRENT_USER = user
                     activity.startActivity(Intent(context, StatsFollowingActivity::class.java))
                     activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 }
 
                 override fun onTweetsClick(view: View) {
+                    AppData.CURRENT_USER = user
                     activity.startActivity(Intent(context, StatsTweetsActivity::class.java))
                     activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 }
 
                 override fun onListedClick(view: View) {
+                    AppData.CURRENT_USER = user
                     activity.startActivity(Intent(context, StatsListedActivity::class.java))
                     activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 }

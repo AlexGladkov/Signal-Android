@@ -19,6 +19,7 @@ import com.twitter.sdk.android.core.DefaultLogger
 import com.twitter.sdk.android.core.Twitter
 import com.twitter.sdk.android.core.TwitterAuthConfig
 import com.twitter.sdk.android.core.TwitterConfig
+import kotlinx.android.synthetic.main.activity_splash.*
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.helpers.*
 import solonsky.signal.twitter.models.ConfigurationModel
@@ -37,6 +38,13 @@ class SplashActivity: MvpAppCompatActivity(), SplashView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (App.getInstance().isNightEnabled) {
+            setTheme(R.style.ActivityThemeDark)
+        } else {
+            setTheme(R.style.ActivityThemeLight)
+        }
+
+        setContentView(R.layout.activity_splash)
 
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         Utilities.setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false)

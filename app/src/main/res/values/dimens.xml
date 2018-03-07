@@ -110,4 +110,5 @@
     <dimen name="new_loader_size">60dp</dimen>
     <dimen name="small_loader_size">30dp</dimen>
     <dimen name="big_loader_size">36dp</dimen>
+    <dimen name="splashSize">88dp</dimen>
 </resources>

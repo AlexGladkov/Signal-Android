@@ -58,6 +58,7 @@ class ProfileProvider(presenter: ProfilePresenter) {
             }
 
             override fun gotUserTimeline(statuses: ResponseList<Status>) {
+                Log.e(TAG, "timeline loaded ${System.currentTimeMillis()}")
                 super.gotUserTimeline(statuses)
                 val gson = Gson()
                 val tweetsArray = ArrayList<StatusModel>()
@@ -85,6 +86,7 @@ class ProfileProvider(presenter: ProfilePresenter) {
     }
 
     var maxId: Long = 0
+    var counts = 0
 
     fun loadMedia(id: Long, screenName: String) {
         val handler = Handler()
@@ -122,7 +124,8 @@ class ProfileProvider(presenter: ProfilePresenter) {
                     }
                 }
 
-                if (mediaArray.size < 16) {
+                if (mediaArray.size < 16 && counts < 4) {
+                    counts += 1
                     val paging = Paging()
                     paging.maxId = maxId
                     paging.count = 50
@@ -140,6 +143,8 @@ class ProfileProvider(presenter: ProfilePresenter) {
         })
 
         val paging = Paging(1, 50)
+        Log.e(TAG, "start loading timeline ${System.currentTimeMillis()}")
+        counts = 0
         if (id == Long.MIN_VALUE) {
             mediaAsync.getUserTimeline(screenName, paging)
         } else {
