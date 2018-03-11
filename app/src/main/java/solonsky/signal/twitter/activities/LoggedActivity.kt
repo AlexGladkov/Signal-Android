@@ -385,17 +385,6 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ConfigurationView, Ac
             false
         }
 
-        //        Log.e(TAG, "current name - " + AppData.userConfiguration.getUser().getName());
-        //        Log.e(TAG, "current client token - " + AppData.userConfiguration.getClientToken());
-        //        Log.e(TAG, "current client secret - " + AppData.userConfiguration.getClientSecret());
-        //        Log.e(TAG, "current consumer key - " + AppData.userConfiguration.getConsumerKey());
-        //        Log.e(TAG, "current consumer secret - " + AppData.userConfiguration.getConsumerSecret());
-
-//        if (AppData.configurationUserModels != null) {
-//            AppData.CLIENT_TOKEN = AppData.userConfiguration.clientToken
-//            AppData.CLIENT_SECRET = AppData.userConfiguration.clientSecret
-//        }
-
         window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_STABLE or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         setStatusBarColor(if (App.getInstance().isNightEnabled)
             R.color.dark_status_bar_timeline_color
@@ -479,6 +468,7 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ConfigurationView, Ac
             override fun success(result: Result<TwitterSession>) {
                 val handler = Handler()
                 viewModel.isAdding = true
+
                 val session = TwitterCore.getInstance().sessionManager.activeSession
                 val authToken = session.authToken
                 AppData.CLIENT_TOKEN = authToken.token
@@ -527,9 +517,8 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ConfigurationView, Ac
                 }).start()
             }
 
-            override fun failure(exception: com.twitter.sdk.android.core.TwitterException) {
-                Log.e(TAG, "Error adding user - " + exception.localizedMessage)
-                Toast.makeText(applicationContext, getString(R.string.error_add_account), Toast.LENGTH_SHORT).show()
+            override fun failure(exception: com.twitter.sdk.android.core.TwitterException?) {
+//                Toast.makeText(applicationContext, getString(R.string.error_add_account), Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -700,7 +689,7 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ConfigurationView, Ac
 //
 //    }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         binding.btnLoggedTwitter.onActivityResult(requestCode, resultCode, data)
     }

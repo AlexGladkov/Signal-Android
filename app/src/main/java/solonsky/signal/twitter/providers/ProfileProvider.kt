@@ -58,7 +58,6 @@ class ProfileProvider(presenter: ProfilePresenter) {
             }
 
             override fun gotUserTimeline(statuses: ResponseList<Status>) {
-                Log.e(TAG, "timeline loaded ${System.currentTimeMillis()}")
                 super.gotUserTimeline(statuses)
                 val gson = Gson()
                 val tweetsArray = ArrayList<StatusModel>()
@@ -118,11 +117,11 @@ class ProfileProvider(presenter: ProfilePresenter) {
 
                 maxId = if (statuses.size > 0) statuses[statuses.size - 1].id else maxId
 
-                if (tweetsArray.size >= 50) {
+//                if (tweetsArray.size >= 50) {
                     handler.post {
                         mPresenter.setupTweets(tweetsArray = tweetsArray)
                     }
-                }
+//                }
 
                 if (mediaArray.size < 16 && counts < 4) {
                     counts += 1

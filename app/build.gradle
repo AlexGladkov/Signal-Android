@@ -20,7 +20,7 @@ android {
         vectorDrawables.useSupportLibrary = true
         minSdkVersion 23
         targetSdkVersion 25
-        versionCode 400
+        versionCode 402
         versionName "1.0.6"
         multiDexEnabled true  // this line will solve this problem
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"

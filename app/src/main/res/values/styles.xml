@@ -1,15 +1,16 @@
 <resources>
-    <style name="TweetTitleFont" >
+
+    <style name="TweetTitleFont">
         <item name="android:textSize">16dp</item>
     </style>
 
     <!-- Base application theme -->
     <!--<style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar" >-->
-        <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
-        <!--<item name="colorPrimary">@android:color/transparent</item>-->
-        <!--<item name="android:windowActionBar">false</item>-->
-        <!--<item name="android:windowNoTitle">true</item>-->
-        <!--<item name="android:windowTranslucentStatus">true</item>-->
+    <!--&lt;!&ndash; Customize your theme here. &ndash;&gt;-->
+    <!--<item name="colorPrimary">@android:color/transparent</item>-->
+    <!--<item name="android:windowActionBar">false</item>-->
+    <!--<item name="android:windowNoTitle">true</item>-->
+    <!--<item name="android:windowTranslucentStatus">true</item>-->
     <!--</style>-->
 
     <!-- End of base application theme -->
@@ -23,7 +24,7 @@
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
-    <style name="thanks_menu" parent="@android:style/Theme.Black.NoTitleBar.Fullscreen" >
+    <style name="thanks_menu" parent="@android:style/Theme.Black.NoTitleBar.Fullscreen">
         <item name="android:windowEnterAnimation">@anim/fade_in</item>
         <item name="android:windowExitAnimation">@anim/fade_out</item>
     </style>
@@ -64,7 +65,7 @@
         <item name="android:windowFullscreen">true</item>
     </style>
 
-    <style name="viewer" >
+    <style name="viewer">
         <item name="android:windowTranslucentStatus">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowContentOverlay">@null</item>
@@ -84,7 +85,9 @@
     </style>
 
     <style name="SplashTheme" parent="Theme.AppCompat.NoActionBar">
-         <item name="android:windowBackground">@drawable/background_splash</item>
+        <item name="android:windowBackground">@drawable/background_splash</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowFullscreen">true</item>
     </style>
 
     <!-- Light base activity theme -->
@@ -301,11 +304,11 @@
         <item name="android:colorEdgeEffect">@color/dark_primary_text_color</item>
     </style>
 
-    <style name="TranslucentDark" parent="ActivityThemeDarkNoAnimation" >
+    <style name="TranslucentDark" parent="ActivityThemeDarkNoAnimation">
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
-    <style name="TranslucentLight" parent="ActivityThemeLightNoAnimation" >
+    <style name="TranslucentLight" parent="ActivityThemeLightNoAnimation">
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
