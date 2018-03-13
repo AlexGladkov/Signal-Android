@@ -36,4 +36,5 @@ public class SettingsContract {
     public final static String GROUP_PUSH = "groupPushNotifications"; // group push notifications if true
     public final static String PIN_TO_TOP = "pinToTopOnStreaming"; // TODO
     public final static String SOUNDS = "sounds"; // TODO
+    public final static String LOCALE = "locale";
 }

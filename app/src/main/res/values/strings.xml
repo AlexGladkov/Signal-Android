@@ -368,5 +368,8 @@
     <string name="success_mute_user">Done. You won’t see new stuff from [username].</string>
     <string name="success_mute_tag">Done. You won’t see new stuff with [tag].</string>
     <string name="success_mute_client">Done. You won’t see new stuff from [clientname].</string>
+    <string name="settings_advanced_language">Language</string>
+    <string name="advanced_english">English</string>
+  <string name="advanced_russian">Русский</string>
 
 </resources>

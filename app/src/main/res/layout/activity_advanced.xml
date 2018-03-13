@@ -73,6 +73,69 @@
                     android:layout_height="@dimen/divider_height"
                     android:background="?attr/dividerColor" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <View
+                        android:id="@+id/settings_divider_top"
+                        android:layout_width="match_parent"
+                        android:layout_height="0.5dp"
+                        android:background="?attr/dividerColor" />
+
+                    <FrameLayout
+                        android:id="@+id/flLanguage"
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/settings_text_size"
+                        android:layout_marginTop="24dp"
+                        android:background="?attr/backgroundPrimaryColor" >
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:orientation="vertical"
+                            android:background="?attr/backgroundPrimaryColor" >
+
+                            <TextView
+                                android:id="@+id/txtAdvancedLanguage"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textSize="16dp"
+                                android:text="@string/settings_advanced_language"
+                                android:layout_marginStart="16dp"
+                                android:fontFamily="sans-serif"
+                                android:includeFontPadding="false"
+                                android:textColor="?attr/primaryTextColor" />
+
+                            <TextView
+                                android:id="@+id/txtAdvancedCurrentLanguage"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="sans-serif"
+                                android:textSize="14dp"
+                                android:text="English"
+                                android:layout_marginTop="4dp"
+                                android:layout_marginStart="16dp"
+                                android:includeFontPadding="false"
+                                android:textColor="?attr/hintTextColor" />
+
+                        </LinearLayout>
+
+                        <View
+                            android:id="@+id/settings_divider_bottom"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/divider_height"
+                            android:background="?attr/dividerColor"
+                            android:layout_marginStart="16dp"
+                            android:layout_gravity="bottom"/>
+
+                    </FrameLayout>
+
+                </LinearLayout>
+
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/divider_height"

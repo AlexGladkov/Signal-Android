@@ -3,6 +3,7 @@ package solonsky.signal.twitter.models;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
+import solonsky.signal.twitter.helpers.Locales;
 import solonsky.signal.twitter.room.models.SettingsEntity;
 
 /**
@@ -67,6 +68,7 @@ public class ConfigurationModel {
     private boolean groupPushNotifications; // group push notifications if true
     private boolean pinToTopOnStreaming; // TODO
     private boolean sounds; // TODO
+    private String locale = Locales.English.getValue();
 
     public ConfigurationModel(SettingsEntity settingsEntity) {
         this.fontSize = settingsEntity.getFontSize();
@@ -89,6 +91,7 @@ public class ConfigurationModel {
         this.groupPushNotifications = settingsEntity.isGroupPushNotifications();
         this.pinToTopOnStreaming = settingsEntity.isPinToTopOnStreaming();
         this.sounds = settingsEntity.isSounds();
+        this.locale = settingsEntity.getLocale();
     }
 
     private ConfigurationModel(int fontSize, int thumbnails, int darkMode, boolean realNames, boolean roundAvatars,
@@ -117,6 +120,7 @@ public class ConfigurationModel {
         this.groupPushNotifications = groupPushNotifications;
         this.pinToTopOnStreaming = pinToTopOnStreaming;
         this.sounds = sounds;
+        this.locale = Locales.English.getValue();
     }
 
     /**
@@ -163,6 +167,14 @@ public class ConfigurationModel {
         configuration.addProperty("sounds", sounds);
 
         return configuration;
+    }
+
+    public String getLocale() {
+        return locale;
+    }
+
+    public void setLocale(String locale) {
+        this.locale = locale;
     }
 
     public int getFontSize() {

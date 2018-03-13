@@ -11,4 +11,5 @@ import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
 interface LoggedView: MvpView {
     fun showMessage(text: String)
     fun setupProfile(avatar: String?)
+    fun updateLocale(newLocale: String)
 }

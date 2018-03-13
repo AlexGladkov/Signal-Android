@@ -12,6 +12,7 @@ import java.util.ArrayList;
 
 import solonsky.signal.twitter.helpers.AppData;
 import solonsky.signal.twitter.helpers.Cache;
+import solonsky.signal.twitter.helpers.Locales;
 import solonsky.signal.twitter.room.models.ConfigurationEntity;
 
 /**

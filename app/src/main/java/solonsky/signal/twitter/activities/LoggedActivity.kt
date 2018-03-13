@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter
 import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.databinding.DataBindingUtil
 import android.os.Bundle
 
@@ -58,10 +59,9 @@ import ru.terrakok.cicerone.Router
 import ru.terrakok.cicerone.commands.Back
 import ru.terrakok.cicerone.commands.Replace
 import ru.terrakok.cicerone.commands.SystemMessage
+import ru.terrakok.cicerone.result.ResultListener
 
 import java.io.IOException
-import java.util.ArrayList
-import java.util.Collections
 
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.adapters.SelectorAdapter
@@ -98,6 +98,7 @@ import twitter4j.Status
 import twitter4j.TwitterAdapter
 import twitter4j.TwitterMethod
 import twitter4j.User
+import java.util.*
 import javax.inject.Inject
 
 class LoggedActivity : MvpAppCompatActivity(), LoggedView, ConfigurationView, ActivityListener {
@@ -205,6 +206,7 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ConfigurationView, Ac
     override fun onResume() {
         super.onResume()
         mPresenter.fetchUsers()
+        mPresenter.checkLocale()
     }
 
     override fun updateCounter(count: Int) {
@@ -394,6 +396,7 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ConfigurationView, Ac
         val switcherOverlay = AccountSwitcherOverlay(this, routerMain)
         switcherOverlay.createSwitcher()
         viewModel = LoggedViewModel(switcherOverlay.getmAdapter(), applicationContext, feedCount)
+        routerMain.setResultListener(Codes.Locale.value) { resultData -> Log.e(TAG, "result $resultData") }
 
         if (AppData.ME != null)
             viewModel.avatar = AppData.ME.originalProfileImageURL
@@ -1156,6 +1159,22 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ConfigurationView, Ac
 
     override fun setupProfile(avatar: String?) {
         ImageLoader.loadImage(avatar, imgLoggedAvatar)
+    }
+
+    override fun updateLocale(newLocale: String) {
+        val locale = Locale(newLocale)
+        val config = Configuration()
+
+        Locale.setDefault(locale)
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
+
+        AppData.newLocale = ""
+        AppData.oldLocale = newLocale
+
+        AppData.isRecreate = true
+        startActivity(Intent(applicationContext, LoggedActivity::class.java))
+        this@LoggedActivity.finish()
     }
 
     // MARK: - Config view implementation

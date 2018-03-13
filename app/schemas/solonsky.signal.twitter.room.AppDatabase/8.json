@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 7,
-    "identityHash": "b41cbaa07b5dd5894be4a0c688cefb53",
+    "version": 8,
+    "identityHash": "3ffe08a29bfa47f9b1db562fc3da550a",
     "entities": [
       {
         "tableName": "user_table",
@@ -202,7 +202,7 @@
       },
       {
         "tableName": "settings_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `fontSize` INTEGER NOT NULL, `thumbnails` INTEGER NOT NULL, `darkMode` INTEGER NOT NULL, `realNames` INTEGER NOT NULL, `roundAvatars` INTEGER NOT NULL, `relativeDates` INTEGER NOT NULL, `staticTopBars` INTEGER NOT NULL, `staticBottomBars` INTEGER NOT NULL, `groupDialogs` INTEGER NOT NULL, `showMentions` INTEGER NOT NULL, `showRetweets` INTEGER NOT NULL, `tweetMarker` INTEGER NOT NULL, `streamOnWifi` INTEGER NOT NULL, `shortTap` INTEGER NOT NULL, `longTap` INTEGER NOT NULL, `doubleTap` INTEGER NOT NULL, `dimMediaAtNight` INTEGER NOT NULL, `groupPushNotifications` INTEGER NOT NULL, `pinToTopOnStreaming` INTEGER NOT NULL, `sounds` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `fontSize` INTEGER NOT NULL, `thumbnails` INTEGER NOT NULL, `darkMode` INTEGER NOT NULL, `realNames` INTEGER NOT NULL, `roundAvatars` INTEGER NOT NULL, `relativeDates` INTEGER NOT NULL, `staticTopBars` INTEGER NOT NULL, `staticBottomBars` INTEGER NOT NULL, `groupDialogs` INTEGER NOT NULL, `showMentions` INTEGER NOT NULL, `showRetweets` INTEGER NOT NULL, `tweetMarker` INTEGER NOT NULL, `streamOnWifi` INTEGER NOT NULL, `shortTap` INTEGER NOT NULL, `longTap` INTEGER NOT NULL, `doubleTap` INTEGER NOT NULL, `dimMediaAtNight` INTEGER NOT NULL, `groupPushNotifications` INTEGER NOT NULL, `pinToTopOnStreaming` INTEGER NOT NULL, `sounds` INTEGER NOT NULL, `locale` TEXT, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -329,6 +329,12 @@
             "columnName": "sounds",
             "affinity": "INTEGER",
             "notNull": true
+          },
+          {
+            "fieldPath": "locale",
+            "columnName": "locale",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -386,7 +392,7 @@
       },
       {
         "tableName": "configuration_table",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userId` INTEGER NOT NULL, `conf_user` TEXT, `conf_consumer_key` TEXT, `conf_consumer_secret` TEXT, `conf_client_token` TEXT, `conf_client_secret` TEXT, `conf_bottom_ids` TEXT, `conf_mute_keywords` TEXT, `conf_mute_hashtags` TEXT, `conf_mute_clients` TEXT, `conf_tab_position` INTEGER NOT NULL, `conf_mentions` INTEGER, `conf_is_messages` INTEGER NOT NULL, `conf_is_likes` INTEGER NOT NULL, `conf_is_retweets` INTEGER NOT NULL, `conf_is_quotes` INTEGER NOT NULL, `conf_is_followers` INTEGER NOT NULL, `conf_is_lists` INTEGER NOT NULL, `conf_is_sound` INTEGER NOT NULL, `conf_is_vibration` INTEGER NOT NULL, `conf_locale` TEXT, PRIMARY KEY(`userId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`userId` INTEGER NOT NULL, `conf_user` TEXT, `conf_consumer_key` TEXT, `conf_consumer_secret` TEXT, `conf_client_token` TEXT, `conf_client_secret` TEXT, `conf_bottom_ids` TEXT, `conf_mute_keywords` TEXT, `conf_mute_hashtags` TEXT, `conf_mute_clients` TEXT, `conf_tab_position` INTEGER NOT NULL, `conf_mentions` INTEGER, `conf_is_messages` INTEGER NOT NULL, `conf_is_likes` INTEGER NOT NULL, `conf_is_retweets` INTEGER NOT NULL, `conf_is_quotes` INTEGER NOT NULL, `conf_is_followers` INTEGER NOT NULL, `conf_is_lists` INTEGER NOT NULL, `conf_is_sound` INTEGER NOT NULL, `conf_is_vibration` INTEGER NOT NULL, PRIMARY KEY(`userId`))",
         "fields": [
           {
             "fieldPath": "userId",
@@ -507,12 +513,6 @@
             "columnName": "conf_is_vibration",
             "affinity": "INTEGER",
             "notNull": true
-          },
-          {
-            "fieldPath": "locale",
-            "columnName": "conf_locale",
-            "affinity": "TEXT",
-            "notNull": false
           }
         ],
         "primaryKey": {
@@ -527,7 +527,7 @@
     ],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"b41cbaa07b5dd5894be4a0c688cefb53\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"3ffe08a29bfa47f9b1db562fc3da550a\")"
     ]
   }
 }

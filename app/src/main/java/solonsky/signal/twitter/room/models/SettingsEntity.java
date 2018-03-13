@@ -4,6 +4,7 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 
+import solonsky.signal.twitter.helpers.Locales;
 import solonsky.signal.twitter.models.ConfigurationModel;
 import solonsky.signal.twitter.room.RoomContract;
 import solonsky.signal.twitter.room.contracts.SettingsContract;
@@ -43,6 +44,7 @@ public class SettingsEntity {
     @ColumnInfo(name = SettingsContract.GROUP_PUSH) private boolean groupPushNotifications; // group push notifications if true
     @ColumnInfo(name = SettingsContract.PIN_TO_TOP) private boolean pinToTopOnStreaming; // TODO
     @ColumnInfo(name = SettingsContract.SOUNDS) private boolean sounds; // TODO
+    @ColumnInfo(name = SettingsContract.LOCALE) private String locale; // Localization
 
     public SettingsEntity(long id, int fontSize, int thumbnails, int darkMode, boolean realNames,
                           boolean roundAvatars, boolean relativeDates, boolean staticTopBars,
@@ -71,6 +73,7 @@ public class SettingsEntity {
         this.groupPushNotifications = groupPushNotifications;
         this.pinToTopOnStreaming = pinToTopOnStreaming;
         this.sounds = sounds;
+        this.locale = Locales.English.getValue();
     }
 
     public SettingsEntity(ConfigurationModel configurationModel, long id) {
@@ -95,6 +98,15 @@ public class SettingsEntity {
         this.groupPushNotifications = configurationModel.isGroupPushNotifications();
         this.pinToTopOnStreaming = configurationModel.isPinToTopOnStreaming();
         this.sounds = configurationModel.isSounds();
+        this.locale = configurationModel.getLocale();
+    }
+
+    public String getLocale() {
+        return locale;
+    }
+
+    public void setLocale(String locale) {
+        this.locale = locale;
     }
 
     public long getId() {

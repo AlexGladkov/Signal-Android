@@ -43,4 +43,10 @@ class LoggedPresenter: MvpPresenter<LoggedView>() {
         Log.e(TAG, "SAVED_BOTTOM_IDS " + AppData.userConfiguration.bottomIds)
         provider.saveConfiguration(configurationUserModel = AppData.userConfiguration)
     }
+
+    fun checkLocale() {
+        if (AppData.newLocale != "") {
+            viewState.updateLocale(newLocale = AppData.newLocale)
+        }
+    }
 }

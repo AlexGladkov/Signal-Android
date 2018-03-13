@@ -31,6 +31,8 @@ public class AppData {
     public static final String notificationFilter = "ru.arktos.agladkov.signal";
 
     public static boolean isRecreate = false;
+    public static String newLocale = "";
+    public static String oldLocale = Locales.English.getValue();
 
     public static String DM_SELECTED_USER;
     public static long DM_OTHER_ID;
