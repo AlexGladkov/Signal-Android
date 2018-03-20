@@ -1,6 +1,7 @@
 package solonsky.signal.twitter.activities
 
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -26,6 +27,7 @@ import solonsky.signal.twitter.models.ConfigurationModel
 import solonsky.signal.twitter.presenters.SplashPresenter
 import solonsky.signal.twitter.views.SplashView
 import java.io.IOException
+import java.util.*
 
 /**
  * Created by agladkov on 01.02.18.
@@ -98,6 +100,15 @@ class SplashActivity: MvpAppCompatActivity(), SplashView {
         startActivity(Intent(applicationContext, LoggedActivity::class.java))
         overridePendingTransition(R.anim.fade_in, R.anim.fade_out)
         finish()
+    }
+
+    override fun setupLocale(newLocale: String) {
+        val locale = Locale(newLocale)
+        val config = Configuration()
+
+        Locale.setDefault(locale)
+        config.setLocale(locale)
+        resources.updateConfiguration(config, resources.displayMetrics)
     }
 
     override fun setupSettings() {

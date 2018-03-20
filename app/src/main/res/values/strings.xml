@@ -63,6 +63,7 @@
     <string name="settings_advanced_group_push">Group push notifications</string>
     <string name="settings_advanced_pin_top">Pin to top on streaming</string>
     <string name="settings_advanced_sounds">Sounds</string>
+    <string name="settings_advanced_language">Language</string>
 
     <string name="about_learn_more">LEARN MORE</string>
     <string name="about_authors">FOLLOW AUTHORS</string>
@@ -368,7 +369,7 @@
     <string name="success_mute_user">Done. You won’t see new stuff from [username].</string>
     <string name="success_mute_tag">Done. You won’t see new stuff with [tag].</string>
     <string name="success_mute_client">Done. You won’t see new stuff from [clientname].</string>
-    <string name="settings_advanced_language">Language</string>
+
     <string name="advanced_english">English</string>
   <string name="advanced_russian">Русский</string>
 

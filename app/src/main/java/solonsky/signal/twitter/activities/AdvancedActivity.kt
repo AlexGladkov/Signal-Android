@@ -92,6 +92,8 @@ class AdvancedActivity : MvpAppCompatActivity(), ConfigurationView {
                             AppData.newLocale = ""
                         } else {
                             AppData.newLocale = Locales.English.value
+                            AppData.appConfiguration.locale = Locales.English.value
+                            txtAdvancedCurrentLanguage.text = Locales.EnglishName.value
                         }
                     }
 
@@ -100,6 +102,8 @@ class AdvancedActivity : MvpAppCompatActivity(), ConfigurationView {
                             AppData.newLocale = ""
                         } else {
                             AppData.newLocale = Locales.Russian.value
+                            AppData.appConfiguration.locale = Locales.Russian.value
+                            txtAdvancedCurrentLanguage.text = Locales.RussianName.value
                         }
                     }
                 }

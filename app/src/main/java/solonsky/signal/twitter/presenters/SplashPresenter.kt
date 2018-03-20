@@ -30,6 +30,9 @@ class SplashPresenter: MvpPresenter<SplashView>() {
 
     fun setupSettings(model: ConfigurationModel) {
         AppData.appConfiguration = model
+        AppData.oldLocale = model.locale
+        viewState.setupLocale(newLocale = model.locale)
+
         App.getInstance().isNightEnabled = AppData.appConfiguration.darkMode == ConfigurationModel.DARK_ALWAYS
         provider.fetchConfiguration()
     }
@@ -39,6 +42,8 @@ class SplashPresenter: MvpPresenter<SplashView>() {
     }
 
     fun saveSettings(settings: ConfigurationModel) {
+        // Setup locale for first boot
+
         provider.saveSettings(settings = settings)
         setupSettings(settings)
     }

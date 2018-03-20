@@ -12,4 +12,5 @@ interface SplashView: MvpView {
     fun performLogin()
     fun performLogged()
     fun setupSettings()
+    fun setupLocale(newLocale: String)
 }

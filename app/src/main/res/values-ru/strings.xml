@@ -59,6 +59,7 @@
     <string name="settings_advanced_group_push">Группировать уведомления</string>
     <string name="settings_advanced_pin_top">Закрепить ленту сверху</string>
     <string name="settings_advanced_sounds">Звуки</string>
+    <string name="settings_advanced_language">Язык</string>
 
     <string name="about_learn_more">УЗНАТЬ БОЛЬШЕ</string>
     <string name="about_authors">АВТОРЫ</string>
