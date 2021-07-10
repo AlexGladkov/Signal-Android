@@ -11,7 +11,7 @@
         <import type="android.view.View" alias="v" />
     </data>
 
-    <android.support.design.widget.CoordinatorLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:id="@+id/rl_logged_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -28,7 +28,7 @@
                 android:layout_height="wrap_content"
                 android:visibility="gone"/>
 
-            <android.support.design.widget.CoordinatorLayout
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
                 android:id="@+id/cl_logged_main"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -48,9 +48,9 @@
                     android:visibility="gone"
                     android:background="?attr/backgroundSecondaryColor" />
 
-            </android.support.design.widget.CoordinatorLayout>
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/tb_logged"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_toolbar_margin_top"
@@ -134,24 +134,24 @@
                         android:visibility="@{logged.toolbarState == appData.TOOLBAR_LOGGED_DM ? v.GONE : v.VISIBLE}"
                         android:onClick="@{click::onComposeClick}"
                         android:background="?attr/buttonRipple"
-                        android:tint="?attr/buttonTintColor"
-                        android:src="@drawable/ic_icons_toolbar_new_tweet" />
+                        android:src="@drawable/ic_icons_toolbar_new_tweet"
+                        app:tint="?attr/buttonTintColor" />
 
                     <ImageView
                         android:layout_width="@dimen/tb_icon_size"
                         android:layout_height="@dimen/tb_icon_size"
                         android:layout_gravity="center_vertical"
                         android:padding="16dp"
-                        android:tint="?attr/buttonTintColor"
                         android:visibility="@{logged.toolbarState == appData.TOOLBAR_LOGGED_DM ? v.VISIBLE : v.GONE}"
                         android:onClick="@{click::onDMClick}"
                         android:background="?attr/buttonRipple"
-                        android:src="@drawable/ic_icons_toolbar_new_dm" />
+                        android:src="@drawable/ic_icons_toolbar_new_dm"
+                        app:tint="?attr/buttonTintColor" />
 
                 </LinearLayout>
-            </android.support.v7.widget.Toolbar>
+            </androidx.appcompat.widget.Toolbar>
 
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/tb_logged_mute"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_toolbar_margin_top"
@@ -198,9 +198,9 @@
 
                 </LinearLayout>
 
-            </android.support.v7.widget.Toolbar>
+            </androidx.appcompat.widget.Toolbar>
 
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/tb_search"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_toolbar_margin_top"
@@ -230,11 +230,11 @@
                         android:padding="16dp"
                         android:layout_marginStart="8dp"
                         android:background="?attr/buttonRipple"
-                        android:tint="?attr/buttonTintColor"
                         android:onClick="@{click::onBackSearchClick}"
                         android:visibility="@{logged.toolbarState == appData.TOOLBAR_LOGGED_SEARCHED ? v.VISIBLE : v.GONE}"
                         android:src="@drawable/ic_icons_toolbar_back"
-                        android:layout_gravity="center_vertical" />
+                        android:layout_gravity="center_vertical"
+                        app:tint="?attr/buttonTintColor" />
 
                     <EditText
                         android:id="@+id/txt_logged_search"
@@ -265,13 +265,13 @@
                         android:src="@drawable/ic_icons_more_hor"
                         android:layout_gravity="center_vertical"
                         android:background="?attr/buttonRipple"
-                        android:tint="?attr/buttonTintColor" />
+                        app:tint="?attr/buttonTintColor" />
 
                 </LinearLayout>
 
-            </android.support.v7.widget.Toolbar>
+            </androidx.appcompat.widget.Toolbar>
 
-            <android.support.v7.widget.Toolbar
+            <androidx.appcompat.widget.Toolbar
                 android:id="@+id/tb_logged_choose"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/default_toolbar_margin_top"
@@ -317,13 +317,13 @@
                         android:padding="16dp"
                         android:src="@drawable/ic_icons_toolbar_gear"
                         android:layout_gravity="center_vertical"
-                        android:tint="?attr/buttonTintColor"
                         android:background="?attr/buttonRipple"
-                        android:onClick="@{click::onSettingsClick}" />
+                        android:onClick="@{click::onSettingsClick}"
+                        app:tint="?attr/buttonTintColor" />
 
                 </LinearLayout>
 
-            </android.support.v7.widget.Toolbar>
+            </androidx.appcompat.widget.Toolbar>
 
             <solonsky.signal.twitter.libs.bottomBar.AGBottomBar
                 android:id="@+id/ag_logged_bottom"
@@ -374,7 +374,7 @@
 
             <!--app:isVisible="@{logged.toolbarState == appData.TOOLBAR_LOOGED_CHOOSE}"-->
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_logged_user"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -395,7 +395,7 @@
 
 
         </RelativeLayout>
-    </android.support.design.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
 </layout>
 

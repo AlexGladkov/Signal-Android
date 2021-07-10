@@ -26,7 +26,7 @@
         android:fitsSystemWindows="true"
         android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_compose"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
@@ -45,7 +45,7 @@
                     android:onClick="@{click::onBackClick}"
                     android:padding="16dp"
                     android:src="@drawable/ic_icons_toolbar_back"
-                    android:tint="?attr/buttonTintColor" />
+                    app:tint="?attr/buttonTintColor" />
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:layout_width="@dimen/tb_icon_size"
@@ -82,10 +82,10 @@
                     android:onClick="@{click::onSendClick}"
                     android:padding="16dp"
                     android:src="@drawable/ic_icons_toolbar_send"
-                    android:tint="?attr/buttonSendTintColor" />
+                    app:tint="?attr/buttonSendTintColor" />
 
             </LinearLayout>
-        </android.support.v7.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -346,7 +346,7 @@
             android:layout_above="@+id/ll_compose_bottom"
             android:orientation="vertical">
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_compose_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -355,7 +355,7 @@
                 android:visibility="@{compose.showPhoto ? v.VISIBLE : v.GONE}"
                 app:listConfig="@{compose.imageConfig}" />
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_compose_mentions"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -363,7 +363,7 @@
                 android:visibility="@{compose.showMentions ? v.VISIBLE : v.GONE}"
                 app:listConfig="@{compose.mentionsConfig}" />
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_compose_hashtags"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -395,7 +395,7 @@
                     android:onClick="@{click::onGeoClick}"
                     android:padding="12dp"
                     android:src="@{compose.locationState == compose.LOCATION_ON ? @drawable/ic_icons_compose_geo_on : compose.locationState == compose.LOCATION_DISABLED ? @drawable/ic_icons_compose_geo_disabled : @drawable/ic_icons_compose_geo_off}"
-                    android:tint="?attr/hintTextColor" />
+                    app:tint="?attr/hintTextColor" />
 
                 <ImageView
                     android:layout_width="0dp"
@@ -407,7 +407,7 @@
                     android:onClick="@{click::onMentionsClick}"
                     android:padding="12dp"
                     android:src="@drawable/ic_tabbar_icons_mentions"
-                    android:tint="?attr/hintTextColor" />
+                    app:tint="?attr/hintTextColor" />
 
                 <ImageView
                     android:id="@+id/img_compose_library"
@@ -433,7 +433,7 @@
                     android:onClick="@{click::onHashClick}"
                     android:padding="12dp"
                     android:src="@drawable/ic_icons_compose_hash"
-                    android:tint="?attr/hintTextColor" />
+                    app:tint="?attr/hintTextColor" />
 
                 <ImageView
                     android:id="@+id/btn_compose_drafts"
@@ -443,7 +443,7 @@
                     android:background="?attr/actionRipple"
                     android:onClick="@{click::onDraftsClick}"
                     android:padding="12dp"
-                    android:tint="?attr/hintTextColor" />
+                    app:tint="?attr/hintTextColor" />
 
             </LinearLayout>
         </FrameLayout>

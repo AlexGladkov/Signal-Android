@@ -1,8 +1,9 @@
 package solonsky.signal.twitter.overlays;
 
 import android.graphics.Bitmap;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.stfalcon.frescoimageviewer.ImageViewer;
 

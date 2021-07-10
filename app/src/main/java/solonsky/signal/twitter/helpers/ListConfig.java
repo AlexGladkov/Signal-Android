@@ -2,14 +2,15 @@ package solonsky.signal.twitter.helpers;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.support.annotation.IntRange;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
+
+import androidx.annotation.IntRange;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -133,7 +134,6 @@ public class ListConfig {
         }
 
         /**
-         * Set {@link android.support.v7.widget.RecyclerView.ItemAnimator}
          *
          * @param itemAnimator the item animator
          * @return the builder
@@ -144,7 +144,6 @@ public class ListConfig {
         }
 
         /**
-         * Set {@link android.support.v7.widget.RecyclerView.ItemDecoration}
          *
          * @return the builder
          */
@@ -157,7 +156,6 @@ public class ListConfig {
         }
 
         /**
-         * Set {@link android.support.v7.widget.RecyclerView.OnScrollListener}
          *
          * @param onScrollListener the scroll listener.
          * @return the builder
@@ -260,7 +258,7 @@ public class ListConfig {
      * The provider of LayoutManager for RecyclerView
      */
     public interface LayoutManagerProvider {
-        RecyclerView.LayoutManager get(Context context);
+        LinearLayoutManager get(Context context);
     }
 
     /**
@@ -268,7 +266,7 @@ public class ListConfig {
      */
     public static class SimpleLinearLayoutManagerProvider implements LayoutManagerProvider {
         @Override
-        public RecyclerView.LayoutManager get(Context context) {
+        public LinearLayoutManager get(Context context) {
             return new LinearLayoutManager(context);
         }
     }
@@ -277,7 +275,7 @@ public class ListConfig {
         private static final String TAG = SpeedyLinearLayoutManagerProvider.class.getSimpleName();
 
         @Override
-        public RecyclerView.LayoutManager get(Context context) {
+        public LinearLayoutManager get(Context context) {
             Log.e(TAG, "Speedy manager created");
             return new SpeedyLinearLayoutManager(context);
         }
@@ -285,14 +283,14 @@ public class ListConfig {
 
     public static class RefreshLinearLayoutManagerProvider implements LayoutManagerProvider {
         @Override
-        public RecyclerView.LayoutManager get(Context context) {
+        public LinearLayoutManager get(Context context) {
             return new LinearLayoutManager(context);
         }
     }
 
     public static class SimpleHorizontalLayoutManagerProvider implements LayoutManagerProvider {
         @Override
-        public RecyclerView.LayoutManager get(Context context) {
+        public LinearLayoutManager get(Context context) {
             return new FancyLinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         }
     }
@@ -302,7 +300,7 @@ public class ListConfig {
      */
     public static class ReversedLinearLayoutManagerProvider implements LayoutManagerProvider {
         @Override
-        public RecyclerView.LayoutManager get(Context context) {
+        public LinearLayoutManager get(Context context) {
             LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
             mLayoutManager.setReverseLayout(true);
             mLayoutManager.setStackFromEnd(true);
@@ -311,7 +309,6 @@ public class ListConfig {
     }
 
     /**
-     * The simple LayoutManager provider for {@link GridLayoutManager}
      */
     public static class SimpleGridLayoutManagerProvider implements LayoutManagerProvider {
         private final int mSpanCount;
@@ -327,7 +324,7 @@ public class ListConfig {
         }
 
         @Override
-        public RecyclerView.LayoutManager get(Context context) {
+        public LinearLayoutManager get(Context context) {
             GridLayoutManager layoutManager = new GridLayoutManager(context, mSpanCount);
             if (mSpanSizeLookup != null) layoutManager.setSpanSizeLookup(mSpanSizeLookup);
             return layoutManager;
@@ -335,7 +332,6 @@ public class ListConfig {
     }
 
     /**
-     * The simple LayoutManager provider for {@link StaggeredGridLayoutManager}
      */
     public static class SimpleStaggeredGridLayoutManagerProvider implements LayoutManagerProvider {
         private final int mSpanCount;
@@ -351,7 +347,7 @@ public class ListConfig {
         }
 
         @Override
-        public RecyclerView.LayoutManager get(Context context) {
+        public LinearLayoutManager get(Context context) {
             return new StaggeredGridLayoutManager(mSpanCount, mOrientation);
         }
     }

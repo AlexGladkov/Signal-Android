@@ -1,25 +1,16 @@
 package solonsky.signal.twitter.activities;
 
-import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
 import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.animation.AnimationUtils;
 import android.widget.Toast;
 
 import com.anjlab.android.iab.v3.BillingProcessor;
@@ -33,15 +24,10 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.util.Locale;
 
-import it.sephiroth.android.library.easing.Back;
-import oauth.signpost.http.HttpResponse;
-import retrofit2.Retrofit;
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.databinding.ActivitySupportBinding;
 import solonsky.signal.twitter.helpers.App;
 import solonsky.signal.twitter.helpers.Utilities;
-import solonsky.signal.twitter.libs.http.Backend;
-import solonsky.signal.twitter.libs.http.RetrofitWorker;
 import solonsky.signal.twitter.viewmodels.SupportViewModel;
 
 /**

@@ -2,14 +2,15 @@ package solonsky.signal.twitter.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.OrientationHelper
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.OrientationHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.MvpAppCompatFragment
+import com.arellomobile.mvp.MvpFragment
 import com.arellomobile.mvp.presenter.InjectPresenter
 import kotlinx.android.synthetic.main.fragment_mentions.*
 import solonsky.signal.twitter.R
@@ -29,7 +30,7 @@ import java.util.*
  * Created by neura on 03.11.17.
  */
 
-class MVPMentionsFragment : MvpAppCompatFragment(), MentionsView {
+class MVPMentionsFragment : MvpFragment(), MentionsView {
     companion object {
         const val TAG = "MVPMentionsFragment"
 

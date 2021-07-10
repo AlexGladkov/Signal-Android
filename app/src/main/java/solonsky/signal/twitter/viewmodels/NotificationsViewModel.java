@@ -1,6 +1,7 @@
 package solonsky.signal.twitter.viewmodels;
 
-import android.databinding.BaseObservable;
+
+import androidx.databinding.BaseObservable;
 
 /**
  * Created by neura on 22.05.17.

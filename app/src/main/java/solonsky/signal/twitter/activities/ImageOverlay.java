@@ -1,7 +1,6 @@
 package solonsky.signal.twitter.activities;
 
 import android.animation.ValueAnimator;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;

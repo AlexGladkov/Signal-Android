@@ -1,12 +1,13 @@
 package solonsky.signal.twitter.libs;
 
 import android.content.Context;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.Scroller;
+
+import androidx.viewpager.widget.ViewPager;
 
 import java.lang.reflect.Field;
 

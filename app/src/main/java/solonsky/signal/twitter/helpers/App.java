@@ -1,25 +1,18 @@
 package solonsky.signal.twitter.helpers;
 
 import android.app.Application;
-import android.arch.persistence.db.SupportSQLiteDatabase;
-import android.arch.persistence.room.Room;
-import android.arch.persistence.room.migration.Migration;
 import android.content.SharedPreferences;
-import android.support.annotation.NonNull;
 import android.util.Log;
 
-import com.twitter.sdk.android.core.DefaultLogger;
-import com.twitter.sdk.android.core.Twitter;
-import com.twitter.sdk.android.core.TwitterAuthConfig;
-import com.twitter.sdk.android.core.TwitterConfig;
+import androidx.annotation.NonNull;
+import androidx.room.Room;
+import androidx.room.migration.Migration;
+import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.di.AppComponent;
-import solonsky.signal.twitter.di.DaggerAppComponent;
 import solonsky.signal.twitter.di.modules.LocalNavigationModule;
 import solonsky.signal.twitter.libs.AppVisibilityDetector;
-import solonsky.signal.twitter.libs.ApplicationLifecycleHandler;
-import solonsky.signal.twitter.models.ConfigurationModel;
 import solonsky.signal.twitter.room.AppDatabase;
 import solonsky.signal.twitter.room.RoomContract;
 import twitter4j.conf.ConfigurationBuilder;

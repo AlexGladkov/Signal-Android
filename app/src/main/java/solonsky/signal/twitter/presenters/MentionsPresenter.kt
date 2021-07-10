@@ -1,7 +1,7 @@
 package solonsky.signal.twitter.presenters
 
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.RecyclerView
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.google.gson.Gson
@@ -45,8 +45,8 @@ class MentionsPresenter : MvpPresenter<MentionsView>() {
         }
 
         if (dy > 0) {
-            val visibleItemCount = recyclerView.layoutManager.childCount
-            val totalItemCount = recyclerView.layoutManager.itemCount
+            val visibleItemCount = (recyclerView.layoutManager as LinearLayoutManager).childCount
+            val totalItemCount = (recyclerView.layoutManager as LinearLayoutManager).itemCount
             val pastVisibleItems = (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
 
             if (!isLoading) {

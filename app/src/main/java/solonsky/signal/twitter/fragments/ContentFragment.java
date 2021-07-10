@@ -2,13 +2,14 @@ package solonsky.signal.twitter.fragments;
 
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.daimajia.swipe.SwipeLayout;
 import com.squareup.picasso.Callback;
@@ -93,9 +94,10 @@ public class ContentFragment extends Fragment {
                 }
 
                 @Override
-                public void onError() {
+                public void onError(Exception e) {
 
                 }
+
             });
 //            Picasso.with(getContext()).load(path).into(new Target() {
 //                @Override

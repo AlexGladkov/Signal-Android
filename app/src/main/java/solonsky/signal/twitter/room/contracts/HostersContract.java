@@ -1,6 +1,5 @@
 package solonsky.signal.twitter.room.contracts;
 
-import android.arch.persistence.room.Room;
 
 import solonsky.signal.twitter.room.RoomContract;
 

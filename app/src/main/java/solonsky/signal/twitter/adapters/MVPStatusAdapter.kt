@@ -3,14 +3,10 @@ package solonsky.signal.twitter.adapters
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Adapter
+import androidx.recyclerview.widget.RecyclerView
 import com.arellomobile.mvp.MvpDelegate
-import okhttp3.internal.Util
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.activities.LoggedActivity
 import solonsky.signal.twitter.api.ActionsApiFactory
@@ -223,4 +219,5 @@ class MVPStatusAdapter(parentDelegate: MvpDelegate<*>) : RecyclerView.Adapter<Re
         (mSources[position] as StatusModel).isHighlighted = isHighlight
         notifyItemChanged(position)
     }
+
 }

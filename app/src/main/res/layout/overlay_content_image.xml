@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb_content"
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -38,7 +38,7 @@
                     android:background="@drawable/white_ripple_background"
                     android:padding="16dp"
                     android:src="@drawable/ic_icons_toolbar_back"
-                    android:tint="@color/white" />
+                    app:tint="@color/white" />
 
                 <TextView
                     android:id="@+id/txt_content_counter"
@@ -61,7 +61,7 @@
                     android:foregroundGravity="center"
                     android:padding="16dp"
                     android:src="@drawable/ic_icons_toolbar_save"
-                    android:tint="@color/white" />
+                    app:tint="@color/white" />
 
                 <ImageView
                     android:id="@+id/img_content_share_image"
@@ -72,7 +72,7 @@
                     android:background="@drawable/white_ripple_background"
                     android:padding="16dp"
                     android:src="@drawable/ic_icons_actions_share"
-                    android:tint="@color/white" />
+                    app:tint="@color/white" />
 
                 <ImageView
                     android:id="@+id/img_content_chrome"
@@ -83,12 +83,12 @@
                     android:background="@drawable/white_ripple_background"
                     android:padding="16dp"
                     android:src="@drawable/ic_icons_toolbar_chrome"
-                    android:tint="@color/white" />
+                    app:tint="@color/white" />
 
             </LinearLayout>
 
         </RelativeLayout>
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
     <LinearLayout
         android:id="@+id/ll_content_container"
@@ -159,7 +159,7 @@
                 android:layout_height="24dp"
                 android:layout_marginStart="8dp"
                 android:scaleType="fitXY"
-                android:tint="@color/white" />
+                app:tint="@color/white" />
 
         </LinearLayout>
 
@@ -196,7 +196,7 @@
                 android:layout_height="@dimen/feed_bottom_icon_size"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_icons_actions_reply"
-                android:tint="?attr/hintTextColor" />
+                app:tint="?attr/hintTextColor" />
 
         </FrameLayout>
 
@@ -213,7 +213,7 @@
                 android:layout_height="@dimen/feed_bottom_icon_size"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_icons_actions_rt"
-                android:tint="?attr/hintTextColor" />
+                app:tint="?attr/hintTextColor" />
 
         </FrameLayout>
 
@@ -230,7 +230,7 @@
                 android:layout_height="@dimen/feed_bottom_icon_size"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_tabbar_icons_likes"
-                android:tint="?attr/hintTextColor" />
+                app:tint="?attr/hintTextColor" />
 
         </FrameLayout>
 
@@ -249,7 +249,7 @@
                 android:layout_height="@dimen/feed_bottom_icon_size"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_icons_actions_share"
-                android:tint="?attr/hintTextColor" />
+                app:tint="?attr/hintTextColor" />
 
         </FrameLayout>
 
@@ -266,7 +266,7 @@
                 android:layout_height="@dimen/feed_bottom_icon_size"
                 android:layout_gravity="center"
                 android:src="@drawable/ic_icons_more_hor"
-                android:tint="?attr/hintTextColor" />
+                app:tint="?attr/hintTextColor" />
 
         </FrameLayout>
     </LinearLayout>

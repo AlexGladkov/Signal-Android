@@ -365,12 +365,12 @@
     <string name="follows_you">follows you</string>
     <string name="not_follow">doesn’t follow you</string>
     <string name="no_bio">No bio</string>
-    <string name="error_loading_direct">Error</string>
-    <string name="success_mute_user">Done. You won’t see new stuff from [username].</string>
-    <string name="success_mute_tag">Done. You won’t see new stuff with [tag].</string>
-    <string name="success_mute_client">Done. You won’t see new stuff from [clientname].</string>
+    <string name="error_loading_direct" translatable="false">Error</string>
+    <string name="success_mute_user" translatable="false">Done. You won’t see new stuff from [username].</string>
+    <string name="success_mute_tag" translatable="false">Done. You won’t see new stuff with [tag].</string>
+    <string name="success_mute_client" translatable="false">Done. You won’t see new stuff from [clientname].</string>
 
-    <string name="advanced_english">English</string>
-  <string name="advanced_russian">Русский</string>
+    <string name="advanced_english" translatable="false">English</string>
+  <string name="advanced_russian" translatable="false">Русский</string>
 
 </resources>

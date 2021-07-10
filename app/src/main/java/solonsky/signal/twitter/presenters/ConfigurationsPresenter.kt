@@ -51,9 +51,9 @@ class ConfigurationsPresenter: MvpPresenter<ConfigurationView>() {
     /** Add new user model
      * @param newConfig - new user settings model */
     fun addNewUserConfiguration(newConfig: ConfigurationUserModel) {
-        Thread({
+        Thread {
             App.db.configurationDao().insert(entity = configConverter.modelToDb(newConfig))
-        }).start()
+        }.start()
     }
 
     /** Update user's timestamps

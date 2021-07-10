@@ -1,13 +1,13 @@
 package solonsky.signal.twitter.fragments
 
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 
 import java.util.ArrayList
 
@@ -33,7 +33,11 @@ class ProfileTweetsFragment : Fragment() {
     private lateinit var binding: FragmentProfileTweetsBinding
     private val tweetsArray = ArrayList<StatusModel>()
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = DataBindingUtil.inflate(inflater!!, R.layout.fragment_profile_tweets, container, false)
         mAdapter = StatusAdapter(tweetsArray, activity as AppCompatActivity, true,
                 true, StatusAdapter.StatusClickListener { searchText, v ->

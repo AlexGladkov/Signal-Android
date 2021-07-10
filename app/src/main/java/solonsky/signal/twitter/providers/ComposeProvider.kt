@@ -20,18 +20,18 @@ class ComposeProvider(private val presenter: ComposePresenter) {
 
     // Load mentions from DB
     fun fetchMentions() {
-        Thread({
+        Thread {
             val users: MutableList<UserModel> = LinkedList()
             App.db.usersDao().all
-                    .map { converter.dbToModel(it) }
-                    .forEach({
-                        users.add(it)
-                    })
+                .map { converter.dbToModel(it) }
+                .forEach({
+                    users.add(it)
+                })
 
             handler.post {
                 presenter.setupData(users = users)
             }
-        }).start()
+        }.start()
     }
 
     fun addUser(user: twitter4j.User) {

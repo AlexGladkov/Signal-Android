@@ -5,14 +5,13 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.ActivityCompat
 import android.view.View
 import android.view.WindowManager
 import android.widget.SeekBar
-import kotlinx.android.synthetic.main.activity_media.*
+import androidx.core.app.ActivityCompat
 import com.arellomobile.mvp.MvpActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
-
+import kotlinx.android.synthetic.main.activity_media.*
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.helpers.AppData
 import solonsky.signal.twitter.helpers.Permission

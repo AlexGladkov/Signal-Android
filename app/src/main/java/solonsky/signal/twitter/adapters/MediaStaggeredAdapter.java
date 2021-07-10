@@ -1,11 +1,12 @@
 package solonsky.signal.twitter.adapters;
 
-import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -87,9 +88,11 @@ public class MediaStaggeredAdapter extends RecyclerView.Adapter<MediaStaggeredAd
                     }
 
                     @Override
-                    public void onError() {
+                    public void onError(Exception e) {
 
                     }
+
+
                 });
 
         holder.mBinding.imgStaggeredMedia.setImageResource(model.getMediaType().equals(Flags.MEDIA_TYPE.VIDEO) ?

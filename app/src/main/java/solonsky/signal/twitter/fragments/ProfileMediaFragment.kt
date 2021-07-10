@@ -1,13 +1,13 @@
 package solonsky.signal.twitter.fragments
 
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.GridLayoutManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 
 import java.util.ArrayList
 
@@ -33,7 +33,11 @@ class ProfileMediaFragment : Fragment() {
     private var imageAdapter: MediaStaggeredAdapter? = null
     private var viewModel: ProfileMediaViewModel? = null
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val binding = DataBindingUtil.inflate<FragmentProfileMediaBinding>(inflater!!, R.layout.fragment_profile_media, container, false)
         imageAdapter = MediaStaggeredAdapter(mediaArray,
                 activity as AppCompatActivity, MediaStaggeredAdapter.ImageStaggeredListener { imageModel, _ ->

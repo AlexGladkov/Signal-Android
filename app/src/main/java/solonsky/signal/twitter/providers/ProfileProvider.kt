@@ -44,13 +44,13 @@ class ProfileProvider(presenter: ProfilePresenter) {
                 val gson = Gson()
                 val favoritesArray = ArrayList<StatusModel>()
 
-                statuses.forEach({
+                statuses.forEach {
                     val statusModel = gson.fromJson(gson.toJsonTree(it), StatusModel::class.java)
                     statusModel.tuneModel(it)
                     statusModel.linkClarify()
 
                     favoritesArray.add(statusModel)
-                })
+                }
 
                 handler.post {
                     mPresenter.setupLikes(favoritesArray = favoritesArray)
@@ -63,7 +63,7 @@ class ProfileProvider(presenter: ProfilePresenter) {
                 val tweetsArray = ArrayList<StatusModel>()
                 val mediaArray = ArrayList<ImageModel>()
 
-                statuses.forEach({
+                statuses.forEach {
                     val statusModel = gson.fromJson(gson.toJsonTree(it), StatusModel::class.java)
                     statusModel.tuneModel(it)
                     statusModel.linkClarify()
@@ -72,7 +72,7 @@ class ProfileProvider(presenter: ProfilePresenter) {
                     it.mediaEntities.forEach { media ->
                         mediaArray.add(ImageModel(media.mediaURL))
                     }
-                })
+                }
 
                 handler.post {
                     mPresenter.setupMedia(mediaArray = mediaArray)
@@ -104,7 +104,7 @@ class ProfileProvider(presenter: ProfilePresenter) {
                 super.gotUserTimeline(statuses)
                 val gson = Gson()
 
-                statuses.forEach({
+                statuses.forEach {
                     val statusModel = gson.fromJson(gson.toJsonTree(it), StatusModel::class.java)
                     statusModel.tuneModel(it)
                     statusModel.linkClarify()
@@ -113,7 +113,7 @@ class ProfileProvider(presenter: ProfilePresenter) {
                     it.mediaEntities.forEach { media ->
                         mediaArray.add(ImageModel(media.mediaURL))
                     }
-                })
+                }
 
                 maxId = if (statuses.size > 0) statuses[statuses.size - 1].id else maxId
 

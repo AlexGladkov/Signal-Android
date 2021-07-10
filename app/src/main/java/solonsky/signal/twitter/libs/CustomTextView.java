@@ -4,8 +4,6 @@ import android.content.Context;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatTextView;
 import android.text.Layout;
 import android.text.TextPaint;
 import android.util.AttributeSet;
@@ -14,11 +12,13 @@ import android.util.TypedValue;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+
 /**
  * Created by kmoaz on 03.09.2017.
  */
 
-public class CustomTextView extends TextView {
+public class CustomTextView extends androidx.appcompat.widget.AppCompatTextView {
 
     private Paint mTestPaint;
     private Handler measureHandler = new Handler();

@@ -4,14 +4,16 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
-import android.support.annotation.NonNull;
 import android.util.AttributeSet;
+import android.widget.TextView;
+
+import androidx.annotation.NonNull;
 
 /**
  * Created by neura on 28.08.17.
  */
 
-public class NoPaddingTextView extends android.support.v7.widget.AppCompatTextView {
+public class NoPaddingTextView extends androidx.appcompat.widget.AppCompatTextView {
     private static final String TAG = NoPaddingTextView.class.getSimpleName();
     private final Paint mPaint = new Paint();
     private final Rect mBounds = new Rect();

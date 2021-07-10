@@ -5,7 +5,6 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import com.fatboyindustrial.gsonjodatime.Converters;
-import com.google.android.exoplayer.util.Util;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

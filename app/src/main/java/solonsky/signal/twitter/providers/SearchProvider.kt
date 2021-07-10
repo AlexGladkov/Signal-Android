@@ -35,14 +35,14 @@ class SearchProvider(private val searchPresenter: SearchPresenter) {
                 val searchedTweets: MutableList<StatusModel> = LinkedList()
                 val searchedMedia: MutableList<StatusModel> = LinkedList()
 
-                queryResult.tweets.forEach({
+                queryResult.tweets.forEach {
                     val statusModel = StatusModel.getNewInstance(it, gson)
                     searchedTweets.add(statusModel)
 
                     if (statusModel.mediaEntities.size() > 0 || statusModel.urlEntities.size() > 0) {
                         searchedMedia.add(statusModel)
                     }
-                })
+                }
 
                 handler.post {
                     searchPresenter.loadAll(dataList = searchedTweets)
@@ -54,12 +54,15 @@ class SearchProvider(private val searchPresenter: SearchPresenter) {
                 super.searchedUser(userList)
                 val searchedUsers: MutableList<solonsky.signal.twitter.models.User> = LinkedList()
 
-                userList.forEach({
-                    val user = gson.fromJson(gson.toJsonTree(it), solonsky.signal.twitter.models.User::class.java)
+                userList.forEach {
+                    val user = gson.fromJson(
+                        gson.toJsonTree(it),
+                        solonsky.signal.twitter.models.User::class.java
+                    )
                     user.biggerProfileImageURL = it.biggerProfileImageURL
                     user.originalProfileImageURL = it.originalProfileImageURL
                     searchedUsers.add(user)
-                })
+                }
 
                 handler.post {
                     searchPresenter.loadUsers(dataList = searchedUsers)
@@ -70,13 +73,13 @@ class SearchProvider(private val searchPresenter: SearchPresenter) {
                 super.gotHomeTimeline(statuses)
                 val searchedHome: MutableList<StatusModel> = LinkedList()
 
-                statuses.forEach({
+                statuses.forEach {
                     val statusModel = StatusModel.getNewInstance(it, gson)
 
                     if (isHome(it)) {
                         searchedHome.add(statusModel)
                     }
-                })
+                }
 
                 handler.post {
                     searchPresenter.loadHome(dataList = searchedHome)

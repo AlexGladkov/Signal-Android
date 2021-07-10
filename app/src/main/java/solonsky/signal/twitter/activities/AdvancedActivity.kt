@@ -1,40 +1,20 @@
 package solonsky.signal.twitter.activities
 
-import android.databinding.DataBindingUtil
-import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import android.view.View
-import android.view.WindowManager
-import android.widget.PopupMenu
-import android.widget.Toast
-
-import com.anupcowkur.reservoir.Reservoir
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
-import kotlinx.android.synthetic.main.activity_advanced.*
-
-import java.io.IOException
-import java.util.ArrayList
-
-import solonsky.signal.twitter.R
 import solonsky.signal.twitter.adapters.SettingsAdapter
-import solonsky.signal.twitter.databinding.ActivityAdvancedBinding
-import solonsky.signal.twitter.helpers.*
-import solonsky.signal.twitter.models.ConfigurationModel
 import solonsky.signal.twitter.models.SettingsModel
 import solonsky.signal.twitter.models.SettingsSwitchModel
 import solonsky.signal.twitter.models.SettingsTextModel
 import solonsky.signal.twitter.presenters.ConfigurationsPresenter
-import solonsky.signal.twitter.viewmodels.AdvancedViewModel
 import solonsky.signal.twitter.views.ConfigurationView
 
 /**
  * Created by neura on 23.05.17.
  */
 
-class AdvancedActivity : MvpAppCompatActivity(), ConfigurationView {
+class AdvancedActivity : MvpAppCompatActivity, ConfigurationView {
     private val TAG = AdvancedActivity::class.java.simpleName
     private var mSettingsList: ArrayList<SettingsModel>? = null
     private var mAdapter: SettingsAdapter? = null
@@ -155,4 +135,5 @@ class AdvancedActivity : MvpAppCompatActivity(), ConfigurationView {
     override fun settingsUpdated() {
 
     }
+
 }

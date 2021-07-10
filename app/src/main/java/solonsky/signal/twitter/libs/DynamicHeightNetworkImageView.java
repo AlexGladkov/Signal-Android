@@ -8,7 +8,7 @@ import android.widget.ImageView;
  * Created by neura on 30.08.17.
  */
 
-public class DynamicHeightNetworkImageView extends ImageView {
+public class DynamicHeightNetworkImageView extends androidx.appcompat.widget.AppCompatImageView {
     private float mAspectRatio = 1.5f;
 
     public DynamicHeightNetworkImageView(Context context) {

@@ -1,12 +1,11 @@
 package solonsky.signal.twitter.models;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
-
-import com.android.databinding.library.baseAdapters.BR;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
 
 import java.util.ArrayList;
 
+import solonsky.signal.twitter.BR;
 import solonsky.signal.twitter.helpers.Flags;
 
 /**

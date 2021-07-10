@@ -26,7 +26,7 @@
         android:fitsSystemWindows="true"
         android:focusableInTouchMode="true" >
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_logged_mute"
             android:layout_width="match_parent"
             app:contentInsetStart="0dp"
@@ -42,10 +42,10 @@
                     android:layout_width="@dimen/tb_icon_size"
                     android:layout_height="@dimen/tb_icon_size"
                     android:padding="16dp"
-                    android:tint="?attr/buttonTintColor"
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="4dp"
-                    android:src="@drawable/ic_icons_toolbar_back" />
+                    android:src="@drawable/ic_icons_toolbar_back"
+                    app:tint="?attr/buttonTintColor" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -67,11 +67,11 @@
                     android:padding="16dp"
                     android:alpha="@{model.action ? 1.0f : 0.2f}"
                     android:src="@drawable/ic_icons_toolbar_apply"
-                    android:tint="?attr/buttonSendTintColor" />
+                    app:tint="?attr/buttonSendTintColor" />
 
             </LinearLayout>
 
-        </android.support.v7.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -79,7 +79,7 @@
             android:layout_marginTop="56dp"
             android:orientation="vertical">
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_mute_selected"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -196,7 +196,7 @@
                 android:layout_height="0dp"
                 android:layout_weight="1" />
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_mute"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"

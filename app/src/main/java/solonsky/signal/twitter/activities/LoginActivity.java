@@ -1,45 +1,30 @@
 package solonsky.signal.twitter.activities;
 
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.anupcowkur.reservoir.Reservoir;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+
 import com.arellomobile.mvp.MvpAppCompatActivity;
 import com.arellomobile.mvp.presenter.InjectPresenter;
-import com.facebook.drawee.backends.pipeline.Fresco;
-import com.facebook.imagepipeline.core.ImagePipelineConfig;
-import com.facebook.imagepipeline.decoder.SimpleProgressiveJpegConfig;
-import com.fatboyindustrial.gsonjodatime.Converters;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.twitter.sdk.android.core.Callback;
-import com.twitter.sdk.android.core.DefaultLogger;
 import com.twitter.sdk.android.core.Result;
-import com.twitter.sdk.android.core.Twitter;
-import com.twitter.sdk.android.core.TwitterAuthConfig;
 import com.twitter.sdk.android.core.TwitterAuthToken;
-import com.twitter.sdk.android.core.TwitterConfig;
 import com.twitter.sdk.android.core.TwitterCore;
 import com.twitter.sdk.android.core.TwitterException;
 import com.twitter.sdk.android.core.TwitterSession;
 import com.twitter.sdk.android.core.identity.TwitterAuthClient;
 
-import java.io.IOException;
-
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.databinding.ActivityLoginBinding;
-import solonsky.signal.twitter.helpers.App;
 import solonsky.signal.twitter.helpers.AppData;
-import solonsky.signal.twitter.helpers.Cache;
 import solonsky.signal.twitter.helpers.FileNames;
 import solonsky.signal.twitter.helpers.FileWork;
 import solonsky.signal.twitter.helpers.Utilities;

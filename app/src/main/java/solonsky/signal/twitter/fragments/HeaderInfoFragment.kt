@@ -1,18 +1,18 @@
 package solonsky.signal.twitter.fragments
 
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.graphics.Typeface
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
 import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.ViewTreeObserver
+import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.activities.MVPProfileActivity
@@ -65,11 +65,12 @@ class HeaderInfoFragment : Fragment() {
 
             var realDescription = user.description
             if (user.descriptionUrlEntities != null) {
-                user.descriptionUrlEntities.forEach({
+                user.descriptionUrlEntities.forEach {
                     realDescription = realDescription.replace(
-                            it.asJsonObject.get("url").asString,
-                            it.asJsonObject.get("expandedURL").asString)
-                })
+                        it.asJsonObject.get("url").asString,
+                        it.asJsonObject.get("expandedURL").asString
+                    )
+                }
             }
 
             if (TextUtils.isEmpty(realDescription)) {
@@ -91,7 +92,8 @@ class HeaderInfoFragment : Fragment() {
 
             val isNight = App.getInstance().isNightEnabled
 
-            binding.txtProfileInfoBio.setHashtagModeColor(ContextCompat.getColor(context, if (isNight)
+            binding.txtProfileInfoBio.setHashtagModeColor(
+                ContextCompat.getColor(context, if (isNight)
                 R.color.dark_tag_color
             else
                 R.color.light_tag_color))

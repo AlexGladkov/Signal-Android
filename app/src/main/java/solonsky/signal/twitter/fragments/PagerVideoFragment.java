@@ -1,6 +1,7 @@
 package solonsky.signal.twitter.fragments;
 
-import android.support.v4.app.Fragment;
+
+import androidx.fragment.app.Fragment;
 
 /**
  * Created by neura on 01.06.17.

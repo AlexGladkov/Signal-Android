@@ -1,6 +1,5 @@
 package solonsky.signal.twitter.interfaces;
 
-import android.support.v7.widget.PopupMenu;
 
 /**
  * Created by neura on 14.10.17.

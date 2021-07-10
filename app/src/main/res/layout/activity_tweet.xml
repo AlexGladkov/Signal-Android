@@ -138,7 +138,7 @@
             app:imageHeight="@dimen/feed_tiny_size"
             app:imageWidth="@dimen/feed_tiny_size" />
         
-        <android.support.v4.view.ViewPager
+        <androidx.viewpager.widget.ViewPager
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:overScrollMode="never" />

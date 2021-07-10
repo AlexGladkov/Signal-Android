@@ -1,32 +1,24 @@
 package solonsky.signal.twitter.activities
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.view.PagerAdapter
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.PopupMenu
-import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.widget.ImageView
 import android.widget.RelativeLayout
-import android.widget.TextView
 import android.widget.Toast
-import com.arellomobile.mvp.MvpActivity
 import com.arellomobile.mvp.MvpAppCompatActivity
 import com.arellomobile.mvp.presenter.InjectPresenter
 import com.ogaclejapan.smarttablayout.SmartTabLayout
+import com.ogaclejapan.smarttablayout.SmartTabLayout.TabProvider
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems
 import kotlinx.android.synthetic.main.activity_mvp_search.*
-import solonsky.signal.twitter.R
 import kotlinx.android.synthetic.main.activity_search.*
-import okhttp3.internal.Util
 import ru.terrakok.cicerone.Navigator
 import ru.terrakok.cicerone.NavigatorHolder
 import ru.terrakok.cicerone.android.SupportFragmentNavigator
 import ru.terrakok.cicerone.commands.Replace
+import solonsky.signal.twitter.R
 import solonsky.signal.twitter.fragments.*
 import solonsky.signal.twitter.helpers.App
 import solonsky.signal.twitter.helpers.Keys
@@ -39,7 +31,7 @@ import javax.inject.Inject
 /**
  * Created by neura on 01.11.17.
  */
-class MVPSearchActivity : MvpAppCompatActivity(), SearchView, SmartTabLayout.TabProvider {
+class MVPSearchActivity : MvpAppCompatActivity, SearchView, TabProvider {
     private val TAG = MVPSearchActivity::class.java.simpleName
     private var currentPosition = 0
 

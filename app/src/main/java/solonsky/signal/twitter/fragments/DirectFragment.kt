@@ -1,18 +1,19 @@
 package solonsky.signal.twitter.fragments
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.RecyclerView
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
 
 import com.anupcowkur.reservoir.Reservoir
 import com.anupcowkur.reservoir.ReservoirGetCallback
@@ -52,13 +53,17 @@ class DirectFragment : Fragment() {
     private var mCallback: ActivityListener? = null
 
     private val directScrollListener = object : RecyclerView.OnScrollListener() {
-        override fun onScrolled(recyclerView: RecyclerView?, dx: Int, dy: Int) {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
             super.onScrolled(recyclerView, dx, dy)
             mCallback?.let { it.updateBars(dy) }
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = DataBindingUtil.inflate(inflater!!, R.layout.fragment_direct, container, false)
 
         mAdapter = DirectAdapter(DirectData.getInstance().getmMessagesList(), context, activity as AppCompatActivity,
@@ -71,11 +76,11 @@ class DirectFragment : Fragment() {
 
                         DirectApi.getInstance().clear()
                         DirectApi.getInstance().userId = model.otherId
-                        activity.startActivity(Intent(context, ChatActivity::class.java))
+                        (activity as AppCompatActivity).startActivity(Intent(context, ChatActivity::class.java))
                         if (model.isHighlighted) {
-                            activity.overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_no_animation)
+                            (activity as AppCompatActivity).overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_no_animation)
                         } else {
-                            activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                            (activity as AppCompatActivity).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                         }
 
                         Handler().postDelayed({
@@ -95,8 +100,8 @@ class DirectFragment : Fragment() {
                     override fun onAvatarClick(v: View, directModel: DirectModel) {
                         val profileIntent = Intent(context, MVPProfileActivity::class.java)
                         profileIntent.putExtra(Flags.PROFILE_ID, directModel.otherId)
-                        activity.startActivity(profileIntent)
-                        activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                        (activity as AppCompatActivity).startActivity(profileIntent)
+                        (activity as AppCompatActivity).overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                     }
                 })
         mAdapter.setHasStableIds(true)
@@ -157,7 +162,7 @@ class DirectFragment : Fragment() {
         }
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         mCallback = context as ActivityListener?
     }
@@ -200,10 +205,10 @@ class DirectFragment : Fragment() {
                         }
 
                         mAdapter.notifyDataSetChanged()
-                        viewModel!!.state = if (DirectData.getInstance().getmMessagesList().size == 0)
+                        (if (DirectData.getInstance().getmMessagesList().size == 0)
                             AppData.UI_STATE_NO_ITEMS
                         else
-                            AppData.UI_STATE_VISIBLE
+                            AppData.UI_STATE_VISIBLE).also { viewModel!!.state = it }
                         loadApi(Paging(1, 200))
                     }
                 })
@@ -223,91 +228,89 @@ class DirectFragment : Fragment() {
 
     }
 
-    private fun refreshData() {
-        if (DirectData.getInstance().getmMessagesList().size > 0) {
-            val handler = Handler()
-            val asyncTwitter = Utilities.getAsyncTwitter()
-            val paging = Paging()
-            paging.sinceId = DirectData.getInstance().getmMessagesList()[0].id
+    private fun refreshData() = if (DirectData.getInstance().getmMessagesList().size > 0) {
+        val handler = Handler()
+        val asyncTwitter = Utilities.getAsyncTwitter()
+        val paging = Paging()
+        paging.sinceId = DirectData.getInstance().getmMessagesList()[0].id
 
-            asyncTwitter.addListener(object: TwitterAdapter() {
-                val directDictionary: HashMap<Long, DirectMessage> = HashMap()
+        asyncTwitter.addListener(object: TwitterAdapter() {
+            val directDictionary: HashMap<Long, DirectMessage> = HashMap()
 
-                override fun onException(te: TwitterException?, method: TwitterMethod?) {
-                    super.onException(te, method)
-                    handler.post {
-                        Toast.makeText(context, getString(R.string.error_loading_direct), Toast.LENGTH_SHORT).show()
-                        binding.srlDirectMain.isRefreshing = false
+            override fun onException(te: TwitterException?, method: TwitterMethod?) {
+                super.onException(te, method)
+                handler.post {
+                    Toast.makeText(context, getString(R.string.error_loading_direct), Toast.LENGTH_SHORT).show()
+                    binding.srlDirectMain.isRefreshing = false
+                }
+            }
+
+            override fun gotSentDirectMessages(messages: ResponseList<DirectMessage>?) {
+                super.gotSentDirectMessages(messages)
+                messages?.reverse()
+                messages?.forEach {
+                    val id = if (it.senderId == AppData.ME.id)
+                        it.recipientId
+                    else
+                        it.senderId
+
+                    if (directDictionary.containsKey(id)) {
+                        directDictionary.remove(id)
+                    }
+
+                    directDictionary.put(id, it)
+                }
+
+                Log.e(TAG, "size ${directDictionary.size}")
+
+                DirectData.getInstance().getmMessagesList().forEach {
+                    if (directDictionary.containsKey(it.otherId)) {
+                        Log.e(TAG, "contains")
+                        directDictionary[it.otherId]?.let { direct ->
+                            Log.e(TAG, "message ${direct.text}")
+                            it.lastMessage = direct.text
+                            it.isHighlighted = true
+                        }
+                        directDictionary.remove(it.otherId)
                     }
                 }
 
-                override fun gotSentDirectMessages(messages: ResponseList<DirectMessage>?) {
-                    super.gotSentDirectMessages(messages)
-                    messages?.reverse()
-                    messages?.forEach {
-                        val id = if (it.senderId == AppData.ME.id)
-                            it.recipientId
-                        else
-                            it.senderId
-
-                        if (directDictionary.containsKey(id)) {
-                            directDictionary.remove(id)
-                        }
-
-                        directDictionary.put(id, it)
-                    }
-
-                    Log.e(TAG, "size ${directDictionary.size}")
-
-                    DirectData.getInstance().getmMessagesList().forEach ({
-                        if (directDictionary.containsKey(it.otherId)) {
-                            Log.e(TAG, "contains")
-                            directDictionary[it.otherId]?.let { direct ->
-                                Log.e(TAG, "message ${direct.text}")
-                                it.lastMessage = direct.text
-                                it.isHighlighted = true
-                            }
-                            directDictionary.remove(it.otherId)
-                        }
-                    })
-
-                    directDictionary.keys.forEach({
-                        DirectData.getInstance().getmMessagesList()
-                                .add(DirectModel.getInstance(directDictionary[it], AppData.ME.id))
-                    })
-
-                    handler.post {
-                        binding.srlDirectMain.isRefreshing = false
-                        mAdapter.notifyDataSetChanged()
-                    }
+                directDictionary.keys.forEach {
+                    DirectData.getInstance().getmMessagesList()
+                        .add(DirectModel.getInstance(directDictionary[it], AppData.ME.id))
                 }
 
-                override fun gotDirectMessages(messages: ResponseList<DirectMessage>?) {
-                    super.gotDirectMessages(messages)
-                    messages?.reverse()
-                    messages?.forEach {
-                        val id = if (it.senderId == AppData.ME.id)
-                            it.recipientId
-                        else
-                            it.senderId
-
-                        if (directDictionary.containsKey(id)) {
-                            directDictionary.remove(id)
-                        }
-
-                        directDictionary.put(id, it)
-                    }
-
-                    handler.post {
-                        asyncTwitter.getSentDirectMessages(paging)
-                    }
+                handler.post {
+                    binding.srlDirectMain.isRefreshing = false
+                    mAdapter.notifyDataSetChanged()
                 }
-            })
+            }
 
-            asyncTwitter.getDirectMessages(paging)
-        } else {
-            binding.srlDirectMain.isRefreshing = false
-        }
+            override fun gotDirectMessages(messages: ResponseList<DirectMessage>?) {
+                super.gotDirectMessages(messages)
+                messages?.reverse()
+                messages?.forEach {
+                    val id = if (it.senderId == AppData.ME.id)
+                        it.recipientId
+                    else
+                        it.senderId
+
+                    if (directDictionary.containsKey(id)) {
+                        directDictionary.remove(id)
+                    }
+
+                    directDictionary[id] = it
+                }
+
+                handler.post {
+                    asyncTwitter.getSentDirectMessages(paging)
+                }
+            }
+        })
+
+        asyncTwitter.getDirectMessages(paging)
+    } else {
+        binding.srlDirectMain.isRefreshing = false
     }
 
     /**
@@ -328,7 +331,7 @@ class DirectFragment : Fragment() {
                 super.gotSentDirectMessages(messages)
                 loadedDirects.addAll(messages)
 
-                Collections.sort(loadedDirects) { o1, o2 -> o2.createdAt.compareTo(o1.createdAt) }
+                loadedDirects.sortWith(Comparator { o1, o2 -> o2.createdAt.compareTo(o1.createdAt) })
 
                 val newDirects = ArrayList<twitter4j.DirectMessage>()
                 val newUserDirects = ArrayList<DirectMessage>()

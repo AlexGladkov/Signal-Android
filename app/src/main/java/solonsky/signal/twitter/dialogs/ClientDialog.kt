@@ -29,10 +29,10 @@ class ClientDialog(val mActivity: Activity, val clientName: String) {
                 .dismissListener(DialogInterface.OnDismissListener { }).build()
 
         mDialog?.let {
-            it.window.attributes.windowAnimations = R.style.actionSheetAnimation
+            it.window?.attributes?.windowAnimations = R.style.actionSheetAnimation
             val lp = it.window!!.attributes
             lp.alpha = 1.0f
-            it.window.attributes = lp
+            it.window?.attributes = lp
 
             val view = it.view
             val title = view.findViewById<View>(R.id.dialog_client_title) as TextView

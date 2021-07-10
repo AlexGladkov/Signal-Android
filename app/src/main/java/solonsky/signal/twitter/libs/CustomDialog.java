@@ -3,8 +3,9 @@ package solonsky.signal.twitter.libs;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.view.View;
+
+import androidx.annotation.NonNull;
 
 /**
  * Created by neura on 29.05.17.

@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.animation.Animation
 import com.arellomobile.mvp.MvpAppCompatFragment
+import com.arellomobile.mvp.MvpFragment
 import solonsky.signal.twitter.interfaces.BackButtonListener
 import solonsky.signal.twitter.interfaces.RouterProvider
 import solonsky.signal.twitter.views.FragmentView
@@ -12,7 +13,7 @@ import solonsky.signal.twitter.views.FragmentView
  * Created by agladkov on 11.01.18.
  * Use this for any child fragment in container (ex. ServiceFragment, ProfileFragment)
  */
-open class BaseChildFragment: MvpAppCompatFragment(), BackButtonListener {
+open class BaseChildFragment: MvpFragment(), BackButtonListener {
     var isAnimationDisabled: Boolean = false
     var isDisabledRecommended: Boolean = false
     private val TAG: String = BaseChildFragment::class.java.simpleName

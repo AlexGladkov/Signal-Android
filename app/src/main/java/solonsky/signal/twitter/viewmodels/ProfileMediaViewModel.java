@@ -1,13 +1,11 @@
 package solonsky.signal.twitter.viewmodels;
 
 import android.content.Context;
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.OrientationHelper;
 
-import com.android.databinding.library.baseAdapters.BR;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
 
+import solonsky.signal.twitter.BR;
 import solonsky.signal.twitter.adapters.DetailStaggeredAdapter;
 import solonsky.signal.twitter.adapters.ImageAdapter;
 import solonsky.signal.twitter.helpers.ListConfig;

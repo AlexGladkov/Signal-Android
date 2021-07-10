@@ -25,9 +25,9 @@
         android:padding="8dp"
         android:background="?attr/searchIconResource"
         android:src="@drawable/ic_icons_compose_search"
-        android:tint="?attr/hintTextColor"
         android:layout_marginStart="12dp"
-        android:layout_gravity="center_vertical" />
+        android:layout_gravity="center_vertical"
+        app:tint="?attr/hintTextColor" />
 
     <TextView
         android:id="@+id/user_search_text"

@@ -4,9 +4,9 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Parcelable
-import android.support.v7.widget.PopupMenu
 import android.util.Log
 import android.view.MenuItem
+import android.widget.PopupMenu
 import com.arellomobile.mvp.InjectViewState
 import com.arellomobile.mvp.MvpPresenter
 import com.google.gson.JsonObject

@@ -47,7 +47,7 @@
                     android:padding="16dp"
                     android:onClick="@{click::onBackClick}"
                     android:src="@drawable/ic_icons_toolbar_back"
-                    android:tint="?attr/buttonTintColor" />
+                    app:tint="?attr/buttonTintColor" />
 
                 <EditText
                     android:id="@+id/txt_search_input"
@@ -78,7 +78,7 @@
                     android:background="?attr/buttonRipple"
                     android:padding="16dp"
                     android:src="@drawable/ic_icons_more_hor"
-                    android:tint="?attr/buttonTintColor" />
+                    app:tint="?attr/buttonTintColor" />
 
             </LinearLayout>
 

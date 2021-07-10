@@ -79,7 +79,7 @@ class SplashProvider(val presenter: SplashPresenter) {
 
     /** Get settings from DB and perform legacy loaded if empty */
     fun fetchSettings() {
-        Thread({
+        Thread {
             val settings: List<ConfigurationModel> = App.db.settingsDao().getAll().map {
                 settingsConverter.dbToModel(it)
             }
@@ -90,21 +90,22 @@ class SplashProvider(val presenter: SplashPresenter) {
                 }
             } else {
                 if (AppData.appConfiguration != null) {
-                    App.db.settingsDao().insert(settingsConverter.modelToDb(AppData.appConfiguration))
+                    App.db.settingsDao()
+                        .insert(settingsConverter.modelToDb(AppData.appConfiguration))
                 } else {
                     handler.post {
                         presenter.reloadSettings()
                     }
                 }
             }
-        }).start()
+        }.start()
     }
 
     /** Perform fetching profile from DB and get it from backend if empty
      * @see fetchRemoteProfile
      */
     fun fetchProfile() {
-        Thread({
+        Thread {
             val hosters = App.db.hostersDao().getAllByDate()
 //            hosters.forEach {
 //                Log.e(TAG, "hoster id ${it.id}, hoster name ${it.timestamp}")
@@ -128,16 +129,16 @@ class SplashProvider(val presenter: SplashPresenter) {
                     fetchRemoteProfile(isLoaded = false)
                 }
             }
-        }).start()
+        }.start()
     }
 
     /** Save settings from legacy model
      * @param settings - legacy model
      */
     fun saveSettings(settings: ConfigurationModel) {
-        Thread({
+        Thread {
             App.db.settingsDao().insert(settingsConverter.modelToDb(settings))
-        }).start()
+        }.start()
     }
 
     /** <tt>LEGACY CODE</tt>
@@ -162,7 +163,7 @@ class SplashProvider(val presenter: SplashPresenter) {
 
     /** Performs fetch user configuration from DB or load it from legacy if empty */
     fun fetchConfiguration() {
-        Thread({
+        Thread {
             Log.e(TAG, "===============")
             App.db.configurationDao().getAllConfigurations().forEach {
                 Log.e(TAG, "id ${it.userId}, bottom ids ${it.bottomIds}")
@@ -170,9 +171,9 @@ class SplashProvider(val presenter: SplashPresenter) {
             Log.e(TAG, "===============")
 
             AppData.configurationUserModels = App.db.configurationDao().getAllConfigurations()
-                    .map { configurationsConverter.dbToModel(it) }
+                .map { configurationsConverter.dbToModel(it) }
             val configurationModels = AppData.configurationUserModels
-                        .filter { it.user.id == AppData.ME.id }
+                .filter { it.user.id == AppData.ME.id }
 
             if (configurationModels.isEmpty()) { // Legacy support
                 copyConfigsFromOld()
@@ -181,7 +182,7 @@ class SplashProvider(val presenter: SplashPresenter) {
                     presenter.setupConfigurations(model = configurationModels[0])
                 }
             }
-        }).start()
+        }.start()
     }
 
     /** Performs saving configuration in DB

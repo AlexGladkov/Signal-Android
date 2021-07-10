@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="80dp" />
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb_stats_header"
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -63,7 +63,7 @@
                     android:padding="16dp"
                     android:background="@drawable/white_ripple_background"
                     android:src="@drawable/ic_icons_toolbar_back"
-                    android:tint="@color/white" />
+                    app:tint="@color/white" />
 
                 <View
                     android:layout_width="0dp"
@@ -75,9 +75,9 @@
             </LinearLayout>
 
         </FrameLayout>
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_stats"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_appearance"
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -33,7 +33,7 @@
                     android:background="?attr/buttonRipple"
                     android:padding="16dp"
                     android:src="@drawable/ic_icons_toolbar_back"
-                    android:tint="?attr/buttonTintColor" />
+                    app:tint="?attr/buttonTintColor" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -49,7 +49,7 @@
 
             </LinearLayout>
 
-        </android.support.v7.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -172,7 +172,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"

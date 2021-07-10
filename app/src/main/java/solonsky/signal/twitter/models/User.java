@@ -1,10 +1,11 @@
 package solonsky.signal.twitter.models;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.view.View;
+
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
 
 import com.fatboyindustrial.gsonjodatime.Converters;
 import com.google.gson.Gson;
