@@ -3,7 +3,6 @@ package solonsky.signal.twitter.helpers;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
-import android.app.RemoteInput;
 import android.app.TaskStackBuilder;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +13,7 @@ import android.text.Html;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
+import androidx.core.app.RemoteInput;
 import androidx.core.content.ContextCompat;
 
 import com.squareup.picasso.Picasso;
@@ -42,7 +42,7 @@ public class NotificationHelper {
 
     public void createLikeNotification(final String text, final String sender, final String senderScreenName,
                                        final String receiver, String avatar) {
-        Picasso.with(mContext).load(avatar).into(new Target() {
+        Picasso.get().load(avatar).into(new Target() {
             @Override
             public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                 try {
@@ -108,7 +108,7 @@ public class NotificationHelper {
 
     public void createRetweetNotification(final String text, final String sender, final String senderScreenName,
                                           final String receiver, String avatar, final long statusId) {
-        Picasso.with(mContext).load(avatar)
+        Picasso.get().load(avatar)
                 .into(new Target() {
                     @Override
                     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
@@ -169,7 +169,7 @@ public class NotificationHelper {
 
     public void createQuoteNotification(final String text, final String sender, final String senderScreenName,
                                         final String receiver, String avatar, final long statusId) {
-        Picasso.with(mContext).load(avatar)
+        Picasso.get().load(avatar)
                 .into(new Target() {
                     @Override
                     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
@@ -233,7 +233,7 @@ public class NotificationHelper {
 
     public void createMentionNotification(final String text, final String sender, final String senderScreenName,
                                           final String receiver, String avatar) {
-        Picasso.with(mContext).load(avatar)
+        Picasso.get().load(avatar)
                 .into(new Target() {
                     @Override
                     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
@@ -277,13 +277,15 @@ public class NotificationHelper {
                     }
 
                     @Override
-                    public void onBitmapFailed(Drawable errorDrawable) {
+                    public void onBitmapFailed(Exception e, Drawable errorDrawable) {
                         NotificationCompat.Builder mBuilder = createNotification(R.mipmap.reply,
                                 R.string.notification_title_mention, -1, text, sender, senderScreenName, receiver,
                                 BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.ic_launcher_app), Flags.NotificationTypes.MENTION);
                         NotificationManager mNotificationManager = (NotificationManager) mContext.getSystemService(Context.NOTIFICATION_SERVICE);
                         mNotificationManager.notify(mContext.getString(R.string.app_name), NOTIFICATION_ID, mBuilder.build());
                     }
+
+
 
                     @Override
                     public void onPrepareLoad(Drawable placeHolderDrawable) {
@@ -294,7 +296,7 @@ public class NotificationHelper {
 
     public void createDirectNotification(final String text, final String sender, final String senderScreenName,
                                          final String receiver, String avatar) {
-        Picasso.with(mContext).load(avatar)
+        Picasso.get().load(avatar)
                 .into(new Target() {
                     @Override
                     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
@@ -362,7 +364,7 @@ public class NotificationHelper {
     public void createReplyNotification(final String text, final String sender, final String senderScreenName,
                                         final String receiver, String avatar, Bitmap bitmap) {
         if (bitmap == null) {
-            Picasso.with(mContext).load(avatar)
+            Picasso.get().load(avatar)
                     .into(new Target() {
                         @Override
                         public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
@@ -374,8 +376,10 @@ public class NotificationHelper {
                         }
 
                         @Override
-                        public void onBitmapFailed(Drawable errorDrawable) {
+                        public void onBitmapFailed(Exception e, Drawable errorDrawable) {
+
                         }
+
 
                         @Override
                         public void onPrepareLoad(Drawable placeHolderDrawable) {
@@ -393,7 +397,7 @@ public class NotificationHelper {
 
     public void createFollowNotification(final String sender, final String senderScreenName, final String receiver,
                                          String avatar) {
-        Picasso.with(mContext).load(avatar)
+        Picasso.get().load(avatar)
                 .into(new Target() {
                     @Override
                     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
@@ -452,7 +456,7 @@ public class NotificationHelper {
 
     public void createListNotification(final String listName, final String sender, final String senderScreenName, final String receiver,
                                        String avatar) {
-        Picasso.with(mContext).load(avatar)
+        Picasso.get().load(avatar)
                 .into(new Target() {
                     @Override
                     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
@@ -478,7 +482,7 @@ public class NotificationHelper {
 
     public void createGenericNotification(final String text, final String sender, final String senderScreenName,
                                           final String receiver, String avatar) {
-        Picasso.with(mContext).load(avatar)
+        Picasso.get().load(avatar)
                 .into(new Target() {
                     @Override
                     public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {

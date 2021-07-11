@@ -44,10 +44,10 @@ public class CustomTextView extends androidx.appcompat.widget.AppCompatTextView 
         initialise();
     }
 
-    public CustomTextView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
-        super(context, attrs, defStyleAttr, defStyleRes);
-        initialise();
-    }
+//    public CustomTextView(Context context, @Nullable AttributeSet attrs, int defStyleAttr, int defStyleRes) {
+//        super(context, attrs, defStyleAttr, defStyleRes);
+//        initialise();
+//    }
 
     private void initialise() {
         mTestPaint = new Paint();

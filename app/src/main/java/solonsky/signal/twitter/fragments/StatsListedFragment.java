@@ -48,7 +48,7 @@ public class StatsListedFragment extends Fragment {
         TextView mTxtSubtitle = (TextView) viewHierarchy.findViewById(R.id.txt_stats_subtitle);
 
         if (AppData.ME != null) {
-            Picasso.with(getContext()).load(AppData.ME.getProfileBannerImageUrl()).into(mBtnBackdrop);
+            Picasso.get().load(AppData.ME.getProfileBannerImageUrl()).into(mBtnBackdrop);
             mTxtSubtitle.setText(getString(R.string.stats_listed) + " " + AppData.ME.getListedCount());
             mTxtTitle.setText(AppData.ME.getName());
         }

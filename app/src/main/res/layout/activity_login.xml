@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data>
-        <variable name="model" type="solonsky.signal.twitter.viewmodels.LoginViewModel" />
-        <variable name="click" type="solonsky.signal.twitter.viewmodels.LoginViewModel.LoginClickHandler" />
-    </data>
+<!--    <data>-->
+<!--        <variable name="model" type="solonsky.signal.twitter.viewmodels.LoginViewModel" />-->
+<!--        <variable name="click" type="solonsky.signal.twitter.viewmodels.LoginViewModel.LoginClickHandler" />-->
+<!--    </data>-->
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -116,16 +116,15 @@
             android:stateListAnimator="@null"
             android:text="@string/login_sign_in"
             android:textColor="@color/white"
-            android:onClick="@{click::onLoginClick}"
             android:textSize="14dp"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true" />
 
-        <com.twitter.sdk.android.core.identity.TwitterLoginButton
-            android:id="@+id/btn_login_twitter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"/>
+<!--        <com.twitter.sdk.android.core.identity.TwitterLoginButton-->
+<!--            android:id="@+id/btn_login_twitter"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:visibility="gone"/>-->
 
     </RelativeLayout>
 </layout>

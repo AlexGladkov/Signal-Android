@@ -83,7 +83,7 @@ public class ImageStaggeredAdapter extends RecyclerView.Adapter<ImageStaggeredAd
 
         Context context = holder.mBinding.getRoot().getContext();
         if (imageHeight > 0 || imageWidth > 0) {
-            Picasso.with(mContext).load(model.getImageUrl())
+            Picasso.get().load(model.getImageUrl())
                     .resize(imageWidth, imageHeight).centerCrop()
                     .transform(new CirclePicasso(
                             Utilities.convertDpToPixel(4, context),

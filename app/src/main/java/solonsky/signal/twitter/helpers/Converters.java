@@ -58,13 +58,13 @@ public class Converters {
     @BindingAdapter({"imageUrl"})
     public static void loadImage(ImageView imageView, String v) {
         if (v == null || v.equals("")) return;
-        Picasso.with(imageView.getContext()).load(v).into(imageView);
+        Picasso.get().load(v).into(imageView);
     }
 
     @BindingAdapter({"imageSlightlyUrl"})
     public static void loadImageSlightly(ImageView imageView, String v) {
         if (v == null || v.equals("")) return;
-        Picasso.with(imageView.getContext())
+        Picasso.get()
                 .load(v)
                 .transform(new CirclePicasso(Utilities.convertDpToPixel(2, imageView.getContext()),
                             Utilities.convertDpToPixel(0.5f, imageView.getContext()),
@@ -78,7 +78,7 @@ public class Converters {
     @BindingAdapter({"imageRoundUrl"})
     public static void loadRoundImage(ImageView imageView, String v) {
         if (v == null || v.equals("")) return;
-        Picasso.with(imageView.getContext()).load(v)
+        Picasso.get().load(v)
                 .tag(imageView.getContext())
                 .transform(new RoundedTransformation(50, (int) Utilities.convertDpToPixel(0.5f,
                         imageView.getContext())))
@@ -94,7 +94,7 @@ public class Converters {
             imageView.setVisibility(View.GONE);
             return;
         }
-        Picasso.with(imageView.getContext()).load(v)
+        Picasso.get().load(v)
                 .resize((int) Utilities.convertDpToPixel(240, imageView.getContext()),
                         (int) Utilities.convertDpToPixel(135, imageView.getContext()))
                 .centerCrop()

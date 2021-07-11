@@ -102,7 +102,6 @@
                         android:clipToPadding="false"
                         android:overScrollMode="never"
                         android:paddingBottom="16dp"
-                        android:visibility="@{model.state == appData.UI_STATE_VISIBLE ? v.VISIBLE : v.GONE}"
                         app:listConfig="@{model.listConfig}" />
 
                 </FrameLayout>

@@ -77,7 +77,7 @@ public class MediaStaggeredAdapter extends RecyclerView.Adapter<MediaStaggeredAd
                 break;
         }
 
-        Picasso.with(mActivity.getApplicationContext()).load(model.getPreviewUrl().equals("") ?
+        Picasso.get().load(model.getPreviewUrl().equals("") ?
                 model.getImageUrl() : model.getPreviewUrl())
                 .resize(imageWidth, imageHeight).centerCrop()
                 .into(holder.mBinding.imgStaggeredMain, new Callback() {

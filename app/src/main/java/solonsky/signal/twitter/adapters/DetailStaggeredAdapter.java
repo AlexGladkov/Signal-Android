@@ -76,7 +76,7 @@ public class DetailStaggeredAdapter extends RecyclerView.Adapter<DetailStaggered
                 imageWidth = containerWidth / 2;
                 break;
         }
-        Picasso.with(mActivity.getApplicationContext()).load(model.getPreviewUrl().equals("") ?
+        Picasso.get().load(model.getPreviewUrl().equals("") ?
                 model.getImageUrl() : model.getPreviewUrl())
                 .resize(imageWidth, imageHeight).centerCrop()
                 .into(holder.mBinding.imgStaggeredMain, new Callback() {

@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
 
 import com.wang.avi.AVLoadingIndicatorView;
 

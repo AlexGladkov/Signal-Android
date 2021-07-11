@@ -40,6 +40,8 @@ class SplashActivity: MvpAppCompatActivity(), SplashView {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        mPresenter.initState()
+
         if (App.getInstance().isNightEnabled) {
             setTheme(R.style.ActivityThemeDark)
         } else {

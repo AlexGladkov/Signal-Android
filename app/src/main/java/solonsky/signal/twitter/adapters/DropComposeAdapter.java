@@ -69,7 +69,7 @@ public class DropComposeAdapter extends BaseAdapter {
         final ImageView imgIcon = (ImageView) convertView.findViewById(R.id.menu_compose_icon);
         final TextView txtTitle = (TextView) convertView.findViewById(R.id.menu_compose_text);
 
-        Picasso.with(imgIcon.getContext()).load(item.getImageUrl()).into(imgIcon);
+        Picasso.get().load(item.getImageUrl()).into(imgIcon);
         txtTitle.setText(item.getText());
 
         convertView.setOnClickListener(new View.OnClickListener() {

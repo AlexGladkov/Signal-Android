@@ -1,6 +1,8 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 30
@@ -38,7 +40,6 @@ android {
 
     dataBinding {
         enabled = true
-        version '2.3.0'
     }
 
     sourceSets {
@@ -138,9 +139,10 @@ dependencies {
     implementation("com.github.terrakok:cicerone:7.0")
 
     // Room
-    String roomVersion = '1.1.1'
-    implementation "android.arch.persistence.room:runtime:$roomVersion"
-    annotationProcessor "android.arch.persistence.room:compiler:$roomVersion"
+    def room_version = "2.3.0"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
 
     // Dagger
     implementation 'net.sourceforge.htmlcleaner:htmlcleaner:2.24'
@@ -166,7 +168,7 @@ dependencies {
     //SwipyRefreshLayout
     implementation 'com.github.orangegangsters:swipy:1.2.3@aar'
 
-    annotationProcessor 'com.android.databinding:compiler:3.1.4'
+    kapt 'com.android.databinding:compiler:3.1.4'
 
     //дополнительные возможности для Android Kotlin
     implementation 'com.pawegio.kandroid:kandroid:0.5.0@aar'
@@ -174,7 +176,7 @@ dependencies {
     //MVP
     String moxyVersion = '2.2.2'
     implementation "com.github.moxy-community:moxy:$moxyVersion"
-    annotationProcessor "com.github.moxy-community:moxy-compiler:$moxyVersion"
+    kapt "com.github.moxy-community:moxy-compiler:$moxyVersion"
     implementation "com.github.moxy-community:moxy-androidx:$moxyVersion"
 
     //RX
@@ -182,14 +184,21 @@ dependencies {
     implementation 'io.reactivex:rxandroid:1.2.1'
 
     //Depency Injection
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.37'
-    implementation 'com.google.dagger:dagger:2.37'
+    def dagger_version = '2.35.1'
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    implementation "com.google.dagger:dagger:$dagger_version"
+
+    implementation "com.google.dagger:dagger-android:$dagger_version"
+    implementation"com.google.dagger:dagger-android-support:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+
+
     provided 'org.glassfish:javax.annotation:10.0-b28'
 
     //ActiveAndroid DB
     implementation 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
 
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
+    kapt 'com.github.bumptech.glide:compiler:4.12.0'
     testImplementation 'junit:junit:4.13.2'
     implementation 'com.zhihu.android:matisse:0.5.3-beta3'
     implementation 'org.jetbrains.kotlin:kotlin-reflect:1.5.20'

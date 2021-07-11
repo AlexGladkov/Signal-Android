@@ -84,7 +84,7 @@ public class ImageHorizontalAdapter extends RecyclerView.Adapter<ImageHorizontal
                         ))
                         .into(holder.mBinding.imageImgMain);
             } else {
-                Picasso.with(mContext).load(imageFile)
+                Picasso.get().load(imageFile)
                         .resize((int) Utilities.convertDpToPixel(64, mContext),
                                 (int) Utilities.convertDpToPixel(64, mContext))
                         .centerCrop()

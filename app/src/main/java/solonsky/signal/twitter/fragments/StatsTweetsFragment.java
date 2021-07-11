@@ -76,7 +76,7 @@ public class StatsTweetsFragment extends Fragment {
         });
 
         if (AppData.ME != null) {
-            Picasso.with(getContext()).load(AppData.ME.getProfileBannerImageUrl()).into(mImgBackdrop);
+            Picasso.get().load(AppData.ME.getProfileBannerImageUrl()).into(mImgBackdrop);
             mTxtSubtitle.setText(getString(R.string.stats_tweets) + " " + AppData.ME.getStatusesCount());
             mTxtTitle.setText(AppData.ME.getName());
 

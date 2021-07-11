@@ -211,7 +211,7 @@ public class PagerImageFragment extends Fragment {
 //            }
 //        });
 
-        Picasso.with(getContext()).load(url).into(imageView);
+        Picasso.get().load(url).into(imageView);
         return viewHierarchy;
     }
 

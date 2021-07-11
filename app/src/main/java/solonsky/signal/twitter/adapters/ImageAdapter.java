@@ -50,7 +50,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         holder.mBinding.setModel(model);
         int containerWidth = Utilities.getScreenWidth(mActivity) / 2;
 
-        Picasso.with(mContext).load(model.getPreviewUrl().equals("") ?
+        Picasso.get().load(model.getPreviewUrl().equals("") ?
                 model.getImageUrl() : model.getPreviewUrl())
                 .resize(containerWidth, containerWidth)
                 .centerCrop()

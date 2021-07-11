@@ -2,7 +2,6 @@ package solonsky.signal.twitter.overlays;
 
 import android.animation.ValueAnimator;
 import android.app.Activity;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.animation.Animation;
@@ -110,7 +109,7 @@ public class ImageActionsOverlay {
 
         imageViewer.show();
 
-        Picasso.with(mActivity.getApplicationContext())
+        Picasso.get()
                 .load(statusModel.getUser().getOriginalProfileImageURL())
                 .into((ImageView) overlay.findViewById(R.id.img_content_avatar));
 

@@ -9,19 +9,24 @@ import androidx.room.Room;
 import androidx.room.migration.Migration;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
+import javax.inject.Inject;
+
+import dagger.Component;
+import dagger.android.AndroidInjector;
+import dagger.android.DaggerApplication;
+import dagger.android.DispatchingAndroidInjector;
+import dagger.android.HasAndroidInjector;
+import dagger.android.support.DaggerAppCompatActivity;
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.di.AppComponent;
+import solonsky.signal.twitter.di.DaggerAppComponent;
 import solonsky.signal.twitter.di.modules.LocalNavigationModule;
 import solonsky.signal.twitter.libs.AppVisibilityDetector;
 import solonsky.signal.twitter.room.AppDatabase;
 import solonsky.signal.twitter.room.RoomContract;
 import twitter4j.conf.ConfigurationBuilder;
 
-/**
- * Created by neura on 10.06.17.
- */
-
-public class App extends Application {
+public class App extends Application{
     public static final String TAG = "App";
     private static volatile App instance;
     private boolean isNightEnabled = false;
@@ -76,7 +81,6 @@ public class App extends Application {
                 App.this.setmIsBackground(true);
             }
         });
-
         //We load the Night State here
         SharedPreferences mSharedPreferences = getSharedPreferences(getString(R.string.app_name), 0);
         this.isNightEnabled = mSharedPreferences.getBoolean("NIGHT_MODE", true);
@@ -109,4 +113,5 @@ public class App extends Application {
     public ConfigurationBuilder getConfigurationBuilder() {
         return configurationBuilder;
     }
+
 }

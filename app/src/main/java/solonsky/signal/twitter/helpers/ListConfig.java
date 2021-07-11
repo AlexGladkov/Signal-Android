@@ -258,7 +258,7 @@ public class ListConfig {
      * The provider of LayoutManager for RecyclerView
      */
     public interface LayoutManagerProvider {
-        LinearLayoutManager get(Context context);
+        RecyclerView.LayoutManager get(Context context);
     }
 
     /**
@@ -266,7 +266,7 @@ public class ListConfig {
      */
     public static class SimpleLinearLayoutManagerProvider implements LayoutManagerProvider {
         @Override
-        public LinearLayoutManager get(Context context) {
+        public RecyclerView.LayoutManager get(Context context) {
             return new LinearLayoutManager(context);
         }
     }
@@ -275,7 +275,7 @@ public class ListConfig {
         private static final String TAG = SpeedyLinearLayoutManagerProvider.class.getSimpleName();
 
         @Override
-        public LinearLayoutManager get(Context context) {
+        public RecyclerView.LayoutManager get(Context context) {
             Log.e(TAG, "Speedy manager created");
             return new SpeedyLinearLayoutManager(context);
         }
@@ -283,14 +283,14 @@ public class ListConfig {
 
     public static class RefreshLinearLayoutManagerProvider implements LayoutManagerProvider {
         @Override
-        public LinearLayoutManager get(Context context) {
+        public RecyclerView.LayoutManager get(Context context) {
             return new LinearLayoutManager(context);
         }
     }
 
     public static class SimpleHorizontalLayoutManagerProvider implements LayoutManagerProvider {
         @Override
-        public LinearLayoutManager get(Context context) {
+        public RecyclerView.LayoutManager get(Context context) {
             return new FancyLinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
         }
     }
@@ -300,7 +300,7 @@ public class ListConfig {
      */
     public static class ReversedLinearLayoutManagerProvider implements LayoutManagerProvider {
         @Override
-        public LinearLayoutManager get(Context context) {
+        public RecyclerView.LayoutManager get(Context context) {
             LinearLayoutManager mLayoutManager = new LinearLayoutManager(context);
             mLayoutManager.setReverseLayout(true);
             mLayoutManager.setStackFromEnd(true);
@@ -324,7 +324,7 @@ public class ListConfig {
         }
 
         @Override
-        public LinearLayoutManager get(Context context) {
+        public RecyclerView.LayoutManager get(Context context) {
             GridLayoutManager layoutManager = new GridLayoutManager(context, mSpanCount);
             if (mSpanSizeLookup != null) layoutManager.setSpanSizeLookup(mSpanSizeLookup);
             return layoutManager;
@@ -347,7 +347,7 @@ public class ListConfig {
         }
 
         @Override
-        public LinearLayoutManager get(Context context) {
+        public RecyclerView.LayoutManager get(Context context) {
             return new StaggeredGridLayoutManager(mSpanCount, mOrientation);
         }
     }

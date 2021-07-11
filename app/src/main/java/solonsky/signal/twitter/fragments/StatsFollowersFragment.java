@@ -50,7 +50,7 @@ public class StatsFollowersFragment extends Fragment {
         userModels = new ArrayList<>();
 
         if (AppData.ME != null) {
-            Picasso.with(getContext()).load(AppData.ME.getProfileBannerImageUrl()).into(mBtnBackdrop);
+            Picasso.get().load(AppData.ME.getProfileBannerImageUrl()).into(mBtnBackdrop);
 
             userModels.add(new UserModel(AppData.ME.getId(), AppData.ME.getProfileImageUrl(), AppData.ME.getName(),
                     "@" + AppData.ME.getScreenName(), true, false, false));

@@ -46,7 +46,7 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
     private final String TAG = "LOGINACTIVITY";
     private LoginActivity mActivity;
     private TwitterAuthClient twitterAuthClient;
-    private ActivityLoginBinding binding;
+//    private ActivityLoginBinding binding;
 
     @InjectPresenter
     LoginPresenter presenter;
@@ -56,44 +56,44 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
         super.onCreate(savedInstanceState);
 
         final FileWork fileWork = new FileWork(getApplicationContext());
-
+        setContentView(R.layout.activity_login); //test
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
         Utilities.setWindowFlag(this, WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS, false);
         getWindow().setStatusBarColor(Color.parseColor("#33000000"));
 
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
+//        binding = DataBindingUtil.setContentView(this, R.layout.activity_login);
         mActivity = this;
 
-        binding.btnLoginTwitter.setCallback(new Callback<TwitterSession>() {
-            @Override
-            public void success(Result<TwitterSession> result) {
-                final Handler handler = new Handler();
-                TwitterSession session = TwitterCore.getInstance().getSessionManager().getActiveSession();
-                final TwitterAuthToken authToken = session.getAuthToken();
-                AppData.CLIENT_TOKEN = (authToken.token);
-                AppData.CLIENT_SECRET = (authToken.secret);
-
-                final AsyncTwitter asyncTwitter = Utilities.getAsyncTwitter();
-                asyncTwitter.addListener(new TwitterAdapter() {
-                    @Override
-                    public void lookedupUsers(ResponseList<twitter4j.User> users) {
-                        super.lookedupUsers(users);
-                        /* Save user for next performance */
-                        User user = User.getFromUserInstance(users.get(0));
-                        AppData.ME = (user);
-                        fileWork.writeToFile(String.valueOf(AppData.ME.getId()), FileNames.USERS_LAST_ID);
-                        fileWork.writeToFile(authToken.token, FileNames.CLIENT_TOKEN);
-                        fileWork.writeToFile(authToken.secret, FileNames.CLIENT_SECRET);
-
-                        /* Create configuration user for notifications and bottom tabs */
-                        AppData.userConfiguration = (ConfigurationUserModel.getDefaultInstance(user,
-                                AppData.CONSUMER_KEY, AppData.CONSUMER_SECRET, authToken.token, authToken.secret));
-
-                        AppData.configurationUserModels.add(AppData.userConfiguration);
-                        ConfigurationUserModel.saveData();
-
-                        presenter.prepareSignal(users.get(0));
-
+//        binding.btnLoginTwitter.setCallback(new Callback<TwitterSession>() {
+//            @Override
+//            public void success(Result<TwitterSession> result) {
+//                final Handler handler = new Handler();
+//                TwitterSession session = TwitterCore.getInstance().getSessionManager().getActiveSession();
+//                final TwitterAuthToken authToken = session.getAuthToken();
+//                AppData.CLIENT_TOKEN = (authToken.token);
+//                AppData.CLIENT_SECRET = (authToken.secret);
+//
+//                final AsyncTwitter asyncTwitter = Utilities.getAsyncTwitter();
+//                asyncTwitter.addListener(new TwitterAdapter() {
+//                    @Override
+//                    public void lookedupUsers(ResponseList<twitter4j.User> users) {
+//                        super.lookedupUsers(users);
+//                        /* Save user for next performance */
+//                        User user = User.getFromUserInstance(users.get(0));
+//                        AppData.ME = (user);
+//                        fileWork.writeToFile(String.valueOf(AppData.ME.getId()), FileNames.USERS_LAST_ID);
+//                        fileWork.writeToFile(authToken.token, FileNames.CLIENT_TOKEN);
+//                        fileWork.writeToFile(authToken.secret, FileNames.CLIENT_SECRET);
+//
+//                        /* Create configuration user for notifications and bottom tabs */
+//                        AppData.userConfiguration = (ConfigurationUserModel.getDefaultInstance(user,
+//                                AppData.CONSUMER_KEY, AppData.CONSUMER_SECRET, authToken.token, authToken.secret));
+//
+//                        AppData.configurationUserModels.add(AppData.userConfiguration);
+//                        ConfigurationUserModel.saveData();
+//
+//                        presenter.prepareSignal(users.get(0));
+/***************************************************************************************/
 //                        handler.post(new Runnable() {
 //                            @Override
 //                            public void run() {
@@ -108,7 +108,7 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
 //                            }
 //                        });
                     }
-
+/**********************************************************************************
                     @Override
                     public void onException(twitter4j.TwitterException te, TwitterMethod method) {
                         super.onException(te, method);
@@ -133,19 +133,19 @@ public class LoginActivity extends MvpAppCompatActivity implements LoginView {
             }
         });
 
-        binding.setModel(new LoginViewModel());
-        binding.setClick(new LoginViewModel.LoginClickHandler() {
-            @Override
-            public void onLoginClick(View v) {
-                binding.btnLoginTwitter.performClick();
-            }
-        });
+//        binding.setModel(new LoginViewModel());
+//        binding.setClick(new LoginViewModel.LoginClickHandler() {
+//            @Override
+//            public void onLoginClick(View v) {
+//                binding.btnLoginTwitter.performClick();
+//            }
+//        });
     }
-
+**********************************************************************************/
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        binding.btnLoginTwitter.onActivityResult(requestCode, resultCode, data);
+//        binding.btnLoginTwitter.onActivityResult(requestCode, resultCode, data);
     }
 
     // MARK: - View implementation

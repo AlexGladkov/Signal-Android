@@ -87,7 +87,7 @@ public class ContentFragment extends Fragment {
     public void setContentImage(String path) {
         if (mImgContent != null) {
             Log.e(TAG, "path - " + path);
-            Picasso.with(getContext()).load(path).into(mImgContent, new Callback() {
+            Picasso.get().load(path).into(mImgContent, new Callback() {
                 @Override
                 public void onSuccess() {
                     mViewBackground.setBackgroundColor(Utilities.getAverageColor(((BitmapDrawable)mImgContent.getDrawable()).getBitmap()));

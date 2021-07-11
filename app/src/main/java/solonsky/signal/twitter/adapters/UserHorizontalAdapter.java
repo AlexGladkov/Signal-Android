@@ -90,7 +90,7 @@ public class UserHorizontalAdapter extends RecyclerView.Adapter<RecyclerView.Vie
                     0 : (int) Utilities.convertDpToPixel(0.5f, mContext));
 
             if (model.getAvatarUrl().equals("")) model.setAvatarUrl("blabla"); // Path must not be empty
-            Picasso.with(mContext).load(model.getAvatarUrl()).placeholder(isNight ?
+            Picasso.get().load(model.getAvatarUrl()).placeholder(isNight ?
                     R.drawable.ic_generic_avatar_t1 : R.drawable.ic_generic_avatar_t2)
                     .into(realHolder.mBinding.userCivAvatar);
 
