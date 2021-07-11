@@ -22,6 +22,7 @@ import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
+import moxy.MvpAppCompatFragment;
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.api.NotificationsApi;
 import solonsky.signal.twitter.data.LoggedData;
@@ -40,7 +41,7 @@ import solonsky.signal.twitter.viewmodels.NotificationsViewModel;
  * Created by neura on 19.05.17.
  */
 
-public class NotificationsFragment extends Fragment implements SmartTabLayout.TabProvider, FragmentCounterListener {
+public class NotificationsFragment extends MvpAppCompatFragment implements SmartTabLayout.TabProvider, FragmentCounterListener {
     private final String TAG = NotificationsFragment.class.getSimpleName();
     private int CURRENT_POSITION = 0;
 

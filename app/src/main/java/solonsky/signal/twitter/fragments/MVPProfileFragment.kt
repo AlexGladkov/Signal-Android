@@ -17,14 +17,13 @@ import androidx.core.widget.NestedScrollView
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.arellomobile.mvp.MvpAppCompatFragment
-import com.arellomobile.mvp.MvpFragment
-import com.arellomobile.mvp.presenter.InjectPresenter
 import com.ogaclejapan.smarttablayout.SmartTabLayout
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_profile.*
+import moxy.MvpAppCompatFragment
+import moxy.presenter.InjectPresenter
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.activities.*
 import solonsky.signal.twitter.adapters.SimplePagerAdapter
@@ -43,7 +42,7 @@ import java.util.*
 /**
  * Created by sunwi on 28.11.2017.
  */
-class MVPProfileFragment: MvpFragment(), SmartTabLayout.TabProvider, ProfileView {
+class MVPProfileFragment: MvpAppCompatFragment(), SmartTabLayout.TabProvider, ProfileView {
     private val TAG: String = MVPProfileFragment::class.java.simpleName
 
     @InjectPresenter
@@ -68,7 +67,7 @@ class MVPProfileFragment: MvpFragment(), SmartTabLayout.TabProvider, ProfileView
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
             inflater.inflate(R.layout.activity_profile, container, false)
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         (activity as LoggedActivity).viewModel.toolbarState = AppData.TOOLBAR_LOGGED_PROFILE
@@ -192,14 +191,14 @@ class MVPProfileFragment: MvpFragment(), SmartTabLayout.TabProvider, ProfileView
     }
 
     override fun setupUser(user: User, homeUser: Boolean) {
-        Picasso.with(context)
+        Picasso.get()
                 .load(user.originalProfileImageURL)
                 .into(img_profile_avatar_image)
 
         val screenWidth = Utilities.getScreenWidth(activity)
         val bannerHeight = Utilities.convertDpToPixel(186f, activity)
 
-        Picasso.with(context)
+        Picasso.get()
                 .load(user.profileBannerImageUrl)
                 .resize(screenWidth, bannerHeight.toInt())
                 .centerCrop()
@@ -230,26 +229,26 @@ class MVPProfileFragment: MvpFragment(), SmartTabLayout.TabProvider, ProfileView
             when (currentPosition) {
                 0 -> {
                     AppData.CURRENT_USER = user
-                    activity.startActivity(Intent(context, StatsTweetsActivity::class.java))
-                    activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                    requireActivity().startActivity(Intent(context, StatsTweetsActivity::class.java))
+                    requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 }
                 1 -> {
                     AppData.CURRENT_USER = user
-                    activity.startActivity(Intent(context, StatsLikesActivity::class.java))
-                    activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                    requireActivity().startActivity(Intent(context, StatsLikesActivity::class.java))
+                    requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 }
                 2 -> {
                     AppData.CURRENT_USER = user
-                    activity.startActivity(Intent(context, StatsImagesActivity::class.java))
-                    activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                    requireActivity().startActivity(Intent(context, StatsImagesActivity::class.java))
+                    requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 }
             }
         }
 
         btn_profile_settings.setOnClickListener {
             AppData.CURRENT_USER = user
-            activity.startActivity(Intent(context, ProfileSettingsActivity::class.java))
-            activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            requireActivity().startActivity(Intent(context, ProfileSettingsActivity::class.java))
+            requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }
 
         /**

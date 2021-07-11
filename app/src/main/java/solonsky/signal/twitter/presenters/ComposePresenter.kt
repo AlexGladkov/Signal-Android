@@ -1,7 +1,7 @@
 package solonsky.signal.twitter.presenters
 
-import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
+import moxy.InjectViewState
+import moxy.MvpPresenter
 import solonsky.signal.twitter.models.User
 import solonsky.signal.twitter.models.UserModel
 import solonsky.signal.twitter.providers.ComposeProvider

@@ -40,11 +40,15 @@ class HeaderStatsFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = DataBindingUtil.inflate(inflater!!, R.layout.fragment_profile_stats, container, false)
 
-        if (arguments != null && arguments.get(User.TAG) != null) {
-            val user = arguments.get(User.TAG) as User
+        if (arguments != null && arguments?.get(User.TAG) != null) {
+            val user = arguments?.get(User.TAG) as User
             viewModel = ProfileStatsViewModel(Utilities.parseFollowers(user.followersCount, ""),
                     Utilities.parseFollowers(user.friendsCount, ""),
                     Utilities.parseFollowers(user.statusesCount, ""),
@@ -56,26 +60,26 @@ class HeaderStatsFragment : Fragment() {
             binding!!.click = object : ProfileStatsViewModel.ProfileStatsClickHandler {
                 override fun onFollowersClick(view: View) {
                     AppData.CURRENT_USER = user
-                    activity.startActivity(Intent(context, StatsFollowersActivity::class.java))
-                    activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                    requireActivity().startActivity(Intent(context, StatsFollowersActivity::class.java))
+                    requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 }
 
                 override fun onFollowingClick(view: View) {
                     AppData.CURRENT_USER = user
-                    activity.startActivity(Intent(context, StatsFollowingActivity::class.java))
-                    activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                    requireActivity().startActivity(Intent(context, StatsFollowingActivity::class.java))
+                    requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 }
 
                 override fun onTweetsClick(view: View) {
                     AppData.CURRENT_USER = user
-                    activity.startActivity(Intent(context, StatsTweetsActivity::class.java))
-                    activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                    requireActivity().startActivity(Intent(context, StatsTweetsActivity::class.java))
+                    requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 }
 
                 override fun onListedClick(view: View) {
                     AppData.CURRENT_USER = user
-                    activity.startActivity(Intent(context, StatsListedActivity::class.java))
-                    activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                    requireActivity().startActivity(Intent(context, StatsListedActivity::class.java))
+                    requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                 }
             }
 
@@ -85,7 +89,7 @@ class HeaderStatsFragment : Fragment() {
         return binding!!.root
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 //        if (profileListener != null)
 //            profileListener!!.updateStats()

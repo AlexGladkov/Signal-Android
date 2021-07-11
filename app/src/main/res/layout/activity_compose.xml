@@ -24,6 +24,7 @@
         android:layout_height="match_parent"
         android:background="?attr/backgroundPrimaryColor"
         android:fitsSystemWindows="true"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar

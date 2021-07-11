@@ -57,11 +57,15 @@ class HeaderInfoFragment : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = DataBindingUtil.inflate(inflater!!, R.layout.fragment_profile_info, container, false)
 
-        if (arguments != null && arguments.get(User.TAG) != null) {
-            val user = arguments.get(User.TAG) as User
+        if (arguments != null && arguments?.get(User.TAG) != null) {
+            val user = arguments?.get(User.TAG) as User
 
             var realDescription = user.description
             if (user.descriptionUrlEntities != null) {
@@ -93,19 +97,19 @@ class HeaderInfoFragment : Fragment() {
             val isNight = App.getInstance().isNightEnabled
 
             binding.txtProfileInfoBio.setHashtagModeColor(
-                ContextCompat.getColor(context, if (isNight)
+                ContextCompat.getColor(requireContext(), if (isNight)
                 R.color.dark_tag_color
             else
                 R.color.light_tag_color))
-            binding.txtProfileInfoBio.setMentionModeColor(ContextCompat.getColor(context, if (isNight)
+            binding.txtProfileInfoBio.setMentionModeColor(ContextCompat.getColor(requireContext(), if (isNight)
                 R.color.dark_highlight_color
             else
                 R.color.light_highlight_color))
-            binding.txtProfileInfoBio.setUrlModeColor(ContextCompat.getColor(context, if (isNight)
+            binding.txtProfileInfoBio.setUrlModeColor(ContextCompat.getColor(requireContext(), if (isNight)
                 R.color.dark_highlight_color
             else
                 R.color.light_highlight_color))
-            binding.txtProfileInfoBio.setSelectedStateColor(ContextCompat.getColor(context, if (isNight)
+            binding.txtProfileInfoBio.setSelectedStateColor(ContextCompat.getColor(requireContext(), if (isNight)
                 R.color.dark_secondary_text_color
             else
                 R.color.light_secondary_text_color))
@@ -118,15 +122,15 @@ class HeaderInfoFragment : Fragment() {
                             AutoLinkMode.MODE_MENTION -> {
                                 val intent = Intent(context, MVPProfileActivity::class.java)
                                 intent.putExtra(Flags.PROFILE_SCREEN_NAME, matchedText)
-                                activity.startActivity(intent)
-                                activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                                requireActivity().startActivity(intent)
+                                requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                             }
                             AutoLinkMode.MODE_URL -> Utilities.openLink(matchedText.trim { it <= ' ' }, activity)
                             AutoLinkMode.MODE_HASHTAG -> {
                                 val searchIntent = Intent(context, MVPSearchActivity::class.java)
                                 searchIntent.putExtra(Keys.SearchQuery.value, matchedText)
                                 startActivity(searchIntent)
-                                activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+                                requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
                             }
                             else -> Log.e(TAG, "unhandled touch")
                         }

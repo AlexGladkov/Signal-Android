@@ -8,6 +8,11 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.stfalcon.frescoimageviewer.ImageViewer;

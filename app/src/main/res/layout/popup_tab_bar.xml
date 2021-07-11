@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="@dimen/tabBarPopupWidth"
+    android:theme="@style/ActivityTheme.Primary.Base.Dark"
     android:layout_height="@dimen/tabBarPopupHeight">
 
     <View

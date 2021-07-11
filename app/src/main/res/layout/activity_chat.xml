@@ -30,6 +30,7 @@
         android:background="?attr/backgroundPrimaryColor"
         android:fitsSystemWindows="true"
         android:focusableInTouchMode="true"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
         android:orientation="vertical">
 
         <androidx.appcompat.widget.Toolbar

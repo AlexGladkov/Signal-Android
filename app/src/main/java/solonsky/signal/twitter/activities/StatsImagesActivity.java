@@ -9,6 +9,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.fatboyindustrial.gsonjodatime.Converters;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -71,7 +77,7 @@ public class StatsImagesActivity extends AppCompatActivity {
         mTxtSubtitle.setText(getString(R.string.stats_images));
         mTxtTitle.setText(user.getName());
 
-        Picasso.with(getApplicationContext())
+        Picasso.get()
                 .load(user.getProfileBannerImageUrl())
                 .resize(Utilities.getScreenWidth(this), (int) Utilities.convertDpToPixel(80, getApplicationContext()))
                 .centerCrop()

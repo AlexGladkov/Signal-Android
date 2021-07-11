@@ -1,10 +1,10 @@
 package solonsky.signal.twitter.di.modules
 
+import com.github.terrakok.cicerone.Cicerone
+import com.github.terrakok.cicerone.NavigatorHolder
+import com.github.terrakok.cicerone.Router
 import dagger.Module
 import dagger.Provides
-import ru.terrakok.cicerone.Cicerone
-import ru.terrakok.cicerone.NavigatorHolder
-import ru.terrakok.cicerone.Router
 import javax.inject.Singleton
 
 /**
@@ -21,5 +21,5 @@ class NavModule {
 
     @Provides
     @Singleton
-    fun provideNavigationHolder(): NavigatorHolder = cicerone.navigatorHolder
+    fun provideNavigationHolder(): NavigatorHolder = cicerone.getNavigatorHolder()
 }

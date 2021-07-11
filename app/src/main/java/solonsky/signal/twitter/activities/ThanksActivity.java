@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.helpers.Utilities;
 

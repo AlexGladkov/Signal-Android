@@ -12,6 +12,7 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/srl_direct_main"
         android:layout_width="match_parent"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
         android:layout_height="match_parent">
 
         <RelativeLayout

@@ -10,6 +10,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+
 import java.util.ArrayList;
 
 import solonsky.signal.twitter.R;

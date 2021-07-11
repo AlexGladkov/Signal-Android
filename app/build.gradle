@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 30
@@ -136,13 +135,12 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     // Cicerone
-    implementation 'ru.terrakok.cicerone:cicerone:3.0.0'
+    implementation("com.github.terrakok:cicerone:7.0")
 
     // Room
     String roomVersion = '1.1.1'
     implementation "android.arch.persistence.room:runtime:$roomVersion"
     annotationProcessor "android.arch.persistence.room:compiler:$roomVersion"
-    kapt "android.arch.persistence.room:compiler:$roomVersion"
 
     // Dagger
     implementation 'net.sourceforge.htmlcleaner:htmlcleaner:2.24'
@@ -160,7 +158,7 @@ dependencies {
     implementation 'com.daimajia.swipelayout:library:1.2.0@aar'
     implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.0'
     implementation 'com.anupcowkur:reservoir:3.1.0'
-    implementation 'com.github.jkwiecien:EasyImage:3.2.0'
+    implementation 'com.github.jkwiecien:EasyImage:2.0.2'
     implementation 'com.github.stfalcon:multiimageview:0.1'
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     implementation 'com.wang.avi:library:2.1.3'
@@ -168,26 +166,23 @@ dependencies {
     //SwipyRefreshLayout
     implementation 'com.github.orangegangsters:swipy:1.2.3@aar'
 
-    kapt 'com.android.databinding:compiler:3.1.4'
+    annotationProcessor 'com.android.databinding:compiler:3.1.4'
 
     //дополнительные возможности для Android Kotlin
     implementation 'com.pawegio.kandroid:kandroid:0.5.0@aar'
 
     //MVP
-    String moxyVersion = '1.5.6'
-    implementation "com.arello-mobile:moxy:$moxyVersion"
-    implementation "com.arello-mobile:moxy-android:$moxyVersion"
-    implementation "com.arello-mobile:moxy-app-compat:$moxyVersion"
-    implementation 'tech.schoolhelper:moxy-x-androidx:1.7.0'
-
-    kapt "com.arello-mobile:moxy-compiler:$moxyVersion"
+    String moxyVersion = '2.2.2'
+    implementation "com.github.moxy-community:moxy:$moxyVersion"
+    annotationProcessor "com.github.moxy-community:moxy-compiler:$moxyVersion"
+    implementation "com.github.moxy-community:moxy-androidx:$moxyVersion"
 
     //RX
     implementation 'io.reactivex:rxjava:1.3.8'
     implementation 'io.reactivex:rxandroid:1.2.1'
 
     //Depency Injection
-    kapt 'com.google.dagger:dagger-compiler:2.37'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.37'
     implementation 'com.google.dagger:dagger:2.37'
     provided 'org.glassfish:javax.annotation:10.0-b28'
 

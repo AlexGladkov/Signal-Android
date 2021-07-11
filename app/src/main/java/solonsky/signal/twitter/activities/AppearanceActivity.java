@@ -9,20 +9,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 
-import com.arellomobile.mvp.MvpAppCompatActivity;
-import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.squareup.picasso.Picasso;
 
 import org.joda.time.LocalDateTime;
 
 import java.util.ArrayList;
 
+import moxy.MvpAppCompatActivity;
+import moxy.presenter.InjectPresenter;
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.adapters.SettingsAdapter;
 import solonsky.signal.twitter.databinding.ActivityAppearanceBinding;
@@ -56,6 +57,7 @@ public class AppearanceActivity extends MvpAppCompatActivity implements Configur
     private ActivityAppearanceBinding binding;
 
     @InjectPresenter
+
     ConfigurationsPresenter presenter;
 
     private final String PREVIEW_URL = "http://getsignal.co/images/app/promo-image.png";
@@ -212,7 +214,7 @@ public class AppearanceActivity extends MvpAppCompatActivity implements Configur
             params.width = width;
             params.height = height;
 
-            Picasso.with(getApplicationContext())
+            Picasso.get()
                     .load(PREVIEW_URL)
                     .resize(width, height)
                     .centerCrop()
@@ -228,7 +230,7 @@ public class AppearanceActivity extends MvpAppCompatActivity implements Configur
             binding.appearanceViewPreviewSmall.setVisibility(View.VISIBLE);
             binding.appearanceViewPreviewBig.setVisibility(View.GONE);
 
-            Picasso.with(getApplicationContext())
+            Picasso.get()
                     .load(PREVIEW_URL)
                     .resize((int) Utilities.convertDpToPixel(64, getApplicationContext()),
                             (int) Utilities.convertDpToPixel(64, getApplicationContext()))
@@ -259,14 +261,14 @@ public class AppearanceActivity extends MvpAppCompatActivity implements Configur
             binding.appearanceCivAvatar.setBorderColor(isNight ? Color.parseColor("#00000000") : Color.parseColor("#1A000000"));
             binding.appearanceCivAvatar.setBorderWidth(isNight ? 0 : (int) Utilities.convertDpToPixel(0.5f, getApplicationContext()));
 
-            Picasso.with(getApplicationContext())
+            Picasso.get()
                     .load(AVATAR_URL_SMALL)
                     .into(binding.appearanceCivAvatar);
         } else {
             binding.appearanceCivAvatar.setVisibility(View.GONE);
             binding.appearanceImgAvatar.setVisibility(View.VISIBLE);
 
-            Picasso.with(getApplicationContext())
+            Picasso.get()
                     .load(AVATAR_URL_BIG)
                     .resize((int) Utilities.convertDpToPixel(40, getApplicationContext()),
                             (int) Utilities.convertDpToPixel(40, getApplicationContext()))

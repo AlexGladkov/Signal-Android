@@ -36,7 +36,6 @@
         <attr name="highlightTextColor" format="color" />
         <attr name="selectionTextColor" format="color" />
         <attr name="hintTextColor" format="color" />
-        <attr name="counterTextColor" format="color" />
         <attr name="tagTextColor" format="color" />
         <attr name="profileTextTitleColor" format="color" />
         

@@ -21,6 +21,8 @@
 
     <com.daimajia.swipe.SwipeLayout
         android:id="@+id/sl_detail"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -41,6 +43,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+
             android:background="?attr/backgroundPrimaryColor">
 
             <solonsky.signal.twitter.libs.ResponsiveScrollView

@@ -13,6 +13,11 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+
 import com.anjlab.android.iab.v3.BillingProcessor;
 import com.anjlab.android.iab.v3.TransactionDetails;
 
@@ -201,15 +206,6 @@ public class SupportActivity extends AppCompatActivity implements BillingProcess
                                 break;
 
                             case TIER_3:
-                                viewModel.setTip1(true);
-                                viewModel.setTip2(true);
-                                viewModel.setTip3(true);
-                                viewModel.setStar1(false);
-                                viewModel.setStar2(false);
-                                viewModel.setStar3(true);
-                                binding.txtSupportMainText.setText(getString(R.string.support_main_subtitle_after));
-                                loadButtonsStyle();
-                                break;
 
                             case TEST_IN_APP:
                                 viewModel.setTip1(true);

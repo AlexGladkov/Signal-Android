@@ -7,8 +7,6 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import com.anupcowkur.reservoir.Reservoir
-import com.arellomobile.mvp.MvpAppCompatActivity
-import com.arellomobile.mvp.presenter.InjectPresenter
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.imagepipeline.core.ImagePipelineConfig
 import com.facebook.imagepipeline.decoder.SimpleProgressiveJpegConfig
@@ -21,6 +19,8 @@ import com.twitter.sdk.android.core.Twitter
 import com.twitter.sdk.android.core.TwitterAuthConfig
 import com.twitter.sdk.android.core.TwitterConfig
 import kotlinx.android.synthetic.main.activity_splash.*
+import moxy.MvpAppCompatActivity
+import moxy.presenter.InjectPresenter
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.helpers.*
 import solonsky.signal.twitter.models.ConfigurationModel

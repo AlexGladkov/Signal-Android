@@ -9,6 +9,7 @@
 
     <FrameLayout
         android:id="@+id/img_staggered"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">

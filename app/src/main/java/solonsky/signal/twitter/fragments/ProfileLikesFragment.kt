@@ -45,8 +45,8 @@ class ProfileLikesFragment : Fragment() {
                 true, StatusAdapter.StatusClickListener { searchText, _ ->
             val searchIntent = Intent(context, MVPSearchActivity::class.java)
             searchIntent.putExtra(Keys.SearchQuery.value, searchText)
-            activity.startActivity(searchIntent)
-            activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            requireActivity().startActivity(searchIntent)
+            requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }, TweetActions.MoreCallback { statusModel ->
             val position = likesArray.indexOf(statusModel)
             likesArray.remove(statusModel)

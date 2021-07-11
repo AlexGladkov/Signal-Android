@@ -2,7 +2,7 @@ package solonsky.signal.twitter.holder
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.arellomobile.mvp.MvpDelegate
+import moxy.MvpDelegate
 import org.jetbrains.annotations.Nullable
 
 

@@ -1,8 +1,8 @@
 package solonsky.signal.twitter.presenters
 
 import android.os.Handler
-import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
+import moxy.InjectViewState
+import moxy.MvpPresenter
 import org.joda.time.DateTime
 import solonsky.signal.twitter.helpers.App
 import solonsky.signal.twitter.models.ConfigurationModel
@@ -29,23 +29,23 @@ class ConfigurationsPresenter: MvpPresenter<ConfigurationView>() {
     /** Updates app settings
      * @param model - new app settings model */
     fun updateAppSettings(model: ConfigurationModel) {
-        Thread({
+        Thread {
             App.db.settingsDao().insert(settingsConverter.modelToDb(configurationModel = model))
             handler.post {
                 viewState.settingsUpdated()
             }
-        }).start()
+        }.start()
     }
 
     /** Update current user settings
      * @param model - new user settings model */
     fun updateUserConfiguration(model: ConfigurationUserModel) {
-        Thread({
+        Thread {
             App.db.configurationDao().update(entity = configConverter.modelToDb(model))
             handler.post {
                 viewState.settingsUpdated()
             }
-        }).start()
+        }.start()
     }
 
     /** Add new user model

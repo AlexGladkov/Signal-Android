@@ -9,6 +9,11 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.squareup.picasso.Picasso;
 import com.wang.avi.AVLoadingIndicatorView;
 
@@ -67,7 +72,7 @@ public class StatsListedActivity extends AppCompatActivity {
         user = AppData.CURRENT_USER == null ? AppData.ME : AppData.CURRENT_USER;
         mTxtSubtitle.setText(getString(R.string.stats_listed) + ": " + Utilities.parseFollowers(user.getListedCount(), ""));
         mTxtTitle.setText(user.getName());
-        Picasso.with(getApplicationContext())
+        Picasso.get()
                 .load(user.getProfileBannerImageUrl())
                 .resize(Utilities.getScreenWidth(this), (int) Utilities.convertDpToPixel(80, getApplicationContext()))
                 .centerCrop()

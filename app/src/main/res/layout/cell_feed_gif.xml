@@ -11,6 +11,8 @@
     <com.daimajia.swipe.SwipeLayout
         android:id="@+id/feed_gif_bottom_wrapper"
         android:layout_width="match_parent"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
+
         android:layout_height="wrap_content">
 
         <!-- Bottom View Start-->

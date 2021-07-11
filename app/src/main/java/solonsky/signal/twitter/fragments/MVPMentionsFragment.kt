@@ -9,10 +9,9 @@ import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.OrientationHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.arellomobile.mvp.MvpAppCompatFragment
-import com.arellomobile.mvp.MvpFragment
-import com.arellomobile.mvp.presenter.InjectPresenter
 import kotlinx.android.synthetic.main.fragment_mentions.*
+import moxy.MvpAppCompatFragment
+import moxy.presenter.InjectPresenter
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.adapters.MVPStatusAdapter
 import solonsky.signal.twitter.data.MentionsData
@@ -30,7 +29,7 @@ import java.util.*
  * Created by neura on 03.11.17.
  */
 
-class MVPMentionsFragment : MvpFragment(), MentionsView {
+class MVPMentionsFragment : MvpAppCompatFragment(), MentionsView {
     companion object {
         const val TAG = "MVPMentionsFragment"
 
@@ -50,14 +49,14 @@ class MVPMentionsFragment : MvpFragment(), MentionsView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
             inflater.inflate(R.layout.fragment_mentions, container, false)
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mMentionsPresenter.oldLoadData()
         mMentionsPresenter.isHiddenChanged(false)
 
-        mAdapter.attachActivity(activity)
+        mAdapter.attachActivity(requireActivity())
         recycler_mentions.adapter = mAdapter
-        recycler_mentions.layoutManager = LinearLayoutManager(context, OrientationHelper.VERTICAL, false)
+        recycler_mentions.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         recycler_mentions.setHasFixedSize(true)
 
         recycler_mentions.setOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -93,7 +92,7 @@ class MVPMentionsFragment : MvpFragment(), MentionsView {
         }
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
             mCallback = context as ActivityListener

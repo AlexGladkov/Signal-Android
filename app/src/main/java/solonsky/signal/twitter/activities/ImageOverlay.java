@@ -12,6 +12,8 @@ import android.widget.TextSwitcher;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.squareup.picasso.Picasso;
 import com.stfalcon.frescoimageviewer.ImageViewer;
 
@@ -186,7 +188,7 @@ public class ImageOverlay {
         txtFollowers.setText(String.valueOf(statusModel.getUser().getFollowersCount()) + " followers");
         txtText.setText(statusModel.getText());
 
-        Picasso.with(appCompatActivity.getApplicationContext()).load(statusModel.getUser().getProfileImageUrl()).into(imgAvatar);
+        Picasso.get().load(statusModel.getUser().getProfileImageUrl()).into(imgAvatar);
 
         txtText.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -316,7 +318,7 @@ public class ImageOverlay {
         txtFollowers.setText(String.valueOf(statusModel.getUser().getFollowersCount()) + " followers");
         txtText.setText(statusModel.getText());
 
-        Picasso.with(appCompatActivity.getApplicationContext()).load(statusModel.getUser().getProfileImageUrl()).into(imgAvatar);
+        Picasso.get().load(statusModel.getUser().getProfileImageUrl()).into(imgAvatar);
 
         txtText.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override

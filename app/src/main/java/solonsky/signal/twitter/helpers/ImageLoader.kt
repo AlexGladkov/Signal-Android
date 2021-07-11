@@ -12,7 +12,7 @@ class ImageLoader {
     companion object {
         fun loadImage(url: String?, imageView: ImageView?) {
             if (url == null || imageView == null || url == "") return
-            Picasso.with(imageView.context).load(url).into(imageView)
+            Picasso.get().load(url).into(imageView)
         }
     }
 }

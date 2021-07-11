@@ -5,12 +5,15 @@ import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
 
-import com.arellomobile.mvp.MvpAppCompatActivity;
-import com.arellomobile.mvp.presenter.InjectPresenter;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+
 
 import java.util.ArrayList;
 import java.util.List;
 
+import moxy.MvpAppCompatActivity;
+import moxy.presenter.InjectPresenter;
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.adapters.SettingsAdapter;
 import solonsky.signal.twitter.data.FeedData;

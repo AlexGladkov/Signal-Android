@@ -31,6 +31,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -243,12 +244,12 @@ public class StatusAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
             applyStyle(holder);
 
             if (AppData.appConfiguration.isRoundAvatars()) {
-                Picasso.with(mContext).load(isRetweet ?
+                Picasso.get().load(isRetweet ?
                         statusModel.getRetweetedStatus().getUser().getOriginalProfileImageURL() :
                         statusModel.getUser().getOriginalProfileImageURL())
                         .into(holder.mBinding.statusCivAvatar);
             } else {
-                Picasso.with(mContext).load(isRetweet ?
+                Picasso.get().load(isRetweet ?
                         statusModel.getRetweetedStatus().getUser().getOriginalProfileImageURL() :
                         statusModel.getUser().getOriginalProfileImageURL())
                         .resize((int) Utilities.convertDpToPixel(40, mContext),
@@ -289,7 +290,7 @@ public class StatusAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                             break;
                     }
 
-                    Picasso.with(mContext).load(statusModel.getMediaEntities().get(0).getAsJsonObject()
+                    Picasso.get().load(statusModel.getMediaEntities().get(0).getAsJsonObject()
                             .get("mediaURLHttps").getAsString())
                             .resize((int) Utilities.convertDpToPixel(64, mContext),
                                     (int) Utilities.convertDpToPixel(64, mContext))
@@ -547,7 +548,7 @@ public class StatusAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
                         }
 
                         holder.mBinding.statusFlQuote.setVisibility(View.VISIBLE);
-                        Picasso.with(mContext).load(statusModel.getQuotedStatus().getMediaEntities().get(0).getAsJsonObject()
+                        Picasso.get().load(statusModel.getQuotedStatus().getMediaEntities().get(0).getAsJsonObject()
                                 .get("mediaURLHttps").getAsString())
                                 .resize((int) Utilities.convertDpToPixel(64, mContext),
                                         (int) Utilities.convertDpToPixel(64, mContext))

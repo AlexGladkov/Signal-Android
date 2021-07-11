@@ -4,8 +4,8 @@ import android.content.Intent
 import android.util.Log
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
+import moxy.InjectViewState
+import moxy.MvpPresenter
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.helpers.AppData
 import solonsky.signal.twitter.helpers.Flags

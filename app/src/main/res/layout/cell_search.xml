@@ -12,6 +12,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
         android:onClick="@{click::onItemClick}"
         app:backgroundAttr="@{model.isHighlighted ? R.attr.backgroundHighlightColor : R.attr.backgroundPrimaryColor}" >
         

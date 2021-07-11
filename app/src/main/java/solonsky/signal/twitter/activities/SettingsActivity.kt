@@ -1,24 +1,18 @@
 package solonsky.signal.twitter.activities
 
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.view.WindowManager
-import ru.terrakok.cicerone.Navigator
-import ru.terrakok.cicerone.NavigatorHolder
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import com.github.terrakok.cicerone.*
 
 import javax.inject.Inject
 
-import ru.terrakok.cicerone.Router
-import ru.terrakok.cicerone.commands.Back
-import ru.terrakok.cicerone.commands.Forward
-import ru.terrakok.cicerone.commands.Replace
-import ru.terrakok.cicerone.result.ResultListener
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.databinding.ActivitySettingsBinding
 import solonsky.signal.twitter.helpers.App
@@ -41,11 +35,14 @@ class SettingsActivity : AppCompatActivity() {
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
 
-    private val navigator = Navigator { command ->
-        when (command) {
-            is Back -> {
-                finish()
-                overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left)
+    private val navigator = object : Navigator {
+
+        override fun applyCommands(commands: Array<out Command>) {
+            when (commands.get(0)) {
+                is Back -> {
+                    finish()
+                    overridePendingTransition(R.anim.slide_out_right, R.anim.slide_in_left)
+                }
             }
         }
     }

@@ -2,6 +2,10 @@ package solonsky.signal.twitter.activities;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.databinding.ActivityTweetBinding;
 import solonsky.signal.twitter.helpers.App;

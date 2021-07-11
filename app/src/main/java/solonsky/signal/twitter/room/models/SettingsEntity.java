@@ -1,8 +1,9 @@
 package solonsky.signal.twitter.room.models;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
+
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import solonsky.signal.twitter.helpers.Locales;
 import solonsky.signal.twitter.models.ConfigurationModel;
@@ -15,7 +16,8 @@ import solonsky.signal.twitter.room.contracts.SettingsContract;
 
 @Entity(tableName = RoomContract.SETTINGS_TABLE)
 public class SettingsEntity {
-    @PrimaryKey private long id;
+    @PrimaryKey
+    private long id;
 
     @ColumnInfo(name = SettingsContract.FONT_SIZE) private int fontSize;
     @ColumnInfo(name = SettingsContract.THUMBNAILS) private int thumbnails;

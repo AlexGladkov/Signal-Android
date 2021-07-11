@@ -3,8 +3,7 @@ package solonsky.signal.twitter.base
 import android.content.Context
 import android.os.Bundle
 import android.view.animation.Animation
-import com.arellomobile.mvp.MvpAppCompatFragment
-import com.arellomobile.mvp.MvpFragment
+import moxy.MvpAppCompatFragment
 import solonsky.signal.twitter.interfaces.BackButtonListener
 import solonsky.signal.twitter.interfaces.RouterProvider
 import solonsky.signal.twitter.views.FragmentView
@@ -13,7 +12,7 @@ import solonsky.signal.twitter.views.FragmentView
  * Created by agladkov on 11.01.18.
  * Use this for any child fragment in container (ex. ServiceFragment, ProfileFragment)
  */
-open class BaseChildFragment: MvpFragment(), BackButtonListener {
+open class BaseChildFragment: MvpAppCompatFragment(), BackButtonListener {
     var isAnimationDisabled: Boolean = false
     var isDisabledRecommended: Boolean = false
     private val TAG: String = BaseChildFragment::class.java.simpleName
@@ -49,7 +48,7 @@ open class BaseChildFragment: MvpFragment(), BackButtonListener {
         super.onPause()
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         context?.let {
             if (it is FragmentView)

@@ -5,11 +5,6 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.Fragment
-import android.support.v4.view.PagerAdapter
-import android.support.v4.view.ViewPager
-import android.support.v4.widget.NestedScrollView
-import android.support.v7.widget.PopupMenu
 import android.text.TextUtils
 import android.view.*
 import android.view.animation.AlphaAnimation
@@ -17,13 +12,17 @@ import android.view.animation.Animation
 import android.view.animation.DecelerateInterpolator
 import android.view.animation.Transformation
 import android.widget.*
-import com.arellomobile.mvp.MvpAppCompatActivity
-import com.arellomobile.mvp.presenter.InjectPresenter
+import androidx.core.widget.NestedScrollView
+import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager.widget.ViewPager
 import com.ogaclejapan.smarttablayout.SmartTabLayout
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_profile.*
+import moxy.MvpAppCompatActivity
+import moxy.presenter.InjectPresenter
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.adapters.SimplePagerAdapter
 import solonsky.signal.twitter.api.ActionsApiFactory
@@ -269,7 +268,7 @@ class MVPProfileActivity : MvpAppCompatActivity(), SmartTabLayout.TabProvider, P
     }
 
     override fun showImage(urls: ArrayList<String>, startPosition: Int) {
-        val imageOverlay = ImageOverlay(urls, this@MVPProfileActivity, startPosition)
+        val imageOverlay = ImageOverlay(urls, this, startPosition)
         imageOverlay.setImageOverlayClickHandler(object : ImageOverlay.ImageOverlayClickHandler {
             override fun onBackClick(v: View) {
                 imageOverlay.imageViewer.onDismiss()
@@ -418,14 +417,14 @@ class MVPProfileActivity : MvpAppCompatActivity(), SmartTabLayout.TabProvider, P
 
     override fun setupUser(user: User, homeUser: Boolean) {
         AppData.CURRENT_USER = user
-        Picasso.with(applicationContext)
+        Picasso.get()
                 .load(user.originalProfileImageURL)
                 .into(img_profile_avatar_image)
 
         val screenWidth = Utilities.getScreenWidth(this@MVPProfileActivity)
         val bannerHeight = Utilities.convertDpToPixel(186f, this@MVPProfileActivity)
 
-        Picasso.with(applicationContext)
+        Picasso.get()
                 .load(user.profileBannerImageUrl)
                 .resize(screenWidth, bannerHeight.toInt())
                 .centerCrop()

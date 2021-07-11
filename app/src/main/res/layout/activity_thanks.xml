@@ -3,6 +3,8 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/ActivityTheme.Primary.Base.Dark"
+
     android:background="@color/thanks_color"
     android:id="@+id/rl_thanks_main">
 

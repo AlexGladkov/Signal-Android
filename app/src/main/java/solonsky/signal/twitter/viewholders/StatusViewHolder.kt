@@ -119,14 +119,14 @@ class StatusViewHolder(itemView: View, screenWidth: Int) : RecyclerView.ViewHold
             mView.mvp_status_civ_avatar.visibility = View.VISIBLE
             mView.mvp_status_img_avatar.visibility = View.GONE
 
-            Picasso.with(itemView.context).load(avatarUrl).into(mView.mvp_status_civ_avatar)
+            Picasso.get().load(avatarUrl).into(mView.mvp_status_civ_avatar)
         } else {
             mView.mvp_status_civ_avatar.visibility = View.GONE
             mView.mvp_status_img_avatar.visibility = View.VISIBLE
 
             val size: Int = Utilities.convertDpToPixel(40f, itemView.context).toInt()
             val round = Utilities.convertDpToPixel(4f, itemView.context)
-            Picasso.with(itemView.context).load(avatarUrl)
+            Picasso.get().load(avatarUrl)
                     .resize(size, size).centerCrop().transform(CirclePicasso(round, 0f, 0, R.color.black))
                     .into(mView.mvp_status_img_avatar)
         }
@@ -515,7 +515,7 @@ class StatusViewHolder(itemView: View, screenWidth: Int) : RecyclerView.ViewHold
     override fun setClipboard(text: String) {
         val clipboard = itemView.context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText(itemView.context.getString(R.string.app_name), text)
-        clipboard.primaryClip = clip
+//        clipboard.primaryClip = clip
     }
 
     override fun openSearch(text: String) {
@@ -639,7 +639,7 @@ class StatusViewHolder(itemView: View, screenWidth: Int) : RecyclerView.ViewHold
             }
         }
 
-        Picasso.with(itemView.context).load(imageUrl)
+        Picasso.get().load(imageUrl)
                 .resize(Utilities.convertDpToPixel(64f, itemView.context).toInt(),
                         Utilities.convertDpToPixel(64f, itemView.context).toInt())
                 .centerCrop()

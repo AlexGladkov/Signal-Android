@@ -6,7 +6,6 @@ import android.app.NotificationManager
 import android.content.Context
 import android.content.Intent
 import android.content.res.Configuration
-import android.databinding.DataBindingUtil
 import android.os.Bundle
 
 import solonsky.signal.twitter.api.DirectApi
@@ -29,8 +28,6 @@ import solonsky.signal.twitter.fragments.MVPMentionsFragment
 import solonsky.signal.twitter.fragments.MVPProfileFragment
 
 import android.os.Handler
-import android.support.annotation.ColorRes
-import android.support.v4.app.Fragment
 import android.util.Log
 import android.view.GestureDetector
 import android.view.MotionEvent
@@ -39,27 +36,26 @@ import android.view.WindowManager
 import android.view.animation.AnimationUtils
 import android.widget.RelativeLayout
 import android.widget.Toast
+import androidx.annotation.ColorRes
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 
 import com.anupcowkur.reservoir.Reservoir
-import com.arellomobile.mvp.MvpAppCompatActivity
-import com.arellomobile.mvp.presenter.InjectPresenter
 import com.fatboyindustrial.gsonjodatime.Converters
+import com.github.terrakok.cicerone.*
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
+import com.pawegio.kandroid.d
 import com.twitter.sdk.android.core.Callback
 import com.twitter.sdk.android.core.Result
 import com.twitter.sdk.android.core.TwitterCore
 import com.twitter.sdk.android.core.TwitterSession
 import kotlinx.android.synthetic.main.activity_logged.*
+import moxy.MvpAppCompatActivity
+import moxy.presenter.InjectPresenter
 
 import org.joda.time.LocalTime
-import ru.terrakok.cicerone.Navigator
-import ru.terrakok.cicerone.NavigatorHolder
-import ru.terrakok.cicerone.Router
-import ru.terrakok.cicerone.commands.Back
-import ru.terrakok.cicerone.commands.Replace
-import ru.terrakok.cicerone.commands.SystemMessage
-import ru.terrakok.cicerone.result.ResultListener
 
 import java.io.IOException
 
@@ -182,23 +178,41 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ConfigurationView, Ac
             StreamData.setInstance(null)
         }
 
-        val fragmentTransaction = supportFragmentManager.beginTransaction()
+        val fragmentTransaction = FragmentActivity().supportFragmentManager.beginTransaction()
         if (feedFragment != null && feedFragment!!.isAdded)
-            fragmentTransaction.remove(feedFragment)
+            feedFragment?.let {
+                fragmentTransaction.remove(it)
+            }
         if (mentionsFragment != null && mentionsFragment!!.isAdded)
-            fragmentTransaction.remove(mentionsFragment)
+            mentionsFragment?.let {
+                fragmentTransaction.remove(it)
+
+            }
         if (notificationsFragment != null && notificationsFragment!!.isAdded)
-            fragmentTransaction.remove(notificationsFragment)
+            notificationsFragment?.let {
+                fragmentTransaction.remove(it)
+
+            }
         if (likesFragment != null && likesFragment!!.isAdded)
-            fragmentTransaction.remove(likesFragment)
+            likesFragment?.let {
+                fragmentTransaction.remove(it)
+            }
         if (searchFragment != null && searchFragment!!.isAdded)
-            fragmentTransaction.remove(searchFragment)
+            searchFragment?.let {
+                fragmentTransaction.remove(it)
+            }
         if (directFragment != null && directFragment!!.isAdded)
-            fragmentTransaction.remove(directFragment)
+            directFragment?.let {
+                fragmentTransaction.remove(it)
+            }
         if (muteFragment != null && muteFragment!!.isAdded)
-            fragmentTransaction.remove(muteFragment)
+            muteFragment?.let {
+                fragmentTransaction.remove(it)
+            }
         if (profileFragment != null && profileFragment!!.isAdded)
-            fragmentTransaction.remove(profileFragment)
+            profileFragment?.let {
+                fragmentTransaction.remove(it)
+            }
         fragmentTransaction.commit()
         System.gc()
     }
@@ -396,7 +410,7 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ConfigurationView, Ac
         val switcherOverlay = AccountSwitcherOverlay(this, routerMain)
         switcherOverlay.createSwitcher()
         viewModel = LoggedViewModel(switcherOverlay.getmAdapter(), applicationContext, feedCount)
-        routerMain.setResultListener(Codes.Locale.value) { resultData -> Log.e(TAG, "result $resultData") }
+        routerMain.setResultListener(Codes.Locale.value.toString()) { resultData -> Log.e(TAG, "result $resultData") }
 
         if (AppData.ME != null)
             viewModel.avatar = AppData.ME.originalProfileImageURL
@@ -618,20 +632,30 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ConfigurationView, Ac
         System.gc()
     }
 
-    private val navigator = Navigator { command ->
-        when (command) {
-            is Back -> {
-                Log.e(TAG, "back")
-                finish()
-            }
-            is SystemMessage -> Toast.makeText(applicationContext, command.message, Toast.LENGTH_SHORT).show()
-            is Replace -> {
-                when (command.screenKey) {
-                    ScreenKeys.Splash.value -> {
-                        Log.e(TAG, "splash")
-                    }
-                }
-            }
+    private val navigator = object : Navigator {
+
+        //TODO FIRST FIX BUG
+        override fun applyCommands(commands: Array<out Command>) {
+//            when (commands.iterator().next()) {
+//                is Back -> {
+//                    Log.e(TAG, "back")
+//                    finish()
+//                }
+//                is SystemMessage -> Toast.makeText(
+//                    applicationContext,
+//                    command.message,
+//                    Toast.LENGTH_SHORT
+//                ).show()
+//                is Replace -> {
+//                    when (command.screenKey) {
+//                        ScreenKeys.Splash.value -> {
+//                            Log.e(TAG, "splash")
+//                        }
+//                        else -> {
+//                        }
+//                    }
+//                }
+//            }
         }
     }
 
@@ -855,87 +879,110 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ConfigurationView, Ac
                 0 -> {
                     if (feedFragment == null)
                         feedFragment = FeedFragment()
-                    if (!feedFragment!!.isAdded)
-                        fragmentTransaction.add(R.id.fl_logged_main,
-                                feedFragment, feedFragment!!.tag)
-                    lastFragment = feedFragment
+                    feedFragment?.let {
+                        if(!it.isAdded)
+                            fragmentTransaction.add(R.id.fl_logged_main,
+                                it, feedFragment!!.tag)
+                        lastFragment = it
+
+                    }
                 }
 
                 1 -> {
                     if (mentionsFragment == null)
                         mentionsFragment = MVPMentionsFragment.newInstance()
-                    if (!mentionsFragment!!.isAdded)
-                        fragmentTransaction.add(R.id.fl_logged_main,
-                                mentionsFragment, mentionsFragment!!.tag)
-                    lastFragment = mentionsFragment
+                    mentionsFragment?.let {
+                        if(!it.isAdded)
+                            fragmentTransaction.add(R.id.fl_logged_main,
+                                it, mentionsFragment!!.tag)
+                        lastFragment = it
+                    }
                 }
 
                 2 -> {
                     if (notificationsFragment == null)
                         notificationsFragment = NotificationsFragment()
-                    if (!notificationsFragment!!.isAdded)
-                        fragmentTransaction.add(R.id.fl_logged_main,
-                                notificationsFragment, notificationsFragment!!.tag)
-                    lastFragment = notificationsFragment
+                    notificationsFragment?.let{
+                        if(!it.isAdded)
+                            fragmentTransaction.add(R.id.fl_logged_main,
+                                it, notificationsFragment!!.tag)
+                        lastFragment = it
+                    }
                 }
 
                 3 -> {
                     if (directFragment == null)
                         directFragment = DirectFragment()
-                    if (!directFragment!!.isAdded)
-                        fragmentTransaction.add(R.id.fl_logged_main,
-                                directFragment, directFragment!!.tag)
-                    lastFragment = directFragment
+                    directFragment?.let {
+                        if(!it.isAdded)
+                            fragmentTransaction.add(R.id.fl_logged_main,
+                                it, directFragment!!.tag)
+                        lastFragment = it
+                    }
+
                 }
 
                 4 -> {
                     if (searchFragment == null)
                         searchFragment = SearchFragment()
-                    if (!searchFragment!!.isAdded)
-                        fragmentTransaction.add(R.id.fl_logged_main,
-                                searchFragment, searchFragment!!.tag)
-                    lastFragment = searchFragment
+                    searchFragment?.let {
+                        if(!it.isAdded)
+                            fragmentTransaction.add(R.id.fl_logged_main,
+                                it, searchFragment!!.tag)
+                        lastFragment = it
+                    }
+
                 }
 
                 5 -> {
                     if (muteFragment == null)
                         muteFragment = MuteFragment()
-                    if (!muteFragment!!.isAdded)
-                        fragmentTransaction.add(R.id.fl_logged_main,
-                                muteFragment, muteFragment!!.tag)
-                    lastFragment = muteFragment
+                    muteFragment?.let {
+                        if(!it.isAdded)
+                            fragmentTransaction.add(R.id.fl_logged_main,
+                                it, muteFragment!!.tag)
+                        lastFragment = it
+                    }
+
                 }
 
                 6 -> {
                     if (profileFragment == null)
                         profileFragment = MVPProfileFragment()
-                    if (!profileFragment!!.isAdded)
-                        fragmentTransaction.add(R.id.fl_logged_main,
-                                profileFragment, profileFragment!!.tag)
-                    lastFragment = profileFragment
-                }
+                    profileFragment?.let {
+                        if(!it.isAdded)
+                            fragmentTransaction.add(R.id.fl_logged_main,
+                                it, profileFragment!!.tag)
+                        lastFragment = it
+                    }
+                     }
 
                 7 -> {
                     if (likesFragment == null)
                         likesFragment = LikesFragment()
-                    if (!likesFragment!!.isAdded)
-                        fragmentTransaction.add(R.id.fl_logged_main,
-                                likesFragment, likesFragment!!.tag)
-                    lastFragment = likesFragment
+                    likesFragment?.let {
+                        if(!it.isAdded)
+                            fragmentTransaction.add(R.id.fl_logged_main,
+                                it, likesFragment!!.tag)
+                        lastFragment = it
+                    }
                 }
             }
         } else {
             if (feedFragment == null)
                 feedFragment = FeedFragment()
-            if (!feedFragment!!.isAdded)
-                fragmentTransaction.add(R.id.fl_logged_main,
-                        feedFragment, feedFragment!!.tag)
-            lastFragment = feedFragment
+            feedFragment?.let {
+                if(!it.isAdded)
+                    fragmentTransaction.add(R.id.fl_logged_main,
+                        it, feedFragment!!.tag)
+                lastFragment = it
+            }
         }
 
         fragmentTransaction.commit()
         viewModel.toolbarState = AppData.TOOLBAR_LOGGED_MAIN
     }
+
 
     /**
      * Init bottom bar with properly count of items and options
@@ -1028,7 +1075,7 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ConfigurationView, Ac
                     bottomBar!!.updateIcon(3, R.drawable.ic_tabbar_icons_messages)
                     binding.agLoggedBottom.setCaptionVisibility(View.GONE, 0)
                     if (feedFragment == null) feedFragment = FeedFragment()
-                    showFragment(feedFragment)
+                    showFragment(feedFragment!!)
                 }
 
                 1 -> {
@@ -1036,7 +1083,7 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ConfigurationView, Ac
                     bottomBar!!.updateIcon(3, R.drawable.ic_tabbar_icons_messages)
                     binding.agLoggedBottom.setCaptionVisibility(View.GONE, 1)
                     if (mentionsFragment == null) mentionsFragment = MVPMentionsFragment.newInstance()
-                    showFragment(mentionsFragment)
+                    showFragment(mentionsFragment!!)
                 }
 
                 2 -> {
@@ -1045,37 +1092,37 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ConfigurationView, Ac
                     binding.agLoggedBottom.setCaptionVisibility(View.GONE, 2)
                     if (notificationsFragment == null)
                         notificationsFragment = NotificationsFragment()
-                    showFragment(notificationsFragment)
+                    showFragment(notificationsFragment!!)
                 }
 
                 3 -> {
                     bottomBar!!.updateIcon(3, R.drawable.ic_tabbar_icons_messages_active)
                     if (directFragment == null) directFragment = DirectFragment()
-                    showFragment(directFragment)
+                    showFragment(directFragment!!)
                 }
 
                 4 -> {
                     bottomBar!!.updateIcon(3, R.drawable.ic_tabbar_icons_messages)
                     if (searchFragment == null) searchFragment = SearchFragment()
-                    showFragment(searchFragment)
+                    showFragment(searchFragment!!)
                 }
 
                 5 -> {
                     bottomBar!!.updateIcon(3, R.drawable.ic_tabbar_icons_messages)
                     if (muteFragment == null) muteFragment = MuteFragment()
-                    showFragment(muteFragment)
+                    showFragment(muteFragment!!)
                 }
 
                 6 -> {
                     bottomBar!!.updateIcon(3, R.drawable.ic_tabbar_icons_messages)
                     if (profileFragment == null) profileFragment = MVPProfileFragment()
-                    showFragment(profileFragment)
+                    showFragment(profileFragment!!)
                 }
 
                 7 -> {
                     bottomBar!!.updateIcon(3, R.drawable.ic_tabbar_icons_messages)
                     if (likesFragment == null) likesFragment = LikesFragment()
-                    showFragment(likesFragment)
+                    showFragment(likesFragment!!)
                 }
             }
 
@@ -1087,9 +1134,9 @@ class LoggedActivity : MvpAppCompatActivity(), LoggedView, ConfigurationView, Ac
         bottomBar!!.build()
     }
 
-    fun showFragment(fragment: Fragment?) {
+    fun showFragment(fragment: Fragment) {
         val fragmentTransaction = supportFragmentManager.beginTransaction()
-        if (lastFragment != null) fragmentTransaction.hide(lastFragment)
+        if (lastFragment != null) fragmentTransaction.hide(lastFragment!!)
         if (!fragment!!.isAdded) {
             fragmentTransaction.add(R.id.fl_logged_main, fragment)
         } else {

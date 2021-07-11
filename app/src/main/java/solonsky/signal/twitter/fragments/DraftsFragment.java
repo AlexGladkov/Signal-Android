@@ -16,6 +16,7 @@ import com.anupcowkur.reservoir.ReservoirGetCallback;
 import java.util.ArrayList;
 import java.util.List;
 
+import moxy.MvpAppCompatFragment;
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.activities.ComposeActivity;
 import solonsky.signal.twitter.adapters.DraftAdapter;
@@ -29,7 +30,7 @@ import solonsky.signal.twitter.viewmodels.DraftsViewModel;
  * Created by neura on 22.05.17.
  */
 
-public class DraftsFragment extends Fragment {
+public class DraftsFragment extends MvpAppCompatFragment {
     private final String TAG = DraftsFragment.class.getSimpleName();
     private DraftsViewModel viewModel;
     private DraftAdapter draftAdapter;

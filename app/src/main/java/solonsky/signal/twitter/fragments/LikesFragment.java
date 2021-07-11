@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import moxy.MvpAppCompatFragment;
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.activities.LoggedActivity;
 import solonsky.signal.twitter.data.LikesData;
@@ -29,7 +30,7 @@ import solonsky.signal.twitter.viewmodels.LikesViewModel;
  * Created by neura on 23.05.17.
  */
 
-public class LikesFragment extends Fragment implements FragmentCounterListener {
+public class LikesFragment extends MvpAppCompatFragment implements FragmentCounterListener {
     private final String TAG = LikesFragment.class.getSimpleName();
     private LikesViewModel viewModel;
     private LoggedActivity mActivity;

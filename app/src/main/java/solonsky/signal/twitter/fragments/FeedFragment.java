@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+
+import moxy.MvpAppCompatFragment;
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.data.FeedData;
 import solonsky.signal.twitter.data.LoggedData;
@@ -34,7 +36,7 @@ import solonsky.signal.twitter.viewmodels.FeedViewModel;
  * Created by neura on 19.05.17.
  */
 
-public class FeedFragment extends Fragment implements FragmentCounterListener {
+public class FeedFragment extends MvpAppCompatFragment implements FragmentCounterListener {
     private final String TAG = FeedFragment.class.getSimpleName();
     private FeedViewModel viewModel;
     private FragmentFeedBinding binding;

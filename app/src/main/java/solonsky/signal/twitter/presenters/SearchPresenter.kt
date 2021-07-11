@@ -7,11 +7,16 @@ import android.os.Parcelable
 import android.util.Log
 import android.view.MenuItem
 import android.widget.PopupMenu
-import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
+import com.github.terrakok.cicerone.Router
+import com.github.terrakok.cicerone.androidx.FragmentScreen
 import com.google.gson.JsonObject
-import ru.terrakok.cicerone.Router
+import moxy.InjectViewState
+import moxy.MvpPresenter
 import solonsky.signal.twitter.R
+import solonsky.signal.twitter.fragments.SearchAllFragment
+import solonsky.signal.twitter.fragments.SearchHomeFragment
+import solonsky.signal.twitter.fragments.SearchMediaFragment
+import solonsky.signal.twitter.fragments.SearchPeopleFragment
 import solonsky.signal.twitter.helpers.*
 import solonsky.signal.twitter.models.NotificationDetailModel
 import solonsky.signal.twitter.models.StatusModel
@@ -72,11 +77,13 @@ class SearchPresenter : MvpPresenter<SearchView>() {
 
     fun fetchRequest(intent: Intent?) {
         if (intent == null) {
-            router.exitWithMessage("Internal error")
+            router.exit()
+//            router.exitWithMessage("Internal error")
         } else {
             val query = intent.getStringExtra(Keys.SearchQuery.value)
             if (query == null || query == "") {
-                router.exitWithMessage("Internal error")
+                router.exit()
+//                router.exitWithMessage("Internal error")
             } else {
                 viewState.setupSearch(query = query)
                 searchProvider.fetchSearchData(searchQuery = query)
@@ -106,22 +113,27 @@ class SearchPresenter : MvpPresenter<SearchView>() {
             0 -> {
                 bundle.putParcelableArrayList(Keys.SearchList.value, searchedAll as ArrayList<StatusModel>)
                 bundle.putBoolean(Keys.SearchLoaded.value, isAllLoaded)
-                router.navigateTo(ScreenKeys.SearchAll.value, bundle)
+                router.navigateTo(FragmentScreen{SearchAllFragment()})
             }
             1 -> {
                 bundle.putParcelableArrayList(Keys.SearchList.value, searchedUsers as ArrayList<User>)
                 bundle.putBoolean(Keys.SearchLoaded.value, isUsersLoaded)
-                router.navigateTo(ScreenKeys.SearchUsers.value, bundle)
+                router.navigateTo(FragmentScreen{SearchPeopleFragment()})
+
+//                router.navigateTo(ScreenKeys.SearchUsers.value, bundle)
             }
             2 -> {
                 bundle.putParcelableArrayList(Keys.SearchList.value, searchedMedia as ArrayList<StatusModel>)
                 bundle.putBoolean(Keys.SearchLoaded.value, isAllLoaded)
-                router.navigateTo(ScreenKeys.SearchMedia.value, bundle)
+                router.navigateTo(FragmentScreen{SearchMediaFragment()})
+//                router.navigateTo(ScreenKeys.SearchMedia.value, bundle)
             }
             3 -> {
                 bundle.putParcelableArrayList(Keys.SearchList.value, searchedHome as ArrayList<StatusModel>)
                 bundle.putBoolean(Keys.SearchLoaded.value, isHomeLoaded)
-                router.navigateTo(ScreenKeys.SearchHome.value, bundle)
+                router.navigateTo(FragmentScreen{SearchHomeFragment()})
+
+//                router.navigateTo(ScreenKeys.SearchHome.value, bundle)
             }
         }
 

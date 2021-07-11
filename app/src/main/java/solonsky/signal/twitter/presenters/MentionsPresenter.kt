@@ -2,9 +2,9 @@ package solonsky.signal.twitter.presenters
 
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
 import com.google.gson.Gson
+import moxy.InjectViewState
+import moxy.MvpPresenter
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.data.LoggedData
 import solonsky.signal.twitter.data.MentionsData

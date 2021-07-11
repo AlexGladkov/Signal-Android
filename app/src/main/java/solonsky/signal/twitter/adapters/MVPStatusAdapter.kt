@@ -6,7 +6,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.arellomobile.mvp.MvpDelegate
+import moxy.MvpDelegate
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.activities.LoggedActivity
 import solonsky.signal.twitter.api.ActionsApiFactory
@@ -105,13 +105,13 @@ class MVPStatusAdapter(parentDelegate: MvpDelegate<*>) : RecyclerView.Adapter<Re
     }
 
     private var mRecycler: RecyclerView? = null
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView?) {
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
         mRecycler = recyclerView
     }
 
     private var lastPosition = -1
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is StatusViewHolder) {
             mActivity?.let { holder.provideActivity(it) }
             holder.setIsRecyclable(false)

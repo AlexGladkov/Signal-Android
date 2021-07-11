@@ -5,12 +5,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.PopupMenu;
 
-import com.arellomobile.mvp.MvpAppCompatActivity;
-import com.arellomobile.mvp.presenter.InjectPresenter;
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+
 
 import java.util.ArrayList;
 
+import moxy.MvpAppCompatActivity;
+import moxy.MvpAppCompatFragment;
+import moxy.presenter.InjectPresenter;
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.adapters.SettingsAdapter;
 import solonsky.signal.twitter.databinding.ActivityGesturesBinding;
@@ -40,7 +45,7 @@ public class GesturesActivity extends MvpAppCompatActivity implements Configurat
     ConfigurationsPresenter configurationsPresenter;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (App.getInstance().isNightEnabled()) {
             setTheme(R.style.ActivityThemeDarkNoAnimation);

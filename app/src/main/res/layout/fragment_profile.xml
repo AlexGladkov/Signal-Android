@@ -18,6 +18,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
         android:layout_height="match_parent"
         android:background="?attr/backgroundPrimaryColor"
         android:focusableInTouchMode="true">
@@ -246,7 +247,6 @@
                 app:civ_border_color="?attr/backgroundPrimaryColor"
                 app:civ_border_overlay="true"
                 app:civ_border_width="2dp"
-                app:civ_fill_color="?attr/backgroundPrimaryColor"
                 app:imageUrl="@{model.avatar}" />
 
             <ImageView

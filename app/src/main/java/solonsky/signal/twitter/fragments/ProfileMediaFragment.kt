@@ -55,7 +55,7 @@ class ProfileMediaFragment : Fragment() {
 
                 override fun onSaveClick(v: View, url: String) {
                     val downloadFiles = DownloadFiles(activity)
-                    downloadFiles.saveFile(url, activity.getString(R.string.download_url))
+                    downloadFiles.saveFile(url, requireActivity().getString(R.string.download_url))
                 }
             })
         })

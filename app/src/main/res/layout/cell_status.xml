@@ -25,6 +25,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
         android:layout_height="wrap_content">
 
         <solonsky.signal.twitter.libs.MySwipeLayout

@@ -46,13 +46,14 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.PagerAdapter
 import androidx.viewpager.widget.ViewPager
-import com.arellomobile.mvp.presenter.InjectPresenter
+import moxy.presenter.InjectPresenter
 import solonsky.signal.twitter.activities.*
 import solonsky.signal.twitter.helpers.AppData
 import solonsky.signal.twitter.models.ImageModel
 import solonsky.signal.twitter.models.StatusModel
 import solonsky.signal.twitter.models.User
 import solonsky.signal.twitter.presenters.ProfilePresenter
+import java.lang.Exception
 
 /**
  * Created by neura on 24.06.17.
@@ -137,12 +138,16 @@ class ProfileFragment : Fragment(), SmartTabLayout.TabProvider, ProfileView {
 
     private lateinit var binding: ActivityProfileBinding
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = DataBindingUtil.inflate(inflater!!, R.layout.activity_profile, container, false)
         return binding.root
     }
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mActivity = activity as LoggedActivity
         mActivity!!.viewModel.toolbarState = AppData.TOOLBAR_LOGGED_PROFILE
@@ -239,14 +244,14 @@ class ProfileFragment : Fragment(), SmartTabLayout.TabProvider, ProfileView {
         }
 
         Log.e(TAG, "old banner " + viewModel!!.backdrop)
-        Picasso.with(context).load(viewModel!!.backdrop)
+        Picasso.get().load(viewModel!!.backdrop)
                 .resize(Utilities.getScreenWidth(mActivity), Utilities.convertDpToPixel(186f, context).toInt())
                 .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .networkPolicy(NetworkPolicy.NO_CACHE)
                 .centerCrop()
                 .into(binding.imgProfileTestHeader)
 
-        Picasso.with(context).load(viewModel!!.avatar)
+        Picasso.get().load(viewModel!!.avatar)
                 .resize(Utilities.convertDpToPixel(72f, context).toInt(),
                         Utilities.convertDpToPixel(72f, context).toInt())
                 .centerCrop()
@@ -257,7 +262,7 @@ class ProfileFragment : Fragment(), SmartTabLayout.TabProvider, ProfileView {
         ProfileRefreshData.getInstance().updateHandler = object : ProfileRefreshHandler {
             override fun onAvatarUpdate() {
                 viewModel!!.avatar = AppData.ME.originalProfileImageURL
-                Picasso.with(context)
+                Picasso.get()
                         .load(AppData.ME.originalProfileImageURL)
                         .into(binding.imgProfileAvatarImage)
             }
@@ -265,7 +270,7 @@ class ProfileFragment : Fragment(), SmartTabLayout.TabProvider, ProfileView {
             override fun onBannerUpdate() {
                 viewModel!!.backdrop = AppData.ME.profileBannerImageUrl
                 binding.imgProfileTestHeader.setImageResource(android.R.color.transparent)
-                Picasso.with(context).load(AppData.ME.profileBannerImageUrl)
+                Picasso.get().load(AppData.ME.profileBannerImageUrl)
                         .resize(Utilities.getScreenWidth(mActivity), Utilities.convertDpToPixel(186f, context).toInt())
                         .centerCrop()
                         .into(binding.imgProfileTestHeader, object : Callback {
@@ -276,7 +281,7 @@ class ProfileFragment : Fragment(), SmartTabLayout.TabProvider, ProfileView {
                                 }, 50)
                             }
 
-                            override fun onError() {
+                            override fun onError(e: Exception?) {
                                 Log.e(TAG, "Error loading new image")
                             }
                         })
