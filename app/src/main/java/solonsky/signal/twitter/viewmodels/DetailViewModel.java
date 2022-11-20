@@ -1,12 +1,13 @@
 package solonsky.signal.twitter.viewmodels;
 
 import android.content.Intent;
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
 import android.os.Handler;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;

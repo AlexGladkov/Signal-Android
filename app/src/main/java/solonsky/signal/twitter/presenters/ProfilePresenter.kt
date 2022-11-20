@@ -1,11 +1,11 @@
 package solonsky.signal.twitter.presenters
 
 import android.content.Intent
-import android.support.v4.app.Fragment
-import android.support.v4.app.FragmentManager
 import android.util.Log
-import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import moxy.InjectViewState
+import moxy.MvpPresenter
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.helpers.AppData
 import solonsky.signal.twitter.helpers.Flags
@@ -37,19 +37,19 @@ class ProfilePresenter : MvpPresenter<ProfileView>() {
         val provider = ProfileProvider(presenter = this)
         when {
             intent == null || intent.extras == null -> performError()
-            intent.extras.get(Flags.PROFILE_DATA) != null -> {
-                val extrasUser = intent.extras.get(Flags.PROFILE_DATA) as User
+            intent.extras?.get(Flags.PROFILE_DATA) != null -> {
+                val extrasUser = intent.extras?.get(Flags.PROFILE_DATA) as User
                 setupUser(user = extrasUser)
                 provider.loadMedia(id = extrasUser.id, screenName = "")
                 provider.loadFavorites(id = extrasUser.id)
             }
-            intent.extras.get(Flags.PROFILE_ID) != null -> {
-                provider.loadUser(id = intent.extras.get(Flags.PROFILE_ID) as Long)
-                provider.loadMedia(id = intent.extras.get(Flags.PROFILE_ID) as Long, screenName = "")
-                provider.loadFavorites(id = intent.extras.get(Flags.PROFILE_ID) as Long)
+            intent.extras?.get(Flags.PROFILE_ID) != null -> {
+                provider.loadUser(id = intent.extras?.get(Flags.PROFILE_ID) as Long)
+                provider.loadMedia(id = intent.extras?.get(Flags.PROFILE_ID) as Long, screenName = "")
+                provider.loadFavorites(id = intent.extras?.get(Flags.PROFILE_ID) as Long)
             }
-            intent.extras.get(Flags.PROFILE_SCREEN_NAME) != null -> {
-                val screenName = (intent.extras.get(Flags.PROFILE_SCREEN_NAME) as String).replace("@", "")
+            intent.extras?.get(Flags.PROFILE_SCREEN_NAME) != null -> {
+                val screenName = (intent.extras?.get(Flags.PROFILE_SCREEN_NAME) as String).replace("@", "")
                 provider.loadUser(screenName = screenName)
                 provider.loadMedia(id = Long.MIN_VALUE, screenName = screenName)
                 provider.loadFavorites(screenName = screenName)

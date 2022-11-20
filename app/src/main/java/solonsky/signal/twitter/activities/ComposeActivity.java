@@ -4,22 +4,18 @@ import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.PopupMenu;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 
+import moxy.MvpAppCompatActivity;
+import moxy.presenter.InjectPresenter;
 import pl.aprilapps.easyphotopicker.DefaultCallback;
 import solonsky.signal.twitter.data.UsersData;
 import solonsky.signal.twitter.helpers.AppData;
@@ -39,12 +35,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.databinding.DataBindingUtil;
+
 import com.anupcowkur.reservoir.ReservoirGetCallback;
-import com.arellomobile.mvp.MvpAppCompatActivity;
-import com.arellomobile.mvp.presenter.InjectPresenter;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -208,9 +208,9 @@ public class ComposeActivity extends MvpAppCompatActivity
                     if (viewModel.getLocationState() == ComposeViewModel.LOCATION_ON) {
                         viewModel.setLocationState(ComposeViewModel.LOCATION_OFF);
                     } else {
-                        if (!Permission.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION)) {
+                        if (!Permission.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION))
                             ActivityCompat.requestPermissions(ComposeActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_LOCATION_CODE);
-                        } else {
+                        else {
                             mFusedLocationClient = LocationServices.getFusedLocationProviderClient(mActivity);
                             mFusedLocationClient.getLastLocation().addOnCompleteListener(mActivity, new OnCompleteListener<Location>() {
                                 @Override

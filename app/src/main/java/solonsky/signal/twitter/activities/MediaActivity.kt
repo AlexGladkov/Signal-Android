@@ -5,14 +5,13 @@ import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.ActivityCompat
 import android.view.View
 import android.view.WindowManager
 import android.widget.SeekBar
+import androidx.core.app.ActivityCompat
 import kotlinx.android.synthetic.main.activity_media.*
-import com.arellomobile.mvp.MvpActivity
-import com.arellomobile.mvp.presenter.InjectPresenter
-
+import moxy.MvpAppCompatActivity
+import moxy.presenter.InjectPresenter
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.helpers.AppData
 import solonsky.signal.twitter.helpers.Permission
@@ -25,7 +24,7 @@ import solonsky.signal.twitter.views.MediaView
  * Created by neura on 31.08.17.
  */
 
-class MediaActivity : MvpActivity(), MediaView {
+class MediaActivity : MvpAppCompatActivity(), MediaView {
     private val TAG = MediaActivity::class.java.simpleName
 
     @InjectPresenter

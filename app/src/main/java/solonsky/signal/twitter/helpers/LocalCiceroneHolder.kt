@@ -1,7 +1,7 @@
 package solonsky.signal.twitter.helpers
 
-import ru.terrakok.cicerone.Cicerone
-import ru.terrakok.cicerone.Router
+import com.github.terrakok.cicerone.Cicerone
+import com.github.terrakok.cicerone.Router
 import java.util.*
 
 /**

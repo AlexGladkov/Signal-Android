@@ -25,7 +25,7 @@ class MyLocationService: Service() {
         var mLastLocation: Location = Location(provider)
         val TAG = LocationListener::class.java.simpleName
 
-        override fun onLocationChanged(location: Location?) {
+        override fun onLocationChanged(location: Location) {
             Log.e(TAG, "location changed")
             mLastLocation.set(location)
             AppData.currentLocation = location
@@ -35,11 +35,11 @@ class MyLocationService: Service() {
             Log.e(TAG, "onStatusChanged - " + provider)
         }
 
-        override fun onProviderEnabled(provider: String?) {
+        override fun onProviderEnabled(provider: String) {
             Log.e(TAG, "onProviderEnabled - " + provider)
         }
 
-        override fun onProviderDisabled(provider: String?) {
+        override fun onProviderDisabled(provider: String) {
             Log.e(TAG, "onProviderDisabled - " + provider)
         }
 

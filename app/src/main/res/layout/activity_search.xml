@@ -17,6 +17,8 @@
         android:id="@+id/fl_search_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
+
         android:background="?attr/backgroundSecondaryColor"
         android:focusableInTouchMode="true">
 
@@ -45,9 +47,8 @@
                     android:layout_marginStart="8dp"
                     android:background="?attr/buttonRipple"
                     android:padding="16dp"
-                    android:onClick="@{click::onBackClick}"
                     android:src="@drawable/ic_icons_toolbar_back"
-                    android:tint="?attr/buttonTintColor" />
+                    app:tint="?attr/buttonTintColor" />
 
                 <EditText
                     android:id="@+id/txt_search_input"
@@ -78,7 +79,7 @@
                     android:background="?attr/buttonRipple"
                     android:padding="16dp"
                     android:src="@drawable/ic_icons_more_hor"
-                    android:tint="?attr/buttonTintColor" />
+                    app:tint="?attr/buttonTintColor" />
 
             </LinearLayout>
 

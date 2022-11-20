@@ -31,31 +31,31 @@ class MentionsProvider(presenter: MentionsPresenter) {
     fun getData() {
         val handler = Handler()
         if (MentionsData.instance.mentionsStatuses.size == 0) {
-            Thread({
+            Thread {
                 Reservoir.getAsync(Cache.Mentions, MentionsData::class.java,
-                        object : ReservoirGetCallback<MentionsData> {
-                            override fun onSuccess(mentionsData: MentionsData) {
-                                MentionsData.instance.mentionsStatuses.addAll(
-                                        mentionsData.mentionsStatuses.filter { it.user.id != AppData.ME.id })
+                    object : ReservoirGetCallback<MentionsData> {
+                        override fun onSuccess(mentionsData: MentionsData) {
+                            MentionsData.instance.mentionsStatuses.addAll(
+                                mentionsData.mentionsStatuses.filter { it.user.id != AppData.ME.id })
 
-                                var entryCount = 0
-                                MentionsData.instance.mentionsStatuses
-                                        .asSequence()
-                                        .filter { it.isHighlighted }
-                                        .map { it.isExpand = false }
-                                        .forEach { entryCount += 1 }
+                            var entryCount = 0
+                            MentionsData.instance.mentionsStatuses
+                                .asSequence()
+                                .filter { it.isHighlighted }
+                                .map { it.isExpand = false }
+                                .forEach { entryCount += 1 }
 
-                                handler.post {
-                                    mPresenter.loaded(MentionsData.instance.mentionsStatuses)
-                                    loadNew(MentionsData.instance.mentionsStatuses[0].id)
-                                }
+                            handler.post {
+                                mPresenter.loaded(MentionsData.instance.mentionsStatuses)
+                                loadNew(MentionsData.instance.mentionsStatuses[0].id)
                             }
+                        }
 
-                            override fun onFailure(e: Exception) {
-                                handler.post { loadClear() }
-                            }
-                        })
-            }).start()
+                        override fun onFailure(e: Exception) {
+                            handler.post { loadClear() }
+                        }
+                    })
+            }.start()
         } else {
             mPresenter.loaded(mentionsStatuses = MentionsData.instance.mentionsStatuses)
         }

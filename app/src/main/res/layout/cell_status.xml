@@ -25,6 +25,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
         android:layout_height="wrap_content">
 
         <solonsky.signal.twitter.libs.MySwipeLayout
@@ -58,7 +59,7 @@
                     android:layout_centerVertical="true"
                     android:scaleType="fitXY"
                     android:src="@drawable/arrow_56"
-                    android:tint="?attr/hintTextColor" />
+                    app:tint="?attr/hintTextColor" />
 
                 <!--<RelativeLayout-->
                 <!--android:id="@+id/status_rl_gradient"-->
@@ -183,8 +184,8 @@
                                 android:layout_marginStart="4dp"
                                 android:layout_marginTop="1.5dp"
                                 android:src="@drawable/ic_icons_tiny_like"
-                                android:tint="?attr/likeTintColor"
-                                android:visibility="@{model.favorited ? v.VISIBLE : v.GONE}" />
+                                android:visibility="@{model.favorited ? v.VISIBLE : v.GONE}"
+                                app:tint="?attr/likeTintColor" />
 
                         </LinearLayout>
 
@@ -284,7 +285,7 @@
                             <!--android:layout_height="wrap_content"-->
                             <!--android:visibility="gone" />-->
 
-                            <android.support.v7.widget.RecyclerView
+                            <androidx.recyclerview.widget.RecyclerView
                                 android:id="@+id/status_recycler_big_media"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content" />
@@ -441,7 +442,7 @@
                                 android:layout_height="@dimen/feed_tiny_size"
                                 android:layout_gravity="center_vertical"
                                 android:src="@drawable/ic_icons_tiny_rt"
-                                android:tint="?attr/rtTintColor" />
+                                app:tint="?attr/rtTintColor" />
 
                             <solonsky.signal.twitter.libs.autoLinkTextView.AutoLinkTextView
                                 android:id="@+id/status_txt_retweet"
@@ -481,7 +482,7 @@
                             android:layout_marginTop="12dp"
                             android:layout_gravity="center_horizontal"
                             android:src="@drawable/ic_icons_actions_reply"
-                            android:tint="@color/action_tint_color" />
+                            app:tint="@color/action_tint_color" />
 
                     </FrameLayout>
 
@@ -498,7 +499,7 @@
                             android:layout_marginTop="12dp"
                             android:layout_gravity="center_horizontal"
                             android:src="@drawable/ic_icons_actions_rt"
-                            android:tint="@color/action_tint_color" />
+                            app:tint="@color/action_tint_color" />
 
                     </FrameLayout>
 
@@ -532,7 +533,7 @@
                             android:layout_marginTop="12dp"
                             android:layout_gravity="center_horizontal"
                             android:src="@drawable/ic_icons_actions_share"
-                            android:tint="@color/action_tint_color" />
+                            app:tint="@color/action_tint_color" />
 
                     </FrameLayout>
 
@@ -549,7 +550,7 @@
                             android:layout_marginTop="12dp"
                             android:layout_gravity="center_horizontal"
                             android:src="@drawable/ic_icons_more_hor"
-                            android:tint="@color/action_tint_color" />
+                            app:tint="@color/action_tint_color" />
 
                     </FrameLayout>
                 </LinearLayout>

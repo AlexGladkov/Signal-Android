@@ -18,6 +18,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
         android:layout_height="match_parent"
         android:background="?attr/backgroundPrimaryColor"
         android:focusableInTouchMode="true">
@@ -27,7 +28,7 @@
             android:layout_width="match_parent"
             android:layout_height="186dp" />
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_profile_header"
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -86,12 +87,12 @@
                         android:onClick="@{click::onSettingsClick}"
                         android:padding="16dp"
                         android:src="@drawable/ic_icons_toolbar_gear"
-                        android:tint="@color/white" />
+                        app:tint="@color/white" />
 
                 </LinearLayout>
 
             </FrameLayout>
-        </android.support.v7.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
         <View
             android:id="@+id/header_fader"
@@ -100,7 +101,7 @@
             android:layout_below="@+id/tb_profile_header"
             android:background="?attr/profileGradientBackgroundColor" />
 
-        <android.support.v4.widget.NestedScrollView
+        <androidx.core.widget.NestedScrollView
             android:id="@+id/scroll_profile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -227,7 +228,7 @@
                     app:stl_underlineThickness="0dp" />
 
             </RelativeLayout>
-        </android.support.v4.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
 
         <RelativeLayout
             android:id="@+id/rl_profile_avatar"
@@ -246,7 +247,6 @@
                 app:civ_border_color="?attr/backgroundPrimaryColor"
                 app:civ_border_overlay="true"
                 app:civ_border_width="2dp"
-                app:civ_fill_color="?attr/backgroundPrimaryColor"
                 app:imageUrl="@{model.avatar}" />
 
             <ImageView

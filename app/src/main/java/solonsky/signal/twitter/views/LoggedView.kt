@@ -1,8 +1,9 @@
 package solonsky.signal.twitter.views
 
-import com.arellomobile.mvp.MvpView
-import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
-import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
+import moxy.MvpView
+import moxy.viewstate.strategy.AddToEndSingleStrategy
+import moxy.viewstate.strategy.StateStrategyType
+
 
 /**
  * Created by sunwi on 22.01.2018.
@@ -12,4 +13,5 @@ interface LoggedView: MvpView {
     fun showMessage(text: String)
     fun setupProfile(avatar: String?)
     fun updateLocale(newLocale: String)
+    fun onResumeFragments()
 }

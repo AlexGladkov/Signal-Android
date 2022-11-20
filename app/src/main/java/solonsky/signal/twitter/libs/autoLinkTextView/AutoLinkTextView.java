@@ -2,13 +2,13 @@ package solonsky.signal.twitter.libs.autoLinkTextView;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.annotation.ColorInt;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -21,7 +21,7 @@ import solonsky.signal.twitter.helpers.App;
  * Created by Chatikyan on 25.09.2016-18:53.
  */
 
-public class AutoLinkTextView extends TextView {
+public class AutoLinkTextView extends androidx.appcompat.widget.AppCompatTextView {
 
     public interface RegularTextViewClick {
         void onTextClicked(View v);

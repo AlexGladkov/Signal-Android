@@ -1,32 +1,30 @@
 package solonsky.signal.twitter.activities
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v4.view.PagerAdapter
-import android.support.v4.view.ViewPager
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.PopupMenu
-import android.util.Log
 import android.view.*
 import android.view.inputmethod.EditorInfo
 import android.widget.ImageView
+import android.widget.PopupMenu
 import android.widget.RelativeLayout
-import android.widget.TextView
 import android.widget.Toast
-import com.arellomobile.mvp.MvpActivity
-import com.arellomobile.mvp.MvpAppCompatActivity
-import com.arellomobile.mvp.presenter.InjectPresenter
+import androidx.fragment.app.Fragment
+import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager.widget.ViewPager
+import com.github.terrakok.cicerone.Navigator
+import com.github.terrakok.cicerone.NavigatorHolder
+import com.github.terrakok.cicerone.Replace
+import com.github.terrakok.cicerone.Screen
+import com.github.terrakok.cicerone.androidx.AppNavigator
+import com.github.terrakok.cicerone.androidx.FragmentScreen
 import com.ogaclejapan.smarttablayout.SmartTabLayout
+import com.ogaclejapan.smarttablayout.SmartTabLayout.TabProvider
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems
 import kotlinx.android.synthetic.main.activity_mvp_search.*
-import solonsky.signal.twitter.R
 import kotlinx.android.synthetic.main.activity_search.*
-import okhttp3.internal.Util
-import ru.terrakok.cicerone.Navigator
-import ru.terrakok.cicerone.NavigatorHolder
-import ru.terrakok.cicerone.android.SupportFragmentNavigator
-import ru.terrakok.cicerone.commands.Replace
+import moxy.MvpAppCompatActivity
+import moxy.presenter.InjectPresenter
+import solonsky.signal.twitter.R
 import solonsky.signal.twitter.fragments.*
 import solonsky.signal.twitter.helpers.App
 import solonsky.signal.twitter.helpers.Keys
@@ -39,7 +37,7 @@ import javax.inject.Inject
 /**
  * Created by neura on 01.11.17.
  */
-class MVPSearchActivity : MvpAppCompatActivity(), SearchView, SmartTabLayout.TabProvider {
+class MVPSearchActivity : MvpAppCompatActivity(), SearchView, TabProvider {
     private val TAG = MVPSearchActivity::class.java.simpleName
     private var currentPosition = 0
 
@@ -50,29 +48,35 @@ class MVPSearchActivity : MvpAppCompatActivity(), SearchView, SmartTabLayout.Tab
     lateinit var navigatorHolder: NavigatorHolder
 
     private var searchedFragment: SearchedFragment = SearchedFragment()
-    private var navigator: Navigator = object : SupportFragmentNavigator(supportFragmentManager, R.id.fl_search) {
-        override fun exit() {
-            finish()
-        }
-
-        override fun createFragment(screenKey: String, data: Any?): Fragment?  {
-            return if (data != null && data is Bundle) {
-                when (screenKey) {
-                    ScreenKeys.SearchAll.value -> SearchAllFragment.getNewInstance(data)
-                    ScreenKeys.SearchHome.value -> SearchAllFragment.getNewInstance(data)
-                    ScreenKeys.SearchMedia.value -> SearchAllFragment.getNewInstance(data)
-                    ScreenKeys.SearchUsers.value -> SearchPeopleFragment.getNewInstance(data)
-                    else -> SearchAllFragment()
-                }
-            } else {
-                SearchAllFragment()
-            }
-        }
-
-        override fun showSystemMessage(message: String) {
-            Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
+    private  var navigator: Navigator = object : AppNavigator(this,R.id.fl_search){
+        override fun commitNewFragmentScreen(screen: FragmentScreen, addToBackStack: Boolean) {
+            super.commitNewFragmentScreen(screen, addToBackStack)
         }
     }
+//    private var navigator: Navigator = object : FragmentNavigator(this, R.id.fl_search) {
+//
+//        override fun exit() {
+//            finish()
+//        }
+//
+//        override fun createFragment(screenKey: String, data: Any?): Fragment  {
+//            return if (data != null && data is Bundle) {
+//                when (screenKey) {
+//                    ScreenKeys.SearchAll.value -> SearchAllFragment.getNewInstance(data)
+//                    ScreenKeys.SearchHome.value -> SearchAllFragment.getNewInstance(data)
+//                    ScreenKeys.SearchMedia.value -> SearchAllFragment.getNewInstance(data)
+//                    ScreenKeys.SearchUsers.value -> SearchPeopleFragment.getNewInstance(data)
+//                    else -> SearchAllFragment()
+//                }
+//            } else {
+//                SearchAllFragment()
+//            }
+//        }
+//
+//        override fun showSystemMessage(message: String) {
+//            Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
+//        }
+//    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         App.getInstance().appComponent.inject(this@MVPSearchActivity)
@@ -125,7 +129,7 @@ class MVPSearchActivity : MvpAppCompatActivity(), SearchView, SmartTabLayout.Tab
         if (savedInstanceState == null) {
             val bundle = Bundle()
             bundle.putBoolean(Keys.SearchLoaded.value, false)
-            navigator.applyCommands(arrayOf(Replace(ScreenKeys.SearchAll.value, bundle)))
+            navigator.applyCommands(arrayOf(Replace(FragmentScreen{SearchAllFragment() }, )))
         }
 
         val adapter = FragmentPagerItemAdapter(

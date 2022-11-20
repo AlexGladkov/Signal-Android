@@ -9,6 +9,8 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="40dp"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
+
         android:background="?attr/backgroundPrimaryColor"
         android:onClick="@{click::onItemClick}" >
         

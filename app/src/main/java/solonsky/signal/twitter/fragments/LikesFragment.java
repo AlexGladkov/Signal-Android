@@ -1,17 +1,19 @@
 package solonsky.signal.twitter.fragments;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+
+import moxy.MvpAppCompatFragment;
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.activities.LoggedActivity;
 import solonsky.signal.twitter.data.LikesData;
@@ -28,7 +30,7 @@ import solonsky.signal.twitter.viewmodels.LikesViewModel;
  * Created by neura on 23.05.17.
  */
 
-public class LikesFragment extends Fragment implements FragmentCounterListener {
+public class LikesFragment extends MvpAppCompatFragment implements FragmentCounterListener {
     private final String TAG = LikesFragment.class.getSimpleName();
     private LikesViewModel viewModel;
     private LoggedActivity mActivity;

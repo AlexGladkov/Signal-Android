@@ -1,8 +1,9 @@
 package solonsky.signal.twitter.room.models;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
+
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 import com.google.gson.JsonArray;
 
@@ -20,7 +21,8 @@ import solonsky.signal.twitter.room.RoomContract;
 @Entity(tableName = RoomContract.CONFIGURATION_TABLE)
 public class ConfigurationEntity {
 
-    @PrimaryKey private long userId;
+    @PrimaryKey
+    private long userId;
 
     @ColumnInfo(name = "conf_user") private User user;
 

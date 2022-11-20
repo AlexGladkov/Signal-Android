@@ -3,9 +3,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/ActivityTheme.Primary.Base.Dark"
     android:orientation="vertical">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb_content"
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -33,7 +34,7 @@
                 android:background="@drawable/white_ripple_background"
                 android:padding="16dp"
                 android:src="@drawable/ic_icons_toolbar_back"
-                android:tint="@color/white" />
+                app:tint="@color/white" />
 
             <ImageView
                 android:id="@+id/img_profile_content_save"
@@ -44,9 +45,9 @@
                 android:foregroundGravity="center"
                 android:padding="16dp"
                 android:src="@drawable/ic_icons_toolbar_save"
-                android:tint="@color/white" />
+                app:tint="@color/white" />
 
         </RelativeLayout>
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
 </LinearLayout>

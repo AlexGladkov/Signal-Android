@@ -5,8 +5,9 @@
         <variable name="model" type="solonsky.signal.twitter.viewmodels.NotificationsMainViewModel" />
     </data>
 
-    <android.support.v4.widget.SwipeRefreshLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/srl_notification_all"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -16,7 +17,7 @@
             android:layout_height="match_parent"
             android:background="?attr/backgroundSecondaryColor" >
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_notifications_all"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -39,5 +40,5 @@
 
         </FrameLayout>
 
-    </android.support.v4.widget.SwipeRefreshLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

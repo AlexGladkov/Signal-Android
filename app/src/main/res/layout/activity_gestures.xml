@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
+
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
@@ -10,9 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
+
         android:background="?attr/backgroundSecondaryColor">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_gestures"
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -30,8 +33,8 @@
                     android:layout_height="@dimen/tb_icon_size"
                     android:src="@drawable/ic_icons_toolbar_back"
                     android:padding="16dp"
-                    android:tint="?attr/buttonTintColor"
-                    android:background="?attr/buttonRipple" />
+                    android:background="?attr/buttonRipple"
+                    app:tint="?attr/buttonTintColor" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -45,9 +48,9 @@
                     android:textColor="?attr/primaryTextColor" />
 
             </LinearLayout>
-        </android.support.v7.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_gestures"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -1,7 +1,7 @@
 package solonsky.signal.twitter.holder
 
-import android.support.v7.widget.RecyclerView
 import android.view.View
+import androidx.recyclerview.widget.RecyclerView
 
 /**
  * Created by neura on 06.11.17.

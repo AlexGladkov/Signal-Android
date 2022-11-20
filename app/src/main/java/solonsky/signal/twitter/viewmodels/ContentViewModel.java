@@ -1,12 +1,14 @@
 package solonsky.signal.twitter.viewmodels;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
 import android.view.View;
 
-import com.android.databinding.library.baseAdapters.BR;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
 
 import org.joda.time.LocalDateTime;
+
+import solonsky.signal.twitter.BR;
+
 
 /**
  * Created by neura on 01.06.17.

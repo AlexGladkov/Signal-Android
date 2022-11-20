@@ -1,10 +1,11 @@
 package solonsky.signal.twitter.models;
 
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
 
 import solonsky.signal.twitter.BR;
 

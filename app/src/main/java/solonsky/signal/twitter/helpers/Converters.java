@@ -3,19 +3,18 @@ package solonsky.signal.twitter.helpers;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.res.Resources;
-import android.databinding.BindingAdapter;
-import android.graphics.ColorFilter;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
 import android.util.TypedValue;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.databinding.BindingAdapter;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
@@ -59,13 +58,13 @@ public class Converters {
     @BindingAdapter({"imageUrl"})
     public static void loadImage(ImageView imageView, String v) {
         if (v == null || v.equals("")) return;
-        Picasso.with(imageView.getContext()).load(v).into(imageView);
+        Picasso.get().load(v).into(imageView);
     }
 
     @BindingAdapter({"imageSlightlyUrl"})
     public static void loadImageSlightly(ImageView imageView, String v) {
         if (v == null || v.equals("")) return;
-        Picasso.with(imageView.getContext())
+        Picasso.get()
                 .load(v)
                 .transform(new CirclePicasso(Utilities.convertDpToPixel(2, imageView.getContext()),
                             Utilities.convertDpToPixel(0.5f, imageView.getContext()),
@@ -79,7 +78,7 @@ public class Converters {
     @BindingAdapter({"imageRoundUrl"})
     public static void loadRoundImage(ImageView imageView, String v) {
         if (v == null || v.equals("")) return;
-        Picasso.with(imageView.getContext()).load(v)
+        Picasso.get().load(v)
                 .tag(imageView.getContext())
                 .transform(new RoundedTransformation(50, (int) Utilities.convertDpToPixel(0.5f,
                         imageView.getContext())))
@@ -95,7 +94,7 @@ public class Converters {
             imageView.setVisibility(View.GONE);
             return;
         }
-        Picasso.with(imageView.getContext()).load(v)
+        Picasso.get().load(v)
                 .resize((int) Utilities.convertDpToPixel(240, imageView.getContext()),
                         (int) Utilities.convertDpToPixel(135, imageView.getContext()))
                 .centerCrop()

@@ -13,9 +13,10 @@
         android:layout_height="match_parent"
         android:fitsSystemWindows="true"
         android:orientation="vertical"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
         android:background="?attr/backgroundSecondaryColor">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_chat_select"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
@@ -32,9 +33,9 @@
                 android:textColorHint="?attr/hintTextColor"
                 android:textSize="14dp" />
 
-        </android.support.v7.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
-        <android.support.v7.widget.RecyclerView
+        <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:overScrollMode="never"

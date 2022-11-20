@@ -7,8 +7,10 @@
             type="solonsky.signal.twitter.viewmodels.TestViewModel" />
         <import type="android.view.View" alias="v" />
     </data>
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
+
         android:orientation="vertical" android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -18,7 +20,7 @@
             android:layout_height="500dp"
             android:orientation="vertical" >
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerDetailConversation"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -91,8 +93,8 @@
                         android:padding="16dp"
                         android:scaleType="fitXY"
                         android:src="@drawable/disclosure_19"
-                        android:tint="?attr/hintTextColor"
-                        android:visibility="@{model.threadSource.size() > 0 ? v.VISIBLE : v.GONE}" />
+                        android:visibility="@{model.threadSource.size() > 0 ? v.VISIBLE : v.GONE}"
+                        app:tint="?attr/hintTextColor" />
                 </LinearLayout>
 
                 <ImageView
@@ -102,11 +104,11 @@
                     android:layout_marginStart="22dp"
                     android:scaleType="fitXY"
                     android:src="@drawable/ic_icons_tiny_corner"
-                    android:tint="?attr/backgroundPrimaryColor" />
+                    app:tint="?attr/backgroundPrimaryColor" />
 
             </RelativeLayout>
 
         </LinearLayout>
 
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 </layout>

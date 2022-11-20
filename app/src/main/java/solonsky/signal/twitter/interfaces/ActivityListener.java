@@ -1,6 +1,7 @@
 package solonsky.signal.twitter.interfaces;
 
-import android.support.annotation.ColorRes;
+
+import androidx.annotation.ColorRes;
 
 import solonsky.signal.twitter.helpers.Flags;
 

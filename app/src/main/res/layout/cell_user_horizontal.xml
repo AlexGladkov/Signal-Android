@@ -8,6 +8,7 @@
 
     <LinearLayout
         android:id="@+id/user_ll_main"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
         android:orientation="vertical"
         android:layout_width="wrap_content"
         android:layout_height="48dp"

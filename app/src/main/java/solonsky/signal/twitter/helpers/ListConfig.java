@@ -2,14 +2,15 @@ package solonsky.signal.twitter.helpers;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.support.annotation.IntRange;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.View;
+
+import androidx.annotation.IntRange;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -133,7 +134,6 @@ public class ListConfig {
         }
 
         /**
-         * Set {@link android.support.v7.widget.RecyclerView.ItemAnimator}
          *
          * @param itemAnimator the item animator
          * @return the builder
@@ -144,7 +144,6 @@ public class ListConfig {
         }
 
         /**
-         * Set {@link android.support.v7.widget.RecyclerView.ItemDecoration}
          *
          * @return the builder
          */
@@ -157,7 +156,6 @@ public class ListConfig {
         }
 
         /**
-         * Set {@link android.support.v7.widget.RecyclerView.OnScrollListener}
          *
          * @param onScrollListener the scroll listener.
          * @return the builder
@@ -311,7 +309,6 @@ public class ListConfig {
     }
 
     /**
-     * The simple LayoutManager provider for {@link GridLayoutManager}
      */
     public static class SimpleGridLayoutManagerProvider implements LayoutManagerProvider {
         private final int mSpanCount;
@@ -335,7 +332,6 @@ public class ListConfig {
     }
 
     /**
-     * The simple LayoutManager provider for {@link StaggeredGridLayoutManager}
      */
     public static class SimpleStaggeredGridLayoutManagerProvider implements LayoutManagerProvider {
         private final int mSpanCount;

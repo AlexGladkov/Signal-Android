@@ -12,6 +12,7 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="48dp"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
         android:onClick="@{click::onItemClick}"
         app:backgroundAttr="@{model.isHighlighted ? R.attr.backgroundHighlightColor : R.attr.backgroundPrimaryColor}" >
         
@@ -51,9 +52,9 @@
                 android:padding="12dp"
                 android:layout_marginEnd="4dp"
                 android:onClick="@{click::onCloseClick}"
-                android:tint="?attr/hintTextColor"
                 android:src="@drawable/ic_icons_close_small"
-                android:visibility="@{model.count == 0 ? v.VISIBLE : v.GONE}" />
+                android:visibility="@{model.count == 0 ? v.VISIBLE : v.GONE}"
+                app:tint="?attr/hintTextColor" />
 
         </LinearLayout>
 

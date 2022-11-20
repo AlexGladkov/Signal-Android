@@ -2,17 +2,18 @@ package solonsky.signal.twitter.viewmodels;
 
 import android.Manifest;
 import android.database.Cursor;
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
 import android.location.Location;
 import android.os.Handler;
 import android.provider.MediaStore;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
 
 import com.wang.avi.AVLoadingIndicatorView;
 

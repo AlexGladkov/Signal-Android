@@ -1,11 +1,8 @@
 package solonsky.signal.twitter.holder
 
-import android.databinding.DataBindingComponent
-import android.databinding.DataBindingUtil
-import android.support.v7.widget.RecyclerView
 import android.view.View
-import com.arellomobile.mvp.MvpDelegate
-import com.mopub.common.MoPub.onCreate
+import androidx.recyclerview.widget.RecyclerView
+import moxy.MvpDelegate
 import org.jetbrains.annotations.Nullable
 
 

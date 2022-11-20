@@ -3,6 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/backgroundSecondaryColor"
+    android:theme="@style/ActivityTheme.Primary.Base.Dark"
+
     android:focusableInTouchMode="true"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -61,7 +63,7 @@
                     android:background="?attr/buttonRipple"
                     android:padding="16dp"
                     android:src="@drawable/ic_icons_toolbar_back"
-                    android:tint="?attr/buttonTintColor" />
+                    app:tint="?attr/buttonTintColor" />
 
                 <EditText
                     android:id="@+id/txtSearchInput"
@@ -92,7 +94,7 @@
                     android:background="?attr/buttonRipple"
                     android:padding="16dp"
                     android:src="@drawable/ic_icons_more_hor"
-                    android:tint="?attr/buttonTintColor" />
+                    app:tint="?attr/buttonTintColor" />
 
             </LinearLayout>
 

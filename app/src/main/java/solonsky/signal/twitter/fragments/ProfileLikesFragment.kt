@@ -1,14 +1,14 @@
 package solonsky.signal.twitter.fragments
 
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.app.Fragment
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
 
 import java.util.ArrayList
 
@@ -33,7 +33,11 @@ class ProfileLikesFragment : Fragment() {
     private lateinit var binding: FragmentProfileLikesBinding
     private var viewModel: ProfileLikesViewModel? = null
 
-    override fun onCreateView(inflater: LayoutInflater?, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         Log.e(TAG, "likes array ${likesArray.size}")
         binding = DataBindingUtil.inflate(inflater!!, R.layout.fragment_profile_likes, container, false)
 
@@ -41,8 +45,8 @@ class ProfileLikesFragment : Fragment() {
                 true, StatusAdapter.StatusClickListener { searchText, _ ->
             val searchIntent = Intent(context, MVPSearchActivity::class.java)
             searchIntent.putExtra(Keys.SearchQuery.value, searchText)
-            activity.startActivity(searchIntent)
-            activity.overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
+            requireActivity().startActivity(searchIntent)
+            requireActivity().overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
         }, TweetActions.MoreCallback { statusModel ->
             val position = likesArray.indexOf(statusModel)
             likesArray.remove(statusModel)

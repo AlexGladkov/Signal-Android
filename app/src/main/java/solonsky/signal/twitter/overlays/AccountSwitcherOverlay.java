@@ -5,11 +5,12 @@ import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 
+import com.github.terrakok.cicerone.Router;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-import ru.terrakok.cicerone.Router;
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.activities.LoggedActivity;
 import solonsky.signal.twitter.activities.SplashActivity;

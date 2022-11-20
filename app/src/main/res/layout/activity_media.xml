@@ -4,6 +4,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:theme="@style/ActivityTheme.Primary.Base.Dark"
+
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/black"
     android:orientation="vertical">
@@ -15,7 +17,7 @@
         android:layout_centerVertical="true"
         android:visibility="gone" />
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb_media"
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -46,7 +48,7 @@
                     android:background="@drawable/white_ripple_background"
                     android:padding="16dp"
                     android:src="@drawable/ic_icons_toolbar_back"
-                    android:tint="@color/white" />
+                    app:tint="@color/white" />
 
                 <TextView
                     android:id="@+id/txt_content_counter"
@@ -68,7 +70,7 @@
                     android:background="@drawable/white_ripple_background"
                     android:padding="16dp"
                     android:src="@drawable/ic_icons_actions_share"
-                    android:tint="@color/white" />
+                    app:tint="@color/white" />
 
                 <ImageView
                     android:id="@+id/btn_media_chrome"
@@ -78,7 +80,7 @@
                     android:background="@drawable/white_ripple_background"
                     android:padding="16dp"
                     android:src="@drawable/ic_icons_toolbar_chrome"
-                    android:tint="@color/white" />
+                    app:tint="@color/white" />
 
             </LinearLayout>
 
@@ -97,12 +99,12 @@
                     android:foregroundGravity="center"
                     android:padding="16dp"
                     android:src="@drawable/ic_icons_toolbar_save"
-                    android:tint="@color/white" />
+                    app:tint="@color/white" />
 
             </FrameLayout>
 
         </RelativeLayout>
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
 
     <FrameLayout
@@ -123,7 +125,7 @@
             android:padding="16dp"
             android:scaleType="fitXY"
             android:src="@drawable/ic_control_rew"
-            android:tint="@color/white" />
+            app:tint="@color/white" />
 
         <ImageView
             android:id="@+id/btn_media_play"
@@ -136,7 +138,7 @@
             android:padding="16dp"
             android:scaleType="fitXY"
             android:src="@drawable/ic_control_play"
-            android:tint="@color/white" />
+            app:tint="@color/white" />
 
         <ImageView
             android:id="@+id/btn_media_pause"
@@ -147,8 +149,8 @@
             android:padding="16dp"
             android:scaleType="fitXY"
             android:src="@drawable/ic_control_pause"
-            android:tint="@color/white"
-            android:visibility="gone" />
+            android:visibility="gone"
+            app:tint="@color/white" />
 
         <ImageView
             android:id="@+id/btn_media_forward"
@@ -160,7 +162,7 @@
             android:padding="16dp"
             android:scaleType="fitXY"
             android:src="@drawable/ic_control_rewind"
-            android:tint="@color/white" />
+            app:tint="@color/white" />
 
         <TextView
             android:id="@+id/txt_media_start"

@@ -23,9 +23,10 @@
         android:id="@+id/rl_content_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
         android:background="@android:color/transparent" >
 
-        <android.support.v4.view.ViewPager
+        <androidx.viewpager.widget.ViewPager
             android:id="@+id/vp_image_main"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

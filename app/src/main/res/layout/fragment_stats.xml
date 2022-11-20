@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:theme="@style/ActivityTheme.Primary.Base.Dark"
     android:background="?attr/backgroundSecondaryColor"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -13,7 +14,7 @@
         android:scaleType="centerCrop"
         android:background="@drawable/debug_backdrop" />
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/tb_stats_header"
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -66,7 +67,7 @@
                     android:padding="16dp"
                     android:background="@drawable/white_ripple_background"
                     android:src="@drawable/ic_icons_toolbar_back"
-                    android:tint="@color/white" />
+                    app:tint="@color/white" />
 
                 <View
                     android:layout_width="0dp"
@@ -78,9 +79,9 @@
             </LinearLayout>
 
         </FrameLayout>
-    </android.support.v7.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar>
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_stats"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -29,6 +29,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
+
         android:background="?attr/backgroundPrimaryColor"
         android:focusableInTouchMode="true">
 
@@ -39,7 +41,7 @@
             android:onClick="@{click::onBackDropClick}"
             android:scaleType="fitXY" />
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_profile_header"
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -100,7 +102,7 @@
                         android:visibility="@{model.homeUser ? v.GONE : v.VISIBLE}"
                         android:padding="16dp"
                         android:src="@drawable/ic_icons_toolbar_back"
-                        android:tint="@color/white" />
+                        app:tint="@color/white" />
 
                     <View
                         android:layout_width="0dp"
@@ -118,7 +120,7 @@
                         android:padding="16dp"
                         android:visibility="@{model.homeUser ? v.GONE : v.VISIBLE}"
                         android:src="@drawable/ic_icons_more_hor"
-                        android:tint="@color/white" />
+                        app:tint="@color/white" />
 
                     <ImageView
                         android:id="@+id/btn_profile_settings"
@@ -129,12 +131,12 @@
                         android:padding="16dp"
                         android:visibility="@{model.homeUser ? v.VISIBLE : v.GONE}"
                         android:src="@drawable/ic_icons_toolbar_gear"
-                        android:tint="@color/white" />
+                        app:tint="@color/white" />
 
                 </LinearLayout>
 
             </FrameLayout>
-        </android.support.v7.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
         <View
             android:id="@+id/header_fader"
@@ -143,7 +145,7 @@
             android:layout_below="@+id/tb_profile_header"
             android:background="?attr/profileGradientBackgroundColor" />
 
-        <android.support.v4.widget.NestedScrollView
+        <androidx.core.widget.NestedScrollView
             android:id="@+id/scroll_profile"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -259,7 +261,7 @@
                     app:stl_underlineThickness="0dp" />
 
             </RelativeLayout>
-        </android.support.v4.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
 
         <RelativeLayout
             android:id="@+id/img_profile_avatar"

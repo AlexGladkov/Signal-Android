@@ -6,14 +6,15 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.squareup.picasso.Picasso;
 import com.wingsofts.dragphotoview.DragPhotoView;
@@ -210,7 +211,7 @@ public class PagerImageFragment extends Fragment {
 //            }
 //        });
 
-        Picasso.with(getContext()).load(url).into(imageView);
+        Picasso.get().load(url).into(imageView);
         return viewHierarchy;
     }
 

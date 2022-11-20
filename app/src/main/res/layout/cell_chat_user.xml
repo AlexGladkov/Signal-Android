@@ -16,6 +16,8 @@
     <RelativeLayout
         android:id="@+id/rl_chat_user"
         android:layout_width="match_parent"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
+
         android:layout_height="wrap_content" >
 
         <LinearLayout
@@ -40,8 +42,8 @@
                 android:layout_marginTop="@{model.showAvatar ? 29f : 15f}"
                 android:scaleType="fitXY"
                 android:src="@drawable/ic_icons_tiny_corner_dm"
-                android:tint="?attr/backgroundHighlightColor"
-                android:visibility="@{model.showArrow ? v.VISIBLE : v.INVISIBLE}" />
+                android:visibility="@{model.showArrow ? v.VISIBLE : v.INVISIBLE}"
+                app:tint="?attr/backgroundHighlightColor" />
 
             <LinearLayout
                 android:layout_width="wrap_content"

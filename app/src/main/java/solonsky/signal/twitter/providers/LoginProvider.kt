@@ -23,13 +23,14 @@ class LoginProvider(val presenter: LoginPresenter) {
     private val handler = Handler()
 
     fun saveConfiguration(configurationUserModel: ConfigurationUserModel) {
-        Thread({
-            App.db.configurationDao().update(configurationConverter.modelToDb(configurationUserModel = configurationUserModel))
+        Thread {
+            App.db.configurationDao()
+                .update(configurationConverter.modelToDb(configurationUserModel = configurationUserModel))
 
             handler.post {
                 presenter.configLoaded()
             }
-        }).start()
+        }.start()
     }
 
     fun saveSettings() {
@@ -44,17 +45,20 @@ class LoginProvider(val presenter: LoginPresenter) {
     }
 
     fun saveMe(user: User) {
-        Thread({
+        Thread {
             AppData.ME = solonsky.signal.twitter.models.User.getFromUserInstance(user)
 
             App.db.usersDao().insert(usersConverter.apiToDb(user))
             App.db.hostersDao().update(
-                    HosterEntity(AppData.ME.id,
-                            DateTime().toString("dd.MM.yyyy HH:mm:ss"), AppData.ME.id))
+                HosterEntity(
+                    AppData.ME.id,
+                    DateTime().toString("dd.MM.yyyy HH:mm:ss"), AppData.ME.id
+                )
+            )
 
             handler.post {
                 presenter.userLoaded()
             }
-        }).start()
+        }.start()
     }
 }

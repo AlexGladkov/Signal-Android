@@ -1,8 +1,8 @@
 package solonsky.signal.twitter.room;
 
-import android.arch.persistence.room.Database;
-import android.arch.persistence.room.RoomDatabase;
-import android.arch.persistence.room.TypeConverters;
+import androidx.room.Database;
+import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 import solonsky.signal.twitter.helpers.Converter;
 import solonsky.signal.twitter.room.dao.ConfigurationDao;

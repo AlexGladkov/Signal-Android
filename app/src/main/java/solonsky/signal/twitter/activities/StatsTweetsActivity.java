@@ -4,15 +4,16 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatboyindustrial.gsonjodatime.Converters;
 import com.google.gson.Gson;
@@ -75,7 +76,7 @@ public class StatsTweetsActivity extends AppCompatActivity {
         mTxtSubtitle.setText(getString(R.string.stats_tweets) + ": " + Utilities.parseFollowers(user.getStatusesCount(), ""));
         mTxtTitle.setText(user.getName());
 
-        Picasso.with(getApplicationContext())
+        Picasso.get()
                 .load(user.getProfileBannerImageUrl())
                 .resize(Utilities.getScreenWidth(this), (int) Utilities.convertDpToPixel(80, getApplicationContext()))
                 .centerCrop()

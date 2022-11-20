@@ -3,8 +3,8 @@ package solonsky.signal.twitter.presenters
 import android.os.AsyncTask
 import android.os.Handler
 import android.util.Log
-import com.arellomobile.mvp.InjectViewState
-import com.arellomobile.mvp.MvpPresenter
+import moxy.InjectViewState
+import moxy.MvpPresenter
 import solonsky.signal.twitter.views.MediaView
 
 /**

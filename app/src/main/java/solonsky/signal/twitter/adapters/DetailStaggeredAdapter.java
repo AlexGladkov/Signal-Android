@@ -1,11 +1,12 @@
 package solonsky.signal.twitter.adapters;
 
-import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Callback;
 import com.squareup.picasso.Picasso;
@@ -75,8 +76,7 @@ public class DetailStaggeredAdapter extends RecyclerView.Adapter<DetailStaggered
                 imageWidth = containerWidth / 2;
                 break;
         }
-
-        Picasso.with(mActivity.getApplicationContext()).load(model.getPreviewUrl().equals("") ?
+        Picasso.get().load(model.getPreviewUrl().equals("") ?
                 model.getImageUrl() : model.getPreviewUrl())
                 .resize(imageWidth, imageHeight).centerCrop()
                 .into(holder.mBinding.imgStaggeredMain, new Callback() {
@@ -87,14 +87,15 @@ public class DetailStaggeredAdapter extends RecyclerView.Adapter<DetailStaggered
                     }
 
                     @Override
-                    public void onError() {
+                    public void onError(Exception e) {
 
                     }
+
                 });
 
         holder.mBinding.imgStaggeredMedia.setImageResource(model.getMediaType().equals(Flags.MEDIA_TYPE.VIDEO) ?
-            R.drawable.ic_badges_media_video : model.getMediaType().equals(Flags.MEDIA_TYPE.GIF) ?
-            R.drawable.ic_badges_media_gif : R.drawable.ic_badges_media_youtube);
+                R.drawable.ic_badges_media_video : model.getMediaType().equals(Flags.MEDIA_TYPE.GIF) ?
+                R.drawable.ic_badges_media_gif : R.drawable.ic_badges_media_youtube);
         holder.mBinding.setModel(model);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

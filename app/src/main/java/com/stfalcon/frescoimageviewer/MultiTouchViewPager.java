@@ -17,10 +17,11 @@
 package com.stfalcon.frescoimageviewer;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
+
+import androidx.annotation.NonNull;
+import androidx.viewpager.widget.ViewPager;
 
 /*
  * Created by Alexander Krol (troy379) on 29.08.16.

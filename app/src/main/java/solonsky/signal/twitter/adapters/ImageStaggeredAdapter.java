@@ -1,12 +1,12 @@
 package solonsky.signal.twitter.adapters;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
@@ -83,7 +83,7 @@ public class ImageStaggeredAdapter extends RecyclerView.Adapter<ImageStaggeredAd
 
         Context context = holder.mBinding.getRoot().getContext();
         if (imageHeight > 0 || imageWidth > 0) {
-            Picasso.with(mContext).load(model.getImageUrl())
+            Picasso.get().load(model.getImageUrl())
                     .resize(imageWidth, imageHeight).centerCrop()
                     .transform(new CirclePicasso(
                             Utilities.convertDpToPixel(4, context),

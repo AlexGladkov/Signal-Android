@@ -1,15 +1,18 @@
 package solonsky.signal.twitter.libs.bottomBar;
 
-import android.support.annotation.ColorRes;
-import android.support.annotation.DrawableRes;
+
+import androidx.annotation.ColorRes;
+import androidx.annotation.DrawableRes;
 
 /**
  * Created by neura on 21.05.17.
  */
 
 public class AGBottomBarSingleItem extends AGBottomBarItem {
-    private @ColorRes int captionBackgroundColor;
-    private @DrawableRes int iconUrl;
+    private @ColorRes
+    int captionBackgroundColor;
+    private @DrawableRes
+    int iconUrl;
 
     public AGBottomBarSingleItem(int id, boolean hasNew, boolean isStart,
                                  int captionBackgroundColor, int iconUrl) {

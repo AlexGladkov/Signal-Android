@@ -1,8 +1,9 @@
 package solonsky.signal.twitter.libs;
 
 import android.content.Context;
-import android.support.v4.widget.NestedScrollView;
 import android.util.AttributeSet;
+
+import androidx.core.widget.NestedScrollView;
 
 /**
  * Created by neura on 29.06.17.

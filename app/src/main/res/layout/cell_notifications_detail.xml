@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="72dp"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
         android:background="?attr/backgroundPrimaryColor"
         android:onClick="@{click::onItemClick}" >
 

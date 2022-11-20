@@ -9,6 +9,8 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
+
         android:focusableInTouchMode="true" >
 
         <ImageView
@@ -23,7 +25,7 @@
             android:background="@drawable/profile_gradient_toolbar"
             android:onClick="@{click::onBannerClick}" />
         
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:layout_width="match_parent"
             android:layout_height="@dimen/profile_toolbar"
             android:contentInsetStart="0dp"
@@ -41,7 +43,7 @@
                     android:padding="16dp"
                     android:background="@drawable/white_ripple_background"
                     android:onClick="@{click::onBackClick}"
-                    android:tint="@color/white" />
+                    app:tint="@color/white" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -62,10 +64,10 @@
                     android:alpha="@{model.apply ? 1.0f : 0.3f}"
                     android:background="@drawable/white_ripple_background"
                     android:onClick="@{click::onSaveClick}"
-                    android:tint="@color/white" />
+                    app:tint="@color/white" />
 
             </LinearLayout>
-        </android.support.v7.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
         
         <View
             android:layout_width="match_parent"
@@ -82,7 +84,7 @@
             android:onClick="@{click::onAvatarClick}"
             app:imageUrl="@{model.avatar}" />
 
-        <android.support.v4.widget.NestedScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@+id/img_profile_settings_backdrop"
@@ -274,7 +276,7 @@
                     android:layout_marginTop="8dp" />
 
             </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
+        </androidx.core.widget.NestedScrollView>
 
     </RelativeLayout>
 </layout>

@@ -1,1 +1,2 @@
-include ':app', ':matisse'
+rootProject.name = "Signal Android"
+include ':app'

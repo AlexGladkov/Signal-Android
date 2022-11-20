@@ -1,6 +1,7 @@
 package solonsky.signal.twitter.libs.bottomBar;
 
-import android.support.annotation.DrawableRes;
+
+import androidx.annotation.DrawableRes;
 
 /**
  * Created by neura on 26.05.17.
@@ -8,7 +9,8 @@ import android.support.annotation.DrawableRes;
 
 public class AGBottomBarMultipleItem extends AGBottomBarItem {
     private @DrawableRes int iconUrl;
-    private @DrawableRes int multipleUrl;
+    private @DrawableRes
+    int multipleUrl;
 
     public AGBottomBarMultipleItem(int id, boolean hasNew, boolean isStart,
                                    int iconUrl, int multipleUrl) {

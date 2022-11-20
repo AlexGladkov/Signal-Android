@@ -1,12 +1,13 @@
 package solonsky.signal.twitter.helpers;
 
-import android.databinding.BindingAdapter;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+
+import androidx.databinding.BindingAdapter;
 
 import solonsky.signal.twitter.libs.autoLinkTextView.AutoLinkMode;
 import solonsky.signal.twitter.libs.autoLinkTextView.AutoLinkTextView;

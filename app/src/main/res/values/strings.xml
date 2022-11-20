@@ -1,8 +1,8 @@
 <resources>
-  <string name="com.twitter.sdk.android.CONSUMER_KEY">5OPDgxPnwuMkhFtkZfJmNDJj7</string>
-  <string name="com.twitter.sdk.android.CONSUMER_SECRET">q2vCmYnI2h3ah2pjzAQYwipiQVskEZjkFAH83wJ3OaDglhDcaF</string>
-  <string name="billing_key">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjsww90W2ca503EeTI+KRoctkIG9vj26tFrx7nUL5JqqN0VxflFkBdkkzi+YtRWdhXOQuCSmUbNHmGoCmeXKEFDi1eL37/B1z/rnnYJ/f6XgYVnEVSjbTdXre6diuO+UpYWVk59o7qJQ33DZ4s0tlYw4UwHGlsm0lEJUD1EMM7nuKQIbooUornuCjBoxZYPC+dIb4edzfPCBoVzgFZg4hOIxS7VD2XHrY/cAgQ+HFQKxBCQzy/paFQxa2mzjWLUIBS1DgIWpgRfxbqG2dzT89WYUoknwC7tUpyfvrTErRl1sfLDciddayhl9liMT3zeg40vVdwvo77fFXG2ktOVnetwIDAQAB</string>
-  <string name="merchant_id">18296208033601745038</string>
+  <string name="com.twitter.sdk.android.CONSUMER_KEY" translatable="false">5OPDgxPnwuMkhFtkZfJmNDJj7</string>
+  <string name="com.twitter.sdk.android.CONSUMER_SECRET" translatable="false">q2vCmYnI2h3ah2pjzAQYwipiQVskEZjkFAH83wJ3OaDglhDcaF</string>
+  <string name="billing_key" translatable="false">MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAjsww90W2ca503EeTI+KRoctkIG9vj26tFrx7nUL5JqqN0VxflFkBdkkzi+YtRWdhXOQuCSmUbNHmGoCmeXKEFDi1eL37/B1z/rnnYJ/f6XgYVnEVSjbTdXre6diuO+UpYWVk59o7qJQ33DZ4s0tlYw4UwHGlsm0lEJUD1EMM7nuKQIbooUornuCjBoxZYPC+dIb4edzfPCBoVzgFZg4hOIxS7VD2XHrY/cAgQ+HFQKxBCQzy/paFQxa2mzjWLUIBS1DgIWpgRfxbqG2dzT89WYUoknwC7tUpyfvrTErRl1sfLDciddayhl9liMT3zeg40vVdwvo77fFXG2ktOVnetwIDAQAB</string>
+  <string name="merchant_id" translatable="false">18296208033601745038</string>
 
     <string name="app_name">Signal</string>
     <string name="title_home">Home</string>
@@ -365,12 +365,12 @@
     <string name="follows_you">follows you</string>
     <string name="not_follow">doesn’t follow you</string>
     <string name="no_bio">No bio</string>
-    <string name="error_loading_direct">Error</string>
-    <string name="success_mute_user">Done. You won’t see new stuff from [username].</string>
-    <string name="success_mute_tag">Done. You won’t see new stuff with [tag].</string>
-    <string name="success_mute_client">Done. You won’t see new stuff from [clientname].</string>
+    <string name="error_loading_direct" translatable="false">Error</string>
+    <string name="success_mute_user" translatable="false">Done. You won’t see new stuff from [username].</string>
+    <string name="success_mute_tag" translatable="false">Done. You won’t see new stuff with [tag].</string>
+    <string name="success_mute_client" translatable="false">Done. You won’t see new stuff from [clientname].</string>
 
-    <string name="advanced_english">English</string>
-  <string name="advanced_russian">Русский</string>
+    <string name="advanced_english" translatable="false">English</string>
+  <string name="advanced_russian" translatable="false">Русский</string>
 
 </resources>

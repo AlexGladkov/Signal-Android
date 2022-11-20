@@ -1,11 +1,12 @@
 apply plugin: 'com.android.application'
+apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 30
+    buildToolsVersion "30.0.3"
 
     lintOptions {
         checkReleaseBuilds false
@@ -19,10 +20,10 @@ android {
         applicationId "solonsky.signal.twitter"
         vectorDrawables.useSupportLibrary = true
         minSdkVersion 23
-        targetSdkVersion 25
+        targetSdkVersion 30
         versionCode 403
         versionName "1.0.6"
-        multiDexEnabled true  // this line will solve this problem
+        multiDexEnabled false  // this line will solve this problem
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
         javaCompileOptions {
@@ -39,7 +40,6 @@ android {
 
     dataBinding {
         enabled = true
-        version '2.3.0'
     }
 
     sourceSets {
@@ -60,126 +60,148 @@ android {
 //}
 
 buildscript {
-    ext.kotlin_version = '1.1.51'
+    ext.kotlin_version = "1.5.20"
     repositories {
+        google()
         mavenCentral()
         maven { url 'https://dl.bintray.com/kotlin/kotlin-eap' }
     }
     dependencies {
+        classpath 'com.google.gms:google-services:4.3.8'
+
+        classpath "com.android.tools.build:gradle:4.2.2"
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
     }
 }
 
 repositories {
     mavenCentral()
+    maven {url "https://oss.sonatype.org/content/repositories/snapshots/" }
+    maven { url 'https://jitpack.io' }
+
     google()
+    jcenter()
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
 
-    implementation('commons-validator:commons-validator:1.4.1') {
+    implementation('commons-validator:commons-validator:1.7') {
         exclude group: 'commons-collections', module: 'commons-collections'
     }
 
     //Optional: see how to use the utility.
-    compile 'com.twitter.sdk.android:twitter-core:3.0.0'
-    compile 'com.twitter.sdk.android:tweet-ui:3.0.0'
-    compile 'com.twitter.sdk.android:tweet-composer:3.0.0'
-    compile 'com.twitter.sdk.android:twitter-mopub:3.0.0'
+    implementation 'com.twitter.sdk.android:twitter-core:3.0.0'
+    implementation 'com.twitter.sdk.android:tweet-ui:3.0.0'
+    implementation 'com.twitter.sdk.android:tweet-composer:3.0.0'
+    implementation 'com.twitter.sdk.android:twitter-mopub:3.0.0'
 
     // Twitter core
     String twitterCoreVersion = '4.0.6'
-    compile 'org.twitter4j:twitter4j-core:4.0.6'
-    compile 'org.twitter4j:twitter4j-stream:4.0.6'
-    compile 'org.twitter4j:twitter4j-async:4.0.6'
+    implementation 'org.twitter4j:twitter4j-core:4.0.7'
+    implementation 'org.twitter4j:twitter4j-stream:4.0.7'
+    implementation 'org.twitter4j:twitter4j-async:4.0.7'
 
-    compile 'com.google.firebase:firebase-crash:11.6.0'
-    compile 'com.google.android.gms:play-services-location:11.6.0'
-    compile 'com.google.code.gson:gson:2.8.0'
-    compile 'com.google.guava:guava:20.0'
-    compile 'com.squareup.okhttp3:okhttp:3.7.0'
-    compile 'com.squareup.retrofit2:retrofit:2.2.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.7.0'
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'com.anjlab.android.iab.v3:library:1.0.44'
-    compile 'com.ogaclejapan.smarttablayout:library:1.6.1@aar'
-    compile 'com.ogaclejapan.smarttablayout:utils-v4:1.6.1@aar'
+    implementation 'com.google.firebase:firebase-crash:16.2.1'
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
+    implementation 'com.google.code.gson:gson:2.8.7'
+    implementation 'com.google.guava:guava:20.0'
+    implementation 'com.squareup.okhttp3:okhttp:5.0.0-alpha.2'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2'
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.anjlab.android.iab.v3:library:1.1.0'
+    implementation 'com.ogaclejapan.smarttablayout:library:2.0.0@aar'
+    implementation 'com.ogaclejapan.smarttablayout:utils-v4:2.0.0@aar'
 
-    // Support
-    String supportVersion = '26.1.0'
-    compile "com.android.support:appcompat-v7:$supportVersion"
-    compile "com.android.support:support-v13:$supportVersion"
-    compile "com.android.support:design:$supportVersion"
-    compile "com.android.support:support-v4:$supportVersion"
-    compile "com.android.support:recyclerview-v7:$supportVersion"
+//    // Support
+//    String supportVersion = '28.0.0'
+//    implementation "com.android.support:appcompat-v7:$supportVersion"
+//    implementation "com.android.support:support-v13:$supportVersion"
+//    implementation "com.android.support:design:$supportVersion"
+//    implementation "com.android.support:support-v4:$supportVersion"
+//    implementation "com.android.support:recyclerview-v7:$supportVersion"
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation 'androidx.core:core-ktx:1.6.0'
+    implementation 'androidx.appcompat:appcompat:1.3.0'
+    implementation 'com.google.android.material:material:1.4.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     // Cicerone
-    compile 'ru.terrakok.cicerone:cicerone:3.0.0'
+    implementation("com.github.terrakok:cicerone:7.0")
 
     // Room
-    String roomVersion = '1.0.0'
-    compile "android.arch.persistence.room:runtime:$roomVersion"
-    annotationProcessor "android.arch.persistence.room:compiler:$roomVersion"
-    kapt "android.arch.persistence.room:compiler:$roomVersion"
+    def room_version = "2.3.0"
+
+    implementation "androidx.room:room-runtime:$room_version"
+    kapt "androidx.room:room-compiler:$room_version"
 
     // Dagger
-    compile 'net.sourceforge.htmlcleaner:htmlcleaner:2.18'
-    compile 'jp.wasabeef:picasso-transformations:2.1.2'
-    compile 'com.github.githubwing:DragPhotoView:1.0.1'
-    compile 'com.github.siyamed:android-shape-imageview:0.9.+@aar'
-    compile 'com.facebook.fresco:fresco:1.5.0'
-    compile 'se.akerfeldt:okhttp-signpost:1.1.0'
-    compile 'de.hdodenhof:circleimageview:2.2.0'
-    compile 'oauth.signpost:signpost-core:1.2.1.2'
-    compile 'joda-time:joda-time:2.9.9'
-    compile 'com.fatboyindustrial.gson-jodatime-serialisers:gson-jodatime-serialisers:1.0.0'
-    compile 'com.aurelhubert:ahbottomnavigation:2.0.6'
-    compile 'com.afollestad.material-dialogs:commons:0.9.4.5'
-    compile 'com.daimajia.swipelayout:library:1.2.0@aar'
-    compile 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.0'
-    compile 'com.anupcowkur:reservoir:3.1.0'
-    compile 'com.github.jkwiecien:EasyImage:2.0.2'
-    compile 'com.github.stfalcon:multiimageview:0.1'
-    compile 'com.github.bumptech.glide:glide:4.0.0'
-    compile 'com.wang.avi:library:2.1.3'
+    implementation 'net.sourceforge.htmlcleaner:htmlcleaner:2.24'
+    implementation 'jp.wasabeef:picasso-transformations:2.4.0'
+    implementation 'com.github.githubwing:DragPhotoView:1.0.2'
+    implementation 'com.github.siyamed:android-shape-imageview:0.9.3@aar'
+    implementation 'com.facebook.fresco:fresco:2.5.0'
+    implementation 'se.akerfeldt:okhttp-signpost:1.1.0'
+    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation 'oauth.signpost:signpost-core:2.1.1'
+    implementation 'joda-time:joda-time:2.10.10'
+    implementation 'com.fatboyindustrial.gson-jodatime-serialisers:gson-jodatime-serialisers:1.8.0'
+    implementation 'com.aurelhubert:ahbottomnavigation:2.2.0'
+    implementation 'com.afollestad.material-dialogs:commons:0.9.6.0'
+    implementation 'com.daimajia.swipelayout:library:1.2.0@aar'
+    implementation 'com.chauthai.swipereveallayout:swipe-reveal-layout:1.4.0'
+    implementation 'com.anupcowkur:reservoir:3.1.0'
+    implementation 'com.github.jkwiecien:EasyImage:2.0.2'
+    implementation 'com.github.stfalcon:multiimageview:0.1'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
+    implementation 'com.wang.avi:library:2.1.3'
 
     //SwipyRefreshLayout
-    compile 'com.github.orangegangsters:swipy:1.2.3@aar'
+    implementation 'com.github.orangegangsters:swipy:1.2.3@aar'
 
-    kapt 'com.android.databinding:compiler:3.0.0'
+    kapt 'com.android.databinding:compiler:3.1.4'
 
     //дополнительные возможности для Android Kotlin
-    compile 'com.pawegio.kandroid:kandroid:0.5.0@aar'
+    implementation 'com.pawegio.kandroid:kandroid:0.5.0@aar'
 
     //MVP
-    String moxyVersion = '1.5.3'
-    compile "com.arello-mobile:moxy:$moxyVersion"
-    compile "com.arello-mobile:moxy-android:$moxyVersion"
-    compile "com.arello-mobile:moxy-app-compat:$moxyVersion"
-    kapt "com.arello-mobile:moxy-compiler:$moxyVersion"
+    String moxyVersion = '2.2.2'
+    implementation "com.github.moxy-community:moxy:$moxyVersion"
+    kapt "com.github.moxy-community:moxy-compiler:$moxyVersion"
+    implementation "com.github.moxy-community:moxy-androidx:$moxyVersion"
 
     //RX
-    compile 'io.reactivex:rxjava:1.1.0'
-    compile 'io.reactivex:rxandroid:1.1.0'
+    implementation 'io.reactivex:rxjava:1.3.8'
+    implementation 'io.reactivex:rxandroid:1.2.1'
 
     //Depency Injection
-    kapt 'com.google.dagger:dagger-compiler:2.13'
-    compile 'com.google.dagger:dagger:2.13'
+    def dagger_version = '2.35.1'
+    kapt "com.google.dagger:dagger-compiler:$dagger_version"
+    implementation "com.google.dagger:dagger:$dagger_version"
+
+    implementation "com.google.dagger:dagger-android:$dagger_version"
+    implementation"com.google.dagger:dagger-android-support:$dagger_version"
+    kapt "com.google.dagger:dagger-android-processor:$dagger_version"
+
+
     provided 'org.glassfish:javax.annotation:10.0-b28'
 
     //ActiveAndroid DB
-    compile 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
+    implementation 'com.michaelpardo:activeandroid:3.1.0-SNAPSHOT'
 
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.0.0'
-    testCompile 'junit:junit:4.12'
-    compile project(':matisse')
-    compile "org.jetbrains.kotlin:kotlin-reflect:1.0.5-3"
+    kapt 'com.github.bumptech.glide:compiler:4.12.0'
+    testImplementation 'junit:junit:4.13.2'
+    implementation 'com.zhihu.android:matisse:0.5.3-beta3'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.5.20'
 }
 
 //// ADD THIS AT THE BOTTOM

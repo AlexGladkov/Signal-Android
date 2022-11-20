@@ -1,13 +1,14 @@
 package solonsky.signal.twitter.di.modules;
 
+import com.github.terrakok.cicerone.Cicerone;
+import com.github.terrakok.cicerone.NavigatorHolder;
+import com.github.terrakok.cicerone.Router;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.Route;
-import ru.terrakok.cicerone.Cicerone;
-import ru.terrakok.cicerone.NavigatorHolder;
-import ru.terrakok.cicerone.Router;
 
 /**
  * Created by sunwi on 08.01.2018.

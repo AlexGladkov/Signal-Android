@@ -2,17 +2,18 @@ package solonsky.signal.twitter.activities;
 
 import android.Manifest;
 import android.content.Intent;
-import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.databinding.DataBindingUtil;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -207,7 +208,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
             }
         });
 
-        Picasso.with(getApplicationContext())
+        Picasso.get()
                 .load(AppData.ME.getProfileBannerImageUrl())
                 .resize(Utilities.getScreenWidth(ProfileSettingsActivity.this),
                         (int) Utilities.convertDpToPixel(176, getApplicationContext()))
@@ -244,7 +245,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                     List<String> images = Matisse.obtainPathResult(data);
                     if (images.size() > 0) {
                         File f = new File(images.get(0));
-                        Picasso.with(getApplicationContext()).load(f).into(binding.imgProfileSettingsAvatar);
+                        Picasso.get().load(f).into(binding.imgProfileSettingsAvatar);
                         viewModel.setNewAvatar(true);
                         viewModel.setApply(true);
                         avatarFile = f;
@@ -255,7 +256,7 @@ public class ProfileSettingsActivity extends AppCompatActivity {
                     List<String> banners = Matisse.obtainPathResult(data);
                     if (banners.size() > 0) {
                         File f = new File(banners.get(0));
-                        Picasso.with(getApplicationContext()).load(f)
+                        Picasso.get().load(f)
                                 .resize(Utilities.getScreenWidth(mActivity), (int) Utilities.convertDpToPixel(176, getApplicationContext()))
                                 .centerCrop()
                                 .into(binding.imgProfileSettingsBackdrop);

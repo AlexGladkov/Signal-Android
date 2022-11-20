@@ -9,9 +9,11 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
+
         android:background="?attr/backgroundSecondaryColor">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_users_notification"
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -29,8 +31,8 @@
                     android:layout_height="@dimen/tb_icon_size"
                     android:padding="16dp"
                     android:src="@drawable/ic_icons_toolbar_back"
-                    android:tint="?attr/buttonTintColor"
-                    android:background="?attr/buttonRipple" />
+                    android:background="?attr/buttonRipple"
+                    app:tint="?attr/buttonTintColor" />
 
                 <TextView
                     android:id="@+id/txt_users_notification"
@@ -45,7 +47,7 @@
                     android:textColor="?attr/primaryTextColor" />
 
             </LinearLayout>
-        </android.support.v7.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
         <ScrollView
             android:layout_width="match_parent"
@@ -58,7 +60,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:overScrollMode="never"
@@ -70,7 +72,7 @@
                     android:layout_height="@dimen/divider_height"
                     android:background="?attr/dividerColor" />
 
-                <android.support.v7.widget.RecyclerView
+                <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"

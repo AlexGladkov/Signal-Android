@@ -1,53 +1,36 @@
 package solonsky.signal.twitter.viewholders
 
-import android.accounts.Account
 import android.app.Activity
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Handler
-import android.support.v4.content.ContextCompat
-import android.support.v7.widget.GridLayoutManager
-import android.support.v7.widget.RecyclerView
 import android.text.TextUtils
-import android.util.Log
 import android.util.TypedValue
-import android.view.MotionEvent
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.PopupMenu
 import android.widget.RelativeLayout
 import android.widget.Toast
-import com.arellomobile.mvp.MvpDelegate
-import com.arellomobile.mvp.presenter.InjectPresenter
-import com.arellomobile.mvp.presenter.ProvidePresenter
-import com.chauthai.swipereveallayout.SwipeRevealLayout
+import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.daimajia.swipe.SwipeLayout
 import com.google.gson.JsonObject
 import com.squareup.picasso.Picasso
-import com.twitter.sdk.android.core.models.Tweet
 import kotlinx.android.synthetic.main.mvp_cell_status.view.*
 import org.joda.time.LocalDateTime
-import org.json.JSONObject
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.activities.*
 import solonsky.signal.twitter.adapters.ImageStaggeredAdapter
 import solonsky.signal.twitter.adapters.MVPStatusAdapter
-import solonsky.signal.twitter.adapters.StatusAdapter
-import solonsky.signal.twitter.api.ActionsApiFactory
-
-import solonsky.signal.twitter.databinding.CellStatusBinding
 import solonsky.signal.twitter.draw.CirclePicasso
 import solonsky.signal.twitter.helpers.*
-import solonsky.signal.twitter.holder.MvpViewHolder
 import solonsky.signal.twitter.libs.Animator
 import solonsky.signal.twitter.libs.DownloadFiles
-import solonsky.signal.twitter.libs.MySwipeLayout
 import solonsky.signal.twitter.libs.autoLinkTextView.AutoLinkMode
 import solonsky.signal.twitter.libs.autoLinkTextView.AutoLinkOnClickListener
 import solonsky.signal.twitter.libs.autoLinkTextView.AutoLinkTextView
@@ -136,14 +119,14 @@ class StatusViewHolder(itemView: View, screenWidth: Int) : RecyclerView.ViewHold
             mView.mvp_status_civ_avatar.visibility = View.VISIBLE
             mView.mvp_status_img_avatar.visibility = View.GONE
 
-            Picasso.with(itemView.context).load(avatarUrl).into(mView.mvp_status_civ_avatar)
+            Picasso.get().load(avatarUrl).into(mView.mvp_status_civ_avatar)
         } else {
             mView.mvp_status_civ_avatar.visibility = View.GONE
             mView.mvp_status_img_avatar.visibility = View.VISIBLE
 
             val size: Int = Utilities.convertDpToPixel(40f, itemView.context).toInt()
             val round = Utilities.convertDpToPixel(4f, itemView.context)
-            Picasso.with(itemView.context).load(avatarUrl)
+            Picasso.get().load(avatarUrl)
                     .resize(size, size).centerCrop().transform(CirclePicasso(round, 0f, 0, R.color.black))
                     .into(mView.mvp_status_img_avatar)
         }
@@ -532,7 +515,7 @@ class StatusViewHolder(itemView: View, screenWidth: Int) : RecyclerView.ViewHold
     override fun setClipboard(text: String) {
         val clipboard = itemView.context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip = ClipData.newPlainText(itemView.context.getString(R.string.app_name), text)
-        clipboard.primaryClip = clip
+//        clipboard.primaryClip = clip
     }
 
     override fun openSearch(text: String) {
@@ -656,7 +639,7 @@ class StatusViewHolder(itemView: View, screenWidth: Int) : RecyclerView.ViewHold
             }
         }
 
-        Picasso.with(itemView.context).load(imageUrl)
+        Picasso.get().load(imageUrl)
                 .resize(Utilities.convertDpToPixel(64f, itemView.context).toInt(),
                         Utilities.convertDpToPixel(64f, itemView.context).toInt())
                 .centerCrop()

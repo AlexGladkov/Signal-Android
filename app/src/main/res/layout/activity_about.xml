@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
@@ -8,7 +9,8 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark">
 
         <ImageView
             android:id="@+id/img_about_back"
@@ -17,8 +19,8 @@
             android:padding="16dp"
             android:background="?attr/buttonRipple"
             android:src="@drawable/ic_icons_toolbar_back"
-            android:tint="?attr/primaryTextColor"
-            android:layout_marginTop="24dp" />
+            android:layout_marginTop="24dp"
+            app:tint="?attr/primaryTextColor" />
 
         <ScrollView
             android:id="@+id/scroll_about"
@@ -101,7 +103,7 @@
                         android:fontFamily="sans-serif-medium"
                         android:includeFontPadding="false"
                         android:text="@string/about_learn_more"
-                        android:textColor="?attr/secondaryTextColor"
+                        android:textColor="?attr/primaryTextColor"
                         android:textSize="12dp" />
 
                     <LinearLayout

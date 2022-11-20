@@ -3,14 +3,10 @@ package solonsky.signal.twitter.adapters
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Adapter
-import com.arellomobile.mvp.MvpDelegate
-import okhttp3.internal.Util
+import androidx.recyclerview.widget.RecyclerView
+import moxy.MvpDelegate
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.activities.LoggedActivity
 import solonsky.signal.twitter.api.ActionsApiFactory
@@ -109,13 +105,13 @@ class MVPStatusAdapter(parentDelegate: MvpDelegate<*>) : RecyclerView.Adapter<Re
     }
 
     private var mRecycler: RecyclerView? = null
-    override fun onAttachedToRecyclerView(recyclerView: RecyclerView?) {
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
         mRecycler = recyclerView
     }
 
     private var lastPosition = -1
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder is StatusViewHolder) {
             mActivity?.let { holder.provideActivity(it) }
             holder.setIsRecyclable(false)
@@ -223,4 +219,5 @@ class MVPStatusAdapter(parentDelegate: MvpDelegate<*>) : RecyclerView.Adapter<Re
         (mSources[position] as StatusModel).isHighlighted = isHighlight
         notifyItemChanged(position)
     }
+
 }

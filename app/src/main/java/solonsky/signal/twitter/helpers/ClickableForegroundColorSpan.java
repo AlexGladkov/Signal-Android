@@ -1,11 +1,12 @@
 package solonsky.signal.twitter.helpers;
 
-import android.support.annotation.ColorInt;
 import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.style.ClickableSpan;
 import android.view.View;
 import android.widget.TextView;
+
+import androidx.annotation.ColorInt;
 
 /**
  * Created by danylo.volokh on 12/22/2015.

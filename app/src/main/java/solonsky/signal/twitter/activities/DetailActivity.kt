@@ -3,17 +3,9 @@ package solonsky.signal.twitter.activities
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
 import android.content.Intent
-import android.databinding.DataBindingUtil
 import android.net.Uri
 import android.os.Bundle
 import android.os.Handler
-import android.support.v4.app.Fragment
-import android.support.v4.content.ContextCompat
-import android.support.v4.view.PagerAdapter
-import android.support.v4.view.ViewPager
-import android.support.v4.widget.NestedScrollView
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.GridLayoutManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -27,8 +19,14 @@ import android.widget.ImageView
 import android.widget.RelativeLayout
 import android.widget.TextView
 import android.widget.Toast
-import com.arellomobile.mvp.MvpAppCompatActivity
-import com.arellomobile.mvp.presenter.InjectPresenter
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
+import androidx.core.widget.NestedScrollView
+import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.viewpager.widget.PagerAdapter
+import androidx.viewpager.widget.ViewPager
 
 import com.daimajia.swipe.SwipeLayout
 import com.google.gson.JsonObject
@@ -472,7 +470,8 @@ class DetailActivity : AppCompatActivity(), SmartTabLayout.TabProvider {
         )
 
         val isNight = App.getInstance().isNightEnabled
-        binding.txtDetailStatus.setHashtagModeColor(ContextCompat.getColor(applicationContext, if (isNight)
+        binding.txtDetailStatus.setHashtagModeColor(
+            ContextCompat.getColor(applicationContext, if (isNight)
             R.color.dark_tag_color
         else
             R.color.light_tag_color))
@@ -618,8 +617,10 @@ class DetailActivity : AppCompatActivity(), SmartTabLayout.TabProvider {
         val fragmentTransaction = fragmentManager.beginTransaction()
 
         if (fragment.isAdded) {
-            fragmentTransaction.hide(lastFragment)
+            lastFragment?.let {
+                fragmentTransaction.hide(it)
                     .show(fragment).commit()
+            }
         }
 
         lastFragment = fragment
@@ -830,7 +831,7 @@ class DetailActivity : AppCompatActivity(), SmartTabLayout.TabProvider {
                     }
                 }
 
-                Picasso.with(applicationContext)
+                Picasso.get()
                         .load(AppData.CURRENT_STATUS_MODEL.quotedStatus.mediaEntities.get(0)
                                 .asJsonObject.get("mediaURL").asString)
                         .resize(Utilities.convertDpToPixel(64f, applicationContext).toInt(),

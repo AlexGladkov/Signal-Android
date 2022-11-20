@@ -1,11 +1,11 @@
 package solonsky.signal.twitter.viewmodels;
 
 import android.content.Context;
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
 
-import com.android.databinding.library.baseAdapters.BR;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
 
+import solonsky.signal.twitter.BR;
 import solonsky.signal.twitter.adapters.NotificationsMainAdapter;
 import solonsky.signal.twitter.helpers.ListConfig;
 

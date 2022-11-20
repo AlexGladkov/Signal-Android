@@ -9,6 +9,8 @@
     <RelativeLayout
         android:id="@+id/rl_chat_other"
         android:layout_width="match_parent"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
+
         android:layout_height="wrap_content">
         
         <LinearLayout
@@ -70,7 +72,7 @@
                 android:src="@drawable/ic_icons_tiny_corner_dm"
                 android:layout_marginTop="@{model.showAvatar ? 29f : 15f}"
                 android:visibility="@{model.showArrow ? v.VISIBLE : v.INVISIBLE}"
-                android:tint="?attr/backgroundSecondaryColor"/>
+                app:tint="?attr/backgroundSecondaryColor" />
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/chat_other_civ_avatar"

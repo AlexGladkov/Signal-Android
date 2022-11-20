@@ -2,13 +2,14 @@ package solonsky.signal.twitter.fragments;
 
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.daimajia.swipe.SwipeLayout;
 import com.squareup.picasso.Callback;
@@ -86,16 +87,17 @@ public class ContentFragment extends Fragment {
     public void setContentImage(String path) {
         if (mImgContent != null) {
             Log.e(TAG, "path - " + path);
-            Picasso.with(getContext()).load(path).into(mImgContent, new Callback() {
+            Picasso.get().load(path).into(mImgContent, new Callback() {
                 @Override
                 public void onSuccess() {
                     mViewBackground.setBackgroundColor(Utilities.getAverageColor(((BitmapDrawable)mImgContent.getDrawable()).getBitmap()));
                 }
 
                 @Override
-                public void onError() {
+                public void onError(Exception e) {
 
                 }
+
             });
 //            Picasso.with(getContext()).load(path).into(new Target() {
 //                @Override

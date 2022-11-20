@@ -3,13 +3,14 @@ package solonsky.signal.twitter.activities;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
+
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
 
 import com.squareup.picasso.Picasso;
 
@@ -109,7 +110,7 @@ public class AboutActivity extends AppCompatActivity {
         binding.imgAboutApp.setBorderColor(isNight ? Color.parseColor("#00000000") : Color.parseColor("#1A000000"));
         binding.imgAboutApp.setBorderWidth(isNight ? 0 : (int) Utilities.convertDpToPixel(0.5f, getApplicationContext()));
 
-        Picasso.with(getApplicationContext()).load("https://pbs.twimg.com/profile_images/655028102314131456/1ct_DreL_400x400.png")
+        Picasso.get().load("https://pbs.twimg.com/profile_images/655028102314131456/1ct_DreL_400x400.png")
                 .resize((int) Utilities.convertDpToPixel(40, getApplicationContext()),
                         (int) Utilities.convertDpToPixel(40, getApplicationContext()))
                 .transform(new CirclePicasso(
@@ -117,7 +118,7 @@ public class AboutActivity extends AppCompatActivity {
                         Utilities.convertDpToPixel(1f, getApplicationContext()),
                         25, R.color.black))
                 .into(binding.imgAboutClient);
-        Picasso.with(getApplicationContext()).load("https://pp.userapi.com/c837520/v837520253/1b073/zqRW0Vkstzg.jpg")
+        Picasso.get().load("https://pp.userapi.com/c837520/v837520253/1b073/zqRW0Vkstzg.jpg")
                 .resize((int) Utilities.convertDpToPixel(40, getApplicationContext()),
                         (int) Utilities.convertDpToPixel(40, getApplicationContext()))
                 .transform(new CirclePicasso(
@@ -125,7 +126,7 @@ public class AboutActivity extends AppCompatActivity {
                         Utilities.convertDpToPixel(1f, getApplicationContext()),
                         25, R.color.black))
                 .into(binding.imgAboutAuthor);
-        Picasso.with(getApplicationContext()).load("https://pbs.twimg.com/profile_images/638436278141239296/lstgZC4g_400x400.png")
+        Picasso.get().load("https://pbs.twimg.com/profile_images/638436278141239296/lstgZC4g_400x400.png")
                 .resize((int) Utilities.convertDpToPixel(40, getApplicationContext()),
                         (int) Utilities.convertDpToPixel(40, getApplicationContext()))
                 .transform(new CirclePicasso(

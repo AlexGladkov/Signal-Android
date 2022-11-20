@@ -1,8 +1,8 @@
 package solonsky.signal.twitter.views
 
-import com.arellomobile.mvp.MvpView
-import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
-import com.arellomobile.mvp.viewstate.strategy.StateStrategyType
+import moxy.MvpView
+import moxy.viewstate.strategy.AddToEndSingleStrategy
+import moxy.viewstate.strategy.StateStrategyType
 import solonsky.signal.twitter.models.ImageModel
 import solonsky.signal.twitter.models.StatusModel
 import solonsky.signal.twitter.models.User

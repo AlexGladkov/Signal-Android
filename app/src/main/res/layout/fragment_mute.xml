@@ -6,7 +6,8 @@
         <import type="android.view.View" alias="v" />
     </data>
 
-    <android.support.v4.widget.NestedScrollView
+    <androidx.core.widget.NestedScrollView
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:overScrollMode="never"
@@ -37,7 +38,7 @@
                 android:background="?attr/dividerColor"
                 android:layout_marginTop="@dimen/mute_recycler_top" />
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_mute_users"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -93,7 +94,7 @@
                 android:background="?attr/dividerColor"
                 android:layout_marginTop="@dimen/mute_recycler_top" />
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_mute_keywords"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -148,7 +149,7 @@
                 android:background="?attr/dividerColor"
                 android:layout_marginTop="@dimen/mute_recycler_top" />
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_mute_hashtags"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -203,7 +204,7 @@
                 android:background="?attr/dividerColor"
                 android:layout_marginTop="@dimen/mute_recycler_top" />
 
-            <android.support.v7.widget.RecyclerView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_mute_clients"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -258,5 +259,5 @@
 
         </LinearLayout>
 
-    </android.support.v4.widget.NestedScrollView>
+    </androidx.core.widget.NestedScrollView>
 </layout>

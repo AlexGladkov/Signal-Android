@@ -3,7 +3,7 @@ package solonsky.signal.twitter.base
 import android.content.Context
 import android.os.Bundle
 import android.view.animation.Animation
-import com.arellomobile.mvp.MvpAppCompatFragment
+import moxy.MvpAppCompatFragment
 import solonsky.signal.twitter.interfaces.BackButtonListener
 import solonsky.signal.twitter.interfaces.RouterProvider
 import solonsky.signal.twitter.views.FragmentView
@@ -48,7 +48,7 @@ open class BaseChildFragment: MvpAppCompatFragment(), BackButtonListener {
         super.onPause()
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         context?.let {
             if (it is FragmentView)

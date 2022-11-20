@@ -1,6 +1,7 @@
 package solonsky.signal.twitter.models;
 
-import android.databinding.Bindable;
+
+import androidx.databinding.Bindable;
 
 import org.joda.time.LocalDateTime;
 

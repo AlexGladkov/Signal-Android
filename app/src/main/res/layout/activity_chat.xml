@@ -30,9 +30,10 @@
         android:background="?attr/backgroundPrimaryColor"
         android:fitsSystemWindows="true"
         android:focusableInTouchMode="true"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
         android:orientation="vertical">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/tb_chat"
             android:layout_width="match_parent"
             android:layout_height="?android:attr/actionBarSize"
@@ -50,7 +51,7 @@
                     android:onClick="@{click::onBackClick}"
                     android:padding="16dp"
                     android:src="@drawable/ic_icons_toolbar_back"
-                    android:tint="?attr/buttonTintColor" />
+                    app:tint="?attr/buttonTintColor" />
 
                 <TextView
                     android:layout_width="0dp"
@@ -72,10 +73,10 @@
                     android:onClick="@{click::onDestroyClick}"
                     android:padding="16dp"
                     android:src="@drawable/ic_icons_more_hor"
-                    android:tint="?attr/buttonTintColor" />
+                    app:tint="?attr/buttonTintColor" />
 
             </LinearLayout>
-        </android.support.v7.widget.Toolbar>
+        </androidx.appcompat.widget.Toolbar>
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -101,7 +102,6 @@
                         android:clipToPadding="false"
                         android:overScrollMode="never"
                         android:paddingBottom="16dp"
-                        android:visibility="@{model.state == appData.UI_STATE_VISIBLE ? v.VISIBLE : v.GONE}"
                         app:listConfig="@{model.listConfig}" />
 
                 </FrameLayout>
@@ -168,7 +168,7 @@
                     android:alpha="@{model.enabled ? 1.0f : 0.2f}"
                     android:onClick="@{click::onSendClick}"
                     android:src="@drawable/ic_icons_toolbar_send"
-                    android:tint="?attr/buttonSendTintColor" />
+                    app:tint="?attr/buttonSendTintColor" />
 
             </LinearLayout>
 

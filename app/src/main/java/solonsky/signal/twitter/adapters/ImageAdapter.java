@@ -1,12 +1,13 @@
 package solonsky.signal.twitter.adapters;
 
 import android.content.Context;
-import android.databinding.DataBindingUtil;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
 
@@ -49,7 +50,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         holder.mBinding.setModel(model);
         int containerWidth = Utilities.getScreenWidth(mActivity) / 2;
 
-        Picasso.with(mContext).load(model.getPreviewUrl().equals("") ?
+        Picasso.get().load(model.getPreviewUrl().equals("") ?
                 model.getImageUrl() : model.getPreviewUrl())
                 .resize(containerWidth, containerWidth)
                 .centerCrop()

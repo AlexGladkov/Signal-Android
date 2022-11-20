@@ -1,7 +1,9 @@
 package solonsky.signal.twitter.room.dao
 
-import android.arch.persistence.room.*
-import android.content.res.Configuration
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import solonsky.signal.twitter.room.RoomContract
 import solonsky.signal.twitter.room.models.ConfigurationEntity
 

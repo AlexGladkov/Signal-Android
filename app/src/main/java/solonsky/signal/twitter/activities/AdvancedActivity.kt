@@ -1,23 +1,17 @@
 package solonsky.signal.twitter.activities
 
-import android.databinding.DataBindingUtil
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.PopupMenu
 import android.widget.Toast
-
+import androidx.core.content.ContextCompat
+import androidx.databinding.DataBindingUtil
 import com.anupcowkur.reservoir.Reservoir
-import com.arellomobile.mvp.MvpAppCompatActivity
-import com.arellomobile.mvp.presenter.InjectPresenter
 import kotlinx.android.synthetic.main.activity_advanced.*
-
-import java.io.IOException
-import java.util.ArrayList
-
+import moxy.MvpAppCompatActivity
+import moxy.presenter.InjectPresenter
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.adapters.SettingsAdapter
 import solonsky.signal.twitter.databinding.ActivityAdvancedBinding
@@ -29,6 +23,7 @@ import solonsky.signal.twitter.models.SettingsTextModel
 import solonsky.signal.twitter.presenters.ConfigurationsPresenter
 import solonsky.signal.twitter.viewmodels.AdvancedViewModel
 import solonsky.signal.twitter.views.ConfigurationView
+import java.io.IOException
 
 /**
  * Created by neura on 23.05.17.
@@ -85,8 +80,8 @@ class AdvancedActivity : MvpAppCompatActivity(), ConfigurationView {
             val menuInflater = popupMenu.menuInflater
             menuInflater.inflate(R.menu.menu_advanced_language, popupMenu.menu)
 
-            popupMenu.setOnMenuItemClickListener({ item ->
-                when(item.itemId) {
+            popupMenu.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
                     R.id.advanced_english -> {
                         if (AppData.oldLocale == Locales.English.value) {
                             AppData.newLocale = ""
@@ -110,7 +105,7 @@ class AdvancedActivity : MvpAppCompatActivity(), ConfigurationView {
 
                 presenter.updateAppSettings(AppData.appConfiguration)
                 false
-            })
+            }
             popupMenu.show()
         }
 
@@ -155,4 +150,5 @@ class AdvancedActivity : MvpAppCompatActivity(), ConfigurationView {
     override fun settingsUpdated() {
 
     }
+
 }

@@ -2,16 +2,16 @@ package solonsky.signal.twitter.fragments
 
 import android.content.Context
 import android.os.Bundle
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.OrientationHelper
-import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import com.arellomobile.mvp.MvpAppCompatFragment
-import com.arellomobile.mvp.presenter.InjectPresenter
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.OrientationHelper
+import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.fragment_mentions.*
+import moxy.MvpAppCompatFragment
+import moxy.presenter.InjectPresenter
 import solonsky.signal.twitter.R
 import solonsky.signal.twitter.adapters.MVPStatusAdapter
 import solonsky.signal.twitter.data.MentionsData
@@ -49,14 +49,14 @@ class MVPMentionsFragment : MvpAppCompatFragment(), MentionsView {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View =
             inflater.inflate(R.layout.fragment_mentions, container, false)
 
-    override fun onViewCreated(view: View?, savedInstanceState: Bundle?) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mMentionsPresenter.oldLoadData()
         mMentionsPresenter.isHiddenChanged(false)
 
-        mAdapter.attachActivity(activity)
+        mAdapter.attachActivity(requireActivity())
         recycler_mentions.adapter = mAdapter
-        recycler_mentions.layoutManager = LinearLayoutManager(context, OrientationHelper.VERTICAL, false)
+        recycler_mentions.layoutManager = LinearLayoutManager(context, RecyclerView.VERTICAL, false)
         recycler_mentions.setHasFixedSize(true)
 
         recycler_mentions.setOnScrollListener(object : RecyclerView.OnScrollListener() {
@@ -92,7 +92,7 @@ class MVPMentionsFragment : MvpAppCompatFragment(), MentionsView {
         }
     }
 
-    override fun onAttach(context: Context?) {
+    override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
             mCallback = context as ActivityListener

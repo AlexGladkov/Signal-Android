@@ -10,6 +10,8 @@
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
+
         android:layout_marginTop="@dimen/status_bar_height"
         android:background="?attr/backgroundPrimaryColor">
 
@@ -138,7 +140,7 @@
             app:imageHeight="@dimen/feed_tiny_size"
             app:imageWidth="@dimen/feed_tiny_size" />
         
-        <android.support.v4.view.ViewPager
+        <androidx.viewpager.widget.ViewPager
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:overScrollMode="never" />

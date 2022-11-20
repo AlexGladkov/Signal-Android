@@ -11,6 +11,8 @@
     <com.daimajia.swipe.SwipeLayout
         android:id="@+id/feed_image_bottom_wrapper"
         android:layout_width="match_parent"
+        android:theme="@style/ActivityTheme.Primary.Base.Dark"
+
         android:layout_height="wrap_content">
 
         <!-- Bottom View Start-->
@@ -29,7 +31,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_centerVertical="true"
                 android:src="@drawable/ic_icons_more_hor"
-                android:tint="?attr/hintTextColor" />
+                app:tint="?attr/hintTextColor" />
             <!--What you want to show-->
 
         </RelativeLayout>
@@ -91,7 +93,7 @@
                             android:layout_marginStart="8dp"
                             android:visibility="@{model.favorite ? v.VISIBLE : v.GONE}"
                             android:layout_gravity="center_vertical"
-                            android:tint="?attr/likeTintColor" />
+                            app:tint="?attr/likeTintColor" />
 
                     </LinearLayout>
 
@@ -129,7 +131,7 @@
                             android:layout_height="@dimen/feed_tiny_size"
                             android:src="@drawable/ic_icons_tiny_rt"
                             android:layout_gravity="center_vertical"
-                            android:tint="?attr/rtTintColor" />
+                            app:tint="?attr/rtTintColor" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -157,18 +159,18 @@
                     android:layout_height="@dimen/feed_bottom_icon_size"
                     android:src="@drawable/ic_icons_actions_reply"
                     android:padding="12dp"
-                    android:tint="@color/action_tint_color"
                     android:onClick="@{click::onReplyClick}"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    app:tint="@color/action_tint_color" />
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="@dimen/feed_bottom_icon_size"
                     android:src="@drawable/ic_icons_actions_rt"
                     android:padding="12dp"
-                    android:tint="@color/action_tint_color"
                     android:onClick="@{click::onRetweetClick}"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    app:tint="@color/action_tint_color" />
 
                 <ImageView
                     android:layout_width="0dp"
@@ -184,18 +186,18 @@
                     android:layout_height="@dimen/feed_bottom_icon_size"
                     android:src="@drawable/ic_icons_actions_share"
                     android:padding="12dp"
-                    android:tint="@color/action_tint_color"
                     android:onClick="@{click::onShareClick}"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    app:tint="@color/action_tint_color" />
 
                 <ImageView
                     android:layout_width="0dp"
                     android:layout_height="@dimen/feed_bottom_icon_size"
                     android:padding="12dp"
-                    android:tint="@color/action_tint_color"
                     android:src="@drawable/ic_icons_more_hor"
                     android:onClick="@{click::onMoreClick}"
-                    android:layout_weight="1" />
+                    android:layout_weight="1"
+                    app:tint="@color/action_tint_color" />
 
             </LinearLayout>
 

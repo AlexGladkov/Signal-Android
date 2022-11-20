@@ -2,13 +2,7 @@ package solonsky.signal.twitter.fragments;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,10 +11,18 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.Nullable;
+import androidx.databinding.DataBindingUtil;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
+
 import com.ogaclejapan.smarttablayout.SmartTabLayout;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItemAdapter;
 import com.ogaclejapan.smarttablayout.utils.v4.FragmentPagerItems;
 
+import moxy.MvpAppCompatFragment;
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.api.NotificationsApi;
 import solonsky.signal.twitter.data.LoggedData;
@@ -39,7 +41,7 @@ import solonsky.signal.twitter.viewmodels.NotificationsViewModel;
  * Created by neura on 19.05.17.
  */
 
-public class NotificationsFragment extends Fragment implements SmartTabLayout.TabProvider, FragmentCounterListener {
+public class NotificationsFragment extends MvpAppCompatFragment implements SmartTabLayout.TabProvider, FragmentCounterListener {
     private final String TAG = NotificationsFragment.class.getSimpleName();
     private int CURRENT_POSITION = 0;
 

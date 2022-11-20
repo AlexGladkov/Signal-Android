@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.afollestad.materialdialogs.MaterialDialog;
 
 import solonsky.signal.twitter.R;
@@ -41,7 +43,7 @@ public class ProfileDialog {
         createDialog();
     }
 
-    public ProfileDialog(User user, Activity activity) {
+    public ProfileDialog(User user, AppCompatActivity activity) {
         this.mUser = user;
         this.mActivity = activity;
         createDialog();

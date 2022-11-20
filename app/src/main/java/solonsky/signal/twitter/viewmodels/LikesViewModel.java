@@ -1,13 +1,13 @@
 package solonsky.signal.twitter.viewmodels;
 
 import android.content.Intent;
-import android.databinding.BaseObservable;
-import android.databinding.Bindable;
 import android.os.Handler;
 import android.view.View;
 import android.widget.Toast;
 
-import com.android.databinding.library.baseAdapters.BR;
+import androidx.databinding.BaseObservable;
+import androidx.databinding.Bindable;
+
 import com.anupcowkur.reservoir.Reservoir;
 import com.anupcowkur.reservoir.ReservoirGetCallback;
 import com.fatboyindustrial.gsonjodatime.Converters;
@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
+import solonsky.signal.twitter.BR;
 import solonsky.signal.twitter.R;
 import solonsky.signal.twitter.activities.LoggedActivity;
 import solonsky.signal.twitter.activities.MVPSearchActivity;
